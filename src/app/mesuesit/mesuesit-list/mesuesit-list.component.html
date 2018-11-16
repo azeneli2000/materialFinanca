@@ -1,0 +1,56 @@
+
+<div class="search-div">
+    <button mat-raised-button (click)="onCreate()">
+      <mat-icon>add</mat-icon>Mesues i Ri
+    </button>
+    <mat-form-field class="search-form-field" floatLabel="never">
+      <input matInput [(ngModel)]="searchKey" placeholder="Kerko.." autocomplete="off" (keyup)="applyFilter()">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+<div class="mat-elevation-z8">
+
+  <mat-table [dataSource]="listData" matSort>
+
+
+    <ng-container matColumnDef="Emri">
+      <mat-header-cell *matHeaderCellDef mat-sort-header >Emri</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.Emri  }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Mbiemri">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Mbiemri</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.Mbiemri  }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Vjetersia">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Vjetersia</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.Vjetersia  }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Kategoria">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Kategoria</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.Kategoria  }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Paga">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Paga</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.Paga  }}</mat-cell>
+      </ng-container>
+
+    <ng-container matColumnDef="Actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-icon-button  (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
+          <button mat-icon-button color="warn" (click) ="onDelete(row.$key)"><mat-icon>delete_outline</mat-icon></button>
+          <button mat-icon-button color="primary"><mat-icon>assignment</mat-icon></button>
+        </mat-cell>
+      </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+    
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+</div>

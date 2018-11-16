@@ -1,0 +1,55 @@
+
+<mat-toolbar>
+    <span>{{service.form.controls['$key'].value?"Modifiko mesues":"Mesues i Ri"}}</span>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+  </mat-toolbar>
+<form [formGroup]="service.form" class="normal-form">
+  <div class="controls-conteiner">
+    <input type="hidden" name="Skey">
+
+    <mat-form-field   appearance="outline">
+        <mat-label>Emri</mat-label>
+      <input formControlName="Emri" matInput [errorStateMatcher]="matcher" >
+     
+      <mat-error *ngIf="service.form.controls['Emri'].errors?.required">
+          Emri <strong>i detyrueshem</strong>
+        </mat-error>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Mbiemri</mat-label>
+      <input formControlName="Mbiemri" matInput [errorStateMatcher]="matcher"   >
+      
+        <mat-error *ngIf="service.form.controls['Mbiemri'].errors?.required">
+            Mbiemri <strong>i detyrueshem</strong>
+          </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="outline">
+        <mat-label>Vjetersia</mat-label>
+      <input type ="number" formControlName="Vjetersia" matInput [errorStateMatcher]="matcher"  >
+      
+      <mat-error *ngIf="service.form.controls['Vjetersia'].errors?.required">
+          Vjetersia <strong>e detyruesheme</strong>
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="outline">
+        <mat-label>Kategorite</mat-label>
+  <mat-select  formControlName="Kategoria">
+    <mat-option *ngFor="let kategoria of Kategorite" [value]="kategoria.value"  >
+      {{kategoria.viewValue}}
+    </mat-option>
+  </mat-select>
+  <mat-error *ngIf="service.form.controls['Kategoria'].errors?.required">
+      Kategoria <strong>e detyruesheme</strong>
+    </mat-error>
+</mat-form-field>
+<br>
+<button mat-raised-button type = "submit" color="primary" [disabled]="service.form.invalid" (click)= "onSubmit()">Ruaj</button>
+
+
+  </div>
+</form>
