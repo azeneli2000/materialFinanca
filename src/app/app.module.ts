@@ -18,13 +18,14 @@ import { MesuesiComponent } from './mesuesit/mesuesi/mesuesi.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { MatToolbarModule, MatButtonModule, MatIconModule, MatListModule,  MatPaginatorIntl} from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatIconModule, MatListModule,  MatPaginatorIntl,MatCardModule} from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 import{MesuesiService} from '../app/shared/mesuesi.service';
@@ -33,6 +34,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MesuesitListComponent } from './mesuesit/mesuesit-list/mesuesit-list.component';
 import { getDutchPaginatorIntl } from './paginator-shqip';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { MesuesiLendaComponent } from './mesuesi-lenda/mesuesi-lenda.component';
+import { LendaComponent } from './lenda/lenda.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +43,9 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MesuesiComponent,
     MenuKryesoreComponent,
     MesuesitListComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    MesuesiLendaComponent,
+    LendaComponent
   ],
   imports: [
     BrowserModule,
@@ -64,12 +69,13 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatPaginatorModule,
     MatSortModule,
     FormsModule,
-    MatDialogModule
-
+    MatDialogModule,
+    MatCardModule,
+    MatCheckboxModule
     
   ],
   providers: [MesuesiService, {provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl()}],
   bootstrap: [AppComponent],
-  entryComponents:[MesuesiComponent,ConfirmDialogComponent]
+  entryComponents:[MesuesiComponent,ConfirmDialogComponent,LendaComponent]
 })
 export class AppModule { }

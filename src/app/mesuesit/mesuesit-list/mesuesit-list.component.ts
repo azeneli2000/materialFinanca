@@ -2,8 +2,13 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import {MesuesiComponent} from './../mesuesi/mesuesi.component'
 import { MesuesiService } from 'src/app/shared/mesuesi.service';
 import { NotificationService } from 'src/app/shared/notification.service';
-import {MatTableDataSource, MatSort, MatPaginator,MatDialog,MatDialogConfig} from '@angular/material'
+import {MatTableDataSource, MatSort, MatPaginator,MatDialog,MatDialogConfig} from '@angular/material';
 import { ConfirmDialogService } from 'src/app/shared/confirm-dialog.service';
+import {Router} from "@angular/router";
+import { MesuesiZgjedhurService } from 'src/app/shared/mesuesi-zgjedhur.service';
+
+
+
 @Component({
   selector: 'app-mesuesit-list',
   templateUrl: './mesuesit-list.component.html',
@@ -11,8 +16,8 @@ import { ConfirmDialogService } from 'src/app/shared/confirm-dialog.service';
 })
 export class MesuesitListComponent implements OnInit {
 
-  constructor(private listMesuesit : MesuesiService, private dialog :MatDialog, private notification : NotificationService,  private dialogService : ConfirmDialogService) { }
-
+  constructor(private listMesuesit : MesuesiService, private dialog :MatDialog, private notification : NotificationService,  private dialogService : ConfirmDialogService,private router : Router,private mesuesiZ : MesuesiZgjedhurService) { }
+  
 
   listData : MatTableDataSource<any>
   displayedColumns: string [] =['Emri','Mbiemri','Vjetersia','Kategoria','Paga','Actions'];
@@ -79,5 +84,15 @@ export class MesuesitListComponent implements OnInit {
       }
     });
   }
+
+
+  onSelect(mesuesi){
+   this.mesuesiZ.mesuesiZgjedhur=mesuesi;
+   this.mesuesiZ.mesuesiZgjedhurId = mesuesi.$key;
+    this.router.navigate(['/mesuesit',mesuesi.$key]);
+  
+  }
+
+ 
 }
 

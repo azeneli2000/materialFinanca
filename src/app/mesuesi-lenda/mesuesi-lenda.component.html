@@ -1,0 +1,81 @@
+<!-- <p>
+ id: {{mesuesiId}}
+ emri : {{mesuesi.Emri}}
+ Mbiemri : {{mesuesi.Mbiemri}}
+ Kategoria : {{mesuesi.Kategoria}}
+ Vjetersia : {{mesuesi.Vjetersia}}
+
+</p> -->
+<mat-card >
+  <mat-card-title>Te dhenat e mesuesit</mat-card-title>
+  <mat-card-content >Emri :  {{mesuesi.Emri}}  {{mesuesi.Mbiemri}}</mat-card-content>
+  <mat-card-content>Kategoria :  {{mesuesi.Kategoria}} </mat-card-content>
+  <mat-card-content>Vjetersia :  {{mesuesi.Vjetersia}} Vjet  </mat-card-content>
+
+  </mat-card>
+  <br>
+  <button mat-raised-button (click)="onCreate()" [disabled]="mesZgjedhurBosh">
+    <mat-icon>add</mat-icon>Lende e Re
+  </button>
+
+
+
+  <div class="mat-elevation-z8" *ngIf = "!mesZgjedhurBosh">
+
+  
+
+  <mat-table [dataSource]="listData" matSort  >
+
+
+    <ng-container matColumnDef="Emri">
+      <mat-header-cell *matHeaderCellDef mat-sort-header >Lenda</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.Emri}}</mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="Javetot">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Javet</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.Javetot}}</mat-cell>
+    </ng-container>
+   
+    <ng-container matColumnDef="Klasa">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Klasa</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.Klasa}}</mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="NrNxenesish">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Nr. Nxenesve</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.NrNxenesish}}</mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="Ore">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Ore</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.Ore}}</mat-cell>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="Paralele">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Paralele</mat-header-cell>
+      <mat-cell #vlera *matCellDef="let element">{{element.Paralele}}
+
+        <mat-checkbox [checked]= "!vlera.value"></mat-checkbox>
+      </mat-cell>
+    </ng-container> -->
+
+   
+    <ng-container matColumnDef="Paga">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Paga</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.Paga}}</mat-cell>
+      </ng-container>
+
+    <ng-container matColumnDef="Actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-icon-button  (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
+          <button mat-icon-button color="warn" (click) ="onDelete(row.$key)"><mat-icon>delete_outline</mat-icon></button>
+        </mat-cell>
+      </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+  </div>

@@ -72,8 +72,7 @@ insertMesuesi(mesuesi){
 
   populateForm(mesuesi){
     
-      this.form.setValue(mesuesi);
-    
+      this.form.setValue(mesuesi);    
   }
 
 

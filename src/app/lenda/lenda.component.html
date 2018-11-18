@@ -1,0 +1,76 @@
+<mat-toolbar>
+  <span>{{service.form.controls['$key'].value?"Modifiko mesues":"Lende e Re"}}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup]="service.form" class="normal-form">
+<div class="controls-conteiner">
+  <input type="hidden" name="Skey">
+ 
+ 
+<!-- emri -->
+<mat-form-field appearance="outline">
+  <mat-label>Lendet</mat-label>
+<mat-select  formControlName="Emri">
+<mat-option *ngFor="let lenda of Lendet" [value]="lenda.value">
+{{lenda.viewValue}}
+</mat-option>
+</mat-select>
+<mat-error *ngIf="service.form.controls['Emri'].errors?.required">
+Lenda <strong>e detyruesheme</strong>
+</mat-error>
+</mat-form-field>
+<br>
+
+<!-- javet -->
+  <mat-form-field appearance="outline">
+      <mat-label>Jave totale</mat-label>
+    <input type ="number" formControlName="Javetot" matInput [errorStateMatcher]="matcher"   >
+    
+      <mat-error *ngIf="service.form.controls['Javetot'].errors?.required">
+        Jave totale <strong>te detyruesheme</strong>
+        </mat-error>
+  </mat-form-field>
+  <br>
+<!-- klasat -->
+  <mat-form-field appearance="outline">
+    <mat-label>Klasa</mat-label>
+<mat-select  formControlName="Klasa">
+<mat-option *ngFor="let klasa of Klasat" [value]="klasa.value"  >
+  {{klasa.viewValue}}
+</mat-option>
+</mat-select>
+<mat-error *ngIf="service.form.controls['Klasa'].errors?.required">
+  Klasa <strong>e detyruesheme</strong>
+</mat-error>
+</mat-form-field>
+<br>
+<!-- nr nxenesish -->
+  <mat-form-field appearance="outline">
+      <mat-label>Nr nxenesve</mat-label>
+    <input type ="number" formControlName="NrNxenesish" matInput [errorStateMatcher]="matcher"  >
+    
+    <mat-error *ngIf="service.form.controls['NrNxenesish'].errors?.required">
+        Nr nxenesve <strong>i detyrueshem</strong>
+      </mat-error>
+  </mat-form-field>
+  <br>
+
+  <!-- ore -->
+  <mat-form-field appearance="outline">
+    <mat-label>Oret</mat-label>
+  <input type ="number" formControlName="Ore" matInput [errorStateMatcher]="matcher"  >
+  
+  <mat-error *ngIf="service.form.controls['Ore'].errors?.required">
+     Oret <strong>jane te detyruesheme</strong>
+    </mat-error>
+</mat-form-field>
+<div class="add-bottom-padding">
+  <mat-checkbox formControlName="Paralele">Klasa Paralele</mat-checkbox>
+</div>
+<br>
+<button mat-raised-button type = "submit" color="primary" [disabled]="service.form.invalid" (click)= "onSubmit()">Ruaj</button>
+
+
+</div>
+</form>
