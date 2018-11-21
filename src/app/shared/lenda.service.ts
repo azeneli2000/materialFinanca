@@ -4,16 +4,17 @@ import {FormGroup, FormControl,Validators,FormGroupDirective,NgForm} from '@angu
 import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
 import { AngularFirestore,AngularFirestoreCollection } from '@angular/fire/firestore';
 import { MesuesiZgjedhurService } from './mesuesi-zgjedhur.service';
-import { JsonPipe } from '@angular/common';
-import { FindValueSubscriber } from 'rxjs/internal/operators/find';
+
 @Injectable({
   providedIn: 'root'
 })
 
 
 export class LendaService {
+//cloudContainer
 
 lendaList : AngularFireList<any>;
+mesuesiList : AngularFireList<any>;
 
   constructor(private db:AngularFireDatabase, private mesuesiZ : MesuesiZgjedhurService) { }
 
@@ -25,10 +26,12 @@ lendaList : AngularFireList<any>;
     NrNxenesish : new FormControl('',[Validators.required]),
     Ore : new FormControl('',[Validators.required]),
     Paga : new FormControl(''),
+   
     //Shtese : new FormControl(''),
     mesuesiId : new FormControl(''),
     Paralele : new FormControl(false),
-    
+    Baza : new FormControl(''),
+    Perqindja : new FormControl(''),
 
 });
 
@@ -37,6 +40,7 @@ lendaList : AngularFireList<any>;
 getLendet(mesZgjedhur){
   console.log (mesZgjedhur);
   this.lendaList = this.db.list('Lendet',ref => ref.orderByChild('mesuesiId').equalTo(mesZgjedhur));
+  this.mesuesiList = this.db.list('Mesuesit');
   console.log(this.lendaList);
   return this.db.list('Lendet',ref => ref.orderByChild('mesuesiId').equalTo(mesZgjedhur)).snapshotChanges();
 }
@@ -53,10 +57,12 @@ initializeFormGroup() {
     //Shtese :'',
     mesuesiId : '',
     Paralele : false,
+   Baza : '',
+   Perqindja:''
   });
 }
 
-insertLenda(lenda){
+insertLenda(lenda,pagaTotMesuesi){
   
   this.lendaList.push({
     Emri : lenda.Emri,
@@ -64,30 +70,66 @@ insertLenda(lenda){
     Klasa : lenda.Klasa,
     NrNxenesish : lenda.NrNxenesish,
     Ore : lenda.Ore,
-    Paga : '0',
+    Paga : lenda.Paga,
     mesuesiId : this.mesuesiZ.mesuesiZgjedhurId,
     Paralele : lenda.Paralele,
+    Perqindja : this.getPerqindjaLenda(lenda.Emri),
+    Baza :this.getBaza(lenda.Emri)    
   });
-}
-  updateLendet(lenda){
-    this.lendaList.update(lenda.$key,{
-    Emri : lenda.Emri,
-    Javetot : lenda.Javetot,
-    Klasa : lenda.Klasa,
-    NrNxenesish : lenda.NrNxenesish,
-    Ore : lenda.Ore,
-    Paralele : lenda.Paralele,
-    //Paga : '0',
-    });
-  }
+this.updatePagaMesuesi( this.mesuesiZ.mesuesiZgjedhurId,pagaTotMesuesi)
 
-  deleteLenda($key : string){
+}
+  // updateLendet(lenda){
+  //   this.lendaList.update(lenda.$key,{
+  //   Emri : lenda.Emri,
+  //   Javetot : lenda.Javetot,
+  //   Klasa : lenda.Klasa,
+  //   NrNxenesish : lenda.NrNxenesish,
+  //   Ore : lenda.Ore,
+  //   Paralele : lenda.Paralele,
+  //   //Paga : '0',
+  //   });
+  // }
+
+  deleteLenda($key : string,paga :number,idMesuesi){
+   
     this.lendaList.remove($key);
+    this.updatePagaMesuesiOnDelete(idMesuesi,paga);
   }
 
   populateForm(lenda){
     
       this.form.setValue(lenda);    
+  }
+
+  getPerqindjaLenda(emriLenda){
+    return 10;
+  }
+  getBaza(emriLenda){
+   
+    if (emriLenda=='Kimi22')
+    return 700;
+    else
+    return 700;
+  }
+
+  getPerqindjaKlasa(klasa){
+return 10;
+  }
+
+getCikli(klasa){
+  return 25;
+}
+
+  updatePagaMesuesi(idMesuesi,Shtesa)
+  {
+    
+    this.mesuesiList.update(idMesuesi,{Paga: Shtesa});
+  }
+  updatePagaMesuesiOnDelete(idMesuesi,Shtesa)
+  {
+   
+    this.mesuesiList.update(idMesuesi,{Paga: Shtesa});
   }
 
 

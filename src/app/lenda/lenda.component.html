@@ -3,29 +3,36 @@
   <span class="fill-remaining-space"></span>
   <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
 </mat-toolbar>
+
+<h3>Paga : {{pagaBrutoMujore}}</h3>
 <form [formGroup]="service.form" class="normal-form">
 <div class="controls-conteiner">
   <input type="hidden" name="Skey">
+  <!-- paga -->
  
- 
+
+ <br>
 <!-- emri -->
 <mat-form-field appearance="outline">
   <mat-label>Lendet</mat-label>
-<mat-select  formControlName="Emri">
-<mat-option *ngFor="let lenda of Lendet" [value]="lenda.value">
+<mat-select (selectionChange)="onSelectLenda($event.value)" formControlName="Emri">
+<mat-option *ngFor="let lenda of Lendet" [value]="lenda.viewValue">
 {{lenda.viewValue}}
+
 </mat-option>
+
 </mat-select>
 <mat-error *ngIf="service.form.controls['Emri'].errors?.required">
 Lenda <strong>e detyruesheme</strong>
 </mat-error>
+
 </mat-form-field>
 <br>
 
 <!-- javet -->
   <mat-form-field appearance="outline">
       <mat-label>Jave totale</mat-label>
-    <input type ="number" formControlName="Javetot" matInput [errorStateMatcher]="matcher"   >
+    <input type ="number"(keyup) = "onChangeJavet($event.target.value)" formControlName="Javetot" matInput [errorStateMatcher]="matcher"   >
     
       <mat-error *ngIf="service.form.controls['Javetot'].errors?.required">
         Jave totale <strong>te detyruesheme</strong>
@@ -35,7 +42,7 @@ Lenda <strong>e detyruesheme</strong>
 <!-- klasat -->
   <mat-form-field appearance="outline">
     <mat-label>Klasa</mat-label>
-<mat-select  formControlName="Klasa">
+<mat-select (selectionChange)="onSelectKlasa($event.value)" formControlName="Klasa">
 <mat-option *ngFor="let klasa of Klasat" [value]="klasa.value"  >
   {{klasa.viewValue}}
 </mat-option>
@@ -48,29 +55,40 @@ Lenda <strong>e detyruesheme</strong>
 <!-- nr nxenesish -->
   <mat-form-field appearance="outline">
       <mat-label>Nr nxenesve</mat-label>
-    <input type ="number" formControlName="NrNxenesish" matInput [errorStateMatcher]="matcher"  >
+    <input type ="number"  (keyup) = "onChangeNxenesit($event.target.value)"  formControlName="NrNxenesish" matInput [errorStateMatcher]="matcher" >
     
     <mat-error *ngIf="service.form.controls['NrNxenesish'].errors?.required">
         Nr nxenesve <strong>i detyrueshem</strong>
       </mat-error>
   </mat-form-field>
+
+
   <br>
 
   <!-- ore -->
   <mat-form-field appearance="outline">
     <mat-label>Oret</mat-label>
-  <input type ="number" formControlName="Ore" matInput [errorStateMatcher]="matcher"  >
+  <input type ="number" (keyup) = "onChangeOret($event.target.value)" formControlName="Ore" matInput [errorStateMatcher]="matcher"  >
   
   <mat-error *ngIf="service.form.controls['Ore'].errors?.required">
      Oret <strong>jane te detyruesheme</strong>
     </mat-error>
 </mat-form-field>
 <div class="add-bottom-padding">
-  <mat-checkbox formControlName="Paralele">Klasa Paralele</mat-checkbox>
+  <mat-checkbox (change)= "onCheck($event.checked)" formControlName="Paralele">Klasa Paralele</mat-checkbox>
 </div>
 <br>
 <button mat-raised-button type = "submit" color="primary" [disabled]="service.form.invalid" (click)= "onSubmit()">Ruaj</button>
+<!-- {{this.service.form.value|json}} -->
 
-
+<!-- {{javeTot}} -->
+<!-- lenda :{{perqindjaLenda}}
+klasa :{{perqindjaKlasa}}
+oret:{{oreJave}}
+javet:{{javeTot}}
+nx :{{nrNxenesishKlase}}
+vj :{{vjetersia}}
+kat :{{kategoria}}
+cikli :{{cikliNr}} -->
 </div>
 </form>

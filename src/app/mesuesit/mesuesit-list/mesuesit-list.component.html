@@ -41,9 +41,9 @@
     <ng-container matColumnDef="Actions">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <button mat-icon-button  (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
-          <button mat-icon-button color="warn" (click) ="onDelete(row.$key)"><mat-icon>delete_outline</mat-icon></button>
-          <button mat-icon-button (click) = onSelect(row) color="primary"><mat-icon>assignment</mat-icon></button>
+          <button mat-icon-button  (click)="onEdit(row)"><mat-icon matTooltip="Modifiko">launch</mat-icon></button>
+          <button mat-icon-button color="warn" (click) ="onDelete(row.$key)"><mat-icon    matTooltip="Fshi">delete_outline</mat-icon></button>
+          <button mat-icon-button (click) = onSelect(row) color="primary"><mat-icon    matTooltip="Oret">assignment</mat-icon></button>
         </mat-cell>
       </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

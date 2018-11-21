@@ -88,7 +88,11 @@ export class MesuesitListComponent implements OnInit {
 
   onSelect(mesuesi){
    this.mesuesiZ.mesuesiZgjedhur=mesuesi;
+  
+   this.mesuesiZ.mesuesiZgjedhurPaga = mesuesi.Paga;
    this.mesuesiZ.mesuesiZgjedhurId = mesuesi.$key;
+   
+   
     this.router.navigate(['/mesuesit',mesuesi.$key]);
   
   }

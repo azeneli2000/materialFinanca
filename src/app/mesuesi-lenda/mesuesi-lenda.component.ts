@@ -17,8 +17,14 @@ export class MesuesiLendaComponent implements OnInit {
  
   constructor(private listLendet : LendaService, private dialog :MatDialog, private notification : NotificationService,  private dialogService : ConfirmDialogService,private route : ActivatedRoute, private mesuesiZgjedhur : MesuesiZgjedhurService,private router : Router,private mz:MesuesiZgjedhurService) { }
   public mesuesiId : string;
-  public mesuesi = this.mesuesiZgjedhur.mesuesiZgjedhur;
-  
+ // public mesuesi = this.mesuesiZgjedhur.mesuesiZgjedhur;
+ 
+ public mesuesi : ['','','','','']; 
+ public emri;
+ public mbiemri;
+ public kategoria;
+ public paga;
+public vjetersia
 
   listData : MatTableDataSource<any>
   displayedColumns: string [] =['Emri','Javetot','Klasa','NrNxenesish','Ore','Paga','Actions'];
@@ -26,7 +32,26 @@ export class MesuesiLendaComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey :string;
   mesZgjedhurBosh : boolean = false;
+ meskey = this.route.snapshot.paramMap.get('$key');
+ 
   ngOnInit() {
+    this.mesuesiZgjedhur.mbushMesuesin();
+    let mz =this.mesuesiZgjedhur.mz;
+    let mzArray;
+     mz.subscribe((mes)=>{
+      this.emri= mes[0];
+      this.kategoria= mes[1];
+      this.mbiemri= mes[2];
+      this.paga= mes[3];
+      this.vjetersia= mes[4];
+       
+     });
+     
+
+
+
+
+
   //visualizon te dhenat e mesuesit
     let idMesuesi = this.route.snapshot.paramMap.get('$key');
     this.mesuesiId = idMesuesi.toString(); 
@@ -40,10 +65,13 @@ console.log(this.mesuesiId);
         return {
           $key : item.key,
           ...item.payload.val()};
+          
       }
 
       );
       this.listData= new MatTableDataSource(array);
+     // let arr1 = array.map(lenda => lenda.Emri=lenda.Emri.viewValue) ;
+      //console.log(arr1);
       this.listData.sort = this.sort;
       this.listData.paginator = this.paginator;
       //filtron vetem kolnat e visualizuara ne tabele 
@@ -77,11 +105,12 @@ console.log(this.mesuesiId);
      this.dialog.open(LendaComponent,dialogConfig);
    }
  
-   onDelete($key){
+   onDelete($key,Paga){
      this.dialogService.openConfirmDialog('Jeni te sigurte qe doni te fshini lenden  ?')
      .afterClosed().subscribe(res =>{
        if(res){
-         this.listLendet.deleteLenda($key);
+        let p = this.paga -Paga;
+         this.listLendet.deleteLenda($key,p,this.mesuesiId,);
          this.notification.warn('Lenda u fshi !');
        }
      });

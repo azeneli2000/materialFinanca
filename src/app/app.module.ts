@@ -9,7 +9,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule  } from '@angular/fire/database';
 // import { AngularFireDatabase } from 'angularfire2/database';
 import { environment } from '../environments/environment';
-// import { AngularFirestore } from '@angular/fire/firestore';
+ //import { AngularFirestore } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MesuesitComponent } from './mesuesit/mesuesit.component';
 import { MesuesiComponent } from './mesuesit/mesuesi/mesuesi.component';
@@ -26,6 +26,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 import{MesuesiService} from '../app/shared/mesuesi.service';
@@ -36,6 +38,7 @@ import { getDutchPaginatorIntl } from './paginator-shqip';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { MesuesiLendaComponent } from './mesuesi-lenda/mesuesi-lenda.component';
 import { LendaComponent } from './lenda/lenda.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +49,7 @@ import { LendaComponent } from './lenda/lenda.component';
     ConfirmDialogComponent,
     MesuesiLendaComponent,
     LendaComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -71,8 +75,9 @@ import { LendaComponent } from './lenda/lenda.component';
     FormsModule,
     MatDialogModule,
     MatCardModule,
-    MatCheckboxModule
-    
+    MatCheckboxModule,
+    MatTabsModule,
+    MatTooltipModule
   ],
   providers: [MesuesiService, {provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl()}],
   bootstrap: [AppComponent],
