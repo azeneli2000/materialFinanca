@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import{ReactiveFormsModule,FormsModule} from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule  } from '@angular/fire/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 // import { AngularFireDatabase } from 'angularfire2/database';
 import { environment } from '../environments/environment';
  //import { AngularFirestore } from '@angular/fire/firestore';
@@ -38,6 +39,8 @@ import { getDutchPaginatorIntl } from './paginator-shqip';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { MesuesiLendaComponent } from './mesuesi-lenda/mesuesi-lenda.component';
 import { LendaComponent } from './lenda/lenda.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,8 @@ import { LendaComponent } from './lenda/lenda.component';
     MesuesitListComponent,
     ConfirmDialogComponent,
     MesuesiLendaComponent,
-    LendaComponent
+    LendaComponent,
+    LoginComponent
     
   ],
   imports: [
@@ -77,9 +81,10 @@ import { LendaComponent } from './lenda/lenda.component';
     MatCardModule,
     MatCheckboxModule,
     MatTabsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    AngularFireAuthModule
   ],
-  providers: [MesuesiService, {provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl()}],
+  providers: [MesuesiService,AuthGuard, {provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl()}],
   bootstrap: [AppComponent],
   entryComponents:[MesuesiComponent,ConfirmDialogComponent,LendaComponent]
 })

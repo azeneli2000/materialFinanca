@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MesuesiService } from 'src/app/shared/mesuesi.service';
 import { NotificationService } from 'src/app/shared/notification.service';
-import {MatDialogRef} from '@angular/material'
+import {MatDialogRef} from '@angular/material';
 
 
 export interface kat {

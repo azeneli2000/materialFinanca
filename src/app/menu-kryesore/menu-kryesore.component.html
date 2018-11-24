@@ -21,6 +21,20 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>Shkolla Nr. 1</span>
+
+      <span class="user"></span>
+      <span flex></span>
+      <div style="font-size: 15px">
+        <button mat-button (click) = "logout()" *ngIf = "auth.authState; else elseBlock"> {{auth.currentDisplayName}}</button> <mat-icon style="font-size: 35px">person</mat-icon>
+       
+       
+        <ng-template #elseBlock>
+        <button mat-button (click) = "login()"> Login</button>
+
+       </ng-template>
+      </div>
+
+      <!-- <button style ="float:right;" (click) = "logout()">Logout</button>  -->
     </mat-toolbar>
     <router-outlet></router-outlet>
     

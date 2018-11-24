@@ -1,0 +1,19 @@
+
+ 
+
+    <div class="imgcontainer">
+        <!-- <img src="img_avatar2.png" alt="Avatar" class="avatar"> -->
+      </div>
+    <h3 style ="text-align: center">Vendosni te dhenat e hyrjes</h3>
+      <div class="container">
+      
+        <input type="email" placeholder="Email" name="uname"  [(ngModel)]="email"   required  placeholder="email"> <br>
+    
+        
+        <input type="password" placeholder="Enter Password" name="psw" [(ngModel)]="password" required  placeholder="Fjalekalimi">
+    <br>
+        <button mat-raised-button color="primary" (click)="login()">Hyrje</button>
+
+        <button  mat-raised-button color="warn" (click)="dil()" style="margin-left : 20px">Dalje</button>
+       
+      </div>
