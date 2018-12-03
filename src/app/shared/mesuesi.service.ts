@@ -72,7 +72,19 @@ insertMesuesi(mesuesi){
 
   deleteMesuesi($key : string){
     this.mesuesitList.remove($key);
-  }
+    //fshin lendet
+    let lendetMes = this.db.list('Lendet',ref1 => ref1.orderByChild('mesuesiId').equalTo($key)).snapshotChanges().subscribe(items=> {
+    let array = items.map(item =>{
+     return (item.key);
+    });
+    lendetMes.unsubscribe();
+    for (var i=0; i<array.length;i++)
+    {
+      this.db.list('Lendet/'+array[i]).remove();
+    }
+    console.log(array);
+    });
+    }
 
   populateForm(mesuesi){ 
     
@@ -86,6 +98,7 @@ insertMesuesi(mesuesi){
            $key : item.key,
            ...item.payload.val()};
        });
+      
        res.unsubscribe();
        let pagaTotMesuesi : number = 0;
        for (var i=0; i<array.length;i++){

@@ -72,7 +72,8 @@ Klasat : combo[]= [
 constructor(private service : LendaService, private notification : NotificationService ,private dialogRef : MatDialogRef<LendaComponent>,private mesZ : MesuesiZgjedhurService) { }
   idMesuesi;   
   pagaFillestareMesuesi;
-
+  difUpdate : number;
+  fillimiUpdate : number;
   lendaZgjedhur : string;
 //te dhena per llogaritjen e pages
   baza : number = 0;
@@ -141,26 +142,31 @@ llogaritPagen()
   this.pagaLenda = ((this.perqindjaLenda+this.perqindjaKlasa + this.vjetersia*0.5 + (this.nrNxenesishKlase-16)*2.5 + this.paraleleNr*2 + this.kategoria*5 + this.cikliNr + this.shtesaInst-10) * this.baza/100) + this.baza;
   this.pagaBrutoMujore = Math.round((this.pagaLenda* this.oreJave*this.javeTot/12)*100/116.7);
   this.pagaBrutoVjetore = Math.round(  this.pagaLenda* this.oreJave*this.javeTot);
+   this.difUpdate =  this.pagaBrutoMujore- this.fillimiUpdate;
+   //this.service.form.controls['Paga'].setValue(this.pagaBrutoMujore);
 }
- 
-onSubmit(){
-  if(this.service.form.valid)
-  {
-    this.service.form.controls['Paga'].setValue(this.pagaBrutoMujore) ;
-    console.log("paga e mesuesit u vendos :" + this.service.form.controls['Paga'].value);
-  let pagaTotMesuesi = this.pagaFillestareMesuesi + this.service.form.controls['Paga'].value;
-   
-    this.service.insertLenda(this.service.form.value,pagaTotMesuesi);
-   
-  
-  
-    // this.service.updateLendet(this.service.form.value);
+
+  onSubmit() {
+    if (this.service.form.valid) {
+      if (!this.service.form.get('$key').value) {
+        this.service.form.controls['Paga'].setValue(this.pagaBrutoMujore);
+        console.log("paga e mesuesit u vendos :" + this.service.form.controls['Paga'].value);
+        let pagaTotMesuesi = this.pagaFillestareMesuesi + this.service.form.controls['Paga'].value;
+        this.service.insertLenda(this.service.form.value, pagaTotMesuesi);
+      }
+      else
+      {
+        this.service.form.controls['Paga'].setValue(this.pagaBrutoMujore);
+        let dif = this.pagaFillestareMesuesi + this.difUpdate;
+        this.service.updateLendet(this.service.form.value,dif);
+      }
+
       this.service.form.reset();
-    this.service.initializeFormGroup();
-    this.notification.success("Mesuesi u ruajt");
-  this.onClose();
+      this.service.initializeFormGroup();
+      this.notification.success("Mesuesi u ruajt");
+      this.onClose();
+    }
   }
- }
 
  onClose() {
    console.log(this.service.form.value);
@@ -181,29 +187,30 @@ onSubmit(){
      //this.llogaritPagen();
   }
 
-  // ngAfterContentInit(){
+  ngAfterContentInit(){
    
     
-  //      this.javeTot=this.service.form.controls['Javetot'].value;
-  //      this.oreJave=this.service.form.controls['Ore'].value;
-  //      this.nrNxenesishKlase=this.service.form.controls['NrNxenesish'].value;
-  //      this.onCheck(this.service.form.controls['Paralele'].value); //vendos paralelenr
-  //      this.onSelectLenda(this.service.form.controls['Emri'].value);//vemdos perqindjen lenda
-  //      this.onSelectKlasa(this.service.form.controls['Klasa'].value);//vendos perqindjen klasa
+       this.javeTot=this.service.form.controls['Javetot'].value;
+       this.oreJave=this.service.form.controls['Ore'].value;
+       this.nrNxenesishKlase=this.service.form.controls['NrNxenesish'].value;
+       this.onCheck(this.service.form.controls['Paralele'].value); //vendos paralelenr
+       this.onSelectLenda(this.service.form.controls['Emri'].value);//vemdos perqindjen lenda
+       this.onSelectKlasa(this.service.form.controls['Klasa'].value);//vendos perqindjen klasa
+       this.shtesaInst =this.service.form.controls['ShtesaInst'].value; //vendos paralelenr
 
        
+      this.fillimiUpdate = this.service.form.controls['Paga'].value;
+       this.pagaBrutoMujore=this.service.form.controls['Paga'].value;
 
-  //      this.pagaBrutoMujore=this.service.form.controls['Paga'].value;
-
-  //      console.log( this.javeTot,
-  //      this.oreJave,
-  //      this.nrNxenesishKlase,
-  //      this.paraleleNr, 
-  //      this.perqindjaLenda,
-  //      this.perqindjaKlasa,this.baza,this.kategoria,this.mesZ.mesuesiZgjedhurId)
+       console.log( this.javeTot,
+       this.oreJave,
+       this.nrNxenesishKlase,
+       this.paraleleNr, 
+       this.perqindjaLenda,
+       this.perqindjaKlasa,this.baza,this.kategoria,this.mesZ.mesuesiZgjedhurId);
 
      
-  // }
+  }
 
  
 

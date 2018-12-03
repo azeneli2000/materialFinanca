@@ -83,30 +83,31 @@ insertLenda(lenda,pagaTotMesuesi){
 this.updatePagaMesuesi( this.mesuesiZ.mesuesiZgjedhurId,pagaTotMesuesi)
 
 }
-  // updateLendet(lenda){
-  //   this.lendaList.update(lenda.$key,{
-  //   Emri : lenda.Emri,
-  //   Javetot : lenda.Javetot,
-  //   Klasa : lenda.Klasa,
-  //   NrNxenesish : lenda.NrNxenesish,
-  //   Ore : lenda.Ore,
-  //   Paralele : lenda.Paralele,
-  //   //Paga : '0',
-  //   });
-  // }
+  updateLendet(lenda,diff){
+    this.lendaList.update(lenda.$key,{
+    Emri : lenda.Emri,
+    Javetot : lenda.Javetot,
+    Klasa : lenda.Klasa,
+    NrNxenesish : lenda.NrNxenesish,
+    Ore : lenda.Ore,
+    Paralele : lenda.Paralele,
+    Paga : lenda.Paga,
+    });
+    this.updatePagaMesuesi( this.mesuesiZ.mesuesiZgjedhurId,diff)
+  }
 
-  deleteLenda($key : string,paga :number,idMesuesi){
+   deleteLenda($key : string,paga :number,idMesuesi){
    
     this.lendaList.remove($key);
     this.updatePagaMesuesiOnDelete(idMesuesi,paga);
   }
 
-  populateForm(lenda){
+   populateForm(lenda){
     
       this.form.setValue(lenda);    
   }
 
-  getPerqindjaLenda(emriLenda){
+   getPerqindjaLenda(emriLenda){
     if(emriLenda=="Matematike"||emriLenda=="Gjuhe"||emriLenda=="Anglisht Pjekurie"||emriLenda=="Anglisht lirimi")
     return 20;
     
@@ -124,7 +125,7 @@ this.updatePagaMesuesi( this.mesuesiZ.mesuesiZgjedhurId,pagaTotMesuesi)
     if(emriLenda=="Pune Admin"||emriLenda=="Veprimtari"||emriLenda=="Shoqerim"|| emriLenda=="Kujdestari")
     return 0;
   }
-  getBaza(emriLenda){
+   getBaza(emriLenda){
    
     if (emriLenda=="Shoqerim")
     return 250;
@@ -139,7 +140,7 @@ this.updatePagaMesuesi( this.mesuesiZ.mesuesiZgjedhurId,pagaTotMesuesi)
       return 700;
   }
 
-  getPerqindjaKlasa(klasa){
+   getPerqindjaKlasa(klasa){
     return parseInt(klasa);
    }
 
@@ -151,6 +152,8 @@ this.updatePagaMesuesi( this.mesuesiZ.mesuesiZgjedhurId,pagaTotMesuesi)
     if(klasa ==10||klasa ==11||klasa ==12) 
     return 25;
     }
+
+
 
   updatePagaMesuesi(idMesuesi,Shtesa)
   {

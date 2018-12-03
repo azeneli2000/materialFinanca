@@ -74,7 +74,7 @@ Lenda <strong>e detyruesheme</strong>
      Oret <strong>jane te detyruesheme</strong>
     </mat-error>
 </mat-form-field>
-
+<br>
 <!-- shtesa inst --> 
 <mat-form-field appearance="outline">
   <mat-label>Shtesa Inst</mat-label>
@@ -92,14 +92,16 @@ Lenda <strong>e detyruesheme</strong>
 <button mat-raised-button type = "submit" color="primary" [disabled]="service.form.invalid" (click)= "onSubmit()">Ruaj</button>
 <!-- {{this.service.form.value|json}} -->
 
-<!-- {{javeTot}} -->
-<!-- lenda :{{perqindjaLenda}}
+{{javeTot}} 
+ lenda :{{perqindjaLenda}}
 klasa :{{perqindjaKlasa}}
 oret:{{oreJave}}
 javet:{{javeTot}}
 nx :{{nrNxenesishKlase}}
 vj :{{vjetersia}}
 kat :{{kategoria}}
-cikli :{{cikliNr}} -->
+cikli :{{cikliNr}}
+shtesa : {{shtesaInst}}
+diferenca : {{difUpdate}}
 </div>
 </form>
