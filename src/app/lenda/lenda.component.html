@@ -65,7 +65,7 @@ Lenda <strong>e detyruesheme</strong>
 
   <br>
 
-  <!-- ore -->
+  <!-- ore   -->
   <mat-form-field appearance="outline">
     <mat-label>Oret</mat-label>
   <input type ="number" (keyup) = "onChangeOret($event.target.value)" formControlName="Ore" matInput [errorStateMatcher]="matcher"  >
@@ -74,6 +74,17 @@ Lenda <strong>e detyruesheme</strong>
      Oret <strong>jane te detyruesheme</strong>
     </mat-error>
 </mat-form-field>
+
+<!-- shtesa inst --> 
+<mat-form-field appearance="outline">
+  <mat-label>Shtesa Inst</mat-label>
+<input type ="number" (keyup) = "onChangeShtesa($event.target.value)" formControlName="ShtesaInst" matInput [errorStateMatcher]="matcher"  >
+
+<mat-error *ngIf="service.form.controls['ShtesaInst'].errors?.required">
+   Shtesa  <strong>eshte e detyruesheme</strong>
+  </mat-error>
+</mat-form-field>
+<!-- paralele -->
 <div class="add-bottom-padding">
   <mat-checkbox (change)= "onCheck($event.checked)" formControlName="Paralele">Klasa Paralele</mat-checkbox>
 </div>
