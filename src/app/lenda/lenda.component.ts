@@ -91,6 +91,8 @@ shtesaInst : number = 0;
 javeTot : number= 0;
 pagaBrutoMujore : number = 0;
 pagaBrutoVjetore : number =0;
+pShtese :number = 0; //paga shtese ne db
+pTot : number = 0; //paga toot mujore ne db
 onSelectLenda(lenda){
     this.baza = this.service.getBaza(lenda);
     this.perqindjaLenda = this.service.getPerqindjaLenda(lenda);
@@ -151,14 +153,22 @@ llogaritPagen()
       if (!this.service.form.get('$key').value) {
         this.service.form.controls['Paga'].setValue(this.pagaBrutoMujore);
         console.log("paga e mesuesit u vendos :" + this.service.form.controls['Paga'].value);
+        let shtesa = this.service.form.controls['Paga'].value;//shtesa        
+       let shtesaTot = shtesa+ this.pShtese;
+      
         let pagaTotMesuesi = this.pagaFillestareMesuesi + this.service.form.controls['Paga'].value;
-        this.service.insertLenda(this.service.form.value, pagaTotMesuesi);
+
+        //tott mujore
+        let totMujore = this.service.form.controls['Paga'].value + this.pTot;
+        this.service.insertLenda(this.service.form.value, pagaTotMesuesi,shtesaTot,totMujore);
       }
       else
       {
         this.service.form.controls['Paga'].setValue(this.pagaBrutoMujore);
         let dif = this.pagaFillestareMesuesi + this.difUpdate;
-        this.service.updateLendet(this.service.form.value,dif);
+        let difShtesa = this.pShtese+this.difUpdate
+        let totMujore1 = this.service.form.controls['Paga'].value + this.pTot;
+        this.service.updateLendet(this.service.form.value,dif,difShtesa,totMujore1);
       }
 
       this.service.form.reset();
@@ -179,9 +189,11 @@ llogaritPagen()
   ngOnInit() {
     this.idMesuesi = this.mesZ.mesuesiZgjedhurId;
     this.mesZ.mz.subscribe((mes)=>{
-      this.kategoria= mes[1];      
-      this.vjetersia= mes[4];      
-      this.pagaFillestareMesuesi= mes[3]; 
+      this.kategoria= mes[2];      
+      this.vjetersia= mes[9];      
+      this.pagaFillestareMesuesi= mes[4]; 
+      this.pShtese = mes[6];
+      this.pTot = mes[8];
      });
 
      //this.llogaritPagen();

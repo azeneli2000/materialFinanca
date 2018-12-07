@@ -65,7 +65,7 @@ initializeFormGroup() {
   });
 }
 
-insertLenda(lenda,pagaTotMesuesi){
+insertLenda(lenda,pagaTotMesuesi,shtesaPaga,totMujore){
   
   this.lendaList.push({
     Emri : lenda.Emri,
@@ -80,10 +80,10 @@ insertLenda(lenda,pagaTotMesuesi){
     Perqindja : this.getPerqindjaLenda(lenda.Emri),
     Baza :this.getBaza(lenda.Emri)    
   });
-this.updatePagaMesuesi( this.mesuesiZ.mesuesiZgjedhurId,pagaTotMesuesi)
+this.updatePagaMesuesi( this.mesuesiZ.mesuesiZgjedhurId,pagaTotMesuesi,shtesaPaga,totMujore)
 
 }
-  updateLendet(lenda,diff){
+  updateLendet(lenda,diff,diffShtesa,totMujore){
     this.lendaList.update(lenda.$key,{
     Emri : lenda.Emri,
     Javetot : lenda.Javetot,
@@ -92,14 +92,15 @@ this.updatePagaMesuesi( this.mesuesiZ.mesuesiZgjedhurId,pagaTotMesuesi)
     Ore : lenda.Ore,
     Paralele : lenda.Paralele,
     Paga : lenda.Paga,
+    ShtesaInst : lenda.ShtesaInst,
     });
-    this.updatePagaMesuesi( this.mesuesiZ.mesuesiZgjedhurId,diff)
+    this.updatePagaMesuesi( this.mesuesiZ.mesuesiZgjedhurId,diff,diffShtesa,totMujore)
   }
 
-   deleteLenda($key : string,paga :number,idMesuesi){
+   deleteLenda($key : string,paga :number,idMesuesi,pagaSig){
    
     this.lendaList.remove($key);
-    this.updatePagaMesuesiOnDelete(idMesuesi,paga);
+    this.updatePagaMesuesiOnDelete(idMesuesi,paga,pagaSig);
   }
 
    populateForm(lenda){
@@ -155,15 +156,17 @@ this.updatePagaMesuesi( this.mesuesiZ.mesuesiZgjedhurId,pagaTotMesuesi)
 
 
 
-  updatePagaMesuesi(idMesuesi,Shtesa)
+  updatePagaMesuesi(idMesuesi,Shtesa,ShtesaPaga,totMujore)
   {
     
-    this.mesuesiList.update(idMesuesi,{Paga: Shtesa});
+    this.mesuesiList.update(idMesuesi,{Paga: Shtesa , PagaShtese : ShtesaPaga,PagaTotMujore : totMujore});
   }
-  updatePagaMesuesiOnDelete(idMesuesi,Shtesa)
+  updatePagaMesuesiOnDelete(idMesuesi,Shtesa,pagasig)
   {
-   
-    this.mesuesiList.update(idMesuesi,{Paga: Shtesa});
+   if (Shtesa>=pagasig)
+    this.mesuesiList.update(idMesuesi,{Paga: Shtesa , PagaSig : pagasig });
+  else 
+     this.mesuesiList.update(idMesuesi,{Paga: Shtesa , PagaSig : 0, PagaTotMujore : 0, PagaShtese : 0  , PagaNetoMujore : 0});
   }
 
 

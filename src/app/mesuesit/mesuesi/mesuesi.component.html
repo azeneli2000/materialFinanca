@@ -48,8 +48,50 @@
     </mat-error>
 </mat-form-field>
 <br>
+<!-- paga sig -->
+<mat-form-field appearance="outline">
+    <mat-label>Paga sig</mat-label>
+  <input type ="number" formControlName="PagaSig" (keyup) = "onChangePagaSig($event.target.value)" matInput [errorStateMatcher]="matcher"   >
+  
+  <mat-error *ngIf="service.form.controls['PagaSig'].errors?.required">
+      Vjetersia <strong>e detyruesheme</strong>
+    </mat-error>
+</mat-form-field>
+<br>
+<!-- paga ne banke -->
+<mat-form-field appearance="outline">
+    <mat-label>Paga neto</mat-label>
+  <input type ="number" formControlName="PagaNetoMujore" matInput [errorStateMatcher]="matcher" readonly >
+  
+  <mat-error *ngIf="service.form.controls['Vjetersia'].errors?.required">
+      Vjetersia <strong>e detyruesheme</strong>
+    </mat-error>
+</mat-form-field>
+<br>
+<!-- paga shtese -->
+<mat-form-field appearance="outline">
+    <mat-label>Shtesa</mat-label>
+  <input type ="number" formControlName="PagaShtese"  matInput [errorStateMatcher]="matcher" readonly  >
+  
+  <mat-error *ngIf="service.form.controls['Vjetersia'].errors?.required">
+      Vjetersia <strong>e detyruesheme</strong>
+    </mat-error>
+</mat-form-field>
+<br>
+<!-- paga totale neto -->
+<mat-form-field appearance="outline">
+    <mat-label>Totali</mat-label>
+  <input type ="number" formControlName="PagaTotMujore"  (keyup) = "onChangePagaTot($event.target.value)" matInput [errorStateMatcher]="matcher"  >
+  
+  <mat-error *ngIf="service.form.controls['Vjetersia'].errors?.required">
+      Vjetersia <strong>e detyruesheme</strong>
+    </mat-error>
+</mat-form-field>
+<div class="add-bottom-padding"> 
+  <mat-checkbox (change)= "onCheck($event.checked)" formControlName="Jashtem">Mesues i jashtem</mat-checkbox>
+</div>
+<br>  
 <button mat-raised-button type = "submit" color="primary" [disabled]="service.form.invalid" (click)= "onSubmit()">Ruaj</button>
-
 
   </div>
 </form>

@@ -24,7 +24,8 @@ export class MesuesiLendaComponent implements OnInit {
  public mbiemri;
  public kategoria;
  public paga;
-public vjetersia
+public vjetersia;
+public pagaSig;
 
   listData : MatTableDataSource<any>
   displayedColumns: string [] =['Emri','Javetot','Klasa','NrNxenesish','Ore','Paga','Actions'];
@@ -40,11 +41,11 @@ public vjetersia
     let mzArray;
      mz.subscribe((mes)=>{
       this.emri= mes[0];
-      this.kategoria= mes[1];
-      this.mbiemri= mes[2];
-      this.paga= mes[3];
-      this.vjetersia= mes[4];
-       
+      this.kategoria= mes[2];
+      this.mbiemri= mes[3];
+      this.paga= mes[4];
+      this.vjetersia= mes[9];
+      this.pagaSig = mes[7]; 
      });
      
 
@@ -110,7 +111,7 @@ console.log(this.mesuesiId);
      .afterClosed().subscribe(res =>{
        if(res){
         let p = this.paga -Paga;
-         this.listLendet.deleteLenda($key,p,this.mesuesiId,);
+         this.listLendet.deleteLenda($key,p,this.mesuesiId,this.pagaSig);
          this.notification.warn('Lenda u fshi !');
        }
      });
