@@ -26,7 +26,9 @@ export class MesuesiLendaComponent implements OnInit {
  public paga;
 public vjetersia;
 public pagaSig;
-
+pagaTotMujore ; 
+pagaNetoMujore; 
+pagaShtese;
   listData : MatTableDataSource<any>
   displayedColumns: string [] =['Emri','Javetot','Klasa','NrNxenesish','Ore','Paga','Actions'];
   @ViewChild(MatSort) sort: MatSort;
@@ -46,6 +48,9 @@ public pagaSig;
       this.paga= mes[4];
       this.vjetersia= mes[9];
       this.pagaSig = mes[7]; 
+      this.pagaTotMujore = mes[8]; 
+      this.pagaNetoMujore = mes[5]; 
+      this.pagaShtese = mes[6]; 
      });
      
 
@@ -111,7 +116,10 @@ console.log(this.mesuesiId);
      .afterClosed().subscribe(res =>{
        if(res){
         let p = this.paga -Paga;
-         this.listLendet.deleteLenda($key,p,this.mesuesiId,this.pagaSig);
+        let psh = this.pagaShtese-Paga;
+        let ptotmujore = this.pagaTotMujore-Paga;
+
+         this.listLendet.deleteLenda($key,p,this.mesuesiId,this.pagaSig,this.pagaNetoMujore,psh,ptotmujore);
          this.notification.warn('Lenda u fshi !');
        }
      });

@@ -24,10 +24,10 @@ export class MesuesiComponent implements OnInit {
   pagaShtese =0;
  
   Kategorite : kat[]= [
-    {value : 1, viewValue : "Kat I" } ,
+    {value : 3, viewValue : "Kat I" } ,
     {value : 2, viewValue : "Kat II" } ,
-    {value : 3, viewValue : "Kat III" } ,
-    {value : 4, viewValue : "Kat IV" } 
+    {value : 1, viewValue : "Kat III" } ,
+    {value : 0, viewValue : "Kat IV" } 
 ];
   constructor(private service : MesuesiService, private notification : NotificationService ,private dialogRef : MatDialogRef<MesuesiComponent>) { }
 
@@ -89,8 +89,9 @@ export class MesuesiComponent implements OnInit {
     { 
     pnm = pnz;
     this.pagaNetoZyrtare = Math.round(pnz);
-    this.pagaShtese = Math.round(pagaBruto - this.pagaNetoZyrtare);
-    }
+    this.pagaShtese = Math.round(pagaBruto - this.pagaSig);
+   
+  }
     if (pagaSig > 30000 && pagaSig < 130000)
     {
       this.pagaNetoZyrtare =Math.round( pnz - ((pagaSig - 30000) * 0.13));
@@ -98,7 +99,11 @@ export class MesuesiComponent implements OnInit {
     }
 
     if (pagaSig >= 130000)
-      pnm = pnz - ((pagaSig - 30000) * 0.15);
+     {
+
+      this.pagaNetoZyrtare =Math.round( pnz - ((pagaSig - 30000) * 0.15));
+      this.pagaShtese = Math.round( pagaBruto- (dp + ((pagaSig - 30000) * 0.15))  - this.pagaNetoZyrtare);
+     }
   
      
     

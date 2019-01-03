@@ -20,7 +20,7 @@ export class MesuesitListComponent implements OnInit {
   
 
   listData : MatTableDataSource<any>
-  displayedColumns: string [] =['Emri','Mbiemri','Vjetersia','Kategoria','Paga','Actions'];
+  displayedColumns: string [] =['Emri','Mbiemri','Vjetersia','Kategoria','Paga','PagaTotMujore','Actions'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey :string;
@@ -67,6 +67,9 @@ export class MesuesitListComponent implements OnInit {
   }
 
   onEdit(row){
+    
+    this.mesuesiZ.mesuesiZgjedhur=row;
+    this.mesuesiZ.mesuesiZgjedhurId = row.$key;
     this.listMesuesit.populateForm(row);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;

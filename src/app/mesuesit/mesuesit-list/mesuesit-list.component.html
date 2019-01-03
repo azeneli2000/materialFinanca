@@ -34,8 +34,13 @@
     </ng-container>
 
     <ng-container matColumnDef="Paga">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Paga</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Paga bruto</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.Paga  }}</mat-cell>
+      </ng-container>
+     
+      <ng-container matColumnDef="PagaTotMujore">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Paga neto</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.PagaTotMujore  }}</mat-cell>
       </ng-container>
 
     <ng-container matColumnDef="Actions">

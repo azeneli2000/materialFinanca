@@ -5,6 +5,7 @@ import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { LendaService } from './lenda.service';
 import { parseI18nMeta } from '@angular/compiler/src/render3/view/i18n';
+import { MesuesiZgjedhurService } from './mesuesi-zgjedhur.service';
 
 
 @Injectable({
@@ -20,7 +21,7 @@ import { parseI18nMeta } from '@angular/compiler/src/render3/view/i18n';
 export class MesuesiService {
   mesuesitList: AngularFireList<any>;
  
-  constructor(private db: AngularFireDatabase, private lendet: LendaService) { }
+  constructor(private db: AngularFireDatabase, private lendet: LendaService , private mesuesiZgjedhur:MesuesiZgjedhurService) { }
 
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
@@ -113,6 +114,13 @@ export class MesuesiService {
   }
 
   updateLendaMesuesiKatVjet(idMesuesi, kat, vj) {
+    //observable per mesuesin
+     
+    let pagaSig = this.form.get('PagaSig').value;
+    let pagaNetoZyrtare = this.form.get('PagaNetoMujore').value;
+  
+    
+   //observable per lendet
     let res = this.lendet.getLendet(idMesuesi).subscribe(list => {
       let array = list.map(item => {
         return {
@@ -126,23 +134,48 @@ export class MesuesiService {
       for (var i = 0; i < array.length; i++) {
         let paraleleNr: number;
         let cikliNr: number = 0;
+       
         //@ts-ignore
+         
         if (array[i].Paralele == true)
           paraleleNr = 0;
         else
           paraleleNr = 1;
         //@ts-ignore
-        let pagaTot = ((parseInt(array[i].Perqindja) + parseInt(array[i].Klasa) + vj * 0.5 + (array[i].NrNxenesish - 16) * 2.5 + paraleleNr * 2 + kat * 5 + cikliNr + array[i].ShtesaInst - 10) * array[i].Baza / 100) + array[i].Baza;
+        let pagaTot = ((parseFloat(array[i].Perqindja) + parseInt(array[i].Klasa) + vj * 0.5 + (array[i].NrNxenesish - 16) * 2.5 + paraleleNr * 2 + kat * 5 + this.lendet.getCikli(array[i].Klasa) + array[i].ShtesaInst - 10) * array[i].Baza / 100) + array[i].Baza;
         //@ts-ignore
-        pagaTot = Math.round((pagaTot * parseInt(array[i].Ore) * parseInt(array[i].Javetot) / 12) * 100 / 116.7);
-        pagaTotMesuesi = pagaTotMesuesi + pagaTot;
+        pagaTot = Math.round((pagaTot * parseFloat(array[i].Ore) * parseFloat(array[i].Javetot) / 12) * 100 / 116.7);
+        pagaTotMesuesi = pagaTotMesuesi + pagaTot;        
         //modifikon pagat per cdo lende
         this.db.list('Lendet').update(array[i].$key, {
           Paga: pagaTot
         });
       }
+      //llogarit pagen tot neto dhe shtesen ne varesi te pages
+      let psh = 0;
+      let ptot = 0;
+      if (pagaSig <= 30000 && pagaSig > 0) {
+
+
+        psh = Math.round(pagaTotMesuesi - pagaSig);
+
+      }
+      if (pagaSig > 30000 && pagaSig < 130000) {
+
+        psh = Math.round(pagaTotMesuesi - (pagaSig * 0.112 + ((pagaSig - 30000) * 0.13)) - pagaNetoZyrtare);
+      }
+      if (pagaSig > 130000) {
+
+        psh = Math.round(pagaTotMesuesi - (pagaSig * 0.112 + ((pagaSig - 30000) * 0.15)) - pagaNetoZyrtare);
+      }
+      
+      ptot = psh+pagaNetoZyrtare;
+
+
       this.db.list('Mesuesit').update(idMesuesi, {
-        Paga: pagaTotMesuesi
+        Paga: pagaTotMesuesi,
+        PagaTotMujore : ptot,
+        PagaShtese : psh
       });
     })
   }

@@ -51,7 +51,8 @@ export class LendaComponent implements OnInit {
     {value :  '0', viewValue : "Pune Admin" } ,
     {value :  '0', viewValue : "Veprimtari" } ,
     {value :  '0', viewValue : "Shoqerim" } ,
-    {value :  '0', viewValue : "Kujdestari" }
+    {value :  '0', viewValue : "Kujdestari" },
+    {value :  '0', viewValue : "Mirembajtje" }
     
 ];
 Klasat : combo[]= [
@@ -167,7 +168,7 @@ llogaritPagen()
         this.service.form.controls['Paga'].setValue(this.pagaBrutoMujore);
         let dif = this.pagaFillestareMesuesi + this.difUpdate;
         let difShtesa = this.pShtese+this.difUpdate
-        let totMujore1 = this.service.form.controls['Paga'].value + this.pTot;
+        let totMujore1 = this.pTot+ this.difUpdate;
         this.service.updateLendet(this.service.form.value,dif,difShtesa,totMujore1);
       }
 
