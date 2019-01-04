@@ -30,7 +30,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 
-
 import{MesuesiService} from '../app/shared/mesuesi.service';
 import { MenuKryesoreComponent } from './menu-kryesore/menu-kryesore.component';
 import { LayoutModule } from '@angular/cdk/layout';

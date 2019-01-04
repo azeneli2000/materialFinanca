@@ -72,9 +72,9 @@ Klasat : combo[]= [
 ];
 constructor(private service : LendaService, private notification : NotificationService ,private dialogRef : MatDialogRef<LendaComponent>,private mesZ : MesuesiZgjedhurService) { }
   idMesuesi;   
-  pagaFillestareMesuesi;
-  difUpdate : number;
-  fillimiUpdate : number;
+  pagaFillestareMesuesi ;
+  difUpdate : number ;
+  fillimiUpdate : number ;
   lendaZgjedhur : string;
 //te dhena per llogaritjen e pages
   baza : number = 0;

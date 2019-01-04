@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
-import { Router } from "@angular/router"
+import { Router } from "@angular/router";
+import {take} from "rxjs/operators";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,10 +14,20 @@ export class AuthService {
   authState: any = null;
  
   constructor(private afAuth: AngularFireAuth, private router: Router) {
-    this.afAuth.authState.subscribe((auth) => {
-      this.authState = auth
+  let s=  this.afAuth.authState.subscribe((auth) => {
+    if(auth) {
+    this.authState = auth;    
+      localStorage.setItem('user', JSON.stringify(this.authState));
+     // console.log(JSON.parse(localStorage.getItem('user')));
+    } else {
+      localStorage.setItem('user', null);
+     // console.log(JSON.parse(localStorage.getItem('user')));
+      this.authState = null;
+    }
     });
+     
   }
+
  
   get isUserAnonymousLoggedIn(): boolean {
     return (this.authState !== null) ? this.authState.isAnonymous : false
@@ -71,56 +83,4 @@ export class AuthService {
     this.router.navigate(['/'])
   }
 }
-// export class AuthService {
 
-//   constructor(private afAuth: AngularFireAuth, private router: Router) { }
-//   email: string;
-//   password: string;
-//   Emri:string;
-//   authenticated;
-//   login(email, password) {
-//     this.afAuth.auth.signInWithEmailAndPassword(email, password);
-
-//     // this.afAuth.authState.subscribe(res => {
-//     //   if (res && res.uid) {
-//     //     // console.log('user is logged in');
-//     //     this.authenticated = true;
-
-//     //   } else {
-//     //     // console.log('user not logged in');
-//     //     this.authenticated = false;
-//     //   }
-//     // });
-   
-
-
-
-//   }
-//   returnState()  {
-//     this.afAuth.authState.subscribe(res => {
-//       if (res!==null && res.uid!==null){
-//        this.Emri =  res.displayName;
-//       this.authenticated = res;
-//     console.log(this.Emri);
-//   }});
-      
-//     // this.afAuth.authState.subscribe(res => {
-//     //   if (res && res.uid) {
-//     //      console.log('user is logged in');
-//     //     //  this.authenticated =  true;
-//     //     } 
-//     //   else {
-//     //     console.log('user not logged in');
-//     //     //  this.authenticated = false;
-//     //   }
-//     // });
-//   }
-
-
-
-
-//   logout() {
-//     this.afAuth.auth.signOut();
-//   }
-
-// }

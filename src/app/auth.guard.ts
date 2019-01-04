@@ -5,6 +5,7 @@ import { AuthService } from './shared/auth.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { NotificationService } from './shared/notification.service';
 import { LoginComponent } from './login/login.component';
+import {take,map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,20 +15,17 @@ export class AuthGuard implements CanActivate {
   constructor(private  as:AuthService, private router : Router,private dialog :MatDialog, private notification : NotificationService){}
   
   
-   canActivate() : boolean{
+   canActivate() : boolean {
 
+ 
 
-
-    
-    // this.as.authState();
-    
-    if(this.as.authState)
+   if(JSON.parse(localStorage.getItem('user'))!=null)
     {
       console.log('authenticated');
       return true;
     }else 
     {
-    //this.router.navigate(['/login']);
+    
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -39,7 +37,5 @@ export class AuthGuard implements CanActivate {
 
     }
 
-   }
-   
-}
-
+    }
+  }

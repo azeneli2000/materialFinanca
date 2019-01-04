@@ -21,7 +21,10 @@ export class LoginComponent implements OnInit {
   error: {name: string, message: string} = {name: '', message: ''};
   login() {
     this.auth.loginWithEmail(this.email,this.password)
-    .then(() => {this.router.navigate(['/']);this.dialogRef.close()})
+    .then(() => {
+     
+      this.router.navigate(['/']);
+      this.dialogRef.close()})
         .catch(_error => {
           this.error = _error
           this.router.navigate(['/'])
@@ -40,7 +43,7 @@ export class LoginComponent implements OnInit {
     // {
     //   console.log("gabim");
     // }
-
+    
   }
 
   logout() {
