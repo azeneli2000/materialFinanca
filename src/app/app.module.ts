@@ -40,6 +40,8 @@ import { MesuesiLendaComponent } from './mesuesi-lenda/mesuesi-lenda.component';
 import { LendaComponent } from './lenda/lenda.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
+import { NxenesitListComponent } from './nxenesit/nxenesit-list/nxenesit-list.component';
+import { NxenesiComponent } from './nxenesit/nxenesi/nxenesi.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { AuthGuard } from './auth.guard';
     ConfirmDialogComponent,
     MesuesiLendaComponent,
     LendaComponent,
-    LoginComponent
+    LoginComponent,
+    NxenesitListComponent,
+    NxenesiComponent
     
   ],
   imports: [

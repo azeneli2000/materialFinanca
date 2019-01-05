@@ -1,0 +1,59 @@
+
+<div class="search-div">
+    <button mat-raised-button (click)="onCreate()">
+      <mat-icon>add</mat-icon>Mesues i Ri
+    </button>
+    <mat-form-field class="search-form-field" floatLabel="never">
+      <input matInput [(ngModel)]="searchKey" placeholder="Kerko.." autocomplete="off" (keyup)="applyFilter()">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+<div class="mat-elevation-z8">
+
+  <mat-table [dataSource]="listData" matSort>
+
+
+    <ng-container matColumnDef="Emri">
+      <mat-header-cell *matHeaderCellDef mat-sort-header >Emri</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.Emri}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Atesia">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Atesia</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.Atesia}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Mbiemri">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Mbiemri</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.Mbiemri}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Klasa">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Klasa</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.Klasa}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Indeksi">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Indeksi</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.Indeksi}}</mat-cell>
+      </ng-container>
+     
+    
+
+    <ng-container matColumnDef="Actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-icon-button  (click)="onEdit(row)"><mat-icon matTooltip="Modifiko">launch</mat-icon></button>
+          <button mat-icon-button color="warn" (click) ="onDelete(row.$key)"><mat-icon    matTooltip="Fshi">delete_outline</mat-icon></button>
+          <button mat-icon-button (click) = onSelect(row) color="primary"><mat-icon    matTooltip="Oret">assignment</mat-icon></button>
+        </mat-cell>
+      </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+    
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+</div>
+
