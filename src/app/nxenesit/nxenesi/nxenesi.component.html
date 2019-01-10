@@ -1,3 +1,106 @@
-<p>
-  nxenesi works!
-</p>
+<mat-toolbar>
+  <span>{{service.form.controls['$key'].value?"Modifiko nxenes":"Nxenes i Ri"}}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-form-field appearance="outline">
+    <mat-label>Viti Shkollor</mat-label>
+<mat-select (selectionChange)="onChangeViti($event)" >
+<mat-option *ngFor="let v of vitiShkollor" [value]="v.value">{{v.value}}</mat-option>  
+</mat-select>
+</mat-form-field>
+<form [formGroup]="service.form" class="normal-form">
+  <div class="controls-conteiner">
+    <input type="hidden" name="Skey">
+    <mat-tab-group dynamicHeight>
+
+      <mat-tab label="Informacione">
+        <br>
+        <mat-form-field appearance="outline">
+          <mat-label>Emri</mat-label>
+          <input formControlName="Emri" matInput [errorStateMatcher]="matcher">
+
+          <mat-error *ngIf="service.form.controls['Emri'].errors?.required">
+            Emri <strong>i detyrueshem</strong>
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline">
+          <mat-label>Mbiemri</mat-label>
+          <input formControlName="Mbiemri" matInput [errorStateMatcher]="matcher">
+
+          <mat-error *ngIf="service.form.controls['Mbiemri'].errors?.required">
+            Mbiemri <strong>i detyrueshem</strong>
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline">
+          <mat-label>Atesia</mat-label>
+          <input formControlName="Atesia" matInput [errorStateMatcher]="matcher">
+
+          <mat-error *ngIf="service.form.controls['Atesia'].errors?.required">
+            Atesia <strong>e detyruesheme</strong>
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline">
+          <mat-label>Klasa</mat-label>
+          <mat-select formControlName="Klasa" (selectionChange)="onChangeKlasa($event)"> 
+            <mat-option *ngFor="let klasa of Klasat" [value]="klasa.value">
+              {{klasa.value}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="service.form.controls['Klasa'].errors?.required">
+            Klasa <strong>e detyruesheme</strong>
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline">
+          <mat-label>Indeksi</mat-label>
+          <mat-select formControlName="Indeksi">
+            <mat-option *ngFor="let indeksi of Indekset" [value]="indeksi.value">
+              {{indeksi.viewValue}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="service.form.controls['Indeksi'].errors?.required">
+            Indeksi <strong>i detyrueshem</strong>
+          </mat-error>
+        </mat-form-field>
+        <div class="add-bottom-padding">
+          <mat-checkbox (change)="onCheck($event.checked)" formControlName="MeTransport">Me transport</mat-checkbox>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Ulje">
+          <br>
+          <div class="uljet">
+            <mat-label>Pagesa : {{pagesaKlasa}}</mat-label>
+          </div>
+
+<br><br>
+          <mat-form-field class="chip-list" *ngIf = "this.service.skontoUpdate">
+              <mat-chip-list #chipList formControlName="Skonto" >
+                <mat-chip *ngFor="let ulje of Uljet" [selectable]="selectable"
+                         [removable]="removable" (removed)="remove(ulje)">
+                  {{ulje}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="ULJET E NXENSIT..."
+                       [matChipInputFor]="chipList"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur"
+                       (matChipInputTokenEnd)="add($event)">
+              </mat-chip-list>
+            </mat-form-field>
+      </mat-tab>
+
+
+    </mat-tab-group>
+    <br>
+    <div class="but">
+      <button mat-raised-button class="ruaj" type="submit" color="primary" [disabled]="service.form.invalid" (click)="onSubmit()">Ruaj</button>
+    </div>
+  </div>
+</form>

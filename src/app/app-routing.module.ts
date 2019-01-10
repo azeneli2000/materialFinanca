@@ -7,11 +7,16 @@ import { AuthGuard } from './auth.guard';
 import { MenuKryesoreComponent } from './menu-kryesore/menu-kryesore.component';
 import { AppComponent } from './app.component';
 import { NxenesitListComponent } from './nxenesit/nxenesit-list/nxenesit-list.component';
+import { NxenesiDetajeComponent } from './nxenesit/nxenesi-detaje/nxenesi-detaje.component';
+import { KonfigurimeComponent } from './konfigurime/konfigurime.component';
 
 
 const routes: Routes = [{path : 'mesuesit',component : MesuesitListComponent,canActivate : [AuthGuard]},
 {path : 'nxenesit',component : NxenesitListComponent,canActivate : [AuthGuard]},
 {path : 'mesuesit/:$key',component : MesuesiLendaComponent,canActivate : [AuthGuard]},
+{path : 'nxenesit/:$key',component : NxenesiDetajeComponent,canActivate : [AuthGuard]},
+{path : 'konfigurime',component : KonfigurimeComponent,canActivate : [AuthGuard]},
+
 {path : 'login',component : LoginComponent}];
 
 @NgModule({

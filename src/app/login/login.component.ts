@@ -5,6 +5,7 @@ import {Router} from "@angular/router"
 import { AuthService } from '../shared/auth.service';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
 import {MatDialogRef} from '@angular/material';
+import { NotificationService } from '../shared/notification.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,7 +13,7 @@ import {MatDialogRef} from '@angular/material';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth : AuthService, private router : Router,private dialogRef : MatDialogRef<LoginComponent>) { }
+  constructor(private auth : AuthService, private router : Router,private dialogRef : MatDialogRef<LoginComponent>,private notification : NotificationService) { }
 
   email  = "shkollanr1@gmail.com";
   
@@ -27,8 +28,17 @@ export class LoginComponent implements OnInit {
       this.dialogRef.close()})
         .catch(_error => {
           this.error = _error
+          if (this.error.message = "A network error (such as timeout, interrupted connection or unreachable host) has occurred.")
+          {
+          this.notification.warn("Nuk jeni te lidhur me internetin !");
           this.router.navigate(['/'])
-          
+          }
+
+          if (this.error.message = "The password is invalid or the user does not have a password.")
+          {
+          this.notification.warn("Te dhenat e hyrjes nuk jane te sakta !");
+          this.router.navigate(['/'])
+          }
         });
      //this.auth.returnState();
     
@@ -41,9 +51,7 @@ export class LoginComponent implements OnInit {
     // }
     // else
     // {
-    //   console.log("gabim");
     // }
-    
   }
 
   logout() {

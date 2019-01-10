@@ -1,7 +1,7 @@
 
 <div class="search-div">
     <button mat-raised-button (click)="onCreate()">
-      <mat-icon>add</mat-icon>Mesues i Ri
+      <mat-icon>add</mat-icon>Nxenes i Ri
     </button>
     <mat-form-field class="search-form-field" floatLabel="never">
       <input matInput [(ngModel)]="searchKey" placeholder="Kerko.." autocomplete="off" (keyup)="applyFilter()">
@@ -9,7 +9,18 @@
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
+    <div class="mbetur" style = "display: inline">
+      <mat-card>
+         
+    <div *ngIf= "mbeturShkolla>0" style = "display: inline"><span  style="color:#303F9F">Shkolla : </span>  <span class = "mbeturSpan"> {{mbeturShkolla|currency : 'EUR':'symbol':'1.0-0'}}</span></div>
+    <div *ngIf= "mbeturTrans>0" style = "display: inline"> <span  class = "mbeturSpan" style="color:#303F9F">  Trans : </span>  <span class = "mbeturSpan">{{mbeturTrans|currency : 'LEK':'symbol':'1.0-0'}}</span></div>
+    <br>
+    <div *ngIf= "mbeturUni>0" style = "display: inline"><span  class = "mbeturSpan" style="color:#303F9F">Uni : </span>  <span class = "mbeturSpan">{{mbeturUni|currency : 'LEK':'symbol':'1.0-0'}}</span></div>
+   <div *ngIf= "mbeturLibra>0" style = "display: inline"> <span  class = "mbeturSpan" style="color:#303F9F"> Librat : </span> <span class = "mbeturSpan">{{mbeturLibra|currency : 'LEK':'symbol':'1.0-0'}}</span></div>
+  </mat-card>
   </div>
+</div>
+<br>
 
 <div class="mat-elevation-z8">
 
@@ -38,6 +49,16 @@
         <mat-cell *matCellDef="let element">{{element.Indeksi}}</mat-cell>
       </ng-container>
      
+    <ng-container matColumnDef="PagesaShkolla">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Pagesa</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.PagesaShkolla|currency :element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
+      </ng-container>
+     
+    <ng-container matColumnDef="PaguarShkolla">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Paguar</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.PaguarShkolla|currency : element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
+      </ng-container>
+     
     
 
     <ng-container matColumnDef="Actions">
@@ -45,7 +66,7 @@
         <mat-cell *matCellDef="let row">
           <button mat-icon-button  (click)="onEdit(row)"><mat-icon matTooltip="Modifiko">launch</mat-icon></button>
           <button mat-icon-button color="warn" (click) ="onDelete(row.$key)"><mat-icon    matTooltip="Fshi">delete_outline</mat-icon></button>
-          <button mat-icon-button (click) = onSelect(row) color="primary"><mat-icon    matTooltip="Oret">assignment</mat-icon></button>
+          <button mat-icon-button (click) = onSelect(row) color="primary"><mat-icon    matTooltip="Pagesat">assignment</mat-icon></button>
         </mat-cell>
       </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

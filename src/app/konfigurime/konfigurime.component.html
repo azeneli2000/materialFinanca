@@ -1,0 +1,265 @@
+<div class="viti">
+    <mat-form-field appearance="outline">
+        <mat-label>Viti Shkollor</mat-label>
+    <mat-select (selectionChange)="onChangeViti($event)" >
+    <mat-option *ngFor="let v of vitiShkollor" [value]="v.value">{{v.value}}</mat-option>  
+    </mat-select>
+    </mat-form-field>
+  </div>
+
+<form [formGroup]="konfigurime.form" class="normal-form">
+   
+  <mat-accordion>
+      
+      
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-description class ="klasa">
+          Klasa I
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input type ="number" formControlName="ShkollaKlasa1" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+      </mat-form-field>
+      <mat-form-field>
+        <input type ="number" formControlName="TransportiKlasa1" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+      </mat-form-field>
+      <mat-form-field>
+        <input type ="number" formControlName="UniformaKlasa1" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+      </mat-form-field>
+      <mat-form-field>
+        <input type ="number" formControlName="LibratKlasa1" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+      </mat-form-field>
+    </mat-expansion-panel>
+  
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-description class ="klasa">
+          Klasa II
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input type ="number" formControlName="ShkollaKlasa2" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+      </mat-form-field>
+      <mat-form-field>
+        <input type ="number" formControlName="TransportiKlasa2" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+      </mat-form-field>
+      <mat-form-field>
+        <input type ="number" formControlName="UniformaKlasa2" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+      </mat-form-field>
+      <mat-form-field>
+        <input type ="number" formControlName="LibratKlasa2" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+      </mat-form-field>
+    </mat-expansion-panel>
+  
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-description class ="klasa">
+          Klasa III
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input type ="number" formControlName="ShkollaKlasa3" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+      </mat-form-field>
+      <mat-form-field>
+        <input type ="number" formControlName="TransportiKlasa3" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+      </mat-form-field>
+      <mat-form-field>
+        <input type ="number" formControlName="UniformaKlasa3" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+      </mat-form-field>
+      <mat-form-field>
+        <input type ="number" formControlName="LibratKlasa3" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+      </mat-form-field>
+    </mat-expansion-panel>
+  
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-description class ="klasa">
+          Klasa IV
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input type ="number" formControlName="ShkollaKlasa4" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+      </mat-form-field>
+      <mat-form-field>
+        <input type ="number" formControlName="TransportiKlasa4" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+      </mat-form-field>
+      <mat-form-field>
+        <input type ="number" formControlName="UniformaKlasa4" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+      </mat-form-field>
+      <mat-form-field>
+        <input type ="number" formControlName="LibratKlasa4" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+      </mat-form-field>
+    </mat-expansion-panel>
+  
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-description class ="klasa">
+            Klasa V
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field>
+          <input type ="number" formControlName="ShkollaKlasa5" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="TransportiKlasa5" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="UniformaKlasa5" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="LibratKlasa5" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        </mat-form-field>
+      </mat-expansion-panel>
+    
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-description class ="klasa">
+            Klasa VI
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field>
+          <input type ="number" formControlName="ShkollaKlasa6" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="TransportiKlasa6" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="UniformaKlasa6" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="LibratKlasa6" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        </mat-form-field>
+      </mat-expansion-panel>
+    
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-description class ="klasa">
+            Klasa VII
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field>
+          <input type ="number" formControlName="ShkollaKlasa7" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="TransportiKlasa7" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="UniformaKlasa7" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="LibratKlasa7" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        </mat-form-field>
+      </mat-expansion-panel>
+    
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-description class ="klasa">
+            Klasa VIII
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field>
+          <input type ="number" formControlName="ShkollaKlasa8" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="TransportiKlasa8" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="UniformaKlasa8" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="LibratKlasa8" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        </mat-form-field>
+      </mat-expansion-panel>
+    
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-description class ="klasa">
+            Klasa IX
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field>
+          <input type ="number" formControlName="ShkollaKlasa9" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="TransportiKlasa9" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="UniformaKlasa9" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="LibratKlasa9" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        </mat-form-field>
+      </mat-expansion-panel>
+    
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-description class ="klasa">
+            Klasa X
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field>
+          <input type ="number" formControlName="ShkollaKlasa10" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="TransportiKlasa10" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="UniformaKlasa10" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="LibratKlasa10" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        </mat-form-field>
+      </mat-expansion-panel> 
+    
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-description class ="klasa">
+            Klasa XI
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field>
+          <input type ="number" formControlName="ShkollaKlasa11" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="TransportiKlasa11" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="UniformaKlasa11" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="LibratKlasa11" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        </mat-form-field>
+      </mat-expansion-panel>
+     
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-description class ="klasa">
+            Klasa XII
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field>
+          <input type ="number" formControlName="ShkollaKlasa12" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="TransportiKlasa12" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="UniformaKlasa12" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        </mat-form-field>
+        <mat-form-field>
+          <input type ="number" formControlName="LibratKlasa12" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        </mat-form-field>
+      </mat-expansion-panel>
+    
+     
+ 
+</mat-accordion>
+<br>
+<div class="but">
+    <button mat-raised-button class="ruaj" type="submit" color="primary" [disabled]="konfigurime.form.invalid" (click)="onSubmit()">Ruaj</button>
+
+  </div>
+ 
+</form>

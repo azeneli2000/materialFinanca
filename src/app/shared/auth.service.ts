@@ -18,7 +18,8 @@ export class AuthService {
     if(auth) {
     this.authState = auth;    
       localStorage.setItem('user', JSON.stringify(this.authState));
-     // console.log(JSON.parse(localStorage.getItem('user')));
+    // console.log(JSON.parse(localStorage.getItem('user')));
+     
     } else {
       localStorage.setItem('user', null);
      // console.log(JSON.parse(localStorage.getItem('user')));

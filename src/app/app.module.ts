@@ -19,7 +19,8 @@ import { MesuesiComponent } from './mesuesit/mesuesi/mesuesi.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { MatToolbarModule, MatButtonModule, MatIconModule, MatListModule,  MatPaginatorIntl,MatCardModule} from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatIconModule, MatListModule,  MatPaginatorIntl,MatCardModule,} from '@angular/material';
+import {MatChipsModule} from '@angular/material/chips';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
@@ -29,6 +30,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import{MesuesiService} from '../app/shared/mesuesi.service';
 import { MenuKryesoreComponent } from './menu-kryesore/menu-kryesore.component';
@@ -42,6 +44,8 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { NxenesitListComponent } from './nxenesit/nxenesit-list/nxenesit-list.component';
 import { NxenesiComponent } from './nxenesit/nxenesi/nxenesi.component';
+import { NxenesiDetajeComponent } from './nxenesit/nxenesi-detaje/nxenesi-detaje.component';
+import { KonfigurimeComponent } from './konfigurime/konfigurime.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,10 @@ import { NxenesiComponent } from './nxenesit/nxenesi/nxenesi.component';
     LendaComponent,
     LoginComponent,
     NxenesitListComponent,
-    NxenesiComponent
+    NxenesiComponent,
+    NxenesiDetajeComponent,
+    KonfigurimeComponent,
+    
     
   ],
   imports: [
@@ -85,10 +92,12 @@ import { NxenesiComponent } from './nxenesit/nxenesi/nxenesi.component';
     MatCheckboxModule,
     MatTabsModule,
     MatTooltipModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    MatChipsModule,
+    MatExpansionModule,
   ],
   providers: [MesuesiService,AuthGuard, {provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl()}],
   bootstrap: [AppComponent],
-  entryComponents:[MesuesiComponent,ConfirmDialogComponent,LendaComponent]
+  entryComponents:[MesuesiComponent,ConfirmDialogComponent,LendaComponent,NxenesiComponent]
 })
 export class AppModule { }
