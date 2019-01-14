@@ -1,5 +1,8 @@
 .mbetur{
-    float : right;
+    /* float : right; */
+    display: inline-flex;
+    flex-flow: row wrap;
+    /* background: grey; */
 }
 .mbeturSpan{
     color : #F44336;
