@@ -1,0 +1,22 @@
+.gjeneralitete{
+    display : flex;
+justify-content: center;
+
+}
+.pagesat{
+    display : inline-flex;
+/* justify-content: center; */
+margin-left: 2%;
+margin-bottom: 2%
+
+}
+.mbetur{
+color: #FF5252;
+float: right;
+
+}
+.ruaj{
+
+    display : flex;
+    justify-content: center;
+}

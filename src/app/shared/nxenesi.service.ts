@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
+import { take } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -72,7 +73,7 @@ export class NxenesiService {
 
   getNxenes($key){
 
-    return this.db.list('2020-2021/'+$key).snapshotChanges();
+    return this.db.object('/2020-2021/'+$key).snapshotChanges();
   }
   populateForm(nxenesi) {
  
@@ -115,6 +116,8 @@ export class NxenesiService {
 
 
   updateNxenes(nxenesi) {
+    this.nxenesitList = this.db.list('2020-2021');
+
     this.nxenesitList.update(nxenesi.$key, {
       Emri: nxenesi.Emri,
       Mbiemri: nxenesi.Mbiemri,

@@ -1,6 +1,149 @@
-<h3>
-{{emriNxenesi}}{{nxenesi|json}}</h3>
+<form [formGroup]="nxenesiService.form">
+    <div class="gjeneralitete">
+        <mat-card class="gjeneralitete1">
+            <mat-card-title style="color: #3F51B5">Gjeneralitete</mat-card-title>
+            <mat-form-field appearance="outline">
+                <mat-label>Emri</mat-label>
+                <input formControlName="Emri" matInput>
+            </mat-form-field>
 
-<ul *ngFor ="let i of nxenesi">
-<li>{{i.key|json}}  {{i.payload|json}}</li>
-</ul>
+            <mat-form-field appearance="outline">
+                <mat-label>Atesia</mat-label>
+                <input formControlName="Atesia" matInput>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Mbiemri</mat-label>
+                <input formControlName="Mbiemri" matInput>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Klasa</mat-label>
+                <input formControlName="Klasa" matInput>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Indeksi</mat-label>
+                <input formControlName="Indeksi" matInput>
+            </mat-form-field>
+        </mat-card>
+    </div>
+    <br>
+    <!-- shkolla -->
+    <div class="pagesat">
+        <mat-card class="gjeneralitete1">
+            <mat-card-title style="color: #3F51B5">Pagesa Shkolla</mat-card-title>
+            <mat-progress-bar mode="determinate" [value]="perqShkolla"></mat-progress-bar>
+
+            <small> {{nxenesiService.form.controls['PagesaShkolla'].value|currency :
+                this.nxenesiService.form.controls['MonedhaShkolla'].value:'symbol':'1.0-0'}}</small>/<small>{{nxenesiService.form.controls['PaguarShkolla'].value|currency :
+                    this.nxenesiService.form.controls['MonedhaShkolla'].value:'symbol':'1.0-0'}}
+            </small>
+            <br>
+            <span class="mbetur">{{mbetjaShkolla|currency :
+                this.nxenesiService.form.controls['MonedhaShkolla'].value:'symbol':'1.0-0'}}</span>
+            <br>
+            <div class="ruaj">
+                <button mat-raised-button color="primary" (click)="onSubmitShkolla()">Paguaj</button>
+            </div>
+            <br>
+            <div *ngIf="hideShkolla">
+                {{this.nxenesiService.form.controls['MonedhaShkolla'].value}}
+                <mat-form-field appearance="outline">
+
+                    <mat-label>Pagesa</mat-label>
+                    <input type="number" #box (keydown.enter)="shkolla(box.value)" matInput>
+                </mat-form-field>
+            </div>
+        </mat-card>
+    </div>
+<!-- transporti -->
+    <div class="pagesat">
+        <mat-card class="gjenera">
+            <mat-card-title style="color: #3F51B5">Pagesa Transporti</mat-card-title>
+            <mat-progress-bar mode="determinate" [value]="perqTransporti"></mat-progress-bar>
+
+            <small> {{nxenesiService.form.controls['PagesaTransporti'].value|currency :
+                    this.nxenesiService.form.controls['MonedhaTransporti'].value:'symbol':'1.0-0'}}</small>/<small>{{nxenesiService.form.controls['PaguarTransporti'].value|currency :
+                            this.nxenesiService.form.controls['MonedhaTransporti'].value:'symbol':'1.0-0'}}
+            </small>
+            <br>
+            <span class="mbetur">{{mbetjaTransporti|currency :
+                this.nxenesiService.form.controls['MonedhaTransporti'].value:'symbol':'1.0-0'}}</span>
+            <br>
+            <div class="ruaj">
+                <button mat-raised-button color="primary" (click)="onSubmitTransporti()">Paguaj</button>
+            </div>
+            <br>
+            <div *ngIf="hideTransporti">
+                {{this.nxenesiService.form.controls['MonedhaTransporti'].value}}
+                <mat-form-field appearance="outline"> 
+                    <mat-label>Pagesa</mat-label>
+                    <input type="number" #box1 (keydown.enter)="transporti(box1.value)" matInput>
+                </mat-form-field>
+            </div>
+        </mat-card>
+    </div>
+
+<!-- uniforma -->
+
+    <div class="pagesat">
+        <mat-card class="gjeneralitete1">
+            <mat-card-title style="color: #3F51B5">Pagesa Uniforma</mat-card-title>
+            <mat-progress-bar mode="determinate" [value]="perqUniforma"></mat-progress-bar>
+
+            <small> {{nxenesiService.form.controls['PagesaUniforma'].value|currency :
+                this.nxenesiService.form.controls['MonedhaUniforma'].value:'symbol':'1.0-0'}}</small>/<small>{{nxenesiService.form.controls['PaguarUniforma'].value|currency :
+                    this.nxenesiService.form.controls['MonedhaUniforma'].value:'symbol':'1.0-0'}}
+            </small>
+            <br>
+            <span class="mbetur">{{mbetjaUniforma|currency :
+                this.nxenesiService.form.controls['MonedhaUniforma'].value:'symbol':'1.0-0'}}</span>
+            <br>
+            <div class="ruaj">
+                <button mat-raised-button color="primary" (click)="onSubmitUniforma()">Paguaj</button>
+            </div>
+            <br>
+            <div *ngIf="hideUniforma">
+                {{this.nxenesiService.form.controls['MonedhaUniforma'].value}}
+                <mat-form-field appearance="outline">
+
+                    <mat-label>Pagesa</mat-label>
+                    <input type = "number" #box2 (keydown.enter)="uniforma(box2.value)" matInput>
+                </mat-form-field>
+            </div>
+        </mat-card>
+    </div>
+    <!-- librat -->
+
+    <div class="pagesat">
+        <mat-card class="gjeneralitete1">
+            <mat-card-title style="color: #3F51B5">Pagesa Librat</mat-card-title>
+            <mat-progress-bar mode="determinate" [value]="perqLibrat"></mat-progress-bar>
+
+            <small> {{nxenesiService.form.controls['PagesaLibrat'].value|currency :
+                this.nxenesiService.form.controls['MonedhaLibrat'].value:'symbol':'1.0-0'}}</small>/<small>{{nxenesiService.form.controls['PaguarLibrat'].value|currency :
+                    this.nxenesiService.form.controls['MonedhaLibrat'].value:'symbol':'1.0-0'}}
+            </small>
+            <br>
+            <span class="mbetur">{{mbetjaLibrat|currency :
+                this.nxenesiService.form.controls['MonedhaLibrat'].value:'symbol':'1.0-0'}}</span>
+            <br>
+            <div class="ruaj">
+                <button mat-raised-button color="primary" [disabled] = "mbetjeLibrat" (click)="onSubmitLibrat()">Paguaj</button>
+            </div>
+            <br>
+            <div *ngIf="hideLibrat">
+                {{this.nxenesiService.form.controls['MonedhaLibrat'].value}}
+                <mat-form-field appearance="outline">
+
+                    <mat-label>Pagesa</mat-label>
+                    <input type = "number" #box3 (keydown.enter)="librat(box3.value)" matInput>
+                </mat-form-field>
+            </div>
+        </mat-card>
+    </div>
+
+
+    <!-- {{nxenesiService.form.value|json}} -->
+</form>

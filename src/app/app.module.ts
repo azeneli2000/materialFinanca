@@ -31,6 +31,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatDividerModule} from '@angular/material/divider';
+
 
 import{MesuesiService} from '../app/shared/mesuesi.service';
 import { MenuKryesoreComponent } from './menu-kryesore/menu-kryesore.component';
@@ -95,6 +98,8 @@ import { KonfigurimeComponent } from './konfigurime/konfigurime.component';
     AngularFireAuthModule,
     MatChipsModule,
     MatExpansionModule,
+    MatProgressBarModule,
+    MatDividerModule,
   ],
   providers: [MesuesiService,AuthGuard, {provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl()}],
   bootstrap: [AppComponent],

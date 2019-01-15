@@ -35,7 +35,7 @@ constructor(private konfigurime : KonfigurimeService,private notification : Noti
     let v= this.konfigurime.getKonfigurime().subscribe(
       list => { if(list.length>0){
         this.insert = false;
-        list.map(item =>{ this.konfigurime.populateForm(item.payload.val(),item.key);console.log(item.key)});
+        list.map(item =>{ this.konfigurime.populateForm(item.payload.val(),item.key);console.log(item.payload.val())});
       }
       else {
         this.insert= true;

@@ -32,14 +32,20 @@ export class MesuesiComponent implements OnInit {
   constructor(private service : MesuesiService, private notification : NotificationService ,private dialogRef : MatDialogRef<MesuesiComponent>) { }
 
   onSubmit(){
+
     if(this.service.form.valid)
     {
+      let changed : boolean;
+      if(!(this.service.form.controls['Kategoria'].pristine && this.service.form.controls['Vjetersia'].pristine))
+      changed = true;
+      else
+      changed = false;
       if (!this.service.form.get('$key').value)
       this.service.insertMesuesi(this.service.form.value);
       else
-      this.service.updateMesuesit(this.service.form.value);
-      this.service.form.reset();
-      this.service.initializeFormGroup();
+      this.service.updateMesuesit(this.service.form.value,changed);
+      // this.service.form.reset();
+      // this.service.initializeFormGroup();
       this.notification.success("Mesuesi u ruajt");
     this.onClose();
     }
@@ -76,7 +82,8 @@ export class MesuesiComponent implements OnInit {
     this.pagaShtese =Math.round (totValue -  this.service.form.controls['PagaNetoMujore'].value);
     
      this.service.form.controls['PagaShtese'].setValue(this.pagaShtese);
-  
+     //this.service.form.controls['PagaTotMujore'].setValue(this.pagaNetoMujore);
+
   }
 
   llogaritPagaSig(pagaBruto, pagaSig) {

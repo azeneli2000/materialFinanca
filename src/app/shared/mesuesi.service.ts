@@ -78,7 +78,8 @@ export class MesuesiService {
       Jashtem: mesuesi.Jashtem
     });
   }
-  updateMesuesit(mesuesi) {
+  updateMesuesit(mesuesi,change) {
+    if (change)
     this.updateLendaMesuesiKatVjet(mesuesi.$key, parseInt(mesuesi.Kategoria), parseInt(mesuesi.Vjetersia));
     this.mesuesitList.update(mesuesi.$key, {
       Emri: mesuesi.Emri,
@@ -171,8 +172,11 @@ export class MesuesiService {
       
       ptot = psh+pagaNetoZyrtare;
 
-
-      this.db.list('Mesuesit').update(idMesuesi, {
+// this.form.controls.pagaTotMesuesi.setValue(pagaTotMesuesi);
+// this.form.controls.PagaTotMujore. setValue(ptot);
+// this.form.controls.PagaShtese.setValue(psh);
+    
+this.db.list('Mesuesit').update(idMesuesi, {
         Paga: pagaTotMesuesi,
         PagaTotMujore : ptot,
         PagaShtese : psh
