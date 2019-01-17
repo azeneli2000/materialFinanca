@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NxenesiService } from 'src/app/shared/nxenesi.service';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { ConfirmDialogService } from 'src/app/shared/confirm-dialog.service';
@@ -7,6 +7,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material';
 import { KonfigurimeService } from 'src/app/shared/konfigurime.service';
 import { NullViewportScroller } from '@angular/common/src/viewport_scroller';
+import { VitiService } from 'src/app/shared/viti.service';
 
 @Component({
   selector: 'app-nxenesi',
@@ -14,6 +15,8 @@ import { NullViewportScroller } from '@angular/common/src/viewport_scroller';
   styleUrls: ['./nxenesi.component.css']
 })
 export class NxenesiComponent implements OnInit {
+
+
   Klasat = [
     { value: '0', viewValue: "0" },
     { value: '1', viewValue: "I" },
@@ -100,12 +103,15 @@ this.pagesaKlasa = Math.round( this.pagesaKlasa - this.pagesaKlasa*perqindja/100
          this.service.form.controls['Skonto'].setValue(null);
         }
         this.service.form.controls['Eskursione'].setValue('');
-       
+      //  for(let i =1; i<300;i++ )
         this.service.insertNxenes(this.service.form.value);
       }
       //modifikim
       else {
         this.service.skontoUpdate = false;
+        this.service.form.controls['PagesaShkolla'].setValue(this.pagesaKlasa);
+       
+console.log(this.Uljet);
         this.service.form.controls['Skonto'].setValue(this.Uljet);
         this.service.updateNxenes(this.service.form.value);
       }
@@ -121,18 +127,39 @@ this.pagesaKlasa = Math.round( this.pagesaKlasa - this.pagesaKlasa*perqindja/100
     this.dialogRef.close();
   }
 
-  onCheck() {
-
-    //
+  onCheck(t) {
+   
+      console.log('insert');
+     let klasaPagesa = 'ShkollaKlasa'+ this.klasaZgjedhur;
+      let v= this.konfigurime.getKonfigurime().subscribe(
+      list => { if(list.length>0){
+        list.map(item =>{
+       
+          this.pagesaTransporti =item.payload.val()["TransportiKlasa" + this.klasaZgjedhur];
+          this.pagesaUniforma =item.payload.val()["UniformaKlasa" + this.klasaZgjedhur];
+          console.log(this.pagesaTransporti)});
+          this.service.form.controls['PagesaTransporti'].setValue(this.pagesaTransporti);
+          this.service.form.controls['PagesaUniforma'].setValue(this.pagesaUniforma);
+      }
+      else {
+        this.pagesaKlasa = 1;
+      }
+      v.unsubscribe();
+        });
+       
+     
+    
   }
   ngOnInit() {
+    
     if (this.service.form.get('$key').value) 
     {
        //po behet modifikim 
      if(this.service.form.get('Skonto').value)//nqs uljet nuk jane null
      this.Uljet =  this.service.form.get('Skonto').value;//vendos vleren e skontos te array uljet            
      this.pagesaKlasa = this.service.form.get('PagesaShkolla').value;
-
+     this.klasaZgjedhur = this.service.form.get('Klasa').value
+console.log(this.Uljet);
     }
   }
   onChangeKlasa(klasa) {

@@ -67,6 +67,7 @@ import { KonfigurimeComponent } from './konfigurime/konfigurime.component';
     KonfigurimeComponent,
     
     
+    
   ],
   imports: [
     BrowserModule,

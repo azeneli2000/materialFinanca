@@ -18,3 +18,8 @@
 .user {
   flex: 1 1 auto;
 }
+.viti{
+  margin-left: 15%;
+  display : block;
+  max-width : 150px;
+}

@@ -5,6 +5,7 @@ import { NotificationService } from 'src/app/shared/notification.service';
 import { NxenesiComponent } from '../nxenesi/nxenesi.component';
 import { ConfirmDialogService } from 'src/app/shared/confirm-dialog.service';
 import { Router } from '@angular/router';
+import { VitiService } from 'src/app/shared/viti.service';
 @Component({
   selector: 'app-nxenesit-list',
   templateUrl: './nxenesit-list.component.html',
@@ -35,8 +36,8 @@ export class NxenesitListComponent implements OnInit {
     Eskursione: [{ Emri: 'E1', Pagesa: 12, Monedha: 'LEK' }],
   };
   //per skonton
- 
-  constructor(private nxenesitService: NxenesiService,private dialog :MatDialog, private notification : NotificationService,private dialogService : ConfirmDialogService,private router : Router) { }
+  vitiZgjedhur
+  constructor(private nxenesitService: NxenesiService,private dialog :MatDialog, private notification : NotificationService,private dialogService : ConfirmDialogService,private router : Router, private _viti : VitiService) { }
 
   mbeturShkolla : number;
   mbeturTrans : number;
@@ -52,35 +53,64 @@ export class NxenesitListComponent implements OnInit {
 
 
   ngOnInit() {
-    
     //this.nxenesitService.insertNxenes(this.nx);
-    this.nxenesitService.getNxenesit().subscribe( 
-      list => {
-        let array = list.map(item =>{
-          return {
-            $key : item.key,
-            ...item.payload.val()};
-        });
-        //
-        this.listData= new MatTableDataSource(array);
-        this.mbeturShkolla= this.listData.filteredData.map(t => t.PagesaShkolla).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarShkolla).reduce((acc, value) => acc + value, 0);
-        this.mbeturTrans= this.listData.filteredData.map(t => t.PagesaTransporti).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarTransporti).reduce((acc, value) => acc + value, 0);
-        this.mbeturLibra= this.listData.filteredData.map(t => t.PagesaLibrat).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarLibrat).reduce((acc, value) => acc + value, 0);
-        this.mbeturUni= this.listData.filteredData.map(t => t.PagesaUniforma).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarUniforma).reduce((acc, value) => acc + value, 0);
+    this.getAll();
+    this._viti.msgMenu$.subscribe(mes=>{this.vitiZgjedhur= mes;this.getAll()});
 
-        this.listData.sort = this.sort;
-        this.listData.paginator = this.paginator;
-        //filtron vetem kolnat e visualizuara ne tabele pervec actions dhe $key
-        this.listData.filterPredicate = (data, filter) => {          
-          return this.displayedColumns.some(ele => {
-            return ele != 'Actions'  && ele != 'PagesaShkolla' && ele != 'PaguarShkolla' && ele != 'Indeksi' && data[ele].toString().toLowerCase().indexOf(filter) != -1;
-          });
-        };
+    // this.nxenesitService.getNxenesit().subscribe( 
+    //   list => {
+    //     let array = list.map(item =>{
+    //       return {
+    //         $key : item.key,
+    //         ...item.payload.val()};
+    //     });
+    //     //
+    //     this.listData= new MatTableDataSource(array);
+    //     this.mbeturShkolla= this.listData.filteredData.map(t => t.PagesaShkolla).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarShkolla).reduce((acc, value) => acc + value, 0);
+    //     this.mbeturTrans= this.listData.filteredData.map(t => t.PagesaTransporti).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarTransporti).reduce((acc, value) => acc + value, 0);
+    //     this.mbeturLibra= this.listData.filteredData.map(t => t.PagesaLibrat).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarLibrat).reduce((acc, value) => acc + value, 0);
+    //     this.mbeturUni= this.listData.filteredData.map(t => t.PagesaUniforma).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarUniforma).reduce((acc, value) => acc + value, 0);
+
+    //     this.listData.sort = this.sort;
+    //     this.listData.paginator = this.paginator;
+    //     //filtron vetem kolnat e visualizuara ne tabele pervec actions dhe $key
+    //     this.listData.filterPredicate = (data, filter) => {          
+    //       return this.displayedColumns.some(ele => {
+    //         return ele != 'Actions'  && ele != 'PagesaShkolla' && ele != 'PaguarShkolla' && ele != 'Indeksi' && data[ele].toString().toLowerCase().indexOf(filter) != -1;
+    //       });
+    //     };
         
 
-      });
+    //   });
   }
+getAll(){
+  this.nxenesitService.getNxenesit().subscribe( 
+    list => {
+      let array = list.map(item =>{
+        return {
+          $key : item.key,
+          ...item.payload.val()};
+      });
+      //
+      this.listData= new MatTableDataSource(array);
+      this.mbeturShkolla= this.listData.filteredData.map(t => t.PagesaShkolla).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarShkolla).reduce((acc, value) => acc + value, 0);
+      this.mbeturTrans= this.listData.filteredData.map(t => t.PagesaTransporti).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarTransporti).reduce((acc, value) => acc + value, 0);
+      this.mbeturLibra= this.listData.filteredData.map(t => t.PagesaLibrat).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarLibrat).reduce((acc, value) => acc + value, 0);
+      this.mbeturUni= this.listData.filteredData.map(t => t.PagesaUniforma).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarUniforma).reduce((acc, value) => acc + value, 0);
 
+      this.listData.sort = this.sort;
+      this.listData.paginator = this.paginator;
+      //filtron vetem kolnat e visualizuara ne tabele pervec actions dhe $key
+      this.listData.filterPredicate = (data, filter) => {          
+        return this.displayedColumns.some(ele => {
+          return ele != 'Actions'  && ele != 'PagesaShkolla' && ele != 'PaguarShkolla' && ele != 'Indeksi' && data[ele].toString().toLowerCase().indexOf(filter) != -1;
+        });
+      };
+      
+
+    });
+
+}
 
   onSearchClear() {
     this.searchKey = "";

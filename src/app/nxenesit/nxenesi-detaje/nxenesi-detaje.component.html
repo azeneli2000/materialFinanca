@@ -4,27 +4,27 @@
             <mat-card-title style="color: #3F51B5">Gjeneralitete</mat-card-title>
             <mat-form-field appearance="outline">
                 <mat-label>Emri</mat-label>
-                <input formControlName="Emri" matInput>
+                <input formControlName="Emri" matInput readonly>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Atesia</mat-label>
-                <input formControlName="Atesia" matInput>
+                <input formControlName="Atesia" matInput readonly>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Mbiemri</mat-label>
-                <input formControlName="Mbiemri" matInput>
+                <input formControlName="Mbiemri" matInput readonly>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Klasa</mat-label>
-                <input formControlName="Klasa" matInput>
+                <input formControlName="Klasa" matInput readonly>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Indeksi</mat-label>
-                <input formControlName="Indeksi" matInput>
+                <input formControlName="Indeksi" matInput readonly>
             </mat-form-field>
         </mat-card>
     </div>
@@ -58,7 +58,7 @@
         </mat-card>
     </div>
 <!-- transporti -->
-    <div class="pagesat">
+    <div class="pagesat" *ngIf = "this.nxenesiService.form.controls['MeTransport'].value">
         <mat-card class="gjenera">
             <mat-card-title style="color: #3F51B5">Pagesa Transporti</mat-card-title>
             <mat-progress-bar mode="determinate" [value]="perqTransporti"></mat-progress-bar>
@@ -87,7 +87,7 @@
 
 <!-- uniforma -->
 
-    <div class="pagesat">
+    <div class="pagesat"  *ngIf = "this.nxenesiService.form.controls['MeUniforme'].value">
         <mat-card class="gjeneralitete1">
             <mat-card-title style="color: #3F51B5">Pagesa Uniforma</mat-card-title>
             <mat-progress-bar mode="determinate" [value]="perqUniforma"></mat-progress-bar>
@@ -116,7 +116,7 @@
     </div>
     <!-- librat -->
 
-    <div class="pagesat">
+    <div class="pagesat" >
         <mat-card class="gjeneralitete1">
             <mat-card-title style="color: #3F51B5">Pagesa Librat</mat-card-title>
             <mat-progress-bar mode="determinate" [value]="perqLibrat"></mat-progress-bar>

@@ -34,8 +34,8 @@ export class NxenesiService {
     PagesaUniforma: new FormControl('', [Validators.required]),
     PaguarUniforma: new FormControl('', [Validators.required]),
     MonedhaUniforma: new FormControl('', [Validators.required]),
-
-    MeTransport: new FormControl(false),
+    MeUniforme: new FormControl(true),
+    MeTransport: new FormControl(true),
     Skonto :  new FormControl(null),
     Eskursione :  new FormControl(''),
   });
@@ -59,7 +59,8 @@ export class NxenesiService {
       PagesaUniforma: 0,
       PaguarUniforma: 0,
       MonedhaUniforma: 'LEK',
-      MeTransport: false,
+      MeTransport: true,
+      MeUniforme: true,
       Skonto: null,
       Eskursione: [{}],
     });
@@ -67,8 +68,9 @@ export class NxenesiService {
   }
 
   getNxenesit() {
-    this.nxenesitList = this.db.list('2020-2021');
-    return this.db.list('2020-2021').snapshotChanges();
+    let viti = localStorage.getItem('VitiShkollor');
+    this.nxenesitList = this.db.list(viti);
+    return this.db.list(viti).snapshotChanges();
   }
 
   getNxenes($key){
@@ -82,7 +84,17 @@ export class NxenesiService {
   }
 
   insertNxenes(nxenesi) {
-    this.nxenesitList = this.db.list('2020-2021');
+    let viti = localStorage.getItem('VitiShkollor');
+
+   
+    let uniforma : number  = 0 ;
+    let transporti : number =0;
+
+    this.nxenesitList = this.db.list(viti);
+      if (nxenesi.MeUniforme)
+        uniforma = nxenesi.PagesaUniforma
+      if (nxenesi.MeTransport)
+        transporti = nxenesi.PagesaTransporti
     this.nxenesitList.push(
       {
         Emri: nxenesi.Emri,
@@ -95,7 +107,7 @@ export class NxenesiService {
         PaguarShkolla: nxenesi.PaguarShkolla,
         MonedhaShkolla: nxenesi.MonedhaShkolla,
 
-        PagesaTransporti: nxenesi.PagesaTransporti,
+        PagesaTransporti: transporti,
         PaguarTransporti: nxenesi.PaguarTransporti,
         MonedhaTransporti: nxenesi.MonedhaTransporti,
 
@@ -103,10 +115,11 @@ export class NxenesiService {
         PaguarLibrat: nxenesi.PaguarLibrat,
         MonedhaLibrat: nxenesi.MonedhaLibrat,
 
-        PagesaUniforma: nxenesi.PagesaUniforma,
+        PagesaUniforma: uniforma,
         PaguarUniforma: nxenesi.PaguarUniforma,
         MonedhaUniforma: nxenesi.MonedhaUniforma,
-
+        
+        MeUniforme: nxenesi.MeUniforme,
         MeTransport: nxenesi.MeTransport,
         Skonto: nxenesi.Skonto ,
         Eskursione: nxenesi.Eskursione,
@@ -116,7 +129,22 @@ export class NxenesiService {
 
 
   updateNxenes(nxenesi) {
-    this.nxenesitList = this.db.list('2020-2021');
+    let viti = localStorage.getItem('VitiShkollor');
+    this.nxenesitList = this.db.list(viti);
+    let uniforma : number  = 0 ;
+    let transporti : number =0;
+console.log(nxenesi.MeTransport);
+      if (nxenesi.MeUniforme)
+        uniforma = nxenesi.PagesaUniforma
+        if (nxenesi.MeTransport)
+        transporti = nxenesi.PagesaTransporti
+
+      //    //nqs mod transportin dhe ska pagesa
+      //   if (nxenesi.MeTransport && nxenesi.PaguarTransporti == 0)
+      // transporti = nxenesi.PagesaTransporti
+      // //nqs mod transportin po ka pagesa
+      // if (nxenesi.MeTransport && nxenesi.PaguarTransporti >0)
+      // transporti = nxenesi.PaguarTransporti
 
     this.nxenesitList.update(nxenesi.$key, {
       Emri: nxenesi.Emri,
@@ -129,7 +157,7 @@ export class NxenesiService {
       PaguarShkolla: nxenesi.PaguarShkolla,
       MonedhaShkolla: nxenesi.MonedhaShkolla,
 
-      PagesaTransporti: nxenesi.PagesaTransporti,
+      PagesaTransporti: transporti,
       PaguarTransporti: nxenesi.PaguarTransporti,
       MonedhaTransporti: nxenesi.MonedhaTransporti,
 
@@ -137,10 +165,11 @@ export class NxenesiService {
       PaguarLibrat: nxenesi.PaguarLibrat,
       MonedhaLibrat: nxenesi.MonedhaLibrat,
 
-      PagesaUniforma: nxenesi.PagesaUniforma,
+      PagesaUniforma: uniforma,
       PaguarUniforma: nxenesi.PaguarUniforma,
       MonedhaUniforma: nxenesi.MonedhaUniforma,
-
+      
+      MeUniforme: nxenesi.MeUniforme,
       MeTransport: nxenesi.MeTransport,
       Skonto: nxenesi.Skonto,
       Eskursione: nxenesi.Eskursione,
@@ -149,9 +178,15 @@ export class NxenesiService {
   }
 
 
-  deleteNxenesi($key: string) {
-    this.nxenesitList.remove($key);
-   
-  }
+  deleteNxenesi($key) {
+    //todo
+  //   this.nxenesitList = this.db.list('2020-2021');
 
+  //   this.nxenesitList.update(nxenesi.$key, {
+  //     PagesaShkolla: nxenesi.PaguarShkolla,
+  // });
+  
+  this.nxenesitList.remove($key);
+
+  }
 }

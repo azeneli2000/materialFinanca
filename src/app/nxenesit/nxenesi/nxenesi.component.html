@@ -5,12 +5,7 @@
     <mat-icon>clear</mat-icon>
   </button>
 </mat-toolbar>
-<mat-form-field appearance="outline">
-    <mat-label>Viti Shkollor</mat-label>
-<mat-select (selectionChange)="onChangeViti($event)" >
-<mat-option *ngFor="let v of vitiShkollor" [value]="v.value">{{v.value}}</mat-option>  
-</mat-select>
-</mat-form-field>
+
 <form [formGroup]="service.form" class="normal-form">
   <div class="controls-conteiner">
     <input type="hidden" name="Skey">
@@ -71,6 +66,9 @@
         <div class="add-bottom-padding">
           <mat-checkbox (change)="onCheck($event.checked)" formControlName="MeTransport">Me transport</mat-checkbox>
         </div>
+        <div class="add-bottom-padding">
+          <mat-checkbox (change)="onCheck($event.checked)" formControlName="MeUniforme">Me Uniforme</mat-checkbox>
+        </div>
       </mat-tab>
 
       <mat-tab label="Ulje">
@@ -103,4 +101,6 @@
       <button mat-raised-button class="ruaj" type="submit" color="primary" [disabled]="service.form.invalid" (click)="onSubmit()">Ruaj</button>
     </div>
   </div>
+  <!-- {{service.form.value|json}} 
+{{Uljet}} --> 
 </form>

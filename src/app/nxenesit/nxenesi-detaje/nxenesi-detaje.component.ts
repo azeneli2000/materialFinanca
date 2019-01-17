@@ -64,6 +64,8 @@ export class NxenesiDetajeComponent implements OnInit {
         this.nxenesiService.form.controls['PagesaUniforma'].setValue(this.nxenesi.PagesaUniforma);
         this.nxenesiService.form.controls['PaguarUniforma'].setValue(this.nxenesi.PaguarUniforma);
         this.nxenesiService.form.controls['MonedhaUniforma'].setValue(this.nxenesi.MonedhaUniforma);
+        this.nxenesiService.form.controls['MeTransport'].setValue(this.nxenesi.MeTransport);
+        this.nxenesiService.form.controls['MeUniforme'].setValue(this.nxenesi.MeUniforme);
 
         this.perqShkolla = Number(this.nxenesiService.form.controls['PaguarShkolla'].value) / Number(this.nxenesiService.form.controls['PagesaShkolla'].value) * 100;
         this.mbetjaShkolla = Number(this.nxenesiService.form.controls['PagesaShkolla'].value) - Number(this.nxenesiService.form.controls['PaguarShkolla'].value);
