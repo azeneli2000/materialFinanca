@@ -9,17 +9,19 @@ import { ConfirmDialogService } from '../shared/confirm-dialog.service';
   styleUrls: ['./konfigurime.component.css']
 })
 export class KonfigurimeComponent implements OnInit {
-  insert : boolean;
-vitiShkollor = [ {value :'2019-2020'},{value :"2020-2021"},{value :"2021-2022"},{value :"2022-2023"},{value :"2023-2024"},{value :"2024-2025"},{value :"2025-2026"},{value :"2026-2027"}];
-vitiZgjedhur; 
-constructor(private konfigurime : KonfigurimeService,private notification : NotificationService, private dialogService : ConfirmDialogService) { }
-  
+  insert: boolean;
+  vitiShkollor = [{ value: '2019-2020' }, { value: "2020-2021" }, { value: "2021-2022" }, { value: "2022-2023" }, { value: "2023-2024" }, { value: "2024-2025" }, { value: "2025-2026" }, { value: "2026-2027" }];
+  vitiZgjedhur;
+  isLoading = true;
+
+  constructor(private konfigurime: KonfigurimeService, private notification: NotificationService, private dialogService: ConfirmDialogService) { }
+
   onSubmit() {
     if (this.konfigurime.form.valid) {
       if (this.insert) {
         this.konfigurime.insertVitShkollor(this.konfigurime.form.value);
       }
-      else {               
+      else {
         console.log(this.vitiZgjedhur);
         this.konfigurime.updateViti(this.konfigurime.form.value);
       }
@@ -29,29 +31,32 @@ constructor(private konfigurime : KonfigurimeService,private notification : Noti
     }
   }
 
-  
+
   ngOnInit() {
-   
-    let v= this.konfigurime.getKonfigurime().subscribe(
-      list => { if(list.length>0){
-        this.insert = false;
-        list.map(item =>{ this.konfigurime.populateForm(item.payload.val(),item.key);console.log(item.payload.val())});
-      }
-      else {
-        this.insert= true;
-        this.konfigurime.initializeFormGroup();
-        this.konfigurime.form.reset;
-      }
-      v.unsubscribe();
-        });
-      
+
+    let v = this.konfigurime.getKonfigurime().subscribe(
+      list => {
+        if (list.length > 0) {
+        this.isLoading = false;
+          this.insert = false;
+          list.map(item => { this.konfigurime.populateForm(item.payload.val(), item.key); console.log(item.payload.val()) });
+        }
+        else {
+          this.insert = true;
+          this.konfigurime.initializeFormGroup();
+          this.konfigurime.form.reset;
+          this.isLoading = false;
+
+        }
+        v.unsubscribe();
+      });
   }
 
 
-     
-  }
+
+}
 
 
- 
+
 
 

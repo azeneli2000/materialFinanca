@@ -9,9 +9,13 @@ import { AppComponent } from './app.component';
 import { NxenesitListComponent } from './nxenesit/nxenesit-list/nxenesit-list.component';
 import { NxenesiDetajeComponent } from './nxenesit/nxenesi-detaje/nxenesi-detaje.component';
 import { KonfigurimeComponent } from './konfigurime/konfigurime.component';
+import { MesuesitComponent } from './mesuesit/mesuesit.component';
 
 
-const routes: Routes = [{path : 'mesuesit',component : MesuesitListComponent,canActivate : [AuthGuard]},
+const routes: Routes = [
+  { path: '', redirectTo: '/fillimi', pathMatch: 'full' },
+  {path : 'mesuesit',component : MesuesitListComponent,canActivate : [AuthGuard]},
+{path : 'fillimi',component : MesuesitComponent,canActivate : [AuthGuard]},
 {path : 'nxenesit',component : NxenesitListComponent,canActivate : [AuthGuard]},
 {path : 'mesuesit/:$key',component : MesuesiLendaComponent,canActivate : [AuthGuard]},
 {path : 'nxenesit/:$key',component : NxenesiDetajeComponent,canActivate : [AuthGuard]},

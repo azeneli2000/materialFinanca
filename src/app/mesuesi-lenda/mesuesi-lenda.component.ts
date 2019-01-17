@@ -18,7 +18,7 @@ export class MesuesiLendaComponent implements OnInit {
   constructor(private listLendet : LendaService, private dialog :MatDialog, private notification : NotificationService,  private dialogService : ConfirmDialogService,private route : ActivatedRoute, private mesuesiZgjedhur : MesuesiZgjedhurService,private router : Router,private mz:MesuesiZgjedhurService) { }
   public mesuesiId : string;
  // public mesuesi = this.mesuesiZgjedhur.mesuesiZgjedhur;
- 
+ isLoading = true;
  public mesuesi : ['','','','','']; 
  public emri;
  public mbiemri;
@@ -67,7 +67,7 @@ console.log(this.mesuesiId);
    //regjistrohet te observable qe kthen getLenda() te lenda service
    this.listLendet.getLendet(idMesuesi.toString()).subscribe(
     list => {
-      let array = list.map(item =>{
+      let array = list.map(item =>{this.isLoading = false;
         return {
           $key : item.key,
           ...item.payload.val()};
@@ -76,6 +76,8 @@ console.log(this.mesuesiId);
 
       );
       this.listData= new MatTableDataSource(array);
+      if(this.listData.data.length==0)
+      this.isLoading = false;
      // let arr1 = array.map(lenda => lenda.Emri=lenda.Emri.viewValue) ;
       //console.log(arr1);
       this.listData.sort = this.sort;

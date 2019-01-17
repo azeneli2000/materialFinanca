@@ -33,6 +33,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 import{MesuesiService} from '../app/shared/mesuesi.service';
@@ -101,6 +102,7 @@ import { KonfigurimeComponent } from './konfigurime/konfigurime.component';
     MatExpansionModule,
     MatProgressBarModule,
     MatDividerModule,
+    MatProgressSpinnerModule,
   ],
   providers: [MesuesiService,AuthGuard, {provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl()}],
   bootstrap: [AppComponent],

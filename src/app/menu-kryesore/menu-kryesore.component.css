@@ -23,3 +23,7 @@
   display : block;
   max-width : 150px;
 }
+.active {
+  color: #303F9F;
+  font-weight: bold;
+}

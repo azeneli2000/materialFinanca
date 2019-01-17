@@ -14,10 +14,13 @@ import { MesuesiZgjedhurService } from 'src/app/shared/mesuesi-zgjedhur.service'
   templateUrl: './mesuesit-list.component.html',
   styleUrls: ['./mesuesit-list.component.css']
 })
+
+
 export class MesuesitListComponent implements OnInit {
+  
+  isLoading = true;
 
   constructor(private listMesuesit : MesuesiService, private dialog :MatDialog, private notification : NotificationService,  private dialogService : ConfirmDialogService,private router : Router,private mesuesiZ : MesuesiZgjedhurService) { }
-  
 
   listData : MatTableDataSource<any>
   displayedColumns: string [] =['Emri','Mbiemri','Vjetersia','Kategoria','Paga','PagaTotMujore','Actions'];
@@ -27,7 +30,7 @@ export class MesuesitListComponent implements OnInit {
   ngOnInit() {
     //regjistrohet te observable qe kthen getMesuesit() te mesuasi service
     this.listMesuesit.getMesuesit().subscribe(
-      list => {
+      list => {this.isLoading = false;
         let array = list.map(item =>{
           return {
             $key : item.key,
@@ -36,6 +39,8 @@ export class MesuesitListComponent implements OnInit {
 
         );
         this.listData= new MatTableDataSource(array);
+        if(this.listData.data.length==0)
+        this.isLoading = false;
         this.listData.sort = this.sort;
         this.listData.paginator = this.paginator;
         //filtron vetem kolnat e visualizuara ne tabele 
