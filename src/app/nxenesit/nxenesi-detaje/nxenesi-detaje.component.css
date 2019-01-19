@@ -20,3 +20,8 @@ float: right;
     display : flex;
     justify-content: center;
 }
+.chip-list{
+    width: 100%;
+
+
+}

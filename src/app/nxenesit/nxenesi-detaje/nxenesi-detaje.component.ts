@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { NxenesiService } from 'src/app/shared/nxenesi.service';
 import { ActivatedRoute } from '@angular/router';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatChipInputEvent } from '@angular/material';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { NotificationService } from 'src/app/shared/notification.service';
+import { ENTER, COMMA } from '@angular/cdk/keycodes';
+import { EskursioneService } from 'src/app/shared/eskursione.service';
+import { CurrencyPipe } from '@angular/common';
 
 export interface DialogData {
   monedha: 'EUR' | 'LEK' | '$';
@@ -16,12 +19,14 @@ export interface DialogData {
 })
 export class NxenesiDetajeComponent implements OnInit {
 
-  constructor(private nxenesiService: NxenesiService, private route: ActivatedRoute, public dialog: MatDialog, private notification: NotificationService) { }
+  constructor(private cp : CurrencyPipe , private nxenesiService: NxenesiService,private eskursionetShkolla : EskursioneService, private route: ActivatedRoute, public dialog: MatDialog, private notification: NotificationService) { }
   // listData : MatTableDataSource<any>
 
   // displayedColumns: string [] =['Emri','Javetot','Klasa','NrNxenesish','Ore','Paga','Actions'];
   // @ViewChild(MatSort) sort: MatSort;
   // @ViewChild(MatPaginator) paginator: MatPaginator;
+
+
   nxenesi;
 
   perqShkolla: number = 0;
@@ -38,7 +43,32 @@ export class NxenesiDetajeComponent implements OnInit {
   hideUniforma: boolean = false;
   hideLibrat: boolean = false;
 
+  //chips
+  disabled = false;
+  visible = true;
+  selectable = true;
+  removable = false;
+  addOnBlur = false;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  eskursione =[] ;
+eskursioneDisponibel;
 
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+    if(!(this.eskursioneDisponibel.eskursione[Number(value)].Pagesa==0)&&this.eskursione[Number(value)] =='')
+    {
+      this.eskursione[Number(value)] = value  +' :    ' + this.eskursioneDisponibel.eskursione[Number(value)].Emri + '     Pagesa : ' + this.cp.transform(this.eskursioneDisponibel.eskursione[Number(value)].Pagesa,this.eskursioneDisponibel.eskursione[Number(value)].MonedhaEskursioni,'symbol','1.0-0') ;
+      this.nxenesiService.form.controls['Eskursione'].setValue(this.eskursione);
+      this.nxenesiService.updateNxenes(this.nxenesiService.form.value);
+      console.log('added');
+    }
+      if (input) {
+      input.value = '';
+    }
+  }
+//!!!!!! custom key firebase :  firebase.database.ref().child('/path/with/custom/key/goes/here').set();
+  
   ngOnInit() {
     let ididNxenesi = this.route.snapshot.paramMap.get('$key');
     let ob = this.nxenesiService.getNxenes(ididNxenesi).subscribe(
@@ -66,7 +96,10 @@ export class NxenesiDetajeComponent implements OnInit {
         this.nxenesiService.form.controls['MonedhaUniforma'].setValue(this.nxenesi.MonedhaUniforma);
         this.nxenesiService.form.controls['MeTransport'].setValue(this.nxenesi.MeTransport);
         this.nxenesiService.form.controls['MeUniforme'].setValue(this.nxenesi.MeUniforme);
-
+        this.nxenesiService.form.controls['Eskursione'].setValue(this.nxenesi.Eskursione);
+        this.eskursione  = this.nxenesi.Eskursione;
+        // this.eskursione.filter( x => x!='');
+        console.log(this.eskursione);
         this.perqShkolla = Number(this.nxenesiService.form.controls['PaguarShkolla'].value) / Number(this.nxenesiService.form.controls['PagesaShkolla'].value) * 100;
         this.mbetjaShkolla = Number(this.nxenesiService.form.controls['PagesaShkolla'].value) - Number(this.nxenesiService.form.controls['PaguarShkolla'].value);
 
@@ -78,7 +111,7 @@ export class NxenesiDetajeComponent implements OnInit {
 
         this.perqLibrat = Number(this.nxenesiService.form.controls['PaguarLibrat'].value) / Number(this.nxenesiService.form.controls['PagesaLibrat'].value) * 100;
         this.mbetjaLibrat = Number(this.nxenesiService.form.controls['PagesaLibrat'].value) - Number(this.nxenesiService.form.controls['PaguarLibrat'].value);
-
+        this.gjejEskursionetShkolla();
       }
     );
 
@@ -110,7 +143,7 @@ export class NxenesiDetajeComponent implements OnInit {
   }
 
   shkolla(box) {
-    console.log(box);
+   
     if ((Number(this.nxenesiService.form.controls['PagesaShkolla'].value) - (Number(this.nxenesiService.form.controls['PaguarShkolla'].value) + Number(box))) >= 0 && box != "" && Number(box) > 0) {
       this.nxenesiService.form.controls['PaguarShkolla'].setValue(Number(this.nxenesiService.form.controls['PaguarShkolla'].value) + Number(box));
       this.perqShkolla = Number(this.nxenesiService.form.controls['PaguarShkolla'].value) / Number(this.nxenesiService.form.controls['PagesaShkolla'].value) * 100;
@@ -131,7 +164,7 @@ export class NxenesiDetajeComponent implements OnInit {
   }
 
   transporti(box1) {
-    console.log(box1);
+    
     if ((Number(this.nxenesiService.form.controls['PagesaTransporti'].value) - (Number(this.nxenesiService.form.controls['PaguarTransporti'].value) + Number(box1))) >= 0 && box1 != "" && Number(box1) > 0) {
       this.nxenesiService.form.controls['PaguarTransporti'].setValue(Number(this.nxenesiService.form.controls['PaguarTransporti'].value) + Number(box1));
       this.perqTransporti = Number(this.nxenesiService.form.controls['PaguarTransporti'].value) / Number(this.nxenesiService.form.controls['PagesaTransporti'].value) * 100;
@@ -151,7 +184,6 @@ export class NxenesiDetajeComponent implements OnInit {
 
   uniforma(box) {
     if ((Number(this.nxenesiService.form.controls['PagesaUniforma'].value) - (Number(this.nxenesiService.form.controls['PaguarUniforma'].value) + Number(box))) >= 0 && box != "" && Number(box) > 0) {
-      console.log(box);
       this.nxenesiService.form.controls['PaguarUniforma'].setValue(Number(this.nxenesiService.form.controls['PaguarUniforma'].value) + Number(box));
       this.perqUniforma = Number(this.nxenesiService.form.controls['PaguarUniforma'].value) / Number(this.nxenesiService.form.controls['PagesaUniforma'].value) * 100;
       this.mbetjaUniforma = Number(this.nxenesiService.form.controls['PagesaUniforma'].value) - Number(this.nxenesiService.form.controls['PaguarUniforma'].value);
@@ -167,7 +199,7 @@ export class NxenesiDetajeComponent implements OnInit {
 
   }
   librat(box) {
-    console.log(box);
+    
     if ((Number(this.nxenesiService.form.controls['PagesaLibrat'].value) - (Number(this.nxenesiService.form.controls['PaguarLibrat'].value) + Number(box))) >= 0 && box != "" && Number(box) > 0) {
       this.nxenesiService.form.controls['PaguarLibrat'].setValue(Number(this.nxenesiService.form.controls['PaguarLibrat'].value) + Number(box));
       this.perqLibrat = Number(this.nxenesiService.form.controls['PaguarLibrat'].value) / Number(this.nxenesiService.form.controls['PagesaLibrat'].value) * 100;
@@ -184,6 +216,16 @@ export class NxenesiDetajeComponent implements OnInit {
   }
 
 
+  gjejEskursionetShkolla(){
+   this.eskursionetShkolla.getEskursione(localStorage.getItem('VitiShkollor')).subscribe(l=>{
+   l.map(i=>{ this.eskursioneDisponibel = i.payload.val();
+//  this.eskursioneDisponibel = arr;
+  console.log(this.eskursioneDisponibel.eskursione[0].Emri);
+   });
+  })
+
+
+}
 }
 
 

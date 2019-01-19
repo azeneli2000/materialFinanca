@@ -39,6 +39,8 @@ export class NxenesiComponent implements OnInit {
     { value: 'D', viewValue: "D" },
 
   ];
+ 
+Eskursionet  = ["","","","","","","","","","","","","","","","","","","","","","","","",""];
 perqindjaTot : number = 0;
 vitiZgjedhur = '2020-2021';
 klasaZgjedhur;
@@ -52,11 +54,11 @@ cmimiKlasa : number = 0;
     // {name: 'Lemon'},
     // {name: 'Lime'},
     // {name: 'Apple'},
-  
+  disabled = false;
   visible = true;
   selectable = true;
-  removable = true;
-  addOnBlur = true;
+  removable = false;
+  addOnBlur = false;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   constructor(private service: NxenesiService, private notification: NotificationService, private dialogRef: MatDialogRef<NxenesiComponent>,private konfigurime : KonfigurimeService) { }
 
@@ -102,7 +104,8 @@ this.pagesaKlasa = Math.round( this.pagesaKlasa - this.pagesaKlasa*perqindja/100
         {
          this.service.form.controls['Skonto'].setValue(null);
         }
-        this.service.form.controls['Eskursione'].setValue('');
+        console.log(this.Eskursionet);
+       this.service.form.controls['Eskursione'].setValue(this.Eskursionet);
       //  for(let i =1; i<300;i++ )
         this.service.insertNxenes(this.service.form.value);
       }
@@ -111,7 +114,6 @@ this.pagesaKlasa = Math.round( this.pagesaKlasa - this.pagesaKlasa*perqindja/100
         this.service.skontoUpdate = false;
         this.service.form.controls['PagesaShkolla'].setValue(this.pagesaKlasa);
        
-console.log(this.Uljet);
         this.service.form.controls['Skonto'].setValue(this.Uljet);
         this.service.updateNxenes(this.service.form.value);
       }
@@ -151,7 +153,7 @@ console.log(this.Uljet);
     
   }
   ngOnInit() {
-    
+    console.log(this.Eskursionet);
     if (this.service.form.get('$key').value) 
     {
        //po behet modifikim 

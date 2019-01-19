@@ -1,0 +1,219 @@
+<form >
+
+  <mat-accordion>
+<!-- e0 -->
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-description class="klasa">
+          <strong> 0 &nbsp; &nbsp; {{emri0.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa0.value!=0"> <strong>Data :</strong>  {{data0.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa0.value|currency : monedha0.value}}</div> 
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input type="text" #emri0 [(ngModel)] = "this.eskursione.form.get('eskursione').value[0].Emri" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Emri">
+      </mat-form-field> 
+     <mat-form-field>
+        <input type="number" #pagesa0 [(ngModel)] = "this.eskursione.form.get('eskursione').value[0].Pagesa" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Nxenesi">
+      </mat-form-field>
+     <mat-form-field>
+        <input type="text" #monedha0 [(ngModel)] = "this.eskursione.form.get('eskursione').value[0].MonedhaEskursioni" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Monedha">
+      </mat-form-field>
+      <mat-form-field>
+        <input type="date" #data0 [(ngModel)] = "this.eskursione.form.get('eskursione').value[0].Data" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Data">
+      </mat-form-field>
+      <mat-form-field>
+        <input type="number" #agjensia0 [(ngModel)] = "this.eskursione.form.get('eskursione').value[0].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
+      </mat-form-field>
+    </mat-expansion-panel>
+
+
+<!-- e1 -->
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-description class="klasa">
+      <strong> 1 &nbsp; &nbsp; {{emri1.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa1.value!=0"> <strong>Data :</strong>  {{data1.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa1.value|currency :  monedha1.value}}</div> 
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-form-field>
+    <input type="text" #emri1 [(ngModel)] = "this.eskursione.form.get('eskursione').value[1].Emri" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Emri">
+  </mat-form-field> 
+ <mat-form-field>
+    <input type="number" #pagesa1 [(ngModel)] = "this.eskursione.form.get('eskursione').value[1].Pagesa" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Nxenesi">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" #monedha1 [(ngModel)] = "this.eskursione.form.get('eskursione').value[1].MonedhaEskursioni" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Monedha">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" #data1 [(ngModel)] = "this.eskursione.form.get('eskursione').value[1].Data" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Data">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="number" #agjensia1 [(ngModel)] = "this.eskursione.form.get('eskursione').value[1].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
+  </mat-form-field>
+</mat-expansion-panel>
+<!-- e2 -->
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-description class="klasa">
+      <strong> 2 &nbsp; &nbsp; {{emri2.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa2.value!=0"> <strong>Data :</strong>  {{data2.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa2.value|currency :  monedha2.value}}</div> 
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-form-field>
+    <input type="text" #emri2 [(ngModel)] = "this.eskursione.form.get('eskursione').value[2].Emri" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Emri">
+  </mat-form-field> 
+ <mat-form-field>
+    <input type="number" #pagesa2 [(ngModel)] = "this.eskursione.form.get('eskursione').value[2].Pagesa" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Nxenesi">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" #monedha2 [(ngModel)] = "this.eskursione.form.get('eskursione').value[2].MonedhaEskursioni" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Monedha">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" #data2 [(ngModel)] = "this.eskursione.form.get('eskursione').value[2].Data" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Data">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="number" #agjensia2 [(ngModel)] = "this.eskursione.form.get('eskursione').value[2].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
+  </mat-form-field>
+</mat-expansion-panel>
+<!-- e3 -->
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-description class="klasa">
+      <strong> 3 &nbsp; &nbsp; {{emri3.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa3.value!=0"> <strong>Data :</strong>  {{data3.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa3.value|currency :  monedha3.value}}</div> 
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-form-field>
+    <input type="text" #emri3 [(ngModel)] = "this.eskursione.form.get('eskursione').value[3].Emri" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Emri">
+  </mat-form-field> 
+ <mat-form-field>
+    <input type="number" #pagesa3 [(ngModel)] = "this.eskursione.form.get('eskursione').value[3].Pagesa" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Nxenesi">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" #monedha3 [(ngModel)] = "this.eskursione.form.get('eskursione').value[3].MonedhaEskursioni" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Monedha">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" #data3 [(ngModel)] = "this.eskursione.form.get('eskursione').value[3].Data" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Data">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="number" #agjensia3 [(ngModel)] = "this.eskursione.form.get('eskursione').value[3].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
+  </mat-form-field>
+</mat-expansion-panel>
+<!-- e4 -->
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-description class="klasa">
+      <strong> 4 &nbsp; &nbsp; {{emri4.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa4.value!=0"> <strong>Data :</strong>  {{data4.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa4.value|currency :  monedha4.value}}</div> 
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-form-field>
+    <input type="text" #emri4 [(ngModel)] = "this.eskursione.form.get('eskursione').value[4].Emri" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Emri">
+  </mat-form-field> 
+ <mat-form-field>
+    <input type="number" #pagesa4 [(ngModel)] = "this.eskursione.form.get('eskursione').value[4].Pagesa" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Nxenesi">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" #monedha4 [(ngModel)] = "this.eskursione.form.get('eskursione').value[4].MonedhaEskursioni" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Monedha">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" #data4 [(ngModel)] = "this.eskursione.form.get('eskursione').value[4].Data" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Data">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="number" #agjensia [(ngModel)] = "this.eskursione.form.get('eskursione').value[4].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
+  </mat-form-field>
+</mat-expansion-panel>
+<!-- e5 -->
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-description class="klasa">
+      <strong> 5 &nbsp; &nbsp; {{emri5.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa5.value!=0"> <strong>Data :</strong>  {{data5.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa5.value|currency :  monedha5.value}}</div> 
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-form-field>
+    <input type="text" #emri5 [(ngModel)] = "this.eskursione.form.get('eskursione').value[5].Emri" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Emri">
+  </mat-form-field> 
+ <mat-form-field>
+    <input type="number" #pagesa5 [(ngModel)] = "this.eskursione.form.get('eskursione').value[5].Pagesa" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Nxenesi">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" #monedha5 [(ngModel)] = "this.eskursione.form.get('eskursione').value[5].MonedhaEskursioni" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Monedha">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" #data5 [(ngModel)] = "this.eskursione.form.get('eskursione').value[5].Data" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Data">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="number" #agjensia5 [(ngModel)] = "this.eskursione.form.get('eskursione').value[5].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
+  </mat-form-field>
+</mat-expansion-panel>
+<!-- e6 -->
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-description class="klasa">
+      <strong> 6 &nbsp; &nbsp; {{emri6.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa6.value!=0"> <strong>Data :</strong>  {{data6.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa6.value|currency :  monedha6.value}}</div> 
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-form-field>
+    <input type="text" #emri6 [(ngModel)] = "this.eskursione.form.get('eskursione').value[6].Emri" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Emri">
+  </mat-form-field> 
+ <mat-form-field>
+    <input type="number" #pagesa6 [(ngModel)] = "this.eskursione.form.get('eskursione').value[6].Pagesa" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Nxenesi">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" #monedha6 [(ngModel)] = "this.eskursione.form.get('eskursione').value[6].MonedhaEskursioni" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Monedha">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" #data6 [(ngModel)] = "this.eskursione.form.get('eskursione').value[6].Data" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Data">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="number" #agjensia6 [(ngModel)] = "this.eskursione.form.get('eskursione').value[6].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
+  </mat-form-field>
+</mat-expansion-panel>
+<!-- e7 -->
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-description class="klasa">
+      <strong> 7 &nbsp; &nbsp; {{emri7.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa7.value!=0"> <strong>Data :</strong>  {{data7.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa7.value|currency : monedha7.value}}</div> 
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-form-field>
+    <input type="text" #emri7 [(ngModel)] = "this.eskursione.form.get('eskursione').value[7].Emri" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Emri">
+  </mat-form-field> 
+ <mat-form-field>
+    <input type="number" #pagesa7 [(ngModel)] = "this.eskursione.form.get('eskursione').value[7].Pagesa" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Nxenesi">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" #monedha7 [(ngModel)] = "this.eskursione.form.get('eskursione').value[7].MonedhaEskursioni" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Monedha">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" #data7 [(ngModel)] = "this.eskursione.form.get('eskursione').value[7].Data" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Data">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="number" #agjensia7 [(ngModel)] = "this.eskursione.form.get('eskursione').value[7].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
+  </mat-form-field>
+</mat-expansion-panel>
+<!-- e8 -->
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-description class="klasa">
+      <strong> 8 &nbsp; &nbsp; {{emri8.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa8.value!=0"> <strong>Data :</strong>  {{data8.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa8.value|currency :  monedha8.value}}</div> 
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-form-field>
+    <input type="text" #emri8 [(ngModel)] = "this.eskursione.form.get('eskursione').value[8].Emri" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Emri">
+  </mat-form-field> 
+ <mat-form-field>
+    <input type="number" #pagesa8 [(ngModel)] = "this.eskursione.form.get('eskursione').value[8].Pagesa" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Nxenesi">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" #monedha8 [(ngModel)] = "this.eskursione.form.get('eskursione').value[8].MonedhaEskursioni" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Monedha">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" #data8 [(ngModel)] = "this.eskursione.form.get('eskursione').value[8].Data" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Data">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="number" #agjensia8 [(ngModel)] = "this.eskursione.form.get('eskursione').value[8].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
+  </mat-form-field>
+</mat-expansion-panel>
+
+</mat-accordion>
+<button mat-raised-button class="ruaj" type="submit" color="primary"  (click)="onSubmit()">Ruaj</button>
+<!-- 
+{{this.eskursione.form.get('eskursione').value[0].Emri}}
+{{this.eskursione.form.value|json}} -->
+</form>

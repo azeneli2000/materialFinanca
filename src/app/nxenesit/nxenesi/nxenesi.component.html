@@ -78,15 +78,15 @@
           </div>
 
 <br><br>
-          <mat-form-field class="chip-list" *ngIf = "this.service.skontoUpdate">
+          <mat-form-field class="chip-list">
               <mat-chip-list #chipList formControlName="Skonto" >
                 <mat-chip *ngFor="let ulje of Uljet" [selectable]="selectable"
-                         [removable]="removable" (removed)="remove(ulje)">
+                         [removable]="this.service.skontoUpdate" (removed)="remove(ulje)">
                   {{ulje}}
-                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  <mat-icon matChipRemove *ngIf="this.service.skontoUpdate">cancel</mat-icon>
                 </mat-chip>
                 <input placeholder="ULJET E NXENSIT..."
-                       [matChipInputFor]="chipList"
+                       [matChipInputFor]="chipList" [disabled] = "!this.service.skontoUpdate"
                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                        [matChipInputAddOnBlur]="addOnBlur"
                        (matChipInputTokenEnd)="add($event)">
@@ -102,5 +102,5 @@
     </div>
   </div>
   <!-- {{service.form.value|json}} 
-{{Uljet}} --> 
+{{Uljet}}  -->
 </form>

@@ -11,7 +11,25 @@
 
   <mat-accordion>
 
-
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-description class="klasa">
+          Klasa 0
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input type="number" formControlName="ShkollaKlasa0" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+      </mat-form-field>
+      <mat-form-field>
+        <input type="number" formControlName="TransportiKlasa0" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+      </mat-form-field>
+      <mat-form-field>
+        <input type="number" formControlName="UniformaKlasa0" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+      </mat-form-field>
+      <mat-form-field>
+        <input type="number" formControlName="LibratKlasa0" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+      </mat-form-field>
+    </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>

@@ -18,6 +18,11 @@ export class KonfigurimeService {
    form: FormGroup = new FormGroup({
 
     $key: new FormControl(null),
+    
+    ShkollaKlasa0: new FormControl('', [Validators.required]),
+    TransportiKlasa0 : new FormControl('', [Validators.required]),
+    UniformaKlasa0 :new FormControl('', [Validators.required]),
+    LibratKlasa0 : new FormControl('', [Validators.required]), 
 
     ShkollaKlasa1: new FormControl('', [Validators.required]),
     TransportiKlasa1 : new FormControl('', [Validators.required]),
@@ -84,6 +89,11 @@ export class KonfigurimeService {
     this.vitiList = this.db.list('/konfigurime');
     this.vitiList.push(
       {
+        ShkollaKlasa0: viti.ShkollaKlasa0,
+        TransportiKlasa0 :viti.TransportiKlasa0,
+        UniformaKlasa0 :viti.UniformaKlasa0,
+        LibratKlasa0 :viti.LibratKlasa0, 
+    
         
         ShkollaKlasa1: viti.ShkollaKlasa1,
         TransportiKlasa1 :viti.TransportiKlasa1,
@@ -151,6 +161,11 @@ export class KonfigurimeService {
   initializeFormGroup() {
     this.form.setValue({
       $key: null,
+      ShkollaKlasa0: '',
+      TransportiKlasa0 :'',
+      UniformaKlasa0 :'',
+      LibratKlasa0 :'', 
+
       ShkollaKlasa1: '',
       TransportiKlasa1 :'',
       UniformaKlasa1 :'',
@@ -226,6 +241,11 @@ console.log(viti);
      this.vitiList = this.db.list('/konfigurime/');
     this.vitiList.update( viti.$key,
       { 
+        ShkollaKlasa0: viti.ShkollaKlasa0,
+      TransportiKlasa0 :viti.TransportiKlasa0,
+      UniformaKlasa0 :viti.UniformaKlasa0,
+      LibratKlasa0 :viti.LibratKlasa0, 
+  
       ShkollaKlasa1: viti.ShkollaKlasa1,
       TransportiKlasa1 :viti.TransportiKlasa1,
       UniformaKlasa1 :viti.UniformaKlasa1,

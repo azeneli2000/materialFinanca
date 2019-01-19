@@ -66,14 +66,17 @@ export class NxenesitListComponent implements OnInit {
       list => {
         let array = list.map(item => {
         this.isLoading = false;
-          return {
+        return {
             $key: item.key,
             ...item.payload.val()
           };
+        
         });
-
         //
-        this.listData = new MatTableDataSource(array);
+     let array1 =  array.filter(item=>item.$key!=='Eskursione')
+        this.listData = new MatTableDataSource(array1);
+        console.log(array1) ; 
+
         if (this.listData.data.length == 0)
           this.isLoading = false;
         this.mbeturShkolla = this.listData.filteredData.map(t => t.PagesaShkolla).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarShkolla).reduce((acc, value) => acc + value, 0);

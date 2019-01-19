@@ -10,6 +10,7 @@ import { NxenesitListComponent } from './nxenesit/nxenesit-list/nxenesit-list.co
 import { NxenesiDetajeComponent } from './nxenesit/nxenesi-detaje/nxenesi-detaje.component';
 import { KonfigurimeComponent } from './konfigurime/konfigurime.component';
 import { MesuesitComponent } from './mesuesit/mesuesit.component';
+import { EskursioneComponent } from './eskursione/eskursione.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
 {path : 'mesuesit/:$key',component : MesuesiLendaComponent,canActivate : [AuthGuard]},
 {path : 'nxenesit/:$key',component : NxenesiDetajeComponent,canActivate : [AuthGuard]},
 {path : 'konfigurime',component : KonfigurimeComponent,canActivate : [AuthGuard]},
+{path : 'eskursione',component : EskursioneComponent,canActivate : [AuthGuard]},
 
 {path : 'login',component : LoginComponent}];
 

@@ -50,6 +50,8 @@ import { NxenesitListComponent } from './nxenesit/nxenesit-list/nxenesit-list.co
 import { NxenesiComponent } from './nxenesit/nxenesi/nxenesi.component';
 import { NxenesiDetajeComponent } from './nxenesit/nxenesi-detaje/nxenesi-detaje.component';
 import { KonfigurimeComponent } from './konfigurime/konfigurime.component';
+import { EskursioneComponent } from './eskursione/eskursione.component';
+import { CurrencyPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,7 @@ import { KonfigurimeComponent } from './konfigurime/konfigurime.component';
     NxenesiComponent,
     NxenesiDetajeComponent,
     KonfigurimeComponent,
+    EskursioneComponent,
     
     
     
@@ -104,8 +107,8 @@ import { KonfigurimeComponent } from './konfigurime/konfigurime.component';
     MatDividerModule,
     MatProgressSpinnerModule,
   ],
-  providers: [MesuesiService,AuthGuard, {provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl()}],
+  providers: [MesuesiService,AuthGuard, {provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl()},CurrencyPipe],
   bootstrap: [AppComponent],
-  entryComponents:[MesuesiComponent,ConfirmDialogComponent,LendaComponent,NxenesiComponent]
+  entryComponents:[MesuesiComponent,ConfirmDialogComponent,LendaComponent,NxenesiComponent,]
 })
 export class AppModule { }

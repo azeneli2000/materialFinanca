@@ -143,7 +143,25 @@
             </div>
         </mat-card>
     </div>
+   
+      
 
+<br><br>
+        <mat-form-field class="chip-list">
+            <mat-chip-list #chipList formControlName="Eskursione" >
+              <ng-container *ngFor="let e of eskursione">
+                <mat-chip  *ngIf = "e!=''"  color="accent" selected="true" >
+            {{e }}
+              </mat-chip>
+            </ng-container>
+              <input  autocomplete="off" placeholder="ESKURSIONET"
+                     [matChipInputFor]="chipList"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur"
+                       (matChipInputTokenEnd)="add($event)">
+                     
+            </mat-chip-list>
+          </mat-form-field>
 
     <!-- {{nxenesiService.form.value|json}} -->
 </form>
