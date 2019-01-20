@@ -13,261 +13,338 @@
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-description class="klasa">
-          Klasa 0
+        <mat-panel-description class="klasa1">
+           <strong style = "color: #FF5252;width :100px">Klasa 0 : </strong>
+          <div class="klasa">
+          <div *ngIf = "shkolla0.value!=0"> <strong>Shkolla : {{shkolla0.value|currency : 'EUR':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "transporti0.value!=0"> <strong>Transporti : {{transporti0.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> &nbsp;&nbsp; 
+         <div  *ngIf = "uniforma0.value!=0"> <strong>Uniforma : {{uniforma0.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "librat0.value!=0"> <strong>Librat : {{librat0.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> 
+        </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input type="number" formControlName="ShkollaKlasa0" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        <input type="number" #shkolla0 formControlName="ShkollaKlasa0" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="TransportiKlasa0" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        <input type="number"#transporti0 formControlName="TransportiKlasa0" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="UniformaKlasa0" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        <input type="number" #uniforma0 formControlName="UniformaKlasa0" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="LibratKlasa0" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        <input type="number" #librat0 formControlName="LibratKlasa0" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
       </mat-form-field>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-description class="klasa">
-          Klasa I
+        <mat-panel-description class="klasa1">
+          <strong style = "color: #FF5252;width :100px">Klasa  I : </strong>
+          <div class="klasa">
+          <div *ngIf = "shkolla1.value!=0"> <strong>Shkolla : {{shkolla1.value|currency : 'EUR':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "transporti1.value!=0"> <strong>Transporti : {{transporti1.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> &nbsp;&nbsp; 
+         <div  *ngIf = "uniforma1.value!=0"> <strong>Uniforma : {{uniforma1.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "librat1.value!=0"> <strong>Librat : {{librat1.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> 
+        </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input type="number" formControlName="ShkollaKlasa1" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        <input type="number" #shkolla1 formControlName="ShkollaKlasa1" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="TransportiKlasa1" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        <input type="number" #transporti1 formControlName="TransportiKlasa1" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="UniformaKlasa1" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        <input type="number" #uniforma1 formControlName="UniformaKlasa1" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="LibratKlasa1" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        <input type="number" #librat1 formControlName="LibratKlasa1" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
       </mat-form-field>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-description class="klasa">
-          Klasa II
+        <mat-panel-description class="klasa1">
+          <strong style = "color: #FF5252;width :100px">Klasa II : </strong>
+          <div class="klasa">
+          <div *ngIf = "shkolla2.value!=0"> <strong>Shkolla : {{shkolla2.value|currency : 'EUR':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "transporti2.value!=0"> <strong>Transporti : {{transporti2.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> &nbsp;&nbsp; 
+         <div  *ngIf = "uniforma2.value!=0"> <strong>Uniforma : {{uniforma2.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "librat2.value!=0"> <strong>Librat : {{librat2.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> 
+        </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input type="number" formControlName="ShkollaKlasa2" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        <input type="number" #shkolla2 formControlName="ShkollaKlasa2" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="TransportiKlasa2" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        <input type="number" #transporti2 formControlName="TransportiKlasa2" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="UniformaKlasa2" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        <input type="number" #uniforma2 formControlName="UniformaKlasa2" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="LibratKlasa2" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        <input type="number" #librat2 formControlName="LibratKlasa2" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
       </mat-form-field>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-description class="klasa">
-          Klasa III
+        <mat-panel-description class="klasa1">
+          <strong style = "color: #FF5252;width :100px">Klasa III : </strong>
+          <div class="klasa">
+          <div *ngIf = "shkolla3.value!=0"> <strong>Shkolla : {{shkolla3.value|currency : 'EUR':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "transporti3.value!=0"> <strong>Transporti : {{transporti3.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> &nbsp;&nbsp; 
+         <div  *ngIf = "uniforma3.value!=0"> <strong>Uniforma : {{uniforma3.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "librat3.value!=0"> <strong>Librat : {{librat3.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> 
+        </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input type="number" formControlName="ShkollaKlasa3" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        <input type="number" #shkolla3 formControlName="ShkollaKlasa3" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="TransportiKlasa3" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        <input type="number" #transporti3 formControlName="TransportiKlasa3" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="UniformaKlasa3" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        <input type="number" #uniforma3 formControlName="UniformaKlasa3" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="LibratKlasa3" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        <input type="number" #librat3 formControlName="LibratKlasa3" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
       </mat-form-field>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-description class="klasa">
-          Klasa IV
-        </mat-panel-description>
+        <mat-panel-description class="klasa1">
+          <strong style = "color: #FF5252;width :100px">Klasa IV : </strong>
+          <div class="klasa">
+          <div *ngIf = "shkolla4.value!=0"> <strong>Shkolla : {{shkolla4.value|currency : 'EUR':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "transporti4.value!=0"> <strong>Transporti : {{transporti4.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> &nbsp;&nbsp; 
+         <div  *ngIf = "uniforma4.value!=0"> <strong>Uniforma : {{uniforma4.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "librat4.value!=0"> <strong>Librat : {{librat4.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> 
+        </div>       
+       </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input type="number" formControlName="ShkollaKlasa4" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        <input type="number" #shkolla4 formControlName="ShkollaKlasa4" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="TransportiKlasa4" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        <input type="number" #transporti4 formControlName="TransportiKlasa4" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="UniformaKlasa4" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        <input type="number" #uniforma4 formControlName="UniformaKlasa4" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="LibratKlasa4" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        <input type="number" #librat4 formControlName="LibratKlasa4" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
       </mat-form-field>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-description class="klasa">
-          Klasa V
+        <mat-panel-description class="klasa1">
+            <strong style = "color: #FF5252;width :100px">Klasa V :&nbsp;&nbsp;&nbsp; </strong>
+            <div class="klasa">
+            <div *ngIf = "shkolla5.value!=0"> <strong>Shkolla : {{shkolla5.value|currency : 'EUR':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+           <div  *ngIf = "transporti5.value!=0"> <strong>Transporti : {{transporti5.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> &nbsp;&nbsp; 
+           <div  *ngIf = "uniforma5.value!=0"> <strong>Uniforma : {{uniforma5.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+           <div  *ngIf = "librat5.value!=0"> <strong>Librat : {{librat5.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> 
+          </div>       
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input type="number" formControlName="ShkollaKlasa5" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        <input type="number" #shkolla5 formControlName="ShkollaKlasa5" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="TransportiKlasa5" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        <input type="number" #transporti5 formControlName="TransportiKlasa5" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="UniformaKlasa5" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        <input type="number" #uniforma5 formControlName="UniformaKlasa5" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="LibratKlasa5" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        <input type="number" #librat5 formControlName="LibratKlasa5" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
       </mat-form-field>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-description class="klasa">
-          Klasa VI
+        <mat-panel-description class="klasa1">
+          <strong style = "color: #FF5252;width :100px">Klasa VI :</strong>
+            <div class="klasa">
+            <div *ngIf = "shkolla6.value!=0"> <strong>Shkolla : {{shkolla6.value|currency : 'EUR':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+           <div  *ngIf = "transporti6.value!=0"> <strong>Transporti : {{transporti6.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> &nbsp;&nbsp; 
+           <div  *ngIf = "uniforma6.value!=0"> <strong>Uniforma : {{uniforma6.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+           <div  *ngIf = "librat6.value!=0"> <strong>Librat : {{librat6.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> 
+          </div>       
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input type="number" formControlName="ShkollaKlasa6" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        <input type="number" #shkolla6 formControlName="ShkollaKlasa6" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="TransportiKlasa6" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        <input type="number" #transporti6 formControlName="TransportiKlasa6" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="UniformaKlasa6" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        <input type="number" #uniforma6 formControlName="UniformaKlasa6" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="LibratKlasa6" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        <input type="number" #librat6 formControlName="LibratKlasa6" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
       </mat-form-field>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-description class="klasa">
-          Klasa VII
+        <mat-panel-description class="klasa1">
+          <strong style = "color: #FF5252;width :100px">Klasa VII : </strong>
+          <div class="klasa">
+          <div *ngIf = "shkolla7.value!=0"> <strong>Shkolla : {{shkolla7.value|currency : 'EUR':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "transporti7.value!=0"> <strong>Transporti : {{transporti7.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> &nbsp;&nbsp; 
+         <div  *ngIf = "uniforma7.value!=0"> <strong>Uniforma : {{uniforma7.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "librat7.value!=0"> <strong>Librat : {{librat7.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> 
+        </div>       
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input type="number" formControlName="ShkollaKlasa7" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        <input type="number" #shkolla7 formControlName="ShkollaKlasa7" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="TransportiKlasa7" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        <input type="number" #transporti7 formControlName="TransportiKlasa7" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="UniformaKlasa7" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        <input type="number" #uniforma7 formControlName="UniformaKlasa7" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="LibratKlasa7" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        <input type="number" #librat7 formControlName="LibratKlasa7" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
       </mat-form-field>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-description class="klasa">
-          Klasa VIII
-        </mat-panel-description>
+        <mat-panel-description class="klasa1">
+          <strong style = "color: #FF5252;width :100px">Klasa VIII : </strong>
+        <div class="klasa">
+          <div *ngIf = "shkolla8.value!=0"> <strong>Shkolla : {{shkolla8.value|currency : 'EUR':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "transporti8.value!=0"> <strong>Transporti : {{transporti8.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> &nbsp;&nbsp; 
+         <div  *ngIf = "uniforma8.value!=0"> <strong>Uniforma : {{uniforma8.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "librat8.value!=0"> <strong>Librat : {{librat8.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> 
+        </div>               </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input type="number" formControlName="ShkollaKlasa8" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        <input type="number" #shkolla8 formControlName="ShkollaKlasa8" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="TransportiKlasa8" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        <input type="number" #transporti8 formControlName="TransportiKlasa8" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="UniformaKlasa8" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        <input type="number" #uniforma8 formControlName="UniformaKlasa8" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="LibratKlasa8" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        <input type="number" #librat8  formControlName="LibratKlasa8" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
       </mat-form-field>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-description class="klasa">
-          Klasa IX
+        <mat-panel-description class="klasa1">
+          <strong style = "color: #FF5252;width :100px">Klasa IX : </strong>
+          <div class="klasa">
+          <div *ngIf = "shkolla9.value!=0"> <strong>Shkolla : {{shkolla9.value|currency : 'EUR':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "transporti9.value!=0"> <strong>Transporti : {{transporti9.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> &nbsp;&nbsp; 
+         <div  *ngIf = "uniforma9.value!=0"> <strong>Uniforma : {{uniforma9.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "librat9.value!=0"> <strong>Librat : {{librat9.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> 
+        </div>        
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input type="number" formControlName="ShkollaKlasa9" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        <input type="number" #shkolla9 formControlName="ShkollaKlasa9" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="TransportiKlasa9" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        <input type="number" #transporti9 formControlName="TransportiKlasa9" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="UniformaKlasa9" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        <input type="number" #uniforma9 formControlName="UniformaKlasa9" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="LibratKlasa9" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        <input type="number" #librat9 formControlName="LibratKlasa9" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
       </mat-form-field>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-description class="klasa">
-          Klasa X
+        <mat-panel-description class="klasa1">
+          <strong style = "color: #FF5252;width :100px">Klasa X : </strong>
+          <div class="klasa">
+          <div *ngIf = "shkolla10.value!=0"> <strong>Shkolla : {{shkolla10.value|currency : 'EUR':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "transporti10.value!=0"> <strong>Transporti : {{transporti10.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> &nbsp;&nbsp; 
+         <div  *ngIf = "uniforma10.value!=0"> <strong>Uniforma : {{uniforma10.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "librat10.value!=0"> <strong>Librat : {{librat10.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> 
+        </div>       
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input type="number" formControlName="ShkollaKlasa10" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        <input type="number" #shkolla10 formControlName="ShkollaKlasa10" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="TransportiKlasa10" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        <input type="number" #transporti10 formControlName="TransportiKlasa10" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="UniformaKlasa10" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        <input type="number" #uniforma10 formControlName="UniformaKlasa10" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="LibratKlasa10" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        <input type="number" #librat10 formControlName="LibratKlasa10" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
       </mat-form-field>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-description class="klasa">
-          Klasa XI
-        </mat-panel-description>
+        <mat-panel-description class="klasa1">
+          <strong style = "color: #FF5252;width :100px">Klasa XI : </strong>
+          <div class="klasa">
+          <div *ngIf = "shkolla11.value!=0"> <strong>Shkolla : {{shkolla11.value|currency : 'EUR':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "transporti11.value!=0"> <strong>Transporti : {{transporti11.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> &nbsp;&nbsp; 
+         <div  *ngIf = "uniforma11.value!=0"> <strong>Uniforma : {{uniforma11.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "librat11.value!=0"> <strong>Librat : {{librat11.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> 
+        </div>             
+      </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input type="number" formControlName="ShkollaKlasa11" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        <input type="number" #shkolla11 formControlName="ShkollaKlasa11" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="TransportiKlasa11" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        <input type="number" #transporti11 formControlName="TransportiKlasa11" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="UniformaKlasa11" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        <input type="number" #uniforma11 formControlName="UniformaKlasa11" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="LibratKlasa11" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        <input type="number" #librat11 formControlName="LibratKlasa11" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
       </mat-form-field>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-description class="klasa">
-          Klasa XII
-        </mat-panel-description>
+        <mat-panel-description class="klasa1">
+          <strong style = "color: #FF5252;width :100px">Klasa XII : </strong>
+          <div class="klasa">
+          <div *ngIf = "shkolla12.value!=0"> <strong>Shkolla : {{shkolla12.value|currency : 'EUR':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "transporti12.value!=0"> <strong>Transporti : {{transporti12.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> &nbsp;&nbsp; 
+         <div  *ngIf = "uniforma12.value!=0"> <strong>Uniforma : {{uniforma12.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div>  &nbsp;&nbsp;
+         <div  *ngIf = "librat12.value!=0"> <strong>Librat : {{librat12.value|currency : 'LEK':'symbol':'1.0-0'}}</strong></div> 
+        </div>         
+      </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
-        <input type="number" formControlName="ShkollaKlasa12" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
+        <input type="number" #shkolla12 formControlName="ShkollaKlasa12" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Shkolla">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="TransportiKlasa12" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
+        <input type="number" #transporti12 formControlName="TransportiKlasa12" matInput [errorStateMatcher]="matcher" placeholder="PagesaTransporti">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="UniformaKlasa12" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
+        <input type="number" #uniforma12 formControlName="UniformaKlasa12" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Uniforma">
       </mat-form-field>
       <mat-form-field>
-        <input type="number" formControlName="LibratKlasa12" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
+        <input type="number" #librat12 formControlName="LibratKlasa12" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Librat">
       </mat-form-field>
     </mat-expansion-panel>
 

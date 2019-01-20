@@ -15,7 +15,7 @@
         <br>
         <mat-form-field appearance="outline">
           <mat-label>Emri</mat-label>
-          <input formControlName="Emri" matInput [errorStateMatcher]="matcher">
+          <input autocomplete="off"  formControlName="Emri" matInput [errorStateMatcher]="matcher">
 
           <mat-error *ngIf="service.form.controls['Emri'].errors?.required">
             Emri <strong>i detyrueshem</strong>
@@ -24,7 +24,7 @@
         <br>
         <mat-form-field appearance="outline">
           <mat-label>Mbiemri</mat-label>
-          <input formControlName="Mbiemri" matInput [errorStateMatcher]="matcher">
+          <input autocomplete="off"  formControlName="Mbiemri" matInput [errorStateMatcher]="matcher">
 
           <mat-error *ngIf="service.form.controls['Mbiemri'].errors?.required">
             Mbiemri <strong>i detyrueshem</strong>
@@ -33,7 +33,7 @@
         <br>
         <mat-form-field appearance="outline">
           <mat-label>Atesia</mat-label>
-          <input formControlName="Atesia" matInput [errorStateMatcher]="matcher">
+          <input autocomplete="off"  formControlName="Atesia" matInput [errorStateMatcher]="matcher">
 
           <mat-error *ngIf="service.form.controls['Atesia'].errors?.required">
             Atesia <strong>e detyruesheme</strong>
@@ -85,7 +85,7 @@
                   {{ulje}}
                   <mat-icon matChipRemove *ngIf="this.service.skontoUpdate">cancel</mat-icon>
                 </mat-chip>
-                <input placeholder="ULJET E NXENSIT..."
+                <input autocomplete="off"  placeholder="ULJET E NXENSIT..."
                        [matChipInputFor]="chipList" [disabled] = "!this.service.skontoUpdate"
                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                        [matChipInputAddOnBlur]="addOnBlur"

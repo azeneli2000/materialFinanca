@@ -1,6 +1,8 @@
 .klasa{
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
+    margin-left: 10%;
+  color:  #3F51B5;
 }
 .but{
     display: flex;
@@ -9,4 +11,4 @@
 .viti{
     display: flex;
     justify-content: center;
-}
+} 

@@ -52,7 +52,7 @@
                 <mat-form-field appearance="outline">
 
                     <mat-label>Pagesa</mat-label>
-                    <input type="number" #box (keydown.enter)="shkolla(box.value)" matInput>
+                    <input autocomplete="off" type="number" #box (keydown.enter)="shkolla(box.value)" matInput>
                 </mat-form-field>
             </div>
         </mat-card>
@@ -79,7 +79,7 @@
                 {{this.nxenesiService.form.controls['MonedhaTransporti'].value}}
                 <mat-form-field appearance="outline"> 
                     <mat-label>Pagesa</mat-label>
-                    <input type="number" #box1 (keydown.enter)="transporti(box1.value)" matInput>
+                    <input autocomplete="off" type="number" #box1 (keydown.enter)="transporti(box1.value)" matInput>
                 </mat-form-field>
             </div>
         </mat-card>
@@ -109,7 +109,7 @@
                 <mat-form-field appearance="outline">
 
                     <mat-label>Pagesa</mat-label>
-                    <input type = "number" #box2 (keydown.enter)="uniforma(box2.value)" matInput>
+                    <input autocomplete="off" type = "number" #box2 (keydown.enter)="uniforma(box2.value)" matInput>
                 </mat-form-field>
             </div>
         </mat-card>
@@ -138,7 +138,7 @@
                 <mat-form-field appearance="outline">
 
                     <mat-label>Pagesa</mat-label>
-                    <input type = "number" #box3 (keydown.enter)="librat(box3.value)" matInput>
+                    <input autocomplete="off" type = "number" #box3 (keydown.enter)="librat(box3.value)" matInput>
                 </mat-form-field>
             </div>
         </mat-card>

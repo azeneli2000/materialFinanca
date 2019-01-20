@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, ElementRef } from '@angular/core';
 import { NxenesiService } from 'src/app/shared/nxenesi.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource, MatSort, MatPaginator, MatChipInputEvent } from '@angular/material';
@@ -43,6 +43,12 @@ export class NxenesiDetajeComponent implements OnInit {
   hideUniforma: boolean = false;
   hideLibrat: boolean = false;
 
+
+  //viewchild
+ @ViewChild('box') boxRef : ElementRef;
+ @ViewChild('box1') boxRef1 : ElementRef;
+ @ViewChild('box2') boxRef2 : ElementRef;
+ @ViewChild('box3') boxRef3 : ElementRef;
   //chips
   disabled = false;
   visible = true;
@@ -121,6 +127,10 @@ eskursioneDisponibel;
     this.hideTransporti = false;
     this.hideUniforma = false;
     this.hideLibrat = false;
+    setTimeout(()=>{    //<<<---    using ()=> syntax
+      ; this.boxRef.nativeElement.focus();
+ }, 200);
+   
 
   }
   onSubmitTransporti() {
@@ -128,18 +138,27 @@ eskursioneDisponibel;
     this.hideShkolla = false;
     this.hideUniforma = false;
     this.hideLibrat = false;
+    setTimeout(()=>{    //<<<---    using ()=> syntax
+      ; this.boxRef1.nativeElement.focus();
+ }, 200);
   }
   onSubmitUniforma() {
     this.hideUniforma = !this.hideUniforma;
     this.hideTransporti = false;
     this.hideShkolla = false;
     this.hideLibrat = false;
+    setTimeout(()=>{    //<<<---    using ()=> syntax
+      ; this.boxRef2.nativeElement.focus();
+ }, 200);
   }
   onSubmitLibrat() {
     this.hideLibrat = !this.hideLibrat;
     this.hideTransporti = false;
     this.hideUniforma = false;
     this.hideShkolla = false;
+    setTimeout(()=>{    //<<<---    using ()=> syntax
+      ; this.boxRef3.nativeElement.focus();
+ }, 200);
   }
 
   shkolla(box) {

@@ -6,3 +6,11 @@
     justify-content: center;
     
   }
+  .but{
+    display: flex;
+    justify-content: center;
+  
+}
+.ruaj{
+    width : 50%;
+}
