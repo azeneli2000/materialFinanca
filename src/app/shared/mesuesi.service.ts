@@ -43,8 +43,8 @@ export class MesuesiService {
 
 
   getMesuesit() {
-    this.mesuesitList = this.db.list('Mesuesit');
-    return this.db.list('Mesuesit').snapshotChanges();
+    this.mesuesitList = this.db.list(localStorage.getItem('VitiShkollor') +'/Mesuesit');
+    return this.db.list(localStorage.getItem('VitiShkollor') +'/Mesuesit').snapshotChanges();
   }
 
   initializeFormGroup() {
@@ -65,6 +65,7 @@ export class MesuesiService {
   }
 
   insertMesuesi(mesuesi) {
+    this.mesuesitList = this.db.list(localStorage.getItem('VitiShkollor') +'/Mesuesit');
     this.mesuesitList.push({
       Emri: mesuesi.Emri,
       Mbiemri: mesuesi.Mbiemri,
@@ -79,6 +80,8 @@ export class MesuesiService {
     });
   }
   updateMesuesit(mesuesi,change) {
+    this.mesuesitList = this.db.list(localStorage.getItem('VitiShkollor') +'/Mesuesit');
+
     if (change)
     this.updateLendaMesuesiKatVjet(mesuesi.$key, parseInt(mesuesi.Kategoria), parseInt(mesuesi.Vjetersia));
     this.mesuesitList.update(mesuesi.$key, {
@@ -95,6 +98,8 @@ export class MesuesiService {
   } 
 
   deleteMesuesi($key: string) {
+    this.mesuesitList = this.db.list(localStorage.getItem('VitiShkollor') +'/Mesuesit');
+
     this.mesuesitList.remove($key);
     //fshin lendet
     let lendetMes = this.db.list('Lendet', ref1 => ref1.orderByChild('mesuesiId').equalTo($key)).snapshotChanges().subscribe(items => {
@@ -176,7 +181,7 @@ export class MesuesiService {
 // this.form.controls.PagaTotMujore. setValue(ptot);
 // this.form.controls.PagaShtese.setValue(psh);
     
-this.db.list('Mesuesit').update(idMesuesi, {
+this.db.list(localStorage.getItem('VitiShkollor') +'/Mesuesit').update(idMesuesi, {
         Paga: pagaTotMesuesi,
         PagaTotMujore : ptot,
         PagaShtese : psh

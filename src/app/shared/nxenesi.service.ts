@@ -75,7 +75,7 @@ export class NxenesiService {
 
   getNxenes($key){
 
-    return this.db.object('/2020-2021/'+$key).snapshotChanges();
+    return this.db.object( localStorage.getItem('VitiShkollor') +'/'+$key).snapshotChanges();
   }
   populateForm(nxenesi) {
  

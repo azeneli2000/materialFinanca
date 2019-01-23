@@ -42,7 +42,7 @@ mesuesiList : AngularFireList<any>;
 getLendet(mesZgjedhur){
   console.log (mesZgjedhur);
   this.lendaList = this.db.list('Lendet',ref => ref.orderByChild('mesuesiId').equalTo(mesZgjedhur));
-  this.mesuesiList = this.db.list('Mesuesit');
+  this.mesuesiList = this.db.list(localStorage.getItem('VitiShkollor') +'/Mesuesit');
   console.log(this.lendaList);
   return this.db.list('Lendet',ref => ref.orderByChild('mesuesiId').equalTo(mesZgjedhur)).snapshotChanges();
 }

@@ -6,6 +6,7 @@ import {MatTableDataSource, MatSort, MatPaginator,MatDialog,MatDialogConfig} fro
 import { ConfirmDialogService } from 'src/app/shared/confirm-dialog.service';
 import {Router} from "@angular/router";
 import { MesuesiZgjedhurService } from 'src/app/shared/mesuesi-zgjedhur.service';
+import { VitiService } from 'src/app/shared/viti.service';
 
 
 
@@ -19,19 +20,51 @@ import { MesuesiZgjedhurService } from 'src/app/shared/mesuesi-zgjedhur.service'
 export class MesuesitListComponent implements OnInit {
   
   isLoading = true;
-
-  constructor(private listMesuesit : MesuesiService, private dialog :MatDialog, private notification : NotificationService,  private dialogService : ConfirmDialogService,private router : Router,private mesuesiZ : MesuesiZgjedhurService) { }
+  vitiZgjedhur;
+  constructor(private listMesuesit : MesuesiService, private dialog :MatDialog, private notification : NotificationService,  private dialogService : ConfirmDialogService,private router : Router,private mesuesiZ : MesuesiZgjedhurService,private _viti: VitiService) { }
 
   listData : MatTableDataSource<any>
   displayedColumns: string [] =['Emri','Mbiemri','Vjetersia','Kategoria','Paga','PagaTotMujore','Actions'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey :string;
+
+
   ngOnInit() {
+    this.getAll();
+
     //regjistrohet te observable qe kthen getMesuesit() te mesuasi service
+    this._viti.msgMenu$.subscribe(mes => { this.vitiZgjedhur = mes; this.getAll(); });
+    // this.listMesuesit.getMesuesit().subscribe(
+    //   list => {this.isLoading = false;
+    //     let array = list.map(item =>{
+    //       return {
+    //         $key : item.key,
+    //         ...item.payload.val()};
+    //     }
+
+    //     );
+    //     this.listData= new MatTableDataSource(array);
+    //     if(this.listData.data.length==0)
+    //     this.isLoading = false;
+    //     this.listData.sort = this.sort;
+    //     this.listData.paginator = this.paginator;
+    //     //filtron vetem kolnat e visualizuara ne tabele 
+    //     this.listData.filterPredicate = (data, filter) => {
+    //       return this.displayedColumns.some(ele => {
+    //         return ele != 'Actions' && data[ele].toString().toLowerCase().indexOf(filter) != -1;
+    //       });
+    //     };
+    //   });
+  }
+  getAll()
+  {
+    this.isLoading = true;
+
     this.listMesuesit.getMesuesit().subscribe(
-      list => {this.isLoading = false;
+      list => {
         let array = list.map(item =>{
+          this.isLoading = false;
           return {
             $key : item.key,
             ...item.payload.val()};

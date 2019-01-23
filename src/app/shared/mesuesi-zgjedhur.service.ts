@@ -15,6 +15,6 @@ mz;
  
 
 mbushMesuesin(){
-  this.mz= this.db.list('Mesuesit/'+this.mesuesiZgjedhurId).valueChanges();
+  this.mz= this.db.list(localStorage.getItem('VitiShkollor') +'/Mesuesit/'+this.mesuesiZgjedhurId).valueChanges();
 }
 }

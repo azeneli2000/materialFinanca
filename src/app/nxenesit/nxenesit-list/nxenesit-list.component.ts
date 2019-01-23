@@ -73,7 +73,7 @@ export class NxenesitListComponent implements OnInit {
         
         });
         //
-     let array1 =  array.filter(item=>item.$key!=='Eskursione')
+     let array1 =  array.filter(item=>item.$key!=='Eskursione'&&item.$key!=='Mesuesit')
         this.listData = new MatTableDataSource(array1);
         console.log(array1) ; 
 
