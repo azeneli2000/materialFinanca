@@ -49,6 +49,28 @@
       Kategoria <strong>e detyruesheme</strong>
     </mat-error>
 </mat-form-field>
+<br>
+
+<mat-form-field appearance="outline">
+  <mat-label>Muaj Page</mat-label>
+<input type ="number" formControlName="MuajPage" matInput [errorStateMatcher]="matcher"  >
+
+<mat-error *ngIf="service.form.controls['MuajPage'].errors?.required">
+    Muaj page <strong>e detyruesheme</strong>
+  </mat-error>
+</mat-form-field>
+
+<br>
+
+<mat-form-field appearance="outline">
+  <mat-label>Llogari Bankare</mat-label>
+<input type ="text" formControlName="LLogariBankare" matInput [errorStateMatcher]="matcher"  >
+
+<mat-error *ngIf="service.form.controls['LLogariBankare'].errors?.required">
+    Llogari bankare  <strong>e detyruesheme</strong>
+  </mat-error>
+</mat-form-field>
+
 <div class="add-bottom-padding"> 
     <mat-checkbox (change)= "onCheck($event.checked)" formControlName="Jashtem">Mesues i jashtem</mat-checkbox>
   </div>

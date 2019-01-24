@@ -1,0 +1,22 @@
+<mat-toolbar>
+  <span>Paga Shtese</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+
+
+
+
+  <br>
+  <mat-form-field   appearance="outline">
+      <mat-label>Paga Shtese</mat-label>
+    <input type = "number" autocomplete="off" [(ngModel)] = "pagesaShtese" matInput [errorStateMatcher]="matcher" >
+   
+    <mat-error *ngIf="service.form.controls['Emri'].errors?.required">
+        Paga <strong>e detyruesheme</strong>
+      </mat-error>
+  </mat-form-field>
+  <br>
+  <div class="but">
+    <button mat-raised-button class = "ruaj" type = "submit" color="primary" [disabled]="service.form.invalid" (click)= "onSubmit()">Paguaj</button>
+    </div>

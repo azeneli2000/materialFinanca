@@ -52,6 +52,8 @@ import { NxenesiDetajeComponent } from './nxenesit/nxenesi-detaje/nxenesi-detaje
 import { KonfigurimeComponent } from './konfigurime/konfigurime.component';
 import { EskursioneComponent } from './eskursione/eskursione.component';
 import { CurrencyPipe } from '@angular/common';
+import { PagesamesuesitComponent } from './pagesamesuesit/pagesamesuesit.component';
+import { PagashteseComponent } from './pagesamesuesit/pagashtese/pagashtese.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,8 @@ import { CurrencyPipe } from '@angular/common';
     NxenesiDetajeComponent,
     KonfigurimeComponent,
     EskursioneComponent,
+    PagesamesuesitComponent,
+    PagashteseComponent,
     
     
     
@@ -109,6 +113,6 @@ import { CurrencyPipe } from '@angular/common';
   ],
   providers: [MesuesiService,AuthGuard, {provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl()},CurrencyPipe],
   bootstrap: [AppComponent],
-  entryComponents:[MesuesiComponent,ConfirmDialogComponent,LendaComponent,NxenesiComponent,]
+  entryComponents:[MesuesiComponent,ConfirmDialogComponent,LendaComponent,NxenesiComponent,PagashteseComponent]
 })
 export class AppModule { }

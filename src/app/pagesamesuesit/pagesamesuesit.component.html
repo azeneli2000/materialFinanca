@@ -1,0 +1,78 @@
+    <button mat-raised-button color="primary" (click)="paguajZyrtare()">Paguaj Pagen Zyrtare</button>
+    <!-- serch box -->
+    <mat-form-field class="search-form-field" floatLabel="never">
+      <input matInput [(ngModel)]="searchKey" placeholder="Kerko.." autocomplete="off" (keyup)="applyFilter()">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+
+   
+    <div class="example-container mat-elevation-z8">
+     
+      <mat-table #table [dataSource]="listData">
+
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </mat-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+            </mat-checkbox>
+          </mat-cell>
+        </ng-container>
+        <!-- emri -->
+        <ng-container matColumnDef="Emri">
+          <mat-header-cell *matHeaderCellDef>Emri</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.Emri }}</mat-cell>
+        </ng-container>
+        <!-- mbiemri -->
+        <ng-container matColumnDef="Mbiemri">
+          <mat-header-cell *matHeaderCellDef>Mbiemri</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.Mbiemri }}</mat-cell>
+        </ng-container>
+        <!-- LlogariBankare -->
+        <ng-container matColumnDef="LlogariBankare">
+          <mat-header-cell *matHeaderCellDef>Nr Bankar</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.LLogariBankare }}</mat-cell>
+        </ng-container>
+        <!-- Paga -->
+        <ng-container matColumnDef="PagaSig">
+          <mat-header-cell *matHeaderCellDef>Paga</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.PagaSig |currency : 'LEK' : 'symbol' : '1.0-0' }}</mat-cell>
+        </ng-container>
+          <!-- Mbetja Sigurime  -->
+          <ng-container matColumnDef="MbetjaSig">
+            <mat-header-cell *matHeaderCellDef>Mbetja Zyrtare</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{  element.PagaSig*element.MuajPage -element.PaguarNeto |currency : 'LEK' : 'symbol' : '1.0-0' }}</mat-cell>
+          </ng-container>
+          <!-- Mbetja Shtese  -->
+          <ng-container matColumnDef="MbetjaShtese">
+            <mat-header-cell *matHeaderCellDef>Mbetja Shtese</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.PagaShtese*element.MuajPage -element.PaguarShtese |currency : 'LEK' : 'symbol' : '1.0-0' }}</mat-cell>
+          </ng-container>
+       
+          <ng-container matColumnDef="Actions">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <button mat-icon-button (click) = onSelect(row) color="primary"><mat-icon    matTooltip="Paga Shtese">assignment</mat-icon></button>
+           
+            </mat-cell>
+          </ng-container>
+        
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+        </mat-row>
+      </mat-table>
+      <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+        <mat-progress-spinner color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+      </mat-card>
+    </div>
+    <!-- {{selection.selected|json}} -->
+
+   

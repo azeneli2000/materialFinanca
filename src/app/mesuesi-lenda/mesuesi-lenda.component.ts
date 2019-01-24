@@ -44,13 +44,13 @@ pagaShtese;
      mz.subscribe((mes)=>{
       this.emri= mes[0];
       this.kategoria= mes[2];
-      this.mbiemri= mes[3];
-      this.paga= mes[4];
-      this.vjetersia= mes[9];
-      this.pagaSig = mes[7]; 
-      this.pagaTotMujore = mes[8]; 
-      this.pagaNetoMujore = mes[5]; 
-      this.pagaShtese = mes[6]; 
+      this.mbiemri= mes[4];
+      this.paga= mes[6];
+      this.vjetersia= mes[13];
+      this.pagaSig = mes[9]; 
+      this.pagaTotMujore = mes[10]; 
+      this.pagaNetoMujore = mes[7]; 
+      this.pagaShtese = mes[8]; 
      });
      
 

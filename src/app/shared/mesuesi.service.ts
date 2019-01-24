@@ -6,6 +6,8 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { LendaService } from './lenda.service';
 import { parseI18nMeta } from '@angular/compiler/src/render3/view/i18n';
 import { MesuesiZgjedhurService } from './mesuesi-zgjedhur.service';
+import { formControlBinding } from '@angular/forms/src/directives/ng_model';
+import { of } from 'rxjs';
 
 
 @Injectable({
@@ -35,6 +37,10 @@ export class MesuesiService {
     PagaShtese: new FormControl('', [Validators.required]),
     PagaTotMujore :  new FormControl('', [Validators.required]),
     Jashtem: new FormControl(false),
+    MuajPage : new FormControl(12, [Validators.required]),
+    LLogariBankare : new FormControl('',[Validators.required]),
+    PaguarNeto : new FormControl(0),
+    PaguarShtese : new FormControl(0),
 
 
 
@@ -59,7 +65,12 @@ export class MesuesiService {
       PagaNetoMujore: 0,
       PagaShtese: 0,
       PagaTotMujore : 0,
-      Jashtem: false
+      Jashtem: false,
+      MuajPage : 12,
+      LLogariBankare : '',
+      PaguarNeto : 0,
+      PaguarShtese : 0,
+
     });
 
   }
@@ -76,7 +87,12 @@ export class MesuesiService {
       PagaNetoMujore: 0,
       PagaShtese: 0,
       PagaTotMujore : 0,
-      Jashtem: mesuesi.Jashtem
+      Jashtem: mesuesi.Jashtem,
+      PaguarNeto : 0,
+      PaguarShtese : 0,
+      MuajPage : 12,
+      LLogariBankare : mesuesi.LLogariBankare,
+
     });
   }
   updateMesuesit(mesuesi,change) {
@@ -93,7 +109,9 @@ export class MesuesiService {
       PagaNetoMujore: mesuesi.PagaNetoMujore,
       PagaShtese: mesuesi.PagaShtese,
       PagaTotMujore : mesuesi.PagaTotMujore,
-      Jashtem: mesuesi.Jashtem
+      Jashtem: mesuesi.Jashtem,
+      MuajPage : mesuesi.MuajPage,
+      LLogariBankare : mesuesi.LLogariBankare,
     });
   } 
 
@@ -187,6 +205,22 @@ this.db.list(localStorage.getItem('VitiShkollor') +'/Mesuesit').update(idMesuesi
         PagaShtese : psh
       });
     })
+  }
+
+  updatePaguarShtese(mesuesi,pagaShtese){
+
+    this.mesuesitList.update(mesuesi.$key, {
+      PaguarShtese: mesuesi.PaguarShtese + pagaShtese  })
+    }
+
+
+  updatePaguarBanke(arrayPagaZyrtare){
+    console.log(arrayPagaZyrtare[0]);
+   for (var i =0; i<=arrayPagaZyrtare.length;i++ )
+   {
+    this.mesuesitList.update(arrayPagaZyrtare[i].$key, {
+      PaguarNeto:  arrayPagaZyrtare[i].PaguarNeto+  arrayPagaZyrtare[i].PagaSig})
+    }
   }
 
   

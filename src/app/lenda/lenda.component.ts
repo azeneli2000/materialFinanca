@@ -143,7 +143,10 @@ onCheck(checked){
 llogaritPagen()
 {
   this.pagaLenda = ((this.perqindjaLenda+this.perqindjaKlasa + this.vjetersia*0.5 + (this.nrNxenesishKlase-16)*2.5 + this.paraleleNr*2 + this.kategoria*5 + this.cikliNr + this.shtesaInst-10) * this.baza/100) + this.baza;
-  this.pagaBrutoMujore = Math.round((this.pagaLenda* this.oreJave*this.javeTot/12)*100/116.7);
+  console.log(this.pagaLenda);
+  console.log('vjetersia:'+ this.vjetersia);
+  console.log('kategoria:'+ this.kategoria);
+    this.pagaBrutoMujore = Math.round((this.pagaLenda* this.oreJave*this.javeTot/12)*100/116.7);
   this.pagaBrutoVjetore = Math.round(  this.pagaLenda* this.oreJave*this.javeTot);
    this.difUpdate =  this.pagaBrutoMujore- this.fillimiUpdate;
    //this.service.form.controls['Paga'].setValue(this.pagaBrutoMujore);
@@ -191,10 +194,11 @@ llogaritPagen()
     this.idMesuesi = this.mesZ.mesuesiZgjedhurId;
     this.mesZ.mz.subscribe((mes)=>{
       this.kategoria= mes[2];      
-      this.vjetersia= mes[9];      
-      this.pagaFillestareMesuesi= mes[4]; 
-      this.pShtese = mes[6];
-      this.pTot = mes[8];
+      this.vjetersia= mes[13];      
+      this.pagaFillestareMesuesi= mes[6]; 
+      this.pShtese = mes[8];
+      this.pTot = mes[10];
+      console.log(this.pagaFillestareMesuesi,this.pShtese,this.pTot);
      });
 
      //this.llogaritPagen();
