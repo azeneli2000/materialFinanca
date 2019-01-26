@@ -4,12 +4,14 @@
 <!-- e0 -->
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-description class="klasa">
-        <strong style = "color: #FF5252;width :50px">0</strong>    <strong>  {{emri0.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa0.value!=0"> <strong>Data :</strong>  {{data0.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa0.value|currency : monedha0.value:'symbol':'1.0-0'}}</div> 
-        </mat-panel-description>
+        <mat-panel-description class="klasa">    
+        <strong style = "color: #FF5252;width :50px">0</strong>    <mat-icon style = "color: #4CAF50" *ngIf = "this.eskursione.form.get('eskursione').value[0].Agjensia" >done</mat-icon>  &nbsp; &nbsp;
+         <strong>  {{emri0.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa0.value!=0"> <strong>Data :</strong>  {{data0.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa0.value|currency : monedha0.value:'symbol':'1.0-0'}}</div> 
+      </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field>
         <input type="text" #emri0 [(ngModel)] = "this.eskursione.form.get('eskursione').value[0].Emri" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Emri">
+      
       </mat-form-field> 
      <mat-form-field>
         <input type="number" #pagesa0 [(ngModel)] = "this.eskursione.form.get('eskursione').value[0].Pagesa" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Pagesa Nxenesi">
@@ -19,12 +21,12 @@
       </mat-form-field>
       <mat-form-field>
         <input type="date" #data0 [(ngModel)] = "this.eskursione.form.get('eskursione').value[0].Data" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Data">
-      </mat-form-field>
+      </mat-form-field>     
       <mat-form-field>
         <input type="number" #agjensia0 [(ngModel)] = "this.eskursione.form.get('eskursione').value[0].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
-        <!-- <button mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="console.log('do behet transaksioni ne arke')">
+        <button type = "submit" mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="insertShpenzim1(0);" *ngIf ="!this.eskursione.form.get('eskursione').value[0].Agjensia">
           <mat-icon>assignment</mat-icon>
-        </button> -->
+        </button>       
       </mat-form-field>
     </mat-expansion-panel>
 
@@ -33,7 +35,9 @@
 <mat-expansion-panel>
   <mat-expansion-panel-header>
     <mat-panel-description class="klasa">
-      <strong style = "color: #FF5252;width :50px">1</strong><strong>   {{emri1.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa1.value!=0"> <strong>Data :</strong>  {{data1.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa1.value|currency :  monedha1.value:'symbol':'1.0-0'}}</div> 
+      <strong style = "color: #FF5252;width :50px">1</strong>
+      <mat-icon style = "color: #4CAF50" *ngIf = "this.eskursione.form.get('eskursione').value[1].Agjensia" >done</mat-icon>  &nbsp; &nbsp;
+      <strong>   {{emri1.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa1.value!=0"> <strong>Data :</strong>  {{data1.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa1.value|currency :  monedha1.value:'symbol':'1.0-0'}}</div> 
     </mat-panel-description>
   </mat-expansion-panel-header>
   <mat-form-field>
@@ -50,13 +54,18 @@
   </mat-form-field>
   <mat-form-field>
     <input type="number" #agjensia1 [(ngModel)] = "this.eskursione.form.get('eskursione').value[1].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
+    <button type = "submit" mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="insertShpenzim1(1);" *ngIf ="!this.eskursione.form.get('eskursione').value[1].Agjensia">
+        <mat-icon>assignment</mat-icon>        </button>       
+
   </mat-form-field>
 </mat-expansion-panel>
 <!-- e2 -->
 <mat-expansion-panel>
   <mat-expansion-panel-header>
     <mat-panel-description class="klasa">
-      <strong style = "color: #FF5252;width :50px">2</strong> <strong> {{emri2.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa2.value!=0"> <strong>Data :</strong>  {{data2.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa2.value|currency :  monedha2.value:'symbol':'1.0-0'}}</div> 
+      <strong style = "color: #FF5252;width :50px">2</strong>
+      <mat-icon style = "color: #4CAF50" *ngIf = "this.eskursione.form.get('eskursione').value[2].Agjensia" >done</mat-icon>  &nbsp; &nbsp;
+      <strong> {{emri2.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa2.value!=0"> <strong>Data :</strong>  {{data2.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa2.value|currency :  monedha2.value:'symbol':'1.0-0'}}</div> 
     </mat-panel-description>
   </mat-expansion-panel-header>
   <mat-form-field>
@@ -73,13 +82,18 @@
   </mat-form-field>
   <mat-form-field>
     <input type="number" #agjensia2 [(ngModel)] = "this.eskursione.form.get('eskursione').value[2].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
+    <button type = "submit" mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="insertShpenzim1(2);" *ngIf ="!this.eskursione.form.get('eskursione').value[2].Agjensia">
+        <mat-icon>assignment</mat-icon>        </button>       
+
   </mat-form-field>
 </mat-expansion-panel>
 <!-- e3 -->
 <mat-expansion-panel>
   <mat-expansion-panel-header>
     <mat-panel-description class="klasa">
-      <strong style = "color: #FF5252;width :50px">3</strong> <strong> {{emri3.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa3.value!=0"> <strong>Data :</strong>  {{data3.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa3.value|currency :  monedha3.value:'symbol':'1.0-0'}}</div> 
+      <strong style = "color: #FF5252;width :50px">3</strong> 
+      <mat-icon style = "color: #4CAF50" *ngIf = "this.eskursione.form.get('eskursione').value[3].Agjensia" >done</mat-icon>  &nbsp; &nbsp;
+      <strong> {{emri3.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa3.value!=0"> <strong>Data :</strong>  {{data3.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa3.value|currency :  monedha3.value:'symbol':'1.0-0'}}</div> 
     </mat-panel-description>
   </mat-expansion-panel-header>
   <mat-form-field>
@@ -96,13 +110,18 @@
   </mat-form-field>
   <mat-form-field>
     <input type="number" #agjensia3 [(ngModel)] = "this.eskursione.form.get('eskursione').value[3].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
+    <button type = "submit" mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="insertShpenzim1(3);" *ngIf ="!this.eskursione.form.get('eskursione').value[3].Agjensia">
+        <mat-icon>assignment</mat-icon>        </button>       
+
   </mat-form-field>
 </mat-expansion-panel>
 <!-- e4 -->
 <mat-expansion-panel>
   <mat-expansion-panel-header>
     <mat-panel-description class="klasa">
-      <strong style = "color: #FF5252;width :50px">4</strong> <strong>  {{emri4.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa4.value!=0"> <strong>Data :</strong>  {{data4.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa4.value|currency :  monedha4.value:'symbol':'1.0-0'}}</div> 
+      <strong style = "color: #FF5252;width :50px">4</strong>
+      <mat-icon style = "color: #4CAF50" *ngIf = "this.eskursione.form.get('eskursione').value[4].Agjensia" >done</mat-icon>  &nbsp; &nbsp;
+      <strong>  {{emri4.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa4.value!=0"> <strong>Data :</strong>  {{data4.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa4.value|currency :  monedha4.value:'symbol':'1.0-0'}}</div> 
     </mat-panel-description>
   </mat-expansion-panel-header>
   <mat-form-field>
@@ -118,14 +137,19 @@
     <input type="date" #data4 [(ngModel)] = "this.eskursione.form.get('eskursione').value[4].Data" [ngModelOptions]="{standalone: true}" matInput [errorStateMatcher]="matcher" placeholder="Data">
   </mat-form-field>
   <mat-form-field>
-    <input type="number" #agjensia [(ngModel)] = "this.eskursione.form.get('eskursione').value[4].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
+    <input type="number" #agjensia4 [(ngModel)] = "this.eskursione.form.get('eskursione').value[4].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
+    <button type = "submit" mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="insertShpenzim1(4);" *ngIf ="!this.eskursione.form.get('eskursione').value[4].Agjensia">
+        <mat-icon>assignment</mat-icon>        </button>       
+
   </mat-form-field>
 </mat-expansion-panel>
 <!-- e5 -->
 <mat-expansion-panel>
   <mat-expansion-panel-header>
     <mat-panel-description class="klasa">
-      <strong style = "color: #FF5252;width :50px">5</strong>  <strong> {{emri5.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa5.value!=0"> <strong>Data :</strong>  {{data5.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa5.value|currency :  monedha5.value:'symbol':'1.0-0'}}</div> 
+      <strong style = "color: #FF5252;width :50px">5</strong>  
+      <mat-icon style = "color: #4CAF50" *ngIf = "this.eskursione.form.get('eskursione').value[5].Agjensia" >done</mat-icon>  &nbsp; &nbsp;
+      <strong> {{emri5.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa5.value!=0"> <strong>Data :</strong>  {{data5.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa5.value|currency :  monedha5.value:'symbol':'1.0-0'}}</div> 
     </mat-panel-description>
   </mat-expansion-panel-header>
   <mat-form-field>
@@ -142,13 +166,18 @@
   </mat-form-field>
   <mat-form-field>
     <input type="number" #agjensia5 [(ngModel)] = "this.eskursione.form.get('eskursione').value[5].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
+    <button type = "submit" mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="insertShpenzim1(5);" *ngIf ="!this.eskursione.form.get('eskursione').value[5].Agjensia">
+        <mat-icon>assignment</mat-icon>         </button>       
+
   </mat-form-field>
 </mat-expansion-panel>
 <!-- e6 -->
 <mat-expansion-panel>
   <mat-expansion-panel-header>
     <mat-panel-description class="klasa">
-      <strong style = "color: #FF5252;width :50px">6</strong> <strong>  {{emri6.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa6.value!=0"> <strong>Data :</strong>  {{data6.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa6.value|currency :  monedha6.value:'symbol':'1.0-0'}}</div> 
+      <strong style = "color: #FF5252;width :50px">6</strong>
+      <mat-icon style = "color: #4CAF50" *ngIf = "this.eskursione.form.get('eskursione').value[6].Agjensia" >done</mat-icon>  &nbsp; &nbsp;
+      <strong>  {{emri6.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa6.value!=0"> <strong>Data :</strong>  {{data6.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa6.value|currency :  monedha6.value:'symbol':'1.0-0'}}</div> 
     </mat-panel-description>
   </mat-expansion-panel-header>
   <mat-form-field>
@@ -165,13 +194,18 @@
   </mat-form-field>
   <mat-form-field>
     <input type="number" #agjensia6 [(ngModel)] = "this.eskursione.form.get('eskursione').value[6].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
+    <button type = "submit" mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="insertShpenzim1(6);" *ngIf ="!this.eskursione.form.get('eskursione').value[6].Agjensia">
+        <mat-icon>assignment</mat-icon>        </button>       
+
   </mat-form-field>
 </mat-expansion-panel>
 <!-- e7 -->
 <mat-expansion-panel>
   <mat-expansion-panel-header>
     <mat-panel-description class="klasa">
-      <strong style = "color: #FF5252;width :50px">7</strong>  <strong>  {{emri7.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa7.value!=0"> <strong>Data :</strong>  {{data7.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa7.value|currency : monedha7.value:'symbol':'1.0-0'}}</div> 
+      <strong style = "color: #FF5252;width :50px">7</strong> 
+      <mat-icon style = "color: #4CAF50" *ngIf = "this.eskursione.form.get('eskursione').value[7].Agjensia" >done</mat-icon>  &nbsp; &nbsp;
+      <strong>  {{emri7.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa7.value!=0"> <strong>Data :</strong>  {{data7.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa7.value|currency : monedha7.value:'symbol':'1.0-0'}}</div> 
     </mat-panel-description>
   </mat-expansion-panel-header>
   <mat-form-field>
@@ -188,13 +222,18 @@
   </mat-form-field>
   <mat-form-field>
     <input type="number" #agjensia7 [(ngModel)] = "this.eskursione.form.get('eskursione').value[7].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
+    <button type = "submit" mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="insertShpenzim1(7);" *ngIf ="!this.eskursione.form.get('eskursione').value[7].Agjensia">
+        <mat-icon>assignment</mat-icon>        </button>       
+
   </mat-form-field>
 </mat-expansion-panel>
 <!-- e8 -->
 <mat-expansion-panel>
   <mat-expansion-panel-header>
     <mat-panel-description class="klasa">
-      <strong style = "color: #FF5252;width :50px">8</strong> <strong>{{emri8.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa8.value!=0"> <strong>Data :</strong>  {{data8.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa8.value|currency :  monedha8.value:'symbol':'1.0-0'}}</div> 
+      <strong style = "color: #FF5252;width :50px">8</strong> 
+      <mat-icon style = "color: #4CAF50" *ngIf = "this.eskursione.form.get('eskursione').value[8].Agjensia" >done</mat-icon>  &nbsp; &nbsp;
+      <strong>{{emri8.value }} </strong> &nbsp; &nbsp; <div *ngIf = "pagesa8.value!=0"> <strong>Data :</strong>  {{data8.value}} &nbsp; &nbsp; <strong> Pagesa :</strong> {{pagesa8.value|currency :  monedha8.value:'symbol':'1.0-0'}}</div> 
     </mat-panel-description>
   </mat-expansion-panel-header>
   <mat-form-field>
@@ -211,6 +250,9 @@
   </mat-form-field>
   <mat-form-field>
     <input type="number" #agjensia8 [(ngModel)] = "this.eskursione.form.get('eskursione').value[8].PagesaAgjensia" [ngModelOptions]="{standalone: true}"matInput [errorStateMatcher]="matcher" placeholder="Pagesa Agjensia">
+    <button type = "submit" mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="insertShpenzim1(8);" *ngIf ="!this.eskursione.form.get('eskursione').value[8].Agjensia">
+        <mat-icon>assignment</mat-icon>        </button>       
+
   </mat-form-field>
 </mat-expansion-panel>
 
@@ -220,6 +262,7 @@
 <button mat-raised-button class="ruaj" type="submit" color="primary"  (click)="onSubmit()">Ruaj</button>
 </div>
 <!-- 
-{{this.eskursione.form.get('eskursione').value[0].Emri}}
-{{this.eskursione.form.value|json}} -->
+{{this.eskursione.form.get('eskursione').value[0].Emri}}!-->
+
+ <!-- {{this.eskursione.form.value|json}} -->
 </form>

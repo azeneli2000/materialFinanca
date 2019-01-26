@@ -1,0 +1,91 @@
+<form [formGroup]="shpenzime.form" class="normal-form">
+
+
+<mat-form-field appearance="outline">
+    <mat-label>Shpenzime</mat-label>
+    <mat-select formControlName="Shpenzime" (selectionChange)="onChanageShpenzime($event)">
+      <mat-option *ngFor="let s of Shpenzime" [value]="s.value">
+        {{s.value}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+    <mat-error *ngIf="shpenzime.form.controls['Shpenzime'].errors?.required">
+      Indeksi <strong>i detyrueshem</strong>
+    </mat-error>
+    <div *ngIf = "insertVisible" style = "display: inline">
+  
+  <mat-form-field appearance="outline" class = "Monedha">
+      <mat-label>Valuta</mat-label>
+      <mat-select formControlName="Monedha">
+          <mat-option *ngFor="let m of Monedhat" [value]="m.value">
+              {{m.value}}
+            </mat-option>       
+      </mat-select>
+    
+    </mat-form-field>
+
+<mat-form-field appearance="outline" class = "kosto">
+  <mat-label>Kosto</mat-label>
+  <input type ="number" autocomplete="off"  formControlName="Kosto" matInput [errorStateMatcher]="matcher">
+  <mat-error *ngIf="shpenzime.form.controls['Kosto'].errors?.required">
+    Kosto <strong>e detyrueshme</strong>
+  </mat-error>
+</mat-form-field>
+
+<mat-form-field class="koment" >
+  <textarea formControlName="Koment" matInput placeholder="Koment"></textarea>
+</mat-form-field>
+<button mat-raised-button class="ruaj" type="submit" color="primary" [disabled]="shpenzime.form.invalid" (click)="onSubmit()">Ruaj</button>
+</div>
+</form>
+
+
+<div *ngIf= "tablaVisible">
+
+<div class="search-div">
+   
+    <mat-form-field class="search-form-field" floatLabel="never">
+      <input matInput [(ngModel)]="searchKey" placeholder="Kerko.." autocomplete="off" (keyup)="applyFilter()">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    
+  </div>
+  <br>
+  
+  <div class="mat-elevation-z8">
+  
+    <mat-table [dataSource]="listData" matSort>
+  
+        <ng-container matColumnDef="Data">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.Data | date: 'dd-MM-yyyy'}}</mat-cell>
+          </ng-container>
+      <ng-container matColumnDef="Kosto">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Kosto</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.Kosto|currency : element.Monedha : 'symbol' }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Koment">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Koment</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.Koment}}</mat-cell>
+      </ng-container>
+      
+  
+  
+     
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  
+  
+  
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10,12,14,15, 25, 100]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+  </div>
+    <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+      <mat-progress-spinner color="primary" mode="indeterminate">
+      </mat-progress-spinner>
+    </mat-card>
+  </div>
+  <!-- {{displayDate|date : 'dd/MM/yyyy'}} -->
+  <!-- {{shpenzime.form.value|json}} -->

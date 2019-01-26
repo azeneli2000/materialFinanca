@@ -8,6 +8,7 @@ import { parseI18nMeta } from '@angular/compiler/src/render3/view/i18n';
 import { MesuesiZgjedhurService } from './mesuesi-zgjedhur.service';
 import { formControlBinding } from '@angular/forms/src/directives/ng_model';
 import { of } from 'rxjs';
+import { ShpenzimeService } from './shpenzime.service';
 
 
 @Injectable({
@@ -22,8 +23,13 @@ import { of } from 'rxjs';
 // }
 export class MesuesiService {
   mesuesitList: AngularFireList<any>;
- 
-  constructor(private db: AngularFireDatabase, private lendet: LendaService , private mesuesiZgjedhur:MesuesiZgjedhurService) { }
+  Shpenzimi = {
+    Kosto: 0,
+    Data: '',
+    Monedha: '',
+    Koment: ''
+  };
+  constructor(private db: AngularFireDatabase, private lendet: LendaService , private mesuesiZgjedhur:MesuesiZgjedhurService, private shpenzimi : ShpenzimeService) { }
 
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
@@ -211,15 +217,30 @@ this.db.list(localStorage.getItem('VitiShkollor') +'/Mesuesit').update(idMesuesi
 
     this.mesuesitList.update(mesuesi.$key, {
       PaguarShtese: mesuesi.PaguarShtese + pagaShtese  })
-    }
+      this.Shpenzimi.Kosto = pagaShtese;
+    this.Shpenzimi.Data =  new Date().toLocaleDateString();
+    this.Shpenzimi.Monedha = 'LEK';
+    this.Shpenzimi.Koment = 'Ne dore ' + mesuesi.Emri + ' ' +mesuesi.Mbiemri ;
+    this.shpenzimi.insertShpenzime('Rroga', this.Shpenzimi);
+   
+  }
 
 
   updatePaguarBanke(arrayPagaZyrtare){
-    console.log(arrayPagaZyrtare[0]);
-   for (var i =0; i<=arrayPagaZyrtare.length;i++ )
+    this.mesuesitList = this.db.list(localStorage.getItem('VitiShkollor') +'/Mesuesit');
+
+    console.log(arrayPagaZyrtare.length);
+  
+
+    for (var i =0; i<arrayPagaZyrtare.length;i++ )
    {
     this.mesuesitList.update(arrayPagaZyrtare[i].$key, {
-      PaguarNeto:  arrayPagaZyrtare[i].PaguarNeto+  arrayPagaZyrtare[i].PagaSig})
+      PaguarNeto:  arrayPagaZyrtare[i].PaguarNeto+  arrayPagaZyrtare[i].PagaNetoMujore});
+    this.Shpenzimi.Kosto = arrayPagaZyrtare[i].PagaNetoMujore;
+    this.Shpenzimi.Data =  new Date().toLocaleDateString();
+    this.Shpenzimi.Monedha = 'LEK';
+    this.Shpenzimi.Koment = 'Zyrtare ' + arrayPagaZyrtare[i].Emri + ' ' +arrayPagaZyrtare[i].Mbiemri ;
+    this.shpenzimi.insertShpenzime('Rroga', this.Shpenzimi);
     }
   }
 

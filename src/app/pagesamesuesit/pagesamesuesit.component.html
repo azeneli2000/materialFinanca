@@ -1,4 +1,4 @@
-    <button mat-raised-button color="primary" (click)="paguajZyrtare()">Paguaj Pagen Zyrtare</button>
+    <button mat-raised-button class="buttonPaguaj" (click)="paguajZyrtare()">Paguaj Pagen Zyrtare</button>
     <!-- serch box -->
     <mat-form-field class="search-form-field" floatLabel="never">
       <input matInput [(ngModel)]="searchKey" placeholder="Kerko.." autocomplete="off" (keyup)="applyFilter()">
@@ -11,7 +11,7 @@
    
     <div class="example-container mat-elevation-z8">
      
-      <mat-table #table [dataSource]="listData">
+      <mat-table #table [dataSource]="listData" matSort>
 
         <!-- Checkbox Column -->
         <ng-container matColumnDef="select">
@@ -27,32 +27,32 @@
         </ng-container>
         <!-- emri -->
         <ng-container matColumnDef="Emri">
-          <mat-header-cell *matHeaderCellDef>Emri</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef  mat-sort-header>Emri</mat-header-cell>
           <mat-cell *matCellDef="let element">{{element.Emri }}</mat-cell>
         </ng-container>
         <!-- mbiemri -->
         <ng-container matColumnDef="Mbiemri">
-          <mat-header-cell *matHeaderCellDef>Mbiemri</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef  mat-sort-header>Mbiemri</mat-header-cell>
           <mat-cell *matCellDef="let element">{{element.Mbiemri }}</mat-cell>
         </ng-container>
         <!-- LlogariBankare -->
         <ng-container matColumnDef="LlogariBankare">
-          <mat-header-cell *matHeaderCellDef>Nr Bankar</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef >Nr Bankar</mat-header-cell>
           <mat-cell *matCellDef="let element">{{element.LLogariBankare }}</mat-cell>
         </ng-container>
         <!-- Paga -->
         <ng-container matColumnDef="PagaSig">
-          <mat-header-cell *matHeaderCellDef>Paga</mat-header-cell>
-          <mat-cell *matCellDef="let element">{{element.PagaSig |currency : 'LEK' : 'symbol' : '1.0-0' }}</mat-cell>
+          <mat-header-cell *matHeaderCellDef  mat-sort-header>Paga Neto</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.PagaNetoMujore |currency : 'LEK' : 'symbol' : '1.0-0' }}</mat-cell>
         </ng-container>
           <!-- Mbetja Sigurime  -->
           <ng-container matColumnDef="MbetjaSig">
-            <mat-header-cell *matHeaderCellDef>Mbetja Zyrtare</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{  element.PagaSig*element.MuajPage -element.PaguarNeto |currency : 'LEK' : 'symbol' : '1.0-0' }}</mat-cell>
+            <mat-header-cell *matHeaderCellDef >Mbetja Zyrtare</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{  element.PagaNetoMujore*element.MuajPage -element.PaguarNeto |currency : 'LEK' : 'symbol' : '1.0-0' }}</mat-cell>
           </ng-container>
           <!-- Mbetja Shtese  -->
           <ng-container matColumnDef="MbetjaShtese">
-            <mat-header-cell *matHeaderCellDef>Mbetja Shtese</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef >Mbetja Shtese</mat-header-cell>
             <mat-cell *matCellDef="let element">{{ element.PagaShtese*element.MuajPage -element.PaguarShtese |currency : 'LEK' : 'symbol' : '1.0-0' }}</mat-cell>
           </ng-container>
        

@@ -14,7 +14,7 @@ export class EskursioneService {
 
     $key: new FormControl(null),
     
-    eskursione : new FormControl(  [{Emri : 'Eskursioni0', Pagesa : 0,Data :'',PagesaAgjensia:''},
+    eskursione : new FormControl(  [{Emri : 'Eskursioni0', Pagesa : 0,Data :'',Agjensia:'',PagesaAgjensia:'',MonedhaEskursioni:'EUR'},
     {Emri : 'Eskursioni1', Pagesa : 0,Data :'',Agjensia:'',PagesaAgjensia : '',MonedhaEskursioni:'EUR'},
     {Emri : 'Eskursioni2', Pagesa : 0,Data :'',Agjensia:'',PagesaAgjensia : '',MonedhaEskursioni:'EUR'},
     {Emri : 'Eskursioni4', Pagesa : 0,Data :'',Agjensia:'',PagesaAgjensia : '',MonedhaEskursioni:'EUR'},

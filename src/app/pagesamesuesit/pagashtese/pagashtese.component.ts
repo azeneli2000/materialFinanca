@@ -18,13 +18,15 @@ pagesaShtese = 0;
   }
 
   onSubmit(){
-
-    if(this.service.form.valid)
-    
+    console.log(this.service.form.value.MuajPage*this.service.form.value.PagaShtese);
+console.log(this.service.form.value.PaguarShtese + this.pagesaShtese);
+    if( (this.service.form.value.PaguarShtese + this.pagesaShtese)<= (this.service.form.value.MuajPage*this.service.form.value.PagaShtese) )   
     {
       this.service.updatePaguarShtese(this.service.form.value,this.pagesaShtese);
       this.notification.success("Paga u ruajt");
     } 
+    else
+    this.notification.warn("Pagesa kalon pagesen totale te mesuesit");
       
     this.onClose();
     
