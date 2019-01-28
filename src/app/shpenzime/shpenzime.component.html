@@ -10,7 +10,7 @@
     </mat-select>
   </mat-form-field>
     <mat-error *ngIf="shpenzime.form.controls['Shpenzime'].errors?.required">
-      Indeksi <strong>i detyrueshem</strong>
+      Shpenzimi <strong>i detyrueshem</strong>
     </mat-error>
     <div *ngIf = "insertVisible" style = "display: inline">
   
@@ -40,6 +40,9 @@
 </form>
 
 
+
+<!-- </div> -->
+
 <div *ngIf= "tablaVisible">
 
 <div class="search-div">
@@ -50,10 +53,25 @@
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
-    
-  </div>
-  <br>
+      
+  <div class="tot">
+    <mat-card>
   
+      <div *ngIf="totEUR>0 && totEUR != 'NaN'" style="display: inline;color : #F44336"><span style="color:#303F9F"> </span> <span class="mbeturSpan">
+          {{totEUR|currency : 'EUR':'symbol':'1.0-0'}}</span></div>
+      <div *ngIf="totLEK>0 && totLEK != 'NaN'" style="display: inline;color:#303F9F"><span style="color:#303F9F"></span> <span class="mbeturSpan">
+          {{totLEK|currency : 'LEK':'symbol':'1.0-0'}}</span></div>
+      <!-- <div *ngIf="mbeturTrans>0" style="display: inline"> <span class="mbeturSpan" style="color:#303F9F"> Trans :
+        </span> <span class="mbeturSpan">{{mbeturTrans|currency : 'LEK':'symbol':'1.0-0'}}</span></div>
+      <br>
+      <div *ngIf="mbeturUni>0" style="display: inline"><span class="mbeturSpan" style="color:#303F9F">Uni : </span>
+        <span class="mbeturSpan">{{mbeturUni|currency : 'LEK':'symbol':'1.0-0'}}</span></div>
+      <div *ngIf="mbeturLibra>0" style="display: inline"> <span class="mbeturSpan" style="color:#303F9F"> Librat :
+        </span> <span class="mbeturSpan">{{mbeturLibra|currency : 'LEK':'symbol':'1.0-0'}}</span></div> -->
+    </mat-card>
+  </div>
+</div>
+
   <div class="mat-elevation-z8">
   
     <mat-table [dataSource]="listData" matSort>
@@ -87,5 +105,4 @@
       </mat-progress-spinner>
     </mat-card>
   </div>
-  <!-- {{displayDate|date : 'dd/MM/yyyy'}} -->
   <!-- {{shpenzime.form.value|json}} -->

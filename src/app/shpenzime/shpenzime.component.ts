@@ -24,6 +24,8 @@ export class ShpenzimeComponent implements OnInit {
   isLoading : boolean = true;
   listData: MatTableDataSource<any>;
   displayedColumns: string[] = ['Data','Kosto', 'Koment'];
+  totEUR : number = 0;
+  totLEK : number = 0;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey: string;
@@ -51,16 +53,15 @@ export class ShpenzimeComponent implements OnInit {
         //
         this.listData = new MatTableDataSource(array);
 
+        this.totEUR = this.listData.filteredData.map((t)=>{if(t.Monedha=='EUR') return t.Kosto; else return 0;}).reduce((acc, value) => acc + value, 0);
+        this.totLEK = this.listData.filteredData.map((t)=>{if(t.Monedha=='LEK') return t.Kosto;else return 0;}).reduce((acc, value) => acc + value, 0);
+console.log('eur : ' + this.totEUR + 'lek :' + this.totLEK);
         if (this.listData.data.length == 0)
         {
           this.isLoading = false;
           console.log('bosh');
         }
-        // this.mbeturShkolla = this.listData.filteredData.map(t => t.PagesaShkolla).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarShkolla).reduce((acc, value) => acc + value, 0);
-        // this.mbeturTrans = this.listData.filteredData.map(t => t.PagesaTransporti).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarTransporti).reduce((acc, value) => acc + value, 0);
-        // this.mbeturLibra = this.listData.filteredData.map(t => t.PagesaLibrat).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarLibrat).reduce((acc, value) => acc + value, 0);
-        // this.mbeturUni = this.listData.filteredData.map(t => t.PagesaUniforma).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarUniforma).reduce((acc, value) => acc + value, 0);
-
+      
         this.listData.sort = this.sort;
         this.listData.paginator = this.paginator;
         //filtron vetem kolnat e visualizuara ne tabele pervec actions dhe $key
@@ -96,10 +97,13 @@ this.shpenzime.form.controls.Data.setValue(shpenzimiDate) ;
   onSearchClear() {
     this.searchKey = "";
     this.applyFilter();
+   
   }
 
   applyFilter() {
     this.listData.filter = this.searchKey.trim().toLowerCase();
+    this.totEUR = this.listData.filteredData.map((t)=>{if(t.Monedha=='EUR') return t.Kosto}).reduce((acc, value) => acc + value, 0);
+    this.totLEK = this.listData.filteredData.map((t)=>{if(t.Monedha=='LEK') return t.Kosto}).reduce((acc, value) => acc + value, 0);
   }
 
 }
