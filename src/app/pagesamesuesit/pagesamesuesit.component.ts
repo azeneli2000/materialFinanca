@@ -30,10 +30,21 @@ export class PagesamesuesitComponent implements OnInit {
   selection = new SelectionModel(true, []) ;
   selected : number;
   totalRows : number;
-
-  
+  mobile : boolean = false
+  totZyrtare : number =0
+  totShtese : number = 0
   ngOnInit() {
-
+    if(window.innerWidth < 400)
+    {
+      this.mobile = true;
+    this.displayedColumns = ['Emri',  'Mbiemri', 'PagaSig','MbetjaShtese'];
+    }
+    else
+    {
+      this.mobile = false;
+      this.displayedColumns =  ['select','Emri','Mbiemri','LlogariBankare','PagaSig','MbetjaSig','MbetjaShtese','Actions'];
+    
+  }
     this.getAll();
     
     //regjistrohet te observable qe kthen getMesuesit() te mesuasi service
@@ -57,6 +68,9 @@ export class PagesamesuesitComponent implements OnInit {
 
         );
         this.listData= new MatTableDataSource(array);
+        this.totZyrtare = this.listData.filteredData.map((t)=>{ return t.PagaNetoMujore*t.MuajPage -t.PaguarNeto; }).reduce((acc, value) => acc + value, 0);
+        this.totShtese = this.listData.filteredData.map((t)=>{ return t.PagaShtese*t.MuajPage -t.PaguarShtese }).reduce((acc, value) => acc + value, 0);
+        
         this.selection = new SelectionModel<any>(true, []);
         console.log(this.selection.selected);
         this.data = array;
@@ -85,11 +99,14 @@ onSearchClear() {
   this.searchKey = "";
   
   this.applyFilter();
+ 
 }
 
 applyFilter() {
 
   this.listData.filter = this.searchKey.trim().toLowerCase();
+  this.totZyrtare = this.listData.filteredData.map((t)=>{ return t.PagaNetoMujore*t.MuajPage -t.PaguarNeto; }).reduce((acc, value) => acc + value, 0);
+  this.totShtese = this.listData.filteredData.map((t)=>{ return t.PagaShtese*t.MuajPage -t.PaguarShtese }).reduce((acc, value) => acc + value, 0);
   console.log(this.listData)
 }
 

@@ -36,8 +36,20 @@ pagaShtese;
   searchKey :string;
   mesZgjedhurBosh : boolean = false;
  meskey = this.route.snapshot.paramMap.get('$key');
- 
+ mobile : boolean = false;
   ngOnInit() {
+    if(window.innerWidth < 400)
+    {
+      this.mobile = true;
+    this.displayedColumns = ['Emri','Javetot','Klasa','NrNxenesish','Ore','Paga'];
+    }
+    else
+    {
+      this.mobile = false;
+      this.displayedColumns =  ['Emri','Javetot','Klasa','NrNxenesish','Ore','Paga','Actions'];
+    
+  }
+
     this.mesuesiZgjedhur.mbushMesuesin();
     let mz =this.mesuesiZgjedhur.mz;
     let mzArray;
@@ -81,6 +93,7 @@ console.log(this.mesuesiId);
      // let arr1 = array.map(lenda => lenda.Emri=lenda.Emri.viewValue) ;
       //console.log(arr1);
       this.listData.sort = this.sort;
+      if(!this.mobile)
       this.listData.paginator = this.paginator;
       //filtron vetem kolnat e visualizuara ne tabele 
       this.listData.filterPredicate = (data, filter) => {

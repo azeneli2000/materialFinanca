@@ -1,3 +1,4 @@
+
 <form [formGroup]="nxenesiService.form">
     <div class="gjeneralitete">
         <mat-card class="gjeneralitete1">
@@ -43,11 +44,11 @@
             <span class="mbetur">{{mbetjaShkolla|currency :
                 this.nxenesiService.form.controls['MonedhaShkolla'].value:'symbol':'1.0-0'}}</span>
             <br>
-            <div class="ruaj">
+            <!-- <div class="ruaj">
                 <button mat-raised-button color="primary" (click)="onSubmitShkolla()">Paguaj</button>
-            </div>
+            </div> -->
             <br>
-            <div *ngIf="hideShkolla">
+            <div>
                 {{this.nxenesiService.form.controls['MonedhaShkolla'].value}}
                 <mat-form-field appearance="outline">
 
@@ -71,11 +72,11 @@
             <span class="mbetur">{{mbetjaTransporti|currency :
                 this.nxenesiService.form.controls['MonedhaTransporti'].value:'symbol':'1.0-0'}}</span>
             <br>
-            <div class="ruaj">
+            <!-- <div class="ruaj">
                 <button mat-raised-button color="primary" (click)="onSubmitTransporti()">Paguaj</button>
-            </div>
+            </div> -->
             <br>
-            <div *ngIf="hideTransporti">
+            <div >
                 {{this.nxenesiService.form.controls['MonedhaTransporti'].value}}
                 <mat-form-field appearance="outline"> 
                     <mat-label>Pagesa</mat-label>
@@ -84,7 +85,7 @@
             </div>
         </mat-card>
     </div>
-
+<br>
 <!-- uniforma -->
 
     <div class="pagesat"  *ngIf = "this.nxenesiService.form.controls['MeUniforme'].value">
@@ -100,11 +101,11 @@
             <span class="mbetur">{{mbetjaUniforma|currency :
                 this.nxenesiService.form.controls['MonedhaUniforma'].value:'symbol':'1.0-0'}}</span>
             <br>
-            <div class="ruaj">
+            <!-- <div class="ruaj">
                 <button mat-raised-button color="primary" (click)="onSubmitUniforma()">Paguaj</button>
-            </div>
+            </div> -->
             <br>
-            <div *ngIf="hideUniforma">
+            <div >
                 {{this.nxenesiService.form.controls['MonedhaUniforma'].value}}
                 <mat-form-field appearance="outline">
 
@@ -129,11 +130,11 @@
             <span class="mbetur">{{mbetjaLibrat|currency :
                 this.nxenesiService.form.controls['MonedhaLibrat'].value:'symbol':'1.0-0'}}</span>
             <br>
-            <div class="ruaj">
+            <!-- <div class="ruaj">
                 <button mat-raised-button color="primary" [disabled] = "mbetjeLibrat" (click)="onSubmitLibrat()">Paguaj</button>
-            </div>
+            </div> -->
             <br>
-            <div *ngIf="hideLibrat">
+            <div>
                 {{this.nxenesiService.form.controls['MonedhaLibrat'].value}}
                 <mat-form-field appearance="outline">
 

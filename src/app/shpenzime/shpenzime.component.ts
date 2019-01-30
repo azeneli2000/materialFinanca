@@ -30,8 +30,21 @@ export class ShpenzimeComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey: string;
   displayDate;
+  mobile : boolean = false
 
   ngOnInit() {
+    if(window.innerWidth < 400)
+    {
+      this.mobile = true;
+   
+    }
+    else
+    {
+      this.mobile = false;
+     
+    
+  }
+    
     this.shpenzime.initializeFormGroup();
      
 
@@ -63,6 +76,7 @@ console.log('eur : ' + this.totEUR + 'lek :' + this.totLEK);
         }
       
         this.listData.sort = this.sort;
+        if(!this.mobile)
         this.listData.paginator = this.paginator;
         //filtron vetem kolnat e visualizuara ne tabele pervec actions dhe $key
         // this.listData.filterPredicate = (data, filter) => {

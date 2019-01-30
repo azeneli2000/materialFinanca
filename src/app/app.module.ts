@@ -56,6 +56,7 @@ import { PagesamesuesitComponent } from './pagesamesuesit/pagesamesuesit.compone
 import { PagashteseComponent } from './pagesamesuesit/pagashtese/pagashtese.component';
 import { ShpenzimeComponent } from './shpenzime/shpenzime.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,7 +76,6 @@ import { ShpenzimeComponent } from './shpenzime/shpenzime.component';
     PagesamesuesitComponent,
     PagashteseComponent,
     ShpenzimeComponent,
-    
     
     
   ],

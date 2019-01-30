@@ -1,3 +1,4 @@
+
 <form [formGroup]="shpenzime.form" class="normal-form">
 
 
@@ -8,11 +9,13 @@
         {{s.value}}
       </mat-option>
     </mat-select>
+ 
   </mat-form-field>
+
     <mat-error *ngIf="shpenzime.form.controls['Shpenzime'].errors?.required">
       Shpenzimi <strong>i detyrueshem</strong>
     </mat-error>
-    <div *ngIf = "insertVisible" style = "display: inline">
+    <div *ngIf = "insertVisible && !mobile" style = "display: inline">
   
   <mat-form-field appearance="outline" class = "Monedha">
       <mat-label>Valuta</mat-label>
@@ -82,7 +85,7 @@
           </ng-container>
       <ng-container matColumnDef="Kosto">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Kosto</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.Kosto|currency : element.Monedha : 'symbol' }}</mat-cell>
+        <mat-cell *matCellDef="let element">{{element.Kosto|currency : element.Monedha : 'symbol' : '1.0-0' }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="Koment">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Koment</mat-header-cell>
@@ -98,7 +101,7 @@
   
   
     </mat-table>
-    <mat-paginator [pageSizeOptions]="[5, 10,12,14,15, 25, 100]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10,12,14,15, 25, 100]" [pageSize]="10" showFirstLastButtons *ngIf = "!mobile"></mat-paginator>
   </div>
     <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
       <mat-progress-spinner color="primary" mode="indeterminate">

@@ -14,7 +14,7 @@
   <mat-card-content><strong>Paga :  {{paga}} Leke</strong>  </mat-card-content>
   </mat-card>
   <div class="search-div">
-  <button mat-raised-button (click)="onCreate()" [disabled]="mesZgjedhurBosh">
+  <button mat-raised-button (click)="onCreate()" [disabled]="mesZgjedhurBosh" *ngIf ="!mobile">
     <mat-icon>add</mat-icon>Lende e Re
   </button>
 </div>
@@ -77,7 +77,7 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       
     </mat-table>
-    <mat-paginator [pageSizeOptions]="[5, 10,12,14,15,25, 100]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10,12,14,15,25, 100]" [pageSize]="10" showFirstLastButtons *ngIf = "!mobile"></mat-paginator>
     <mat-card *ngIf="isLoading" 
     style="display: flex; justify-content: center; align-items: center">
    <mat-progress-spinner 

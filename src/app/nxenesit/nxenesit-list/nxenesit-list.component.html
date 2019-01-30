@@ -1,5 +1,5 @@
 <div class="search-div">
-  <button mat-raised-button (click)="onCreate()">
+  <button mat-raised-button (click)="onCreate()" *ngIf = "!mobile">
     <mat-icon>add</mat-icon>Nxenes i Ri
   </button>
   <mat-form-field class="search-form-field" floatLabel="never">
@@ -85,7 +85,7 @@
 
 
   </mat-table>
-  <mat-paginator [pageSizeOptions]="[5, 10,12,14,15, 25, 100]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10,12,14,15, 25, 100]" [pageSize]="10" showFirstLastButtons *ngIf ="!mobile"></mat-paginator>
 
   <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
     <mat-progress-spinner color="primary" mode="indeterminate">

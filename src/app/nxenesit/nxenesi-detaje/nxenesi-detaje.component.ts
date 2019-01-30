@@ -7,6 +7,7 @@ import { NotificationService } from 'src/app/shared/notification.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { EskursioneService } from 'src/app/shared/eskursione.service';
 import { CurrencyPipe } from '@angular/common';
+import { PrintService } from 'src/app/shared/print.service';
 
 export interface DialogData {
   monedha: 'EUR' | 'LEK' | '$';
@@ -19,7 +20,7 @@ export interface DialogData {
 })
 export class NxenesiDetajeComponent implements OnInit {
 
-  constructor(private cp : CurrencyPipe , private nxenesiService: NxenesiService,private eskursionetShkolla : EskursioneService, private route: ActivatedRoute, public dialog: MatDialog, private notification: NotificationService) { }
+  constructor(private cp : CurrencyPipe , private nxenesiService: NxenesiService,private eskursionetShkolla : EskursioneService, private route: ActivatedRoute, public dialog: MatDialog, private notification: NotificationService,private printer:PrintService ) { }
   // listData : MatTableDataSource<any>
 
   // displayedColumns: string [] =['Emri','Javetot','Klasa','NrNxenesish','Ore','Paga','Actions'];
@@ -38,10 +39,10 @@ export class NxenesiDetajeComponent implements OnInit {
   mbetjaLibrat: number = 0;
   mbetjaUniforma: number = 0;
 
-  hideShkolla: boolean = false;
-  hideTransporti: boolean = false;
-  hideUniforma: boolean = false;
-  hideLibrat: boolean = false;
+  hideShkolla: boolean = true;
+  hideTransporti: boolean = true;
+  hideUniforma: boolean = true;
+  hideLibrat: boolean = true;
 
 
   //viewchild
@@ -76,6 +77,12 @@ eskursioneDisponibel;
 //!!!!!! custom key firebase :  firebase.database.ref().child('/path/with/custom/key/goes/here').set();
   
   ngOnInit() {
+   //  this.printer.getPrinters().subscribe(res=>console.log(res));
+ 
+   //  this.printer.printData('OneNote','Andi').subscribe(res=>console.log(res));
+  //  this.printer.print();
+  //  this.printer.removePrinter();
+
     let ididNxenesi = this.route.snapshot.paramMap.get('$key');
     let ob = this.nxenesiService.getNxenes(ididNxenesi).subscribe(
 
@@ -122,52 +129,61 @@ eskursioneDisponibel;
     );
 
   }
-  onSubmitShkolla() {
-    this.hideShkolla = !this.hideShkolla;
-    this.hideTransporti = false;
-    this.hideUniforma = false;
-    this.hideLibrat = false;
-    setTimeout(()=>{    //<<<---    using ()=> syntax
-      ; this.boxRef.nativeElement.focus();
- }, 200);
+//   onSubmitShkolla() {
+//     this.hideShkolla = !this.hideShkolla;
+//     this.hideTransporti = false;
+//     this.hideUniforma = false;
+//     this.hideLibrat = false;
+//     setTimeout(()=>{    //<<<---    using ()=> syntax
+//       ; this.boxRef.nativeElement.focus();
+//  }, 200);
    
 
-  }
-  onSubmitTransporti() {
-    this.hideTransporti = !this.hideTransporti;
-    this.hideShkolla = false;
-    this.hideUniforma = false;
-    this.hideLibrat = false;
-    setTimeout(()=>{    //<<<---    using ()=> syntax
-      ; this.boxRef1.nativeElement.focus();
- }, 200);
-  }
-  onSubmitUniforma() {
-    this.hideUniforma = !this.hideUniforma;
-    this.hideTransporti = false;
-    this.hideShkolla = false;
-    this.hideLibrat = false;
-    setTimeout(()=>{    //<<<---    using ()=> syntax
-      ; this.boxRef2.nativeElement.focus();
- }, 200);
-  }
-  onSubmitLibrat() {
-    this.hideLibrat = !this.hideLibrat;
-    this.hideTransporti = false;
-    this.hideUniforma = false;
-    this.hideShkolla = false;
-    setTimeout(()=>{    //<<<---    using ()=> syntax
-      ; this.boxRef3.nativeElement.focus();
- }, 200);
-  }
+//   }
+//   onSubmitTransporti() {
+//     this.hideTransporti = !this.hideTransporti;
+//     this.hideShkolla = false;
+//     this.hideUniforma = false;
+//     this.hideLibrat = false;
+//     setTimeout(()=>{   
+//       ; this.boxRef1.nativeElement.focus();
+//  }, 200);
+//   }
+//   onSubmitUniforma() {
+//     this.hideUniforma = !this.hideUniforma;
+//     this.hideTransporti = false;
+//     this.hideShkolla = false;
+//     this.hideLibrat = false;
+//     setTimeout(()=>{  
+//       ; this.boxRef2.nativeElement.focus();
+//  }, 200);
+//   }
+//   onSubmitLibrat() {
+//     this.hideLibrat = !this.hideLibrat;
+//     this.hideTransporti = false;
+//     this.hideUniforma = false;
+//     this.hideShkolla = false;
+//     setTimeout(()=>{   
+//       ; this.boxRef3.nativeElement.focus();
+//  }, 200);
+//   }
 
-  shkolla(box) {
+  shkolla(box ) {
    
     if ((Number(this.nxenesiService.form.controls['PagesaShkolla'].value) - (Number(this.nxenesiService.form.controls['PaguarShkolla'].value) + Number(box))) >= 0 && box != "" && Number(box) > 0) {
       this.nxenesiService.form.controls['PaguarShkolla'].setValue(Number(this.nxenesiService.form.controls['PaguarShkolla'].value) + Number(box));
       this.perqShkolla = Number(this.nxenesiService.form.controls['PaguarShkolla'].value) / Number(this.nxenesiService.form.controls['PagesaShkolla'].value) * 100;
       this.mbetjaShkolla = Number(this.nxenesiService.form.controls['PagesaShkolla'].value) - Number(this.nxenesiService.form.controls['PaguarShkolla'].value);
       this.nxenesiService.updateNxenes(this.nxenesiService.form.value);
+
+      //printimi i fatures
+      let printerArray : string[] = [''];
+      printerArray.push(box);
+      this.printer.print11(printerArray);
+
+     
+
+
       this.hideShkolla = false;
       this.nxenesiService.form.reset();
       this.nxenesiService.initializeFormGroup();
@@ -178,6 +194,10 @@ eskursioneDisponibel;
       this.hideShkolla = false;
 
     }
+    this.boxRef.nativeElement.value  = "";
+    this.boxRef1.nativeElement.value  = "";
+    this.boxRef2.nativeElement.value  = "";
+    this.boxRef3.nativeElement.value  = "";
 
 
   }
@@ -199,6 +219,11 @@ eskursioneDisponibel;
 
     }
 
+    this.boxRef.nativeElement.value  = "";
+    this.boxRef1.nativeElement.value  = "";
+    this.boxRef2.nativeElement.value  = "";
+    this.boxRef3.nativeElement.value  = "";
+
   }
 
   uniforma(box) {
@@ -216,6 +241,11 @@ eskursioneDisponibel;
 
     }
 
+    this.boxRef.nativeElement.value  = "";
+    this.boxRef1.nativeElement.value  = "";
+    this.boxRef2.nativeElement.value  = "";
+    this.boxRef3.nativeElement.value  = "";
+
   }
   librat(box) {
     
@@ -232,6 +262,11 @@ eskursioneDisponibel;
       this.hideLibrat = false;
 
     }
+
+    this.boxRef.nativeElement.value  = "";
+    this.boxRef1.nativeElement.value  = "";
+    this.boxRef2.nativeElement.value  = "";
+    this.boxRef3.nativeElement.value  = "";
   }
 
 

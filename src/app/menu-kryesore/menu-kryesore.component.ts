@@ -28,7 +28,20 @@ vz ;
   constructor(private breakpointObserver: BreakpointObserver,private auth :AuthService , private router : Router ,private ag :AuthGuard,private dialog :MatDialog, private _viti : VitiService) {}
     aut = this.auth.authState;
     name ;
+    mobile : boolean = false;
   ngOnInit() {
+    if(window.innerWidth < 400)
+    {
+      this.mobile = true;
+   
+    }
+    else
+    {
+      this.mobile = false;
+    
+    
+  }
+
     this.name = this.auth.currentUser;
     console.log(this.name);
     this.vitiFillestar= localStorage.getItem('VitiShkollor');

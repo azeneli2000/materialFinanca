@@ -28,9 +28,20 @@ export class MesuesitListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey :string;
-
+mobile : boolean = false;
 
   ngOnInit() {
+    if(window.innerWidth < 400)
+    {
+      this.mobile = true;
+    this.displayedColumns = ['Emri',  'Mbiemri', 'Paga','PagaTotMujore','Actions'];
+    }
+    else
+    {
+      this.mobile = false;
+      this.displayedColumns =  ['Emri','Mbiemri','Vjetersia','Kategoria','Paga','PagaTotMujore','Actions'];
+    
+  }
     this.getAll();
 
     //regjistrohet te observable qe kthen getMesuesit() te mesuasi service
@@ -75,6 +86,7 @@ export class MesuesitListComponent implements OnInit {
         if(this.listData.data.length==0)
         this.isLoading = false;
         this.listData.sort = this.sort;
+        if(!this.mobile)
         this.listData.paginator = this.paginator;
         //filtron vetem kolnat e visualizuara ne tabele 
         this.listData.filterPredicate = (data, filter) => {

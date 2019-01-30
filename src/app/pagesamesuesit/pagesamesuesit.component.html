@@ -1,4 +1,4 @@
-    <button mat-raised-button class="buttonPaguaj" (click)="paguajZyrtare()">Paguaj Pagen Zyrtare</button>
+    <button mat-raised-button class="buttonPaguaj" (click)="paguajZyrtare()" *ngIf = "!mobile">Paguaj Pagen Zyrtare</button>
     <!-- serch box -->
     <mat-form-field class="search-form-field" floatLabel="never">
       <input matInput [(ngModel)]="searchKey" placeholder="Kerko.." autocomplete="off" (keyup)="applyFilter()">
@@ -7,7 +7,16 @@
       </button>
     </mat-form-field>
 
-
+    <div class="tot">
+      <mat-card>
+    
+        <div *ngIf="totZyrtare>0 && totZyrtare != 'NaN'" style="display: inline;color : #F44336"><span style="color:#303F9F"> </span> <span class="mbeturSpan">
+          Zyrtare :   {{totZyrtare|currency : 'LEK':'symbol':'1.0-0'}}</span></div>
+        <div *ngIf="totShtese>0 && totShtese != 'NaN'" style="display: inline;color:#303F9F"><span style="color:#303F9F"></span> <span class="mbeturSpan">
+            Shtese :{{totShtese|currency : 'LEK':'symbol':'1.0-0'}}</span></div>
+      
+      </mat-card>
+    </div>
    
     <div class="example-container mat-elevation-z8">
      

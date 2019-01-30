@@ -50,13 +50,24 @@ export class NxenesitListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey: string;
-
+mobile: boolean =false;
 
 
 
   ngOnInit() {
     //this.nxenesitService.insertNxenes(this.nx);
-    this.getAll();
+    if(window.innerWidth < 400)
+    {
+      this.mobile = true;
+     this.displayedColumns = ['Emri',  'Mbiemri', 'Klasa',  'PagesaShkolla', 'PaguarShkolla'];
+    }
+     else
+     {
+     this.displayedColumns =  ['Emri', 'Atesia', 'Mbiemri', 'Klasa', 'Indeksi', 'PagesaShkolla', 'PaguarShkolla', 'Actions'];
+     this.mobile = false;
+     }
+     
+     this.getAll();
     this._viti.msgMenu$.subscribe(mes => { this.vitiZgjedhur = mes; this.getAll() });
 
   }
@@ -85,6 +96,7 @@ export class NxenesitListComponent implements OnInit {
         this.mbeturUni = this.listData.filteredData.map(t => t.PagesaUniforma).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarUniforma).reduce((acc, value) => acc + value, 0);
 
         this.listData.sort = this.sort;
+        if(!this.mobile)
         this.listData.paginator = this.paginator;
         //filtron vetem kolnat e visualizuara ne tabele pervec actions dhe $key
         this.listData.filterPredicate = (data, filter) => {
