@@ -360,6 +360,9 @@ Apache-2.0
 @firebase/logger
 Apache-2.0
 
+qz-tray
+LGPL-2.1
+
 angularfire2/auth
 MIT
 
