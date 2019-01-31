@@ -3,13 +3,7 @@
 justify-content: center;
 
 }
-.pagesat{
-    display : inline-flex;
-/* justify-content: center; */
-margin-left: 2%;
-margin-bottom: 2%
 
-}
 .mbetur{
 color: #FF5252;
 float: right;
@@ -21,7 +15,13 @@ float: right;
     justify-content: center;
 }
 .chip-list{
-    width: 100%;
+  
+ margin-left: 2.5%;
+    width: 95%;
+}
 
-
+.wraper{
+display : flex;
+justify-content: center;
+flex-wrap: wrap;
 }

@@ -177,9 +177,9 @@ eskursioneDisponibel;
       this.nxenesiService.updateNxenes(this.nxenesiService.form.value);
 
       //printimi i fatures
-      let printerArray : string[] = [''];
+      let printerArray : string[] = ['Nxenesi ka paguar : '];
       printerArray.push(box);
-      this.printer.print11(printerArray);
+      this.printer.print11('PAGESE PER SHKOLLEN',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box,this.nxenesiService.form.controls['MonedhaShkolla'].value);
 
      
 
@@ -209,6 +209,8 @@ eskursioneDisponibel;
       this.perqTransporti = Number(this.nxenesiService.form.controls['PaguarTransporti'].value) / Number(this.nxenesiService.form.controls['PagesaTransporti'].value) * 100;
       this.mbetjaTransporti = Number(this.nxenesiService.form.controls['PagesaTransporti'].value) - Number(this.nxenesiService.form.controls['PaguarTransporti'].value);
       this.nxenesiService.updateNxenes(this.nxenesiService.form.value);
+      this.printer.print11('PAGESE PER TRANSPORTIN',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box1,this.nxenesiService.form.controls['MonedhaTransporti'].value);
+
       console.log(this.hideTransporti);
       this.hideTransporti = false;
       this.notification.success("Pagesa u krye me sukses !");
@@ -232,6 +234,8 @@ eskursioneDisponibel;
       this.perqUniforma = Number(this.nxenesiService.form.controls['PaguarUniforma'].value) / Number(this.nxenesiService.form.controls['PagesaUniforma'].value) * 100;
       this.mbetjaUniforma = Number(this.nxenesiService.form.controls['PagesaUniforma'].value) - Number(this.nxenesiService.form.controls['PaguarUniforma'].value);
       this.nxenesiService.updateNxenes(this.nxenesiService.form.value);
+      this.printer.print11('PAGESE PER UNIFORMEN',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box,this.nxenesiService.form.controls['MonedhaUniforma'].value);
+
       this.hideUniforma = false;
       this.notification.success("Pagesa u krye me sukses !");
     }
@@ -254,6 +258,8 @@ eskursioneDisponibel;
       this.perqLibrat = Number(this.nxenesiService.form.controls['PaguarLibrat'].value) / Number(this.nxenesiService.form.controls['PagesaLibrat'].value) * 100;
       this.mbetjaLibrat = Number(this.nxenesiService.form.controls['PagesaLibrat'].value) - Number(this.nxenesiService.form.controls['PaguarLibrat'].value);
       this.nxenesiService.updateNxenes(this.nxenesiService.form.value);
+      this.printer.print11('PAGESE PER LIBRAT',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box,this.nxenesiService.form.controls['MonedhaLibrat'].value);
+
       this.hideLibrat = false;
       this.notification.success("Pagesa u krye me sukses !");
     }
