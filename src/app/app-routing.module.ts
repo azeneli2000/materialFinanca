@@ -13,6 +13,7 @@ import { MesuesitComponent } from './mesuesit/mesuesit.component';
 import { EskursioneComponent } from './eskursione/eskursione.component';
 import { PagesamesuesitComponent } from './pagesamesuesit/pagesamesuesit.component';
 import { ShpenzimeComponent } from './shpenzime/shpenzime.component';
+import { ArkaComponent } from './arka/arka.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
 {path : 'eskursione',component : EskursioneComponent,canActivate : [AuthGuard]},
 {path : 'pagesat',component : PagesamesuesitComponent,canActivate : [AuthGuard]},
 {path : 'shpenzime',component : ShpenzimeComponent,canActivate : [AuthGuard]},
+{path : 'arka',component : ArkaComponent,canActivate : [AuthGuard]},
 {path : 'login',component : LoginComponent}];
 
 @NgModule({

@@ -28,7 +28,7 @@ export class PagesamesuesitComponent implements OnInit {
   PagaShteseFillestare = 0;
   PagaShteseTot = 0;
   selection = new SelectionModel(true, []) ;
-  selected : number;
+  selected : number = 0;
   totalRows : number;
   mobile : boolean = false
   totZyrtare : number =0
@@ -48,9 +48,10 @@ export class PagesamesuesitComponent implements OnInit {
     this.getAll();
     
     //regjistrohet te observable qe kthen getMesuesit() te mesuasi service
-    this._viti.msgMenu$.subscribe(mes => { this.vitiZgjedhur = mes; this.getAll(); this.listData.data.forEach(row => this.selection.select(row));
+    this._viti.msgMenu$.subscribe(mes => { this.vitiZgjedhur = mes; this.getAll(); this.listData.data.forEach(row => this.selection.select(row));   
+
     });
-   
+
   }
 
   getAll()
@@ -71,6 +72,8 @@ export class PagesamesuesitComponent implements OnInit {
         this.totZyrtare = this.listData.filteredData.map((t)=>{ return t.PagaNetoMujore*t.MuajPage -t.PaguarNeto; }).reduce((acc, value) => acc + value, 0);
         this.totShtese = this.listData.filteredData.map((t)=>{ return t.PagaShtese*t.MuajPage -t.PaguarShtese }).reduce((acc, value) => acc + value, 0);
         
+        this.totalRows = this.listData.data.length;
+
         this.selection = new SelectionModel<any>(true, []);
         console.log(this.selection.selected);
         this.data = array;
@@ -156,7 +159,7 @@ paguajZyrtare(array){
      
     });
     this.selection = new SelectionModel(true, []);
-  
+  console.log(this.selection.selected.length)
     // this.applyFilter();
     this.listData.sort = this.sort;
     this.listData.paginator = this.paginator;
@@ -168,10 +171,13 @@ paguajZyrtare(array){
       this.listData.data.forEach(row => this.selection.select(row));
       this.selected =  this.selection.selected.length;
       this.totalRows = this.listData.data.length;
-      // console.log(this.selection.selected);
+      console.log(this.selection.selected.length);
 // this.applyFilter();
 this.listData.sort = this.sort;
 this.listData.paginator = this.paginator;
+  }
+  selNr(){
+this.selected = this.selection.selected.length;
   }
 }
 

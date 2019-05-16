@@ -1,4 +1,4 @@
-    <button mat-raised-button class="buttonPaguaj" (click)="paguajZyrtare()" *ngIf = "!mobile">Paguaj Pagen Zyrtare</button>
+    <button mat-raised-button class="buttonPaguaj" (click)="paguajZyrtare()" *ngIf = "!mobile">Paguaj Pagen Zyrtare</button><span style = "color:  #fc7169;;margin-left: 10px;">{{selected}}/{{totalRows}}</span>
     <!-- serch box -->
     <mat-form-field class="search-form-field" floatLabel="never">
       <input matInput [(ngModel)]="searchKey" placeholder="Kerko.." autocomplete="off" (keyup)="applyFilter()">
@@ -30,7 +30,7 @@
             </mat-checkbox>
           </mat-header-cell>
           <mat-cell *matCellDef="let row">
-            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null;selNr()" [checked]="selection.isSelected(row)">
             </mat-checkbox>
           </mat-cell>
         </ng-container>

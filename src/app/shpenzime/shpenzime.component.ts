@@ -2,6 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ShpenzimeService } from '../shared/shpenzime.service';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { DatePipe } from '@angular/common';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+import { PrintService } from '../shared/print.service';
 
 @Component({
   selector: 'app-shpenzime',
@@ -10,9 +14,12 @@ import { DatePipe } from '@angular/common';
 })
 export class ShpenzimeComponent implements OnInit {
 
-  constructor(private shpenzime: ShpenzimeService,private datePipe : DatePipe) { }
+  constructor(private shpenzime: ShpenzimeService,private datePipe : DatePipe,private printer : PrintService) { }
+  myControl = new FormControl();
+  options = ['Dieta','Shperblime','Interes kredie','Interes huaje','Transporti','Uniformat','Librat','Eskursion','Kancelari','Mjete mesimore','Mjete pastrimi','Karburant','Zbukurime','Lyerje','Qera','Energji','Uje','Telefona','Internet','Kamera','Mirembajtje','Sherbime noteriale','Blerje mjetesh mesimore','Komisione bankare','Tatim fitimi','Taksa Vendore','Tatime te tjera','Gjoba','Shpenzime personale','Sigurime',]
+  filteredOptions: Observable<string[]>;
   Shpenzime = [
-    { value: 'Kredi' }, { value: 'Qera' }, { value: 'Rroga' }, { value: 'Ekskursione' }, { value: 'Uniforma' }, { value: 'Libra' }, { value: 'Energji' }, { value: 'Uje' }
+    { value: 'Kredi' },{ value: 'Hua' }, { value: 'Qera' }, { value: 'Rroga' }, { value: 'Ekskursione' }, { value: 'Uniforma' }, { value: 'Libra' }, { value: 'Energji' }, { value: 'Uje' }, { value: 'Mirembajtje' }, { value: 'Materiale te qendrueshme' }, { value: 'Materiale konsumi' }, { value: 'Tatime-Taksa' }, { value: 'Shpenzime Personale' }
 
   ];
   Monedhat = [
@@ -32,7 +39,23 @@ export class ShpenzimeComponent implements OnInit {
   displayDate;
   mobile : boolean = false
 
+  private _filter(value: string): string[] {
+    if(value!=''&& value!=null)
+{
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+}
+  }
+
   ngOnInit() {
+
+    if(this.insertVisible){
+    this.filteredOptions = this.shpenzime.form.controls.Koment.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+      }
     if(window.innerWidth < 400)
     {
       this.mobile = true;
@@ -98,6 +121,9 @@ console.log('eur : ' + this.totEUR + 'lek :' + this.totLEK);
 
       this.getKategoria(selectedValue.value);
       this.tablaVisible = true;
+      this.shpenzime.form.controls.Monedha.setValue('LEK');
+      this.shpenzime.form.controls.Kosto.setValue('');
+      this.shpenzime.form.controls.Koment.setValue('');
 
   }
   onSubmit(){
@@ -106,6 +132,11 @@ console.log('eur : ' + this.totEUR + 'lek :' + this.totLEK);
 console.log(shpenzimiDate);
 this.shpenzime.form.controls.Data.setValue(shpenzimiDate) ;
     this.shpenzime.insertShpenzime(this.shpenzime.form.controls.Shpenzime.value,this.shpenzime.form.value);
+   this.printer.printShpenzime(this.shpenzime.form.controls.Shpenzime.value,this.shpenzime.form.controls.Koment.value,this.shpenzime.form.controls.Kosto.value,this.shpenzime.form.controls.Monedha.value)
+    this.shpenzime.form.controls.Kosto.setValue('');
+    this.shpenzime.form.controls.Koment.setValue('');
+    this.shpenzime.form.controls.Kosto.reset();
+
   }
 
   onSearchClear() {

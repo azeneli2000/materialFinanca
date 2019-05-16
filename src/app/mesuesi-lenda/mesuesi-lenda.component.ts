@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import{ ActivatedRoute,Router} from '@angular/router'
 import { MesuesiZgjedhurService } from '../shared/mesuesi-zgjedhur.service';
 import { NotificationService } from 'src/app/shared/notification.service';
@@ -6,6 +6,9 @@ import {MatTableDataSource, MatSort, MatPaginator,MatDialog,MatDialogConfig} fro
 import { ConfirmDialogService } from 'src/app/shared/confirm-dialog.service';
 import{LendaComponent} from 'src/app/lenda/lenda.component';
 import { LendaService } from '../shared/lenda.service';
+import * as XLSX from 'xlsx';
+import { ExcelService } from '../shared/excel.service';
+
 
 
 @Component({
@@ -15,7 +18,8 @@ import { LendaService } from '../shared/lenda.service';
 })
 export class MesuesiLendaComponent implements OnInit {
  
-  constructor(private listLendet : LendaService, private dialog :MatDialog, private notification : NotificationService,  private dialogService : ConfirmDialogService,private route : ActivatedRoute, private mesuesiZgjedhur : MesuesiZgjedhurService,private router : Router,private mz:MesuesiZgjedhurService) { }
+  constructor(private listLendet : LendaService, private dialog :MatDialog, private notification : NotificationService,  private dialogService : ConfirmDialogService,private route : ActivatedRoute, private mesuesiZgjedhur : MesuesiZgjedhurService,private router : Router,private mz:MesuesiZgjedhurService,private excelService:ExcelService) { }
+  @ViewChild('TABLE') table: ElementRef;
   public mesuesiId : string;
  // public mesuesi = this.mesuesiZgjedhur.mesuesiZgjedhur;
  isLoading = true;
@@ -139,6 +143,14 @@ console.log(this.mesuesiId);
        }
      });
    }
+
+   ExportTOExcel()
+{
+ 
+  this.excelService.exportAsExcelFile( this.listData.data, 'sample');
+
+  
+}
 
 
 }

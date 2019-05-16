@@ -83,7 +83,7 @@ export class MesuesiService {
 
   insertMesuesi(mesuesi) {
     this.mesuesitList = this.db.list(localStorage.getItem('VitiShkollor') +'/Mesuesit');
-    this.mesuesitList.push({
+ let k =  this.mesuesitList.push({
       Emri: mesuesi.Emri,
       Mbiemri: mesuesi.Mbiemri,
       Vjetersia: mesuesi.Vjetersia,
@@ -99,7 +99,9 @@ export class MesuesiService {
       MuajPage : 12,
       LLogariBankare : mesuesi.LLogariBankare,
 
-    });
+    }).key;
+    console.log(k);
+
   }
   updateMesuesit(mesuesi,change) {
     this.mesuesitList = this.db.list(localStorage.getItem('VitiShkollor') +'/Mesuesit');

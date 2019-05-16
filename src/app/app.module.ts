@@ -34,6 +34,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 import{MesuesiService} from '../app/shared/mesuesi.service';
@@ -55,7 +56,10 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { PagesamesuesitComponent } from './pagesamesuesit/pagesamesuesit.component';
 import { PagashteseComponent } from './pagesamesuesit/pagashtese/pagashtese.component';
 import { ShpenzimeComponent } from './shpenzime/shpenzime.component';
+import { ArkaComponent } from './arka/arka.component';
+//import { ExcelService } from './services/excel.service';
 
+import { ExcelService } from './shared/excel.service';
 
 @NgModule({
   declarations: [
@@ -76,15 +80,14 @@ import { ShpenzimeComponent } from './shpenzime/shpenzime.component';
     PagesamesuesitComponent,
     PagashteseComponent,
     ShpenzimeComponent,
-    
+    ArkaComponent,
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(environment.firebase),
-   
+    AngularFireModule.initializeApp(environment.firebase),   
     BrowserAnimationsModule,
     MatSidenavModule,
     ReactiveFormsModule,
@@ -112,8 +115,13 @@ import { ShpenzimeComponent } from './shpenzime/shpenzime.component';
     MatProgressBarModule,
     MatDividerModule,
     MatProgressSpinnerModule,
+    MatAutocompleteModule,
+     
+
+   
+
   ],
-  providers: [MesuesiService,AuthGuard, {provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl()},CurrencyPipe,DatePipe],
+  providers: [MesuesiService,AuthGuard, {provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl()},CurrencyPipe,DatePipe,ExcelService],
   bootstrap: [AppComponent],
   entryComponents:[MesuesiComponent,ConfirmDialogComponent,LendaComponent,NxenesiComponent,PagashteseComponent]
 })
