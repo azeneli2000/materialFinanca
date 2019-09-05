@@ -8,6 +8,7 @@ import { MatChipInputEvent } from '@angular/material';
 import { KonfigurimeService } from 'src/app/shared/konfigurime.service';
 import { NullViewportScroller } from '@angular/common/src/viewport_scroller';
 import { VitiService } from 'src/app/shared/viti.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-nxenesi',
@@ -68,9 +69,9 @@ cmimiKlasa : number = 0;
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
-    if ((value || '').trim() && !isNaN(Number(value.slice(-2))) && (Number(value.slice(-2)) != 0)) {
+    if ((value || '').trim() && !isNaN(Number(value.slice(-4))) && (Number(value.slice(-4)) != 0)) {
       this.Uljet.push(  value.trim() );
-      let perqindja = Number(value.slice(-2));
+      let perqindja = Number(value.slice(-4));
 this.pagesaKlasa = Math.round( this.pagesaKlasa - this.pagesaKlasa*perqindja/100);
     }
     if (input) {
@@ -82,7 +83,7 @@ this.pagesaKlasa = Math.round( this.pagesaKlasa - this.pagesaKlasa*perqindja/100
     const index = this.Uljet.indexOf(ulje);
     if (index >= 0) {
       this.Uljet.splice(index, 1);
-      let perqindja = Number(ulje.slice(-2));
+      let perqindja = Number(ulje.slice(-4));
      this.pagesaKlasa =Math.round(this.pagesaKlasa*(100/(100-perqindja)));
     }
   }
@@ -125,6 +126,7 @@ this.pagesaKlasa = Math.round( this.pagesaKlasa - this.pagesaKlasa*perqindja/100
   }
   onClose() {
     this.service.form.reset();
+
     this.service.initializeFormGroup();
     this.dialogRef.close();
   }
@@ -154,15 +156,28 @@ this.pagesaKlasa = Math.round( this.pagesaKlasa - this.pagesaKlasa*perqindja/100
   }
   ngOnInit() {
     console.log(this.Eskursionet);
-    if (this.service.form.get('$key').value) 
-    {
-       //po behet modifikim 
+  //   let obj : any;
+  //   if (this.service.form.get('$key').value) 
+  //   {
+  //    obj = this.service.getNxenes(this.service.form.get('$key').value).subscribe(
+
+  //       data => {
+  //       let nxenesi = data.payload.val();
+      
+  //         this.Uljet=nxenesi["Skonto"];
+  //        console.log(nxenesi);
+  //       }
+  //     );
+  // }
+
+      // po behet modifikim  
      if(this.service.form.get('Skonto').value)//nqs uljet nuk jane null
      this.Uljet =  this.service.form.get('Skonto').value;//vendos vleren e skontos te array uljet            
      this.pagesaKlasa = this.service.form.get('PagesaShkolla').value;
-     this.klasaZgjedhur = this.service.form.get('Klasa').value
+     this.klasaZgjedhur = this.service.form.get('Klasa').value;
 console.log(this.Uljet);
-    }
+
+    
   }
   onChangeKlasa(klasa) {
    // this.vitiZgjedhur = viti.value;

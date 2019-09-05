@@ -133,11 +133,14 @@ export class NxenesiService {
     this.nxenesitList = this.db.list(viti);
     let uniforma : number  = 0 ;
     let transporti : number =0;
+    let skonto = null;
 console.log(nxenesi.MeTransport);
       if (nxenesi.MeUniforme)
         uniforma = nxenesi.PagesaUniforma
         if (nxenesi.MeTransport)
         transporti = nxenesi.PagesaTransporti
+if(nxenesi.Skonto)
+ skonto = nxenesi.Skonto;
 
       //    //nqs mod transportin dhe ska pagesa
       //   if (nxenesi.MeTransport && nxenesi.PaguarTransporti == 0)
@@ -171,7 +174,7 @@ console.log(nxenesi.MeTransport);
       
       MeUniforme: nxenesi.MeUniforme,
       MeTransport: nxenesi.MeTransport,
-      Skonto: nxenesi.Skonto,
+      Skonto:skonto,
       Eskursione: nxenesi.Eskursione,
 
     });

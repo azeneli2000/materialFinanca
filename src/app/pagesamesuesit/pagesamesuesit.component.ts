@@ -122,7 +122,10 @@ onSelect(row){
   this.dialog.open(PagashteseComponent,dialogConfig);
 }
 
+llogritMuajPagesaReale()
+{
 
+}
 
 
 paguajZyrtare(array){

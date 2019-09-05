@@ -62,7 +62,10 @@
       <mat-cell *matCellDef="let element">{{element.PaguarShkolla|currency : element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
     </ng-container>
 
-
+    <ng-container matColumnDef="MbeturShkolla">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Mbetur</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.PagesaShkolla-element.PaguarShkolla|currency : element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
+    </ng-container>
 
     <ng-container matColumnDef="Actions">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>

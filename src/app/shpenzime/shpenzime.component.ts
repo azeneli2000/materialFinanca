@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { PrintService } from '../shared/print.service';
+import { ArkaService } from '../shared/arka.service';
 
 @Component({
   selector: 'app-shpenzime',
@@ -14,7 +15,7 @@ import { PrintService } from '../shared/print.service';
 })
 export class ShpenzimeComponent implements OnInit {
 
-  constructor(private shpenzime: ShpenzimeService,private datePipe : DatePipe,private printer : PrintService) { }
+  constructor(private shpenzime: ShpenzimeService,private datePipe : DatePipe,private printer : PrintService,private arka : ArkaService) { }
   myControl = new FormControl();
   options = ['Dieta','Shperblime','Interes kredie','Interes huaje','Transporti','Uniformat','Librat','Eskursion','Kancelari','Mjete mesimore','Mjete pastrimi','Karburant','Zbukurime','Lyerje','Qera','Energji','Uje','Telefona','Internet','Kamera','Mirembajtje','Sherbime noteriale','Blerje mjetesh mesimore','Komisione bankare','Tatim fitimi','Taksa Vendore','Tatime te tjera','Gjoba','Shpenzime personale','Sigurime',]
   filteredOptions: Observable<string[]>;
@@ -69,7 +70,7 @@ export class ShpenzimeComponent implements OnInit {
   }
     
     this.shpenzime.initializeFormGroup();
-     
+    this.arka.getTotali();
 
   }
 
@@ -132,7 +133,14 @@ console.log('eur : ' + this.totEUR + 'lek :' + this.totLEK);
 console.log(shpenzimiDate);
 this.shpenzime.form.controls.Data.setValue(shpenzimiDate) ;
     this.shpenzime.insertShpenzime(this.shpenzime.form.controls.Shpenzime.value,this.shpenzime.form.value);
-   this.printer.printShpenzime(this.shpenzime.form.controls.Shpenzime.value,this.shpenzime.form.controls.Koment.value,this.shpenzime.form.controls.Kosto.value,this.shpenzime.form.controls.Monedha.value)
+    //insert transaksionin
+    this.arka.insertTransaksion("Shpenzime",this.shpenzime.form.controls["$key"].value,this.shpenzime.form.controls.Koment.value,this.shpenzime.form.controls.Monedha.value,this.shpenzime.form.controls.Kosto.value,"Shpenzime "+this.shpenzime.form.controls["Shpenzime"].value,"0")
+   //update totali
+    this.arka.updateTotali(-Math.abs(this.shpenzime.form.controls.Kosto.value),this.shpenzime.form.controls.Monedha.value);
+   
+    this.printer.printShpenzime(this.shpenzime.form.controls.Shpenzime.value,this.shpenzime.form.controls.Koment.value,this.shpenzime.form.controls.Kosto.value,this.shpenzime.form.controls.Monedha.value);
+    this.printer.printShpenzime(this.shpenzime.form.controls.Shpenzime.value,this.shpenzime.form.controls.Koment.value,this.shpenzime.form.controls.Kosto.value,this.shpenzime.form.controls.Monedha.value);
+    
     this.shpenzime.form.controls.Kosto.setValue('');
     this.shpenzime.form.controls.Koment.setValue('');
     this.shpenzime.form.controls.Kosto.reset();

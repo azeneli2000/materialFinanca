@@ -4,6 +4,7 @@ import { EskursioneService } from '../shared/eskursione.service';
 import { ConfirmDialogService } from '../shared/confirm-dialog.service';
 import { ShpenzimeService } from '../shared/shpenzime.service';
 import { DatePipe } from '@angular/common';
+import { ArkaService } from '../shared/arka.service';
 
 @Component({
   selector: 'app-eskursione',
@@ -21,9 +22,10 @@ export class EskursioneComponent implements OnInit {
     Koment: ''
   };
   error;
-  constructor(private eskursione: EskursioneService, private notification: NotificationService, private dialogService: ConfirmDialogService, private shpenzimeService: ShpenzimeService, private datePipe: DatePipe) { }
+  constructor(private eskursione: EskursioneService, private notification: NotificationService, private dialogService: ConfirmDialogService, private shpenzimeService: ShpenzimeService, private datePipe: DatePipe,private arka : ArkaService) { }
 
   ngOnInit() {
+    this.arka.getTotali();
     this.eskursione.initializeFormGroup();
     console.log(this.eskursione.form.get('eskursione').value[0].Emri);
 
@@ -44,6 +46,8 @@ export class EskursioneComponent implements OnInit {
         }
         v.unsubscribe();
       });
+
+
   }
 
 
@@ -87,7 +91,10 @@ export class EskursioneComponent implements OnInit {
               PagesaAgjensia: this.eskursione.form.get('eskursione').value[i].PagesaAgjensia
             };
             this.shpenzimeService.insertShpenzime('Ekskursione', this.Shpenzimi);
-
+            //transaksioni i arkes
+            this.arka.insertTransaksion('PES',i,this.eskursione.form.get('eskursione').value[i].Emri ,this.eskursione.form.get('eskursione').value[i].MonedhaEskursioni,Number(this.eskursione.form.get('eskursione').value[i].PagesaAgjensia),'Shpenzime Eskursione',"0");
+            //modifikimi i totalit
+            this.arka.updateTotali(-Math.abs( this.eskursione.form.get('eskursione').value[i].PagesaAgjensia),this.eskursione.form.get('eskursione').value[i].MonedhaEskursioni)
             this.eskursione.updateEskursione(this.eskursione.form.value, localStorage.getItem('VitiShkollor'));
             this.notification.success('Pagesa u krye !')
 

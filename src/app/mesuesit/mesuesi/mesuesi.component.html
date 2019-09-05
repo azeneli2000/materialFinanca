@@ -53,7 +53,7 @@
 
 <mat-form-field appearance="outline">
   <mat-label>Muaj Page</mat-label>
-<input type ="number" formControlName="MuajPage" matInput [errorStateMatcher]="matcher"  >
+<input type ="number" formControlName="MuajPage" [matTooltip]="muajReale" matInput [errorStateMatcher]="matcher"  >
 
 <mat-error *ngIf="service.form.controls['MuajPage'].errors?.required">
     Muaj page <strong>e detyruesheme</strong>

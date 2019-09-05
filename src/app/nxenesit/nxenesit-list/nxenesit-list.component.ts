@@ -59,11 +59,11 @@ mobile: boolean =false;
     if(window.innerWidth < 400)
     {
       this.mobile = true;
-     this.displayedColumns = ['Emri',  'Mbiemri', 'Klasa',  'PagesaShkolla', 'PaguarShkolla'];
+     this.displayedColumns = ['Emri',  'Mbiemri', 'Klasa',  'PagesaShkolla', 'PaguarShkolla','MbeturShkolla'];
     }
      else
      {
-     this.displayedColumns =  ['Emri', 'Atesia', 'Mbiemri', 'Klasa', 'Indeksi', 'PagesaShkolla', 'PaguarShkolla', 'Actions'];
+     this.displayedColumns =  ['Emri', 'Atesia', 'Mbiemri', 'Klasa', 'Indeksi', 'PagesaShkolla', 'PaguarShkolla','MbeturShkolla', 'Actions'];
      this.mobile = false;
      }
      
@@ -84,9 +84,9 @@ mobile: boolean =false;
         
         });
         //
-     let array1 =  array.filter(item=>item.$key!=='Eskursione'&&item.$key!=='Mesuesit'&&item.$key!=='Shpenzime')
+     let array1 =  array.filter(item=>item.$key!=='Eskursione' &&item.$key!=='Mesuesit'&& item.$key!=='Shpenzime'&& item.$key!=='Arketime');
         this.listData = new MatTableDataSource(array1);
-        console.log(array1) ; 
+        // console.log(array1) ; 
 
         if (this.listData.data.length == 0)
           this.isLoading = false;
@@ -95,13 +95,20 @@ mobile: boolean =false;
         this.mbeturLibra = this.listData.filteredData.map(t => t.PagesaLibrat).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarLibrat).reduce((acc, value) => acc + value, 0);
         this.mbeturUni = this.listData.filteredData.map(t => t.PagesaUniforma).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarUniforma).reduce((acc, value) => acc + value, 0);
 
+        let sum = this.listData.filteredData.map(t =>{
+         
+          return Number(t.PaguarShkolla)
+         }    
+          ).reduce((acc, value) => acc + value) ;
+        console.log(sum);
+
         this.listData.sort = this.sort;
         if(!this.mobile)
         this.listData.paginator = this.paginator;
         //filtron vetem kolnat e visualizuara ne tabele pervec actions dhe $key
         this.listData.filterPredicate = (data, filter) => {
           return this.displayedColumns.some(ele => {
-            return ele != 'Actions' && ele != 'PagesaShkolla' && ele != 'PaguarShkolla' && ele != 'Indeksi' && data[ele].toString().toLowerCase().indexOf(filter) != -1;
+            return ele != 'MbeturShkolla' && ele != 'Actions' && ele != 'PagesaShkolla' && ele != 'PaguarShkolla' && ele != 'Indeksi' && data[ele].toString().toLowerCase().indexOf(filter) != -1;
           });
         };
 

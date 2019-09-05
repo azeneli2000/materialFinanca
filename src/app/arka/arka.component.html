@@ -1,11 +1,45 @@
 <div class="search-div">
-  
+  <button mat-raised-button (click)="onXchangeClick()" >
+    <mat-icon>add</mat-icon>Xchange
+  </button>
   <mat-form-field class="search-form-field" floatLabel="never">
     <input matInput [(ngModel)]="searchKey" placeholder="Kerko.." autocomplete="off" (keyup)="applyFilter()">
     <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
+
+  <div class="mbetur">
+    <mat-card>
+      <mat-card-header>
+     
+        <mat-card-title>TOTALI ARKA</mat-card-title>
+      </mat-card-header>
+      <div style="display: inline"><span style="color:#303F9F"></span> <span class="mbeturSpan">
+          {{this.arkaSevice.TotaliEuro|currency : 'EUR':'symbol':'1.0-0'}}</span></div><br>
+      <div  style="display: inline"> <span class="mbeturSpan" style="color:#303F9F"> 
+        </span> <span class="mbeturSpan">{{this.arkaSevice.TotaliLeke|currency : 'LEK':'symbol':'1.0-0'}}</span></div>  <br>
+      <div style="display: inline"><span class="mbeturSpan" style="color:#303F9F"></span>
+        <span class="mbeturSpan">{{this.arkaSevice.TotaliDoll|currency : 'USD':'symbol':'1.0-0'}}</span></div>
+   
+    </mat-card>
+  </div>
+
+  <div class="mbetur">
+    <mat-card>
+      <mat-card-header>
+     
+        <mat-card-title>TOTALI KERKIMI</mat-card-title>
+      </mat-card-header>
+      <div style="display: inline"><span style="color:#303F9F"></span> <span class="mbeturSpan">
+          {{this.totEurKerkimi|currency : 'EUR':'symbol':'1.0-0'}}</span></div><br>
+      <div  style="display: inline"> <span class="mbeturSpan" style="color:#303F9F"> 
+        </span> <span class="mbeturSpan">{{this.totLekKerkimi|currency : 'LEK':'symbol':'1.0-0'}}</span></div>  <br>
+      <div style="display: inline"><span class="mbeturSpan" style="color:#303F9F"></span>
+        <span class="mbeturSpan">{{this.totDolKerkimi|currency : 'USD':'symbol':'1.0-0'}}</span></div> 
+   
+    </mat-card>
+  </div>
 </div>
 
 <div class="mat-elevation-z8">

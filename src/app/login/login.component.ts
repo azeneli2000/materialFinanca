@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   email  = "shkollanr1@gmail.com";
   
-  password = "zenelzeneli";
+  password = "";
 
   error: {name: string, message: string} = {name: '', message: ''};
   login() {

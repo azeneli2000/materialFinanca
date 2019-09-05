@@ -71,6 +71,11 @@ eskursioneDisponibel;
       this.nxenesiService.form.controls['Eskursione'].setValue(this.eskursione);
 
       this.nxenesiService.updateNxenes(this.nxenesiService.form.value);
+     //insert transaksion
+      this.arka.insertTransaksion('PE-' + this.eskursioneDisponibel.eskursione[Number(value)].Emri ,this.nxenesiService.form.controls["$key"].value,this.nxenesiService.form.controls["Emri"].value + this.nxenesiService.form.controls["Mbiemri"].value,this.eskursioneDisponibel.eskursione[Number(value)].MonedhaEskursioni,this.eskursioneDisponibel.eskursione[Number(value)].Pagesa,'Arketim per eskursion',"0")
+      this.arka.updateTotali(this.eskursioneDisponibel.eskursione[Number(value)].Pagesa,this.eskursioneDisponibel.eskursione[Number(value)].MonedhaEskursioni);
+
+      //print fatura
       this.printer.printEskursione('ARKETIM PER ESKURSION',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.eskursioneDisponibel.eskursione[Number(value)].Emri,this.eskursioneDisponibel.eskursione[Number(value)].Pagesa,this.eskursioneDisponibel.eskursione[Number(value)].MonedhaEskursioni);
 console.log(this.eskursioneDisponibel.eskursione[Number(value)].Emri);
       console.log('adeded');
@@ -87,7 +92,7 @@ console.log(this.eskursioneDisponibel.eskursione[Number(value)].Emri);
    //  this.printer.printData('OneNote','Andi').subscribe(res=>console.log(res));
   //  this.printer.print();
   //  this.printer.removePrinter();
-
+    this.arka.getTotali();
     let ididNxenesi = this.route.snapshot.paramMap.get('$key');
     let ob = this.nxenesiService.getNxenes(ididNxenesi).subscribe(
 
@@ -115,6 +120,7 @@ console.log(this.eskursioneDisponibel.eskursione[Number(value)].Emri);
         this.nxenesiService.form.controls['MeTransport'].setValue(this.nxenesi.MeTransport);
         this.nxenesiService.form.controls['MeUniforme'].setValue(this.nxenesi.MeUniforme);
         this.nxenesiService.form.controls['Eskursione'].setValue(this.nxenesi.Eskursione);
+        this.nxenesiService.form.controls["Skonto"].setValue(this.nxenesi.Skonto);
         this.eskursione  = this.nxenesi.Eskursione;
         // this.eskursione.filter( x => x!='');
         console.log(this.eskursione);
@@ -137,17 +143,19 @@ console.log(this.eskursioneDisponibel.eskursione[Number(value)].Emri);
 
   shkolla(box ) {
    
-    if ((Number(this.nxenesiService.form.controls['PagesaShkolla'].value) - (Number(this.nxenesiService.form.controls['PaguarShkolla'].value) + Number(box))) >= 0 && box != "" && Number(box) > 0) {
+    if ((Number(this.nxenesiService.form.controls['PagesaShkolla'].value) - (Number(this.nxenesiService.form.controls['PaguarShkolla'].value) + Number(box))) >= 0 && box != "" && Number(box) != 0) {
       this.nxenesiService.form.controls['PaguarShkolla'].setValue(Number(this.nxenesiService.form.controls['PaguarShkolla'].value) + Number(box));
       this.perqShkolla = Number(this.nxenesiService.form.controls['PaguarShkolla'].value) / Number(this.nxenesiService.form.controls['PagesaShkolla'].value) * 100;
       this.mbetjaShkolla = Number(this.nxenesiService.form.controls['PagesaShkolla'].value) - Number(this.nxenesiService.form.controls['PaguarShkolla'].value);
       this.nxenesiService.updateNxenes(this.nxenesiService.form.value);
       //gjenerimi i transksionit per pagesen e shkolles
-     this.arka.insertTransaksion('PSH',this.nxenesiService.form.controls["$key"].value,this.nxenesiService.form.controls["Emri"].value + this.nxenesiService.form.controls["Mbiemri"].value,this.nxenesiService.form.controls["MonedhaShkolla"].value,box,'Pagese per shkollim')
+     this.arka.insertTransaksion('PSH',this.nxenesiService.form.controls["$key"].value,this.nxenesiService.form.controls["Emri"].value + this.nxenesiService.form.controls["Mbiemri"].value,this.nxenesiService.form.controls["MonedhaShkolla"].value,Number(box),'Arketim per shkollim',"0")
+    this.arka.updateTotali(Number(box),this.nxenesiService.form.controls["MonedhaShkolla"].value);
      console.log(JSON.parse(localStorage.getItem('user')).displayName);
      //printimi i fatures
       let printerArray : string[] = ['Nxenesi ka paguar : '];
       printerArray.push(box);
+      this.printer.print11('ARKETIM PER SHKOLLIM',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box,this.nxenesiService.form.controls['MonedhaShkolla'].value);
       this.printer.print11('ARKETIM PER SHKOLLIM',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box,this.nxenesiService.form.controls['MonedhaShkolla'].value);
 
      
@@ -179,10 +187,12 @@ console.log(this.eskursioneDisponibel.eskursione[Number(value)].Emri);
       this.mbetjaTransporti = Number(this.nxenesiService.form.controls['PagesaTransporti'].value) - Number(this.nxenesiService.form.controls['PaguarTransporti'].value);
       this.nxenesiService.updateNxenes(this.nxenesiService.form.value);
       //gjenerimi i transaksionit
-      this.arka.insertTransaksion('PT',this.nxenesiService.form.controls["$key"].value,this.nxenesiService.form.controls["Emri"].value + this.nxenesiService.form.controls["Mbiemri"].value,this.nxenesiService.form.controls["MonedhaTransporti"].value,box1,'Pagese per transport')
-     
+      this.arka.insertTransaksion('PT',this.nxenesiService.form.controls["$key"].value,this.nxenesiService.form.controls["Emri"].value + this.nxenesiService.form.controls["Mbiemri"].value,this.nxenesiService.form.controls["MonedhaTransporti"].value,Number(box1),'Arketim per transport',"0")
+      this.arka.updateTotali(Number(box1),this.nxenesiService.form.controls["MonedhaTransporti"].value);
+
       //printimi i fatures
       this.printer.print11('ARKETIM PER TRANSPORTIN',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box1,this.nxenesiService.form.controls['MonedhaTransporti'].value);
+      this.printer.print11('ARKETIM PER SHKOLLIM',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box1,this.nxenesiService.form.controls['MonedhaShkolla'].value);
 
       console.log(this.hideTransporti);
       this.hideTransporti = false;
@@ -208,7 +218,7 @@ console.log(this.eskursioneDisponibel.eskursione[Number(value)].Emri);
       this.mbetjaUniforma = Number(this.nxenesiService.form.controls['PagesaUniforma'].value) - Number(this.nxenesiService.form.controls['PaguarUniforma'].value);
       this.nxenesiService.updateNxenes(this.nxenesiService.form.value);
         //gjenerimi i transaksionit
-        this.arka.insertTransaksion('PU',this.nxenesiService.form.controls["$key"].value,this.nxenesiService.form.controls["Emri"].value + this.nxenesiService.form.controls["Mbiemri"].value,this.nxenesiService.form.controls["MonedhaUniforma"].value,box,'Pagese per uniformen')
+        this.arka.insertTransaksion('PU',this.nxenesiService.form.controls["$key"].value,this.nxenesiService.form.controls["Emri"].value + this.nxenesiService.form.controls["Mbiemri"].value,this.nxenesiService.form.controls["MonedhaUniforma"].value,Number(box),'Pagese per uniformen',"0")
       //printimi i fatures
       this.printer.print11('ARKETIM PER UNIFORMEN',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box,this.nxenesiService.form.controls['MonedhaUniforma'].value);
 
@@ -235,7 +245,7 @@ console.log(this.eskursioneDisponibel.eskursione[Number(value)].Emri);
       this.mbetjaLibrat = Number(this.nxenesiService.form.controls['PagesaLibrat'].value) - Number(this.nxenesiService.form.controls['PaguarLibrat'].value);
       this.nxenesiService.updateNxenes(this.nxenesiService.form.value);
        //gjenerimi i transaksionit
-       this.arka.insertTransaksion('PT',this.nxenesiService.form.controls["$key"].value,this.nxenesiService.form.controls["Emri"].value + this.nxenesiService.form.controls["Mbiemri"].value,this.nxenesiService.form.controls["MonedhaLibrat"].value,box,'Pagese per librat')
+       this.arka.insertTransaksion('PT',this.nxenesiService.form.controls["$key"].value,this.nxenesiService.form.controls["Emri"].value + this.nxenesiService.form.controls["Mbiemri"].value,this.nxenesiService.form.controls["MonedhaLibrat"].value,Number(box),'Pagese per librat',"0s")
       //printimi i fatures 
       this.printer.print11('ARKETIM PER LIBRAT',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box,this.nxenesiService.form.controls['MonedhaLibrat'].value);
 
@@ -262,7 +272,7 @@ console.log(this.eskursioneDisponibel.eskursione[Number(value)].Emri);
   console.log(this.eskursioneDisponibel.eskursione[0].Emri);
    });
   })
-
+ 
 
 }
 }

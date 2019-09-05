@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ShpenzimeService {
+export class AeketimeService {
 
   constructor(private db: AngularFireDatabase) { }
+
   shpenzimetList: AngularFireList<any>;
 
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
-    Kosto: new FormControl(0, [Validators.required]),
+    Sasia: new FormControl(0, [Validators.required]),
     Koment: new FormControl(''),
-    Shpenzime: new FormControl(''),
+    Arketime: new FormControl(''),
     Monedha : new FormControl('LEK'),
     Data : new FormControl('')
     
@@ -23,31 +24,31 @@ export class ShpenzimeService {
   initializeFormGroup() {
     this.form.setValue({
       $key: null,
-      Kosto: '',
+      Sasia: '',
       Koment: '',
-      Shpenzime: '',
+      Arketime: '',
       Monedha: 'LEK',
       Data : ''
     });
 
   }
 
-  getShpenzime(kategoria) {
+  getArketime(kategoria) {
     let viti = localStorage.getItem('VitiShkollor');
-    this.shpenzimetList = this.db.list(viti + '/Shpenzime/'+ kategoria);
-    return this.db.list(viti + '/Shpenzime/'+ kategoria).snapshotChanges();
+    this.shpenzimetList = this.db.list(viti + '/Arketime/'+ kategoria);
+    return this.db.list(viti + '/Arketime/'+ kategoria).snapshotChanges();
   }
 
-   insertShpenzime(kategoria,shpenzimi) : string
+   insertArketime(kategoria,arketimi) : string
    {
     let viti = localStorage.getItem('VitiShkollor');
-    this.shpenzimetList = this.db.list(viti + '/Shpenzime/'+ kategoria);
+    this.shpenzimetList = this.db.list(viti + '/Arketime/'+ kategoria);
   let key =  this.shpenzimetList.push(
       {
-        Kosto: shpenzimi.Kosto,
-        Koment: shpenzimi.Koment,
-        Monedha: shpenzimi.Monedha,    
-        Data : shpenzimi.Data   
+        Sasia: arketimi.Sasia,
+        Koment: arketimi.Koment,
+        Monedha: arketimi.Monedha,    
+        Data : arketimi.Data   
       }).key;
       console.log(key);
       return key.toString();

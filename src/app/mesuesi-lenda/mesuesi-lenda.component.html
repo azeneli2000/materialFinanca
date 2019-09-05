@@ -16,6 +16,9 @@
   <div class="search-div">
   <button mat-raised-button (click)="onCreate()" [disabled]="mesZgjedhurBosh" *ngIf ="!mobile">
     <mat-icon>add</mat-icon>Lende e Re
+  </button>&nbsp;
+  <button mat-raised-button (click)="getMesuesi()" [disabled]="mesZgjedhurBosh" *ngIf ="!mobile">
+    <mat-icon>launch</mat-icon>Detaje
   </button>
 </div>
 
@@ -85,7 +88,9 @@
    </mat-progress-spinner>
   </mat-card>
   <div>
-  <button  mat-raised-button color="primary" (click)="ExportTOExcel()">Excel</button>
+  <button  mat-raised-button color="primary"  matTooltip ="Zyrtare" (click)="print()"><mat-icon >print</mat-icon></button>&nbsp;
+  <button  mat-raised-button color = "warn"  matTooltip ="Konfidenciale"  (click)="printKonfidenciale()"><mat-icon >print</mat-icon></button>&nbsp;
+  <button  mat-raised-button style="background-color: #9C27B0;color:whitesmoke"  matTooltip ="Drejtori"  (click)="printDrejtoria()"><mat-icon >print</mat-icon></button>
 
 </div>
   </div>

@@ -1,0 +1,114 @@
+
+<form [formGroup]="arketime.form" class="normal-form">
+
+
+  <mat-form-field appearance="outline">
+      <mat-label>Arketime</mat-label>
+      <mat-select formControlName="Arketime" (selectionChange)="onChanageArketime($event)">
+        <mat-option *ngFor="let s of Arketime" [value]="s.value">
+          {{s.value}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="arketime.form.controls['Arketime'].errors?.required">
+        Arketimi <strong>i detyrueshem</strong>
+      </mat-error>
+    </mat-form-field>
+  
+    
+      <div *ngIf = "!mobile" style = "display: inline">
+    
+    <mat-form-field appearance="outline" class = "Monedha">
+        <mat-label>Valuta</mat-label>
+        <mat-select formControlName="Monedha">
+            <mat-option *ngFor="let m of Monedhat" [value]="m.value">
+                {{m.value}}
+              </mat-option>       
+        </mat-select>
+      
+      </mat-form-field>
+  
+  <mat-form-field appearance="outline" class = "kosto">
+    <mat-label>Sasia</mat-label>
+    <input type ="number" autocomplete="off"  formControlName="Sasia" matInput [errorStateMatcher]="matcher">
+    <mat-error *ngIf="arketime.form.controls['Sasia'].errors?.required">
+      Sasia <strong>e detyrueshme</strong>
+    </mat-error>
+  </mat-form-field>
+  
+  <mat-form-field class="koment" >
+    <input type="text" matInput formControlName="Koment" matInput placeholder="Koment" [matAutocomplete] = "auto">
+  
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">{{option}}</mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <button mat-raised-button class="ruaj" type="submit" color="primary" [disabled]="arketime.form.invalid" (click)="onSubmit()">Ruaj</button>
+  </div>
+  </form>
+  
+  
+  
+  <!-- </div> -->
+  
+  
+  <div class="search-div">
+     
+      <mat-form-field class="search-form-field" floatLabel="never">
+        <input matInput [(ngModel)]="searchKey" placeholder="Kerko.." autocomplete="off" (keyup)="applyFilter()">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+        
+    <div class="tot">
+      <mat-card>
+    
+        <div *ngIf="totEUR>0 && totEUR != 'NaN'" style="display: inline;color : #F44336"><span style="color:#303F9F"> </span> <span class="mbeturSpan">
+            {{totEUR|currency : 'EUR':'symbol':'1.0-0'}}</span></div>
+        <div *ngIf="totLEK>0 && totLEK != 'NaN'" style="display: inline;color:#303F9F"><span style="color:#303F9F"></span> <span class="mbeturSpan">
+            {{totLEK|currency : 'LEK':'symbol':'1.0-0'}}</span></div>
+        <!-- <div *ngIf="mbeturTrans>0" style="display: inline"> <span class="mbeturSpan" style="color:#303F9F"> Trans :
+          </span> <span class="mbeturSpan">{{mbeturTrans|currency : 'LEK':'symbol':'1.0-0'}}</span></div>
+        <br>
+        <div *ngIf="mbeturUni>0" style="display: inline"><span class="mbeturSpan" style="color:#303F9F">Uni : </span>
+          <span class="mbeturSpan">{{mbeturUni|currency : 'LEK':'symbol':'1.0-0'}}</span></div>
+        <div *ngIf="mbeturLibra>0" style="display: inline"> <span class="mbeturSpan" style="color:#303F9F"> Librat :
+          </span> <span class="mbeturSpan">{{mbeturLibra|currency : 'LEK':'symbol':'1.0-0'}}</span></div> -->
+      </mat-card>
+    </div>
+  </div>
+  
+    <div class="mat-elevation-z8">
+    
+      <mat-table [dataSource]="listData" matSort>
+    
+          <ng-container matColumnDef="Data">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.Data | date: 'dd-MM-yyyy'}}</mat-cell>
+            </ng-container>
+        <ng-container matColumnDef="Sasia">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Sasia</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.Sasia|currency : element.Monedha : 'symbol' : '1.0-0' }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Koment">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Koment</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.Koment}}</mat-cell>
+        </ng-container>
+        
+    
+    
+       
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    
+    
+    
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10,12,14,15, 25, 100]" [pageSize]="10" showFirstLastButtons *ngIf = "!mobile"></mat-paginator>
+    </div>
+      <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+        <mat-progress-spinner color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+      </mat-card>
+    <!-- {{shpenzime.form.value|json}} -->
+  

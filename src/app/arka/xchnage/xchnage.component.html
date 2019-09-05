@@ -1,0 +1,66 @@
+<mat-toolbar>
+  <span>Xchange</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+  
+  <form [formGroup]="this.form" class="normal-form">
+    <div class="controls-conteiner">
+     
+   
+    
+      <mat-form-field appearance="outline">
+        <mat-label>Sasia</mat-label>
+      <input type ="number" formControlName="Sasia"  (keyup) = "llogaritXchange()" matInput [errorStateMatcher]="matcher"  >
+      
+      <mat-error *ngIf="this.form.controls['Sasia'].errors?.required">
+          Sasia<strong>i detyrueshem</strong>
+        </mat-error>
+      </mat-form-field>
+      
+      
+      <mat-form-field appearance="outline">
+          <mat-label>Monedha Fillestare</mat-label>
+    <mat-select  formControlName="MonedhaFillestare">
+      <mat-option *ngFor="let monedha of monedhat" [value]="monedha.value" >{{monedha.value}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="this.form.controls['MonedhaFillestare'].errors?.required">
+      Monedha Fillestare <strong>e detyruesheme</strong>
+      </mat-error>
+  </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+          <mat-label>Monedha Perfundimtare</mat-label>
+    <mat-select  formControlName="MonedhaPerfundimtare">
+      <mat-option *ngFor="let monedha of monedhat" [value]="monedha.value" >{{monedha.value}}</mat-option>
+    
+    </mat-select>
+    <mat-error *ngIf="this.form.controls['MonedhaPerfundimtare'].errors?.required">
+      Monedha Perfundimtare <strong>e detyruesheme</strong>
+      </mat-error>
+  </mat-form-field>
+  <br>
+ 
+  <hr>
+ 1  {{this.form.get("MonedhaFillestare").value}} =
+  <mat-form-field appearance="outline">
+    <mat-label>Kursi</mat-label>
+  <input type ="number" formControlName="Kursi"  (keyup) = "llogaritXchange()" matInput [errorStateMatcher]="matcher">
+  
+  <!-- <mat-error *ngIf="this.form.controls['Kursi'].errors?.required">
+      Kursi<strong>i detyrueshem</strong>
+    </mat-error> -->
+  </mat-form-field>
+  {{this.form.get("MonedhaPerfundimtare").value}}
+  <hr>
+  <br>
+  Totali : {{res}}  {{this.form.get("MonedhaPerfundimtare").value}}
+
+  
+  <br> <br> 
+  <div class="but">
+  <button mat-raised-button class = "ruaj" type = "submit" color="primary" [disabled]="this.form.invalid" (click)= "onSubmit()">Ruaj</button>
+  </div>
+    </div>
+  </form>
+  <!-- {{this.form.value|json}} -->

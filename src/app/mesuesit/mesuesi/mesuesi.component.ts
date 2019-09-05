@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  AfterContentInit } from '@angular/core';
 import { MesuesiService } from 'src/app/shared/mesuesi.service';
 import { NotificationService } from 'src/app/shared/notification.service';
 import {MatDialogRef} from '@angular/material';
+import { LendaService } from 'src/app/shared/lenda.service';
 
 
 export interface kat {
@@ -14,6 +15,7 @@ export interface kat {
   styleUrls: ['./mesuesi.component.css']
 })
 export class MesuesiComponent implements OnInit {
+  
   pagaSig =this.service.form.controls['PagaSig'].value;
   pagaBruto =  this.service.form.controls['Paga'].value;
   // pagaNetoZyrtare =this.service.form.controls['PagaNetoMujore'].value;;
@@ -22,14 +24,16 @@ export class MesuesiComponent implements OnInit {
   pagaNetoZyrtare =0;
   pagaNetoMujore =0;
   pagaShtese =0;
- 
+   lendet : [] ;
+   muajReale=0;
+
   Kategorite : kat[]= [
     {value : 3, viewValue : "Kat I" } ,
     {value : 2, viewValue : "Kat II" } ,
     {value : 1, viewValue : "Kat III" } ,
     {value : 0, viewValue : "Kat IV" } 
 ];
-  constructor(private service : MesuesiService, private notification : NotificationService ,private dialogRef : MatDialogRef<MesuesiComponent>) { }
+  constructor(private service : MesuesiService, private notification : NotificationService ,private dialogRef : MatDialogRef<MesuesiComponent>,private listLendet : LendaService, ) { }
 
   onSubmit(){
 
@@ -123,6 +127,105 @@ export class MesuesiComponent implements OnInit {
     // this.service.form.controls['PagaNetoMujore'].disable();
     // this.service.form.controls['PagaShtese'].disable();
     // this.service.form.controls['PagaTotMujore'].disable();
+    if (this.service.form.get('$key').value)
+    this.gjejLendet();
+
   }
+  // ngAfterContentInit()
+  // {
+  //   if (this.service.form.get('$key').value)
+  //   this.muajReale= this.llogaritMuajPuneReale();
+  // }
+  gjejLendet()
+  {
+    
+
+    let idMesuesi = this.service.form.controls["$key"].value;
+  
+    this.listLendet.getLendet(idMesuesi.toString()).subscribe(
+      list => {
+        let array = list.map(item =>{
+          return {
+            $key : item.key,
+            ...item.payload.val()
+          };       
+        });
+       
+       this.lendet = array as [];
+       this.llogaritMuajPuneReale()
+
+      });
+  }
+
+
+llogaritMuajPuneReale()
+  { 
+    let oreMesimore =0 ;
+      let puneRezerve =0;
+    
+    
+    let ditePushimi;
+    if (this.service.form.controls["Jashtem"].value==true)
+    {
+      puneRezerve = 5;
+      ditePushimi = 12;
+    }
+    else
+    {
+      ditePushimi = 14;
+      puneRezerve = 10;
+    }
+    
+       
+    let oreTot=0;
+    let inst = false;
+    let colspan;
+    let lejeZakonshme =0;
+    let festaZyrtare = 0;
+    let puneNeDispozicion =0; 
+    let kujdestari = false;
+    console.log(this.lendet);
+ 
+    this.lendet.forEach(element => {
+    
+    
+     if(element["Emri"]=="Kujdestari")
+    kujdestari =true;
+     if (element["Emri"]=="Mirembajtje"||element["Emri"]=="Shoqerim"||element["Emri"]=="Pune Admin"||element["Emri"]=="Kujdestari"||element["Emri"]=="Veprimtari")
+     {
+       if(element["Emri"]=="Kujdestari"||element["Emri"]=="Veprimtari")
+       {
+         oreMesimore = oreMesimore;
+         oreTot=oreTot;
+       }
+      else
+      {
+        oreMesimore = oreMesimore + element["Javetot"]* element["Ore"]/2;
+        oreTot = oreTot + element["Javetot"]* element["Ore"]/2;
+    
+      }
+     }
+     else 
+     {
+      oreMesimore = oreMesimore + element["Javetot"]* element["Ore"];
+      oreTot = oreTot + element["Javetot"]* element["Ore"];
+    
+     }
+    
+    });
+    if(this.service.form.controls["Jashtem"].value==false)
+      puneRezerve = 10;
+    let punaMesimore  = Math.round(oreMesimore/4) ;
+    if (punaMesimore>175)
+        punaMesimore =175;
+    let muajVjetoreNeto = (punaMesimore+puneRezerve+ditePushimi +(((punaMesimore+puneRezerve)/22)*3))/22;
+   console.log(muajVjetoreNeto);
+      if (this.service.form.get('$key').value)
+    this.muajReale=Math.round( muajVjetoreNeto*100)/100;
+    return muajVjetoreNeto;
+    //  let pagaVjetoreNeto : number =Math.round((Math.round(12*100)/100*this.pagaNetoMujore));
+    // let puneNeDispoziocion : number = (12-((punaMesimore+puneRezerve+ditePushimi +(((punaMesimore+puneRezerve)/22)*3))/22))*22;
+    
+    }
 
 }

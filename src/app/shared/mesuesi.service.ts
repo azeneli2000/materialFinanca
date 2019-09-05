@@ -9,6 +9,7 @@ import { MesuesiZgjedhurService } from './mesuesi-zgjedhur.service';
 import { formControlBinding } from '@angular/forms/src/directives/ng_model';
 import { of } from 'rxjs';
 import { ShpenzimeService } from './shpenzime.service';
+import { ArkaService } from './arka.service';
 
 
 @Injectable({
@@ -29,7 +30,7 @@ export class MesuesiService {
     Monedha: '',
     Koment: ''
   };
-  constructor(private db: AngularFireDatabase, private lendet: LendaService , private mesuesiZgjedhur:MesuesiZgjedhurService, private shpenzimi : ShpenzimeService) { }
+  constructor(private db: AngularFireDatabase, private lendet: LendaService , private mesuesiZgjedhur:MesuesiZgjedhurService, private shpenzimi : ShpenzimeService, private arka : ArkaService) { }
 
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
@@ -223,8 +224,9 @@ this.db.list(localStorage.getItem('VitiShkollor') +'/Mesuesit').update(idMesuesi
     this.Shpenzimi.Data =  new Date().toLocaleDateString();
     this.Shpenzimi.Monedha = 'LEK';
     this.Shpenzimi.Koment = 'Ne dore ' + mesuesi.Emri + ' ' +mesuesi.Mbiemri ;
-    this.shpenzimi.insertShpenzime('Rroga', this.Shpenzimi);
-   
+  let shpenzimiKey =  this.shpenzimi.insertShpenzime('Rroga', this.Shpenzimi);
+  this.arka.insertTransaksion("PSHTs",shpenzimiKey,this.Shpenzimi.Koment,this.Shpenzimi.Monedha ,this.Shpenzimi.Kosto,"Paga Shtese",mesuesi.$key);
+  this.arka.updateTotali(-Math.abs(this.Shpenzimi.Kosto),this.Shpenzimi.Monedha);
   }
 
 
@@ -242,7 +244,9 @@ this.db.list(localStorage.getItem('VitiShkollor') +'/Mesuesit').update(idMesuesi
     this.Shpenzimi.Data =  new Date().toLocaleDateString();
     this.Shpenzimi.Monedha = 'LEK';
     this.Shpenzimi.Koment = 'Zyrtare ' + arrayPagaZyrtare[i].Emri + ' ' +arrayPagaZyrtare[i].Mbiemri ;
-    this.shpenzimi.insertShpenzime('Rroga', this.Shpenzimi);
+   let shpenzimiKey = this.shpenzimi.insertShpenzime('Rroga', this.Shpenzimi);
+    this.arka.insertTransaksion("PZ",shpenzimiKey,this.Shpenzimi.Koment,this.Shpenzimi.Monedha ,this.Shpenzimi.Kosto,"Paga Zyrtare",arrayPagaZyrtare[i].$key);
+    this.arka.updateTotali(-Math.abs(this.Shpenzimi.Kosto),this.Shpenzimi.Monedha);
     }
   }
 
