@@ -19,13 +19,17 @@ export class AuthService {
     this.authState = auth;    
       localStorage.setItem('user', JSON.stringify(this.authState));
     // console.log(JSON.parse(localStorage.getItem('user')));
-     
-    } else {
+    if(auth.email == "financashkolla@gmail.com")
+    auth.updateProfile({displayName :"Klaid Billa",photoURL : " "});
+    if(auth.email == "shkollanr1@gmail.com")
+    auth.updateProfile({displayName :"Zenel Zeneli",photoURL : " "});
+  } else {
       localStorage.setItem('user', null);
      // console.log(JSON.parse(localStorage.getItem('user')));
       this.authState = null;
     }
     });
+    
      
   }
 
@@ -42,7 +46,8 @@ export class AuthService {
     return this.authState['email']
   }
   get currentDisplayName(): string {
-    return this.authState['displayName']
+   
+    return this.authState['displayName'];
   }
  
   get currentUser(): any {

@@ -41,8 +41,8 @@ vz ;
     
     
   }
-
     this.name = this.auth.currentUser;
+
     console.log(this.name);
     this.vitiFillestar= localStorage.getItem('VitiShkollor');
   }
