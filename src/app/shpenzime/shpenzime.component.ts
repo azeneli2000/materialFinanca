@@ -132,9 +132,9 @@ console.log('eur : ' + this.totEUR + 'lek :' + this.totLEK);
     this.datePipe.transform(shpenzimiDate,"dd-MM-yyyy");
 console.log(shpenzimiDate);
 this.shpenzime.form.controls.Data.setValue(shpenzimiDate) ;
-    this.shpenzime.insertShpenzime(this.shpenzime.form.controls.Shpenzime.value,this.shpenzime.form.value);
+   let key =  this.shpenzime.insertShpenzime(this.shpenzime.form.controls.Shpenzime.value,this.shpenzime.form.value);
     //insert transaksionin
-    this.arka.insertTransaksion("Shpenzime",this.shpenzime.form.controls["$key"].value,this.shpenzime.form.controls.Koment.value,this.shpenzime.form.controls.Monedha.value,this.shpenzime.form.controls.Kosto.value,"Shpenzime "+this.shpenzime.form.controls["Shpenzime"].value,"0")
+    this.arka.insertTransaksion("Shpenzime",key,this.shpenzime.form.controls.Koment.value,this.shpenzime.form.controls.Monedha.value,this.shpenzime.form.controls.Kosto.value,"Shpenzime "+this.shpenzime.form.controls["Shpenzime"].value,this.shpenzime.form.controls["Shpenzime"].value)
    //update totali
     this.arka.updateTotali(-Math.abs(this.shpenzime.form.controls.Kosto.value),this.shpenzime.form.controls.Monedha.value);
    

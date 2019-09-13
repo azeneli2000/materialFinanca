@@ -20,7 +20,7 @@ export class ArketimeComponent implements OnInit {
   options = ['Dieta','Shperblime','Interes kredie','Interes huaje','Transporti','Uniformat','Librat','Eskursion','Kancelari','Mjete mesimore','Mjete pastrimi','Karburant','Zbukurime','Lyerje','Qera','Energji','Uje','Telefona','Internet','Kamera','Mirembajtje','Sherbime noteriale','Blerje mjetesh mesimore','Komisione bankare','Tatim fitimi','Taksa Vendore','Tatime te tjera','Gjoba','Shpenzime personale','Sigurime',]
   filteredOptions: Observable<string[]>;
   Arketime = [
-    { value: 'Libra' },{ value: 'Uniforrma' }, { value: 'Dyqani' }, { value: 'Arketim  i posatshem'  }
+    { value: 'Libra' },{ value: 'Uniforma' }, { value: 'Dyqani' }, { value: 'Arketim  i posatshem'  }
 
   ];
   Monedhat = [
@@ -122,9 +122,9 @@ console.log('eur : ' + this.totEUR + 'lek :' + this.totLEK);
     let arketimiDate = new Date().toLocaleDateString();
     this.datePipe.transform(arketimiDate,"dd-MM-yyyy");
 this.arketime.form.controls.Data.setValue(arketimiDate) ;
-    this.arketime.insertArketime(this.arketime.form.controls.Arketime.value,this.arketime.form.value);
+   let key =  this.arketime.insertArketime(this.arketime.form.controls.Arketime.value,this.arketime.form.value);
     //insert transaksionin
-    this.arka.insertTransaksion("Arketime",this.arketime.form.controls["$key"].value,this.arketime.form.controls.Koment.value,this.arketime.form.controls.Monedha.value,this.arketime.form.controls.Sasia.value,"Arketime "+this.arketime.form.controls["Arketime"].value,"0")
+    this.arka.insertTransaksion("Arketime",key,this.arketime.form.controls.Koment.value,this.arketime.form.controls.Monedha.value,this.arketime.form.controls.Sasia.value,"Arketime "+this.arketime.form.controls["Arketime"].value,this.arketime.form.controls["Arketime"].value)
    //update totali
     this.arka.updateTotali(Math.abs(this.arketime.form.controls.Sasia.value),this.arketime.form.controls.Monedha.value);
     

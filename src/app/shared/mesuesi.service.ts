@@ -225,7 +225,8 @@ this.db.list(localStorage.getItem('VitiShkollor') +'/Mesuesit').update(idMesuesi
     this.Shpenzimi.Monedha = 'LEK';
     this.Shpenzimi.Koment = 'Ne dore ' + mesuesi.Emri + ' ' +mesuesi.Mbiemri ;
   let shpenzimiKey =  this.shpenzimi.insertShpenzime('Rroga', this.Shpenzimi);
-  this.arka.insertTransaksion("PSHTs",shpenzimiKey,this.Shpenzimi.Koment,this.Shpenzimi.Monedha ,this.Shpenzimi.Kosto,"Paga Shtese",mesuesi.$key);
+  this.arka.insertTransaksion("PSHTS",'Rroga/' + shpenzimiKey,this.Shpenzimi.Koment,this.Shpenzimi.Monedha ,this.Shpenzimi.Kosto,"Paga Shtese",mesuesi.$key);
+  this.arka.getTotali();
   this.arka.updateTotali(-Math.abs(this.Shpenzimi.Kosto),this.Shpenzimi.Monedha);
   }
 
@@ -245,7 +246,7 @@ this.db.list(localStorage.getItem('VitiShkollor') +'/Mesuesit').update(idMesuesi
     this.Shpenzimi.Monedha = 'LEK';
     this.Shpenzimi.Koment = 'Zyrtare ' + arrayPagaZyrtare[i].Emri + ' ' +arrayPagaZyrtare[i].Mbiemri ;
    let shpenzimiKey = this.shpenzimi.insertShpenzime('Rroga', this.Shpenzimi);
-    this.arka.insertTransaksion("PZ",shpenzimiKey,this.Shpenzimi.Koment,this.Shpenzimi.Monedha ,this.Shpenzimi.Kosto,"Paga Zyrtare",arrayPagaZyrtare[i].$key);
+    this.arka.insertTransaksion("PZ",'Rroga/' +shpenzimiKey,this.Shpenzimi.Koment,this.Shpenzimi.Monedha ,this.Shpenzimi.Kosto,"Paga Zyrtare",arrayPagaZyrtare[i].$key);
     this.arka.updateTotali(-Math.abs(this.Shpenzimi.Kosto),this.Shpenzimi.Monedha);
     }
   }

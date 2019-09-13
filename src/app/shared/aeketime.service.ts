@@ -15,7 +15,7 @@ export class AeketimeService {
     $key: new FormControl(null),
     Sasia: new FormControl(0, [Validators.required]),
     Koment: new FormControl(''),
-    Arketime: new FormControl(''),
+    Arketime: new FormControl('',[Validators.required]),
     Monedha : new FormControl('LEK'),
     Data : new FormControl('')
     

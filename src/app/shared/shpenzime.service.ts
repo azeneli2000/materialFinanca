@@ -14,7 +14,7 @@ export class ShpenzimeService {
     $key: new FormControl(null),
     Kosto: new FormControl(0, [Validators.required]),
     Koment: new FormControl(''),
-    Shpenzime: new FormControl(''),
+    Shpenzime: new FormControl('',[Validators.required]),
     Monedha : new FormControl('LEK'),
     Data : new FormControl('')
     

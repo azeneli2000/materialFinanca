@@ -192,7 +192,7 @@ console.log(this.eskursioneDisponibel.eskursione[Number(value)].Emri);
 
       //printimi i fatures
       this.printer.print11('ARKETIM PER TRANSPORTIN',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box1,this.nxenesiService.form.controls['MonedhaTransporti'].value);
-      this.printer.print11('ARKETIM PER SHKOLLIM',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box1,this.nxenesiService.form.controls['MonedhaShkolla'].value);
+      this.printer.print11('ARKETIM PER SHKOLLIM',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box1,this.nxenesiService.form.controls['MonedhaTransporti'].value);
 
       console.log(this.hideTransporti);
       this.hideTransporti = false;

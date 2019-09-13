@@ -94,17 +94,17 @@ console.log(this.mesuesiId);
    //regjistrohet te observable qe kthen getLenda() te lenda service
    this.listLendet.getLendet(idMesuesi.toString()).subscribe(
     list => {
-      let array = list.map(item =>{this.isLoading = false;
+      let array = list.map(item =>{
+        this.isLoading = false;
         return {
           $key : item.key,
           ...item.payload.val()};
           
-      }
-
-      );
+      });
       this.lendetPrint = array;
-      console.log(this.lendetPrint[0]["Klasa"]);
+      // console.log(this.lendetPrint[0]["Klasa"]);
       this.listData= new MatTableDataSource(array);
+      console.log(this.listData.data.length);
       if(this.listData.data.length==0)
       this.isLoading = false;
      // let arr1 = array.map(lenda => lenda.Emri=lenda.Emri.viewValue) ;

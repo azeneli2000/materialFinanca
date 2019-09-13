@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { query } from '@angular/core/src/render3';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class ArkaService {
 TotaliEuro ; TotaliLeke ; TotaliDoll ;
   getArka(){
 
-     return  this.db.list('Arka').snapshotChanges();
+     return  this.db.list('Arka',ref=>ref.orderByChild("Data")).snapshotChanges();
   }
 
 
@@ -187,9 +188,9 @@ console.log(this.TotaliEuro);
 
 }
 
-  anullo(docref,koment,$key,sasia : number ){
-//nqs eshte shpenzim
-this.db.list(docref).remove();
+  anullo($key ){
+// //nqs eshte shpenzim
+// this.db.list(docref).remove();
 
 this.db.list('Arka').update($key,{
 Anulluar : true
