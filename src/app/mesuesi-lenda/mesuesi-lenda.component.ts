@@ -47,7 +47,7 @@ public nrMuaj ;
   mesZgjedhurBosh : boolean = false;
  meskey = this.route.snapshot.paramMap.get('$key');
  mobile : boolean = false;
-
+user : boolean = false;
 lendetPrint:any ;
 viti :any;
  ngOnInit() {
@@ -62,6 +62,9 @@ viti :any;
       this.displayedColumns =  ['Emri','Javetot','Klasa','NrNxenesish','Ore','Paga','Actions'];
     
   }
+  let c = JSON.parse(localStorage.getItem('user'));
+  if(c.displayName == "Zenel Zeneli")
+  this.user = true;    
     this.mesuesiZgjedhur.mbushMesuesin();
     let mz =this.mesuesiZgjedhur.mz;
     let mzArray;

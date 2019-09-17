@@ -13,7 +13,7 @@ export class KonfigurimeComponent implements OnInit {
   vitiShkollor = [{ value: '2019-2020' }, { value: "2020-2021" }, { value: "2021-2022" }, { value: "2022-2023" }, { value: "2023-2024" }, { value: "2024-2025" }, { value: "2025-2026" }, { value: "2026-2027" }];
   vitiZgjedhur;
   isLoading = true;
-
+  user : boolean = false;
   constructor(private konfigurime: KonfigurimeService, private notification: NotificationService, private dialogService: ConfirmDialogService) { }
 
   onSubmit() {
@@ -33,7 +33,9 @@ export class KonfigurimeComponent implements OnInit {
 
 
   ngOnInit() {
-
+    let c = JSON.parse(localStorage.getItem('user'));
+    if(c.displayName == "Zenel Zeneli")
+    this.user = true;    
     let v = this.konfigurime.getKonfigurime().subscribe(
       list => {
         if (list.length > 0) {

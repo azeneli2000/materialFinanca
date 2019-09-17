@@ -24,7 +24,7 @@ export class AeketimeService {
   initializeFormGroup() {
     this.form.setValue({
       $key: null,
-      Sasia: '',
+      Sasia: 0,
       Koment: '',
       Arketime: '',
       Monedha: 'LEK',

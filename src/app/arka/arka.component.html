@@ -2,6 +2,9 @@
   <button mat-raised-button (click)="onXchangeClick()" >
     <mat-icon>add</mat-icon>Xchange
   </button>
+  <!-- <button mat-raised-button (click)="kaloShpenzime()" >
+    <mat-icon>add</mat-icon>kalo
+  </button> -->
   <mat-form-field class="search-form-field" floatLabel="never">
     <input matInput [(ngModel)]="searchKey" placeholder="Kerko.." autocomplete="off" (keyup)="applyFilter()">
     <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
@@ -49,23 +52,23 @@
 
   <ng-container matColumnDef="Koment">
     <mat-header-cell *matHeaderCellDef mat-sort-header >Koment</mat-header-cell>
-    <mat-cell  *matCellDef="let element; let row" [ngClass]="{'make-red': row.Anulluar == true}" >{{element.Koment  }}</mat-cell>
+    <mat-cell  *matCellDef="let element; let row" [ngClass]="{'make-red': row.Anulluar == true}" >{{element.Koment}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="Sasia">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Sasia</mat-header-cell>
-    <mat-cell *matCellDef="let element; let row;" [ngClass]="{'make-red': row.Anulluar == true}">{{element.Sasia  }}</mat-cell>
+    <mat-cell *matCellDef="let element; let row;" [ngClass]="{'make-red': row.Anulluar == true}">{{element.Sasia | number : '1.0-0'}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="Valuta">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Monedha</mat-header-cell>
-    <mat-cell *matCellDef="let element; let row;" [ngClass]="{'make-red': row.Anulluar == true}">{{element.Valuta  }}</mat-cell>
+    <mat-cell *matCellDef="let element; let row;" [ngClass]="{'make-red': row.Anulluar == true}">{{element.Valuta}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="TeDhena">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Informacione</mat-header-cell>
-    <mat-cell *matCellDef="let element; let row;" [ngClass]="{'make-red': row.Anulluar == true}">{{element.TeDhena  }}</mat-cell>
+    <mat-cell *matCellDef="let element; let row;" [ngClass]="{'make-red': row.Anulluar == true}">{{element.TeDhena}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="User">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Perdoruesi</mat-header-cell>
-    <mat-cell *matCellDef="let element; let row;" [ngClass]="{'make-red': row.Anulluar == true}">{{element.User  }}</mat-cell>
+    <mat-cell *matCellDef="let element; let row;" [ngClass]="{'make-red': row.Anulluar == true}">{{element.User}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="Data">
@@ -78,9 +81,9 @@
   <ng-container matColumnDef="Actions">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let row">
-          <button mat-icon-button (click) = onSelect(row) color="primary" ><mat-icon    matTooltip="Print">print</mat-icon></button>
+          <button mat-icon-button (click) = printFatura(row) color="primary" ><mat-icon    matTooltip="Print Faturen">print</mat-icon></button>
         <!-- <button mat-icon-button  (click)="onEdit(row)" *ngIf = "!mobile"><mat-icon matTooltip="Modifiko">launch</mat-icon></button> -->
-        <button mat-icon-button color="warn" (click) ="onAnulloClick(row)"  *ngIf = "!mobile && row.Anulluar == false && anullim"><mat-icon    matTooltip="Anullo">undo</mat-icon></button>
+        <button mat-icon-button color="warn" (click) =" onDelete(row)"  *ngIf = "!mobile && row.Anulluar == false && anullim"><mat-icon    matTooltip="Anullo">undo</mat-icon></button>
       </mat-cell>
     </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -98,4 +101,9 @@ style="display: flex; justify-content: center; align-items: center">
  mode="indeterminate">
 </mat-progress-spinner>
 </mat-card>
+<div>
+  <button  mat-raised-button color="primary"  matTooltip ="Print Transaksionet" (click)="printArka()"><mat-icon >print</mat-icon></button>&nbsp;
+ 
+
+</div>
 </div>

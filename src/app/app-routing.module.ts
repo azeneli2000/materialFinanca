@@ -15,6 +15,7 @@ import { PagesamesuesitComponent } from './pagesamesuesit/pagesamesuesit.compone
 import { ShpenzimeComponent } from './shpenzime/shpenzime.component';
 import { ArkaComponent } from './arka/arka.component';
 import { ArketimeComponent } from './arketime/arketime.component';
+import { BankatComponent } from './bankat/bankat.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
 {path : 'arka',component : ArkaComponent,canActivate : [AuthGuard]},
 {path : 'login',component : LoginComponent},
 {path : 'arketime',component : ArketimeComponent},
+{path : 'huate',component : BankatComponent},
 
 ];
 

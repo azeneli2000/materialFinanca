@@ -88,6 +88,11 @@ export class ShpenzimeComponent implements OnInit {
         
         });
         //
+        array.sort(function (a,b){
+          let c = new Date(a["Data"]);
+          let d = new Date(b["Data"]);
+          return +d - +c;
+        });
         this.listData = new MatTableDataSource(array);
 
         this.totEUR = this.listData.filteredData.map((t)=>{if(t.Monedha=='EUR') return t.Kosto; else return 0;}).reduce((acc, value) => acc + value, 0);

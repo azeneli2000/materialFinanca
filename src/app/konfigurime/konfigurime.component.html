@@ -357,7 +357,7 @@
   </mat-card>
   <br>
   <div class="but">
-    <button mat-raised-button class="ruaj" type="submit" color="primary" [disabled]="konfigurime.form.invalid" (click)="onSubmit()">Ruaj</button>
+    <button mat-raised-button class="ruaj" type="submit" color="primary" [disabled]="konfigurime.form.invalid" (click)="onSubmit()" *ngIf = "user" >Ruaj</button>
 
   </div>
 

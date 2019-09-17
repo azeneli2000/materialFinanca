@@ -29,6 +29,7 @@ export class MesuesitListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey :string;
 mobile : boolean = false;
+user : boolean = false;
 
   ngOnInit() {
     if(window.innerWidth < 400)
@@ -42,7 +43,12 @@ mobile : boolean = false;
       this.displayedColumns =  ['Emri','Mbiemri','Vjetersia','Kategoria','Paga','PagaTotMujore','Actions'];
     
   }
-    this.getAll();
+
+      let c = JSON.parse(localStorage.getItem('user'));
+       if(c.displayName == "Zenel Zeneli")
+       this.user = true;    
+  
+  this.getAll();
 
     //regjistrohet te observable qe kthen getMesuesit() te mesuasi service
     this._viti.msgMenu$.subscribe(mes => { this.vitiZgjedhur = mes; this.getAll(); });

@@ -62,6 +62,8 @@ import { ArkaComponent } from './arka/arka.component';
 import { ExcelService } from './shared/excel.service';
 import { XchnageComponent } from './arka/xchnage/xchnage.component';
 import { ArketimeComponent } from './arketime/arketime.component';
+import { BankatComponent } from './bankat/bankat.component';
+import { PagesebankaComponent } from './pagesebanka/pagesebanka.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +87,8 @@ import { ArketimeComponent } from './arketime/arketime.component';
     ArkaComponent,
     XchnageComponent,
     ArketimeComponent,
+    BankatComponent,
+    PagesebankaComponent,
     
   ],
   imports: [
@@ -127,6 +131,6 @@ import { ArketimeComponent } from './arketime/arketime.component';
   ],
   providers: [MesuesiService,AuthGuard, {provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl()},CurrencyPipe,DatePipe,ExcelService],
   bootstrap: [AppComponent],
-  entryComponents:[MesuesiComponent,ConfirmDialogComponent,LendaComponent,NxenesiComponent,PagashteseComponent,XchnageComponent]
+  entryComponents:[MesuesiComponent,ConfirmDialogComponent,LendaComponent,NxenesiComponent,PagashteseComponent,XchnageComponent,PagesebankaComponent]
 })
 export class AppModule { }

@@ -79,6 +79,12 @@ export class ArketimeComponent implements OnInit {
           };
         
         });
+        array.sort(function (a,b){
+          let c = new Date(a["Data"]);
+          let d = new Date(b["Data"]);
+          return +d - +c;
+        });
+    
         //
         this.listData = new MatTableDataSource(array);
 

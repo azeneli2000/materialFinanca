@@ -1,0 +1,108 @@
+<form [formGroup]="this.bankat.form" class="normal-form">
+
+
+  <mat-form-field appearance="outline">
+      <mat-label>Hua</mat-label>
+      <mat-select formControlName="Bankat" (selectionChange)="onChanageBankat($event)">
+        <mat-option *ngFor="let s of Bankat" [value]="s.value">
+          {{s.value}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="bankat.form.controls['Bankat'].errors?.required">
+        Arketimi <strong>i detyrueshem</strong>
+      </mat-error>
+    </mat-form-field>
+  
+    
+      <div *ngIf = "!mobile" style = "display: inline">
+    
+    <mat-form-field appearance="outline" class = "Monedha">
+        <mat-label>Valuta</mat-label>
+        <mat-select formControlName="Monedha">
+            <mat-option *ngFor="let m of Monedhat" [value]="m.value">
+                {{m.value}}
+              </mat-option>       
+        </mat-select>
+      
+      </mat-form-field>
+  
+  <mat-form-field appearance="outline" class = "kosto">
+    <mat-label>Sasia</mat-label>
+    <input type ="number" autocomplete="off"  formControlName="Sasia" matInput [errorStateMatcher]="matcher">
+    <mat-error *ngIf="bankat.form.controls['Sasia'].errors?.required">
+      Sasia <strong>e detyrueshme</strong>
+    </mat-error>
+  </mat-form-field>
+  
+  <mat-form-field class="koment" >
+    <input type="text" matInput formControlName="Koment" matInput placeholder="Koment">   
+  </mat-form-field>
+  <button mat-raised-button class="ruaj" type="submit" color="primary" [disabled]="bankat.form.invalid" (click)="onSubmit()">Ruaj</button>
+  </div>
+  </form>
+  
+  
+  
+  <!-- </div> -->
+  
+  
+  <div class="search-div">     
+      <mat-form-field class="search-form-field" floatLabel="never">
+        <input matInput [(ngModel)]="searchKey" placeholder="Kerko.." autocomplete="off" (keyup)="applyFilter()">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+        
+    <div class="tot">
+      <mat-card>    
+        <div *ngIf="totEUR>0 && totEUR != 'NaN'" style="display: inline;color : #F44336"><span style="color:#303F9F"> </span> <span class="mbeturSpan">
+            {{totEUR|currency : 'EUR':'symbol':'1.0-0'}}</span></div>
+        <div *ngIf="totLEK>0 && totLEK != 'NaN'" style="display: inline;color:#303F9F"><span style="color:#303F9F"></span> <span class="mbeturSpan">
+            {{totLEK|currency : 'LEK':'symbol':'1.0-0'}}</span></div>     
+      </mat-card>
+    </div>
+  </div>
+  
+    <div class="mat-elevation-z8">
+    
+      <mat-table [dataSource]="listData" matSort>    
+       
+          <ng-container matColumnDef="Data">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.Data | date: 'dd-MM-yyyy'}}</mat-cell>
+            </ng-container>
+        <ng-container matColumnDef="Sasia">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Principali</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.Sasia|currency : element.Monedha : 'symbol' : '1.0-0' }}</mat-cell>
+        </ng-container>
+       
+        <ng-container matColumnDef="Paguar">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Paguar</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.Paguar|currency : element.Monedha : 'symbol' : '1.0-0' }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Mbetur">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Mbetja</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.Sasia - element.Paguar|currency : element.Monedha : 'symbol' : '1.0-0' }}</mat-cell>
+            </ng-container>
+        <ng-container matColumnDef="Koment">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Koment</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.Koment}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Actions">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let row">
+              <button mat-icon-button (click) = onSelect(row) color="primary"><mat-icon    matTooltip="Paguaj">assignment</mat-icon></button>
+          </mat-cell>
+        </ng-container>
+           
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10,12,14,15, 25, 100]" [pageSize]="10" showFirstLastButtons *ngIf = "!mobile"></mat-paginator>
+    </div>
+      <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+        <mat-progress-spinner color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+      </mat-card>

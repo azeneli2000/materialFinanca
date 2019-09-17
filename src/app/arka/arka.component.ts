@@ -8,6 +8,10 @@ import { NxenesiService } from '../shared/nxenesi.service';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { resolve } from 'q';
 import { first } from 'rxjs/operators';
+import { isNgTemplate } from '@angular/compiler';
+import { ShpenzimeService } from '../shared/shpenzime.service';
+import { AeketimeService } from '../shared/aeketime.service';
+import { PrintService } from '../shared/print.service';
 
 @Component({
   selector: 'app-arka',
@@ -16,7 +20,7 @@ import { first } from 'rxjs/operators';
 })
 export class ArkaComponent implements OnInit {
 
-  constructor(private db: AngularFireDatabase,private nxensiService : NxenesiService, private arkaSevice : ArkaService,private dialog :MatDialog, private notification : NotificationService,  private dialogService : ConfirmDialogService) { }
+  constructor(private db: AngularFireDatabase,private nxensiService : NxenesiService, private arkaSevice : ArkaService,private dialog :MatDialog, private notification : NotificationService,  private dialogService : ConfirmDialogService,private shpenzimeProva : ShpenzimeService,private arketimeProva : AeketimeService,private print : PrintService) { }
   isLoading = true;
   listData : MatTableDataSource<any>
   displayedColumns: string [] =['Koment','Sasia','Valuta','TeDhena','User','Data','Actions'];
@@ -131,6 +135,7 @@ if(c.displayName == "Zenel Zeneli")
   applyFilter() {
     this.listData.filter = this.searchKey.trim().toLowerCase();
   // console.log(this.listData.filteredData);
+  // console.log(this.listData.filteredData);
 //euro
 this.totEurKerkimi = this.listData.filteredData.map((t)=>{
   if(t.Valuta=='EUR')
@@ -197,6 +202,11 @@ this.totDolKerkimi = this.listData.filteredData.map((t)=>{
     
     return this.db
     .object( localStorage.getItem('VitiShkollor') +'/Mesuesit/'+key).valueChanges().pipe(first()).toPromise();
+    }
+  getBankaAnullim(key,kategoria) : Promise<any>{
+    
+    return this.db
+    .object( 'Bankat/' + kategoria+ '/'+ key).valueChanges().pipe(first()).toPromise();
     }
 
 
@@ -303,8 +313,82 @@ this.totDolKerkimi = this.listData.filteredData.map((t)=>{
           });
      break;
         }
+        case "PP" :
+          { 
+            const banka =   this.db.list( 'Bankat/' + row.DocRef1);
+            this.getBankaAnullim(row.DocRef,row.DocRef1).then(
+              (data)=>{     
+           //heq nga principali sasine e paguar
+             banka.update(row.DocRef,{
+              Paguar:  data.Paguar - row.Sasia,
+             });
+            });
+         //ngre totalin e arkes sa sasia
+        this.arkaSevice.updateTotali(Math.abs(row.Sasia),row.Valuta);
+       //fshin shpenzimin
+     
+        //bej anulluar true
+        this.arkaSevice.anullo(row.$key);
+        
+       break;
+          }
+    
     }
 
   }
+  onDelete(row) {
+    this.dialogService.openConfirmDialog('Jeni te sigurte qe doni te anulloni transaksionin  ?')
+      .afterClosed().subscribe(res => {
+        if (res) {
+        this.onAnulloClick(row);          
+        this.notification.warn('Transaksioni u anullua me sukses !'); 
+        }
+      });
+  }
+
+
+  printArka()
+  {
+this.print.printArka(this.listData.filteredData,this.totEurKerkimi,this.totLekKerkimi,this.totDolKerkimi);
+
+  }
+  printFatura(row)
+  {
+    this.print.printArkaThermal(row.Koment,row.TeDhena,row.Sasia,row.Valuta,row.Lloji);
+
+  }
+
+//   kaloShpenzime()
+//   {
+//     this.arkaSevice.getArka().subscribe( list => {
+//       let array = list.map(item =>{
+       
+//         return {
+//           $key : item.key,
+//           ...item.payload.val()};
+//       });
+//     let  array1 =array.filter((item)=>{
+      
+//        return (item["Koment"] == "Shpenzime Libra" && item["Anulluar"]==false);
+//     });
+//     let arketimi = { 
+//     Kosto:0,
+//     Koment: '',
+//     Shpenzime: '',
+//     Monedha : '',
+//     Data : ''}
+//     for(let i=0;i<=array1.length-1;i++)
+// {
+ 
+//   arketimi.Kosto = array1[i]["Sasia"];
+//   arketimi.Koment = array1[i]["TeDhena"];
+//   arketimi.Monedha = array1[i]["Valuta"];
+//   arketimi.Data = array1[i]["Data"];
+
+// this.shpenzimeProva.insertShpenzime("Libra",arketimi);
+// }
+// console.log(array1);
+//   })
+// }
 
 }

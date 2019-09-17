@@ -1,0 +1,24 @@
+<mat-toolbar>
+  <span>{{this.service.formPaguar.Banka}}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+
+
+
+
+  <br>
+  <mat-form-field   appearance="outline">
+      <mat-label>Paguaj principalin</mat-label>
+    <input type = "number" autocomplete="off" [(ngModel)] = "principali" matInput  >
+   
+    <!-- <mat-error *ngIf="service.form.controls['Emri'].errors?.required">
+        Paga <strong>e detyruesheme</strong>
+      </mat-error> --> 
+  </mat-form-field>
+  <br>
+  <div class="but">
+    <button mat-raised-button class = "ruaj" type = "submit" color="primary"  (click)= "onSubmit()">Paguaj</button>
+    </div>
+    <!-- {{this.service.form.value|json}} -->
+
