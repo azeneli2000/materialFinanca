@@ -21,7 +21,7 @@ export class BankatComponent implements OnInit {
   options = ['Principali'];
   filteredOptions: Observable<string[]>;
   Bankat = [
-    { value: 'FIB' },{ value: 'BKT' }, { value: 'Intesa' }, { value: 'Personale'  }
+    { value: 'FIB' },{ value: 'BKT' }, { value: 'Intesa' }, { value: 'Credins'  }, { value: 'Personale'  }
 
   ];
   Monedhat = [

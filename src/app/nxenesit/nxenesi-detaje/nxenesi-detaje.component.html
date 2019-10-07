@@ -96,7 +96,7 @@
 <div>
 <!-- uniforma -->
 
-    <div class="pagesat"  *ngIf = "this.nxenesiService.form.controls['MeUniforme'].value">
+    <!-- <div class="pagesat"  *ngIf = "this.nxenesiService.form.controls['MeUniforme'].value">
         <mat-card class="gjeneralitete1">
             <mat-card-title style="color: #3F51B5">Pagesa Uniforma</mat-card-title>
             <mat-progress-bar mode="determinate" [value]="perqUniforma"></mat-progress-bar>
@@ -109,9 +109,7 @@
             <span class="mbetur">{{mbetjaUniforma|currency :
                 this.nxenesiService.form.controls['MonedhaUniforma'].value:'symbol':'1.0-0'}}</span>
             <br>
-            <!-- <div class="ruaj">
-                <button mat-raised-button color="primary" (click)="onSubmitUniforma()">Paguaj</button>
-            </div> -->
+          
             <br>
             <div >
                 {{this.nxenesiService.form.controls['MonedhaUniforma'].value}}
@@ -122,10 +120,10 @@
                 </mat-form-field>
             </div>
         </mat-card>
-    </div>
+    </div> -->
     <!-- librat -->
 
-    <div class="pagesat" >
+    <!-- <div class="pagesat" >
         <mat-card class="gjeneralitete1">
             <mat-card-title style="color: #3F51B5">Pagesa Librat</mat-card-title>
             <mat-progress-bar mode="determinate" [value]="perqLibrat"></mat-progress-bar>
@@ -138,9 +136,7 @@
             <span class="mbetur">{{mbetjaLibrat|currency :
                 this.nxenesiService.form.controls['MonedhaLibrat'].value:'symbol':'1.0-0'}}</span>
             <br>
-            <!-- <div class="ruaj">
-                <button mat-raised-button color="primary" [disabled] = "mbetjeLibrat" (click)="onSubmitLibrat()">Paguaj</button>
-            </div> -->
+           
             <br>
             <div>
                 {{this.nxenesiService.form.controls['MonedhaLibrat'].value}}
@@ -151,7 +147,7 @@
                 </mat-form-field>
             </div>
         </mat-card>
-    </div>
+    </div> -->
 </div>   
 </div>
       

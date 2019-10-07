@@ -7,6 +7,7 @@ import { ConfirmDialogService } from 'src/app/shared/confirm-dialog.service';
 import {Router} from "@angular/router";
 import { MesuesiZgjedhurService } from 'src/app/shared/mesuesi-zgjedhur.service';
 import { VitiService } from 'src/app/shared/viti.service';
+import { PrintService } from 'src/app/shared/print.service';
 
 
 
@@ -21,7 +22,7 @@ export class MesuesitListComponent implements OnInit {
   
   isLoading = true;
   vitiZgjedhur;
-  constructor(private listMesuesit : MesuesiService, private dialog :MatDialog, private notification : NotificationService,  private dialogService : ConfirmDialogService,private router : Router,private mesuesiZ : MesuesiZgjedhurService,private _viti: VitiService) { }
+  constructor(private listMesuesit : MesuesiService, private dialog :MatDialog, private notification : NotificationService,  private dialogService : ConfirmDialogService,private router : Router,private mesuesiZ : MesuesiZgjedhurService,private _viti: VitiService,private printer : PrintService) { }
 
   listData : MatTableDataSource<any>
   displayedColumns: string [] =['Emri','Mbiemri','Vjetersia','Kategoria','Paga','PagaTotMujore','Actions'];
@@ -154,6 +155,11 @@ user : boolean = false;
    
     this.router.navigate(['/mesuesit',mesuesi.$key]);
   
+  }
+  printMesuesit()
+  {
+
+    this.printer.printMesuesit(this.listData.filteredData);
   }
 
  

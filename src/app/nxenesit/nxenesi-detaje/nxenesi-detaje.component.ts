@@ -211,59 +211,59 @@ console.log(this.eskursioneDisponibel.eskursione[Number(value)].Emri);
 
   }
 
-  uniforma(box) {
-    if ((Number(this.nxenesiService.form.controls['PagesaUniforma'].value) - (Number(this.nxenesiService.form.controls['PaguarUniforma'].value) + Number(box))) >= 0 && box != "" && Number(box) > 0) {
-      this.nxenesiService.form.controls['PaguarUniforma'].setValue(Number(this.nxenesiService.form.controls['PaguarUniforma'].value) + Number(box));
-      this.perqUniforma = Number(this.nxenesiService.form.controls['PaguarUniforma'].value) / Number(this.nxenesiService.form.controls['PagesaUniforma'].value) * 100;
-      this.mbetjaUniforma = Number(this.nxenesiService.form.controls['PagesaUniforma'].value) - Number(this.nxenesiService.form.controls['PaguarUniforma'].value);
-      this.nxenesiService.updateNxenes(this.nxenesiService.form.value);
-        //gjenerimi i transaksionit
-        this.arka.insertTransaksion('PU',this.nxenesiService.form.controls["$key"].value,this.nxenesiService.form.controls["Emri"].value + this.nxenesiService.form.controls["Mbiemri"].value,this.nxenesiService.form.controls["MonedhaUniforma"].value,Number(box),'Pagese per uniformen',"0")
-      //printimi i fatures
-      this.printer.print11('ARKETIM PER UNIFORMEN',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box,this.nxenesiService.form.controls['MonedhaUniforma'].value);
+  // uniforma(box) {
+  //   if ((Number(this.nxenesiService.form.controls['PagesaUniforma'].value) - (Number(this.nxenesiService.form.controls['PaguarUniforma'].value) + Number(box))) >= 0 && box != "" && Number(box) > 0) {
+  //     this.nxenesiService.form.controls['PaguarUniforma'].setValue(Number(this.nxenesiService.form.controls['PaguarUniforma'].value) + Number(box));
+  //     this.perqUniforma = Number(this.nxenesiService.form.controls['PaguarUniforma'].value) / Number(this.nxenesiService.form.controls['PagesaUniforma'].value) * 100;
+  //     this.mbetjaUniforma = Number(this.nxenesiService.form.controls['PagesaUniforma'].value) - Number(this.nxenesiService.form.controls['PaguarUniforma'].value);
+  //     this.nxenesiService.updateNxenes(this.nxenesiService.form.value);
+  //       //gjenerimi i transaksionit
+  //       this.arka.insertTransaksion('PU',this.nxenesiService.form.controls["$key"].value,this.nxenesiService.form.controls["Emri"].value + this.nxenesiService.form.controls["Mbiemri"].value,this.nxenesiService.form.controls["MonedhaUniforma"].value,Number(box),'Pagese per uniformen',"0")
+  //     //printimi i fatures
+  //     this.printer.print11('ARKETIM PER UNIFORMEN',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box,this.nxenesiService.form.controls['MonedhaUniforma'].value);
 
-      this.hideUniforma = false;
-      this.notification.success("Pagesa u krye me sukses !");
-    }
-    else {
-      this.notification.warn("Vendosni pagesen ne formatin e duhur !");
-      this.hideUniforma = false;
+  //     this.hideUniforma = false;
+  //     this.notification.success("Pagesa u krye me sukses !");
+  //   }
+  //   else {
+  //     this.notification.warn("Vendosni pagesen ne formatin e duhur !");
+  //     this.hideUniforma = false;
 
-    }
+  //   }
 
-    this.boxRef.nativeElement.value  = "";
-    this.boxRef1.nativeElement.value  = "";
-    this.boxRef2.nativeElement.value  = "";
-    this.boxRef3.nativeElement.value  = "";
+  //   this.boxRef.nativeElement.value  = "";
+  //   this.boxRef1.nativeElement.value  = "";
+  //   this.boxRef2.nativeElement.value  = "";
+  //   this.boxRef3.nativeElement.value  = "";
 
-  }
-  librat(box) {
+  // }
+  // librat(box) {
     
-    if ((Number(this.nxenesiService.form.controls['PagesaLibrat'].value) - (Number(this.nxenesiService.form.controls['PaguarLibrat'].value) + Number(box))) >= 0 && box != "" && Number(box) > 0) {
-      this.nxenesiService.form.controls['PaguarLibrat'].setValue(Number(this.nxenesiService.form.controls['PaguarLibrat'].value) + Number(box));
-      this.perqLibrat = Number(this.nxenesiService.form.controls['PaguarLibrat'].value) / Number(this.nxenesiService.form.controls['PagesaLibrat'].value) * 100;
-      this.mbetjaLibrat = Number(this.nxenesiService.form.controls['PagesaLibrat'].value) - Number(this.nxenesiService.form.controls['PaguarLibrat'].value);
-      this.nxenesiService.updateNxenes(this.nxenesiService.form.value);
-       //gjenerimi i transaksionit
-       this.arka.insertTransaksion('PT',this.nxenesiService.form.controls["$key"].value,this.nxenesiService.form.controls["Emri"].value + this.nxenesiService.form.controls["Mbiemri"].value,this.nxenesiService.form.controls["MonedhaLibrat"].value,Number(box),'Pagese per librat',"0s")
-      //printimi i fatures 
-      this.printer.print11('ARKETIM PER LIBRAT',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box,this.nxenesiService.form.controls['MonedhaLibrat'].value);
+  //   if ((Number(this.nxenesiService.form.controls['PagesaLibrat'].value) - (Number(this.nxenesiService.form.controls['PaguarLibrat'].value) + Number(box))) >= 0 && box != "" && Number(box) > 0) {
+  //     this.nxenesiService.form.controls['PaguarLibrat'].setValue(Number(this.nxenesiService.form.controls['PaguarLibrat'].value) + Number(box));
+  //     this.perqLibrat = Number(this.nxenesiService.form.controls['PaguarLibrat'].value) / Number(this.nxenesiService.form.controls['PagesaLibrat'].value) * 100;
+  //     this.mbetjaLibrat = Number(this.nxenesiService.form.controls['PagesaLibrat'].value) - Number(this.nxenesiService.form.controls['PaguarLibrat'].value);
+  //     this.nxenesiService.updateNxenes(this.nxenesiService.form.value);
+  //      //gjenerimi i transaksionit
+  //      this.arka.insertTransaksion('PT',this.nxenesiService.form.controls["$key"].value,this.nxenesiService.form.controls["Emri"].value + this.nxenesiService.form.controls["Mbiemri"].value,this.nxenesiService.form.controls["MonedhaLibrat"].value,Number(box),'Pagese per librat',"0s")
+  //     //printimi i fatures 
+  //     this.printer.print11('ARKETIM PER LIBRAT',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box,this.nxenesiService.form.controls['MonedhaLibrat'].value);
 
-      this.hideLibrat = false;
-      this.notification.success("Pagesa u krye me sukses !");
-    }
-    else {
-      this.notification.warn("Vendosni pagesen ne formatin e duhur !");
-      this.hideLibrat = false;
+  //     this.hideLibrat = false;
+  //     this.notification.success("Pagesa u krye me sukses !");
+  //   }
+  //   else {
+  //     this.notification.warn("Vendosni pagesen ne formatin e duhur !");
+  //     this.hideLibrat = false;
 
-    }
+  //   }
 
-    this.boxRef.nativeElement.value  = "";
-    this.boxRef1.nativeElement.value  = "";
-    this.boxRef2.nativeElement.value  = "";
-    this.boxRef3.nativeElement.value  = "";
-  }
-
+  //   this.boxRef.nativeElement.value  = "";
+  //   this.boxRef1.nativeElement.value  = "";
+  //   this.boxRef2.nativeElement.value  = "";
+  //   this.boxRef3.nativeElement.value  = "";
+  // }
+  
 
   gjejEskursionetShkolla(){
    this.eskursionetShkolla.getEskursione(localStorage.getItem('VitiShkollor')).subscribe(l=>{

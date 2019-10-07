@@ -24,7 +24,7 @@ export class ShpenzimeComponent implements OnInit {
 
   ];
   Monedhat = [
-    { value: 'LEK' }, { value: 'EUR' }
+    { value: 'LEK' }, { value: 'EUR' }, { value: 'DOLLARE' }
 
   ];
   tablaVisible : boolean = false;

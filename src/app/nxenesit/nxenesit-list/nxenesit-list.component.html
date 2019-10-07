@@ -28,43 +28,46 @@
 <div class="mat-elevation-z8">
 
   <mat-table [dataSource]="listData" matSort>
-
+    <ng-container matColumnDef="index">
+      <mat-header-cell *matHeaderCellDef> Index </mat-header-cell>
+      <mat-cell *matCellDef="let i = index;">{{i+1}}</mat-cell>
+    </ng-container>
 
     <ng-container matColumnDef="Emri">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Emri</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.Emri}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla)}">{{element.Emri}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="Atesia">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Atesia</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.Atesia}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla)}">{{element.Atesia}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="Mbiemri">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Mbiemri</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.Mbiemri}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla)}">{{element.Mbiemri}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="Klasa">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Klasa</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.Klasa}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla)}">{{element.Klasa}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="Indeksi">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Indeksi</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.Indeksi}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla)}">{{element.Indeksi}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="PagesaShkolla">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Pagesa</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.PagesaShkolla|currency :element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla)}">{{element.PagesaShkolla|currency :element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="PaguarShkolla">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Paguar</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.PaguarShkolla|currency : element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla)}">{{element.PaguarShkolla|currency : element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="MbeturShkolla">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Mbetur</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.PagesaShkolla-element.PaguarShkolla|currency : element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla)}">{{element.PagesaShkolla-element.PaguarShkolla|currency : element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="Actions">
@@ -88,10 +91,15 @@
 
 
   </mat-table>
-  <mat-paginator [pageSizeOptions]="[5, 10,12,14,15, 25, 100]" [pageSize]="10" showFirstLastButtons *ngIf ="!mobile"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10,12,14,15, 25, 100]" [pageSize]="25" showFirstLastButtons *ngIf ="!mobile"></mat-paginator>
 
   <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
     <mat-progress-spinner color="primary" mode="indeterminate">
     </mat-progress-spinner>
   </mat-card>
+  <div>
+    <button  mat-raised-button color="primary"  matTooltip ="Print Mesuesit" (click)="printVonesa()"><mat-icon >print</mat-icon></button>&nbsp;
+   
+  
+  </div>
 </div>

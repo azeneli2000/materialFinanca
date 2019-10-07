@@ -6,6 +6,7 @@ import { NxenesiComponent } from '../nxenesi/nxenesi.component';
 import { ConfirmDialogService } from 'src/app/shared/confirm-dialog.service';
 import { Router } from '@angular/router';
 import { VitiService } from 'src/app/shared/viti.service';
+import { PrintService } from 'src/app/shared/print.service';
 @Component({
   selector: 'app-nxenesit-list',
   templateUrl: './nxenesit-list.component.html',
@@ -39,14 +40,14 @@ export class NxenesitListComponent implements OnInit {
   vitiZgjedhur
   isLoading = true;
 
-  constructor(private nxenesitService: NxenesiService, private dialog: MatDialog, private notification: NotificationService, private dialogService: ConfirmDialogService, private router: Router, private _viti: VitiService) { }
+  constructor(private nxenesitService: NxenesiService, private dialog: MatDialog, private notification: NotificationService, private dialogService: ConfirmDialogService, private router: Router, private _viti: VitiService, private printer : PrintService) { }
 
   mbeturShkolla: number;
   mbeturTrans: number;
   mbeturLibra: number;
   mbeturUni: number;
   listData: MatTableDataSource<any>;
-  displayedColumns: string[] = ['Emri', 'Atesia', 'Mbiemri', 'Klasa', 'Indeksi', 'PagesaShkolla', 'PaguarShkolla', 'Actions'];
+  displayedColumns: string[] = ['index','Emri', 'Atesia', 'Mbiemri', 'Klasa', 'Indeksi', 'PagesaShkolla', 'PaguarShkolla', 'Actions'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey: string;
@@ -59,14 +60,14 @@ mobile: boolean =false;
     if(window.innerWidth < 400)
     {
       this.mobile = true;
-     this.displayedColumns = ['Emri',  'Mbiemri', 'Klasa',  'PagesaShkolla', 'PaguarShkolla','MbeturShkolla'];
+     this.displayedColumns = ['index','Emri',  'Mbiemri', 'Klasa',  'PagesaShkolla', 'PaguarShkolla','MbeturShkolla'];
     }
      else
      {
-     this.displayedColumns =  ['Emri', 'Atesia', 'Mbiemri', 'Klasa', 'Indeksi', 'PagesaShkolla', 'PaguarShkolla','MbeturShkolla', 'Actions'];
+     this.displayedColumns =  ['index','Emri', 'Atesia', 'Mbiemri', 'Klasa', 'Indeksi', 'PagesaShkolla', 'PaguarShkolla','MbeturShkolla', 'Actions'];
      this.mobile = false;
      }
-     
+    
      this.getAll();
     this._viti.msgMenu$.subscribe(mes => { this.vitiZgjedhur = mes; this.getAll() });
 
@@ -107,8 +108,24 @@ mobile: boolean =false;
         this.listData.paginator = this.paginator;
         //filtron vetem kolnat e visualizuara ne tabele pervec actions dhe $key
         this.listData.filterPredicate = (data, filter) => {
+          let i : number;
+          if (this.searchKey =="shkolla"  )
+          {
+           
+            
+           return this.gjejVonesa(data.PagesaShkolla,data.PaguarShkolla);
+
+          }
+          if (this.searchKey =="transporti" )
+          {
+           return this.gjejVonesaTransporti(data.PagesaTransporti,data.PaguarTransporti);
+
+          }
+         
+          if(this.searchKey!="transporti"&&this.searchKey!="shkolla")
+          
           return this.displayedColumns.some(ele => {
-            return ele != 'MbeturShkolla' && ele != 'Actions' && ele != 'PagesaShkolla' && ele != 'PaguarShkolla' && ele != 'Indeksi' && data[ele].toString().toLowerCase().indexOf(filter) != -1;
+            return ele != 'MbeturShkolla' && ele != 'Actions' && ele != 'PagesaShkolla' && ele != 'PaguarShkolla' && ele != 'Indeksi' && ele != 'index' && data[ele].toString().toLowerCase().indexOf(filter) != -1;
           });
         };
 
@@ -122,7 +139,11 @@ mobile: boolean =false;
   }
 
   applyFilter() {
+   
+  
+  
     this.listData.filter = this.searchKey.trim().toLowerCase();
+  
     this.mbeturShkolla = this.listData.filteredData.map(t => t.PagesaShkolla).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarShkolla).reduce((acc, value) => acc + value, 0);
     this.mbeturTrans = this.listData.filteredData.map(t => t.PagesaTransporti).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarTransporti).reduce((acc, value) => acc + value, 0);
     this.mbeturLibra = this.listData.filteredData.map(t => t.PagesaLibrat).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarLibrat).reduce((acc, value) => acc + value, 0);
@@ -172,6 +193,49 @@ mobile: boolean =false;
 
     this.router.navigate(['/nxenesit', nxenesi.$key]);
 
+  }
+
+  gjejVonesa(pagesa,paguar) 
+  {
+    let kesti = (pagesa- 100)/10;
+    // console.log(kesti);
+    let nrKesteshPaguar =Math.floor((paguar-100)/kesti);
+    var currentdate = new Date(); 
+//  console.log('keste : ' + nrKesteshPaguar);
+     let dateNow =  new Date(currentdate.getFullYear(),currentdate.getMonth(),currentdate.getDate());
+   
+    let dateFillimi =  new Date("09/20/2019");
+    
+    let muaj = dateNow.getMonth() - dateFillimi.getMonth() + (12 * (dateNow.getFullYear() - dateFillimi.getFullYear()));
+    // console.log(muaj);
+    return (nrKesteshPaguar<=muaj);
+  }
+  gjejVonesaTransporti(pagesa,paguar) 
+  {
+    let kesti = (pagesa- 100)/10;
+    // console.log(kesti);
+    let nrKesteshPaguar =Math.floor((paguar-100)/kesti);
+    var currentdate = new Date(); 
+//  console.log('keste : ' + nrKesteshPaguar);
+     let dateNow =  new Date(currentdate.getFullYear(),currentdate.getMonth(),currentdate.getDate());
+   
+    let dateFillimi =  new Date("09/20/2019");
+    
+    let muaj = dateNow.getMonth() - dateFillimi.getMonth() + (12 * (dateNow.getFullYear() - dateFillimi.getFullYear()));
+    // console.log(muaj);
+    return (nrKesteshPaguar<=muaj);
+  }
+
+  printVonesa()
+  {
+    if (this.searchKey == "shkolla")
+   this.printer.printVonesa(this.listData.filteredData,"VONESAT SHKOLLA KLASA ");
+   
+    if (this.searchKey == "transporti")
+     this.printer.printVonesa(this.listData.filteredData,"VONESAT TRANSPORTI KLASA ");
+
+     if (this.searchKey != "shkolla" && this.searchKey != "transporti")
+     this.printer.printVonesa(this.listData.filteredData,"KLASA ");
   }
 
 }
