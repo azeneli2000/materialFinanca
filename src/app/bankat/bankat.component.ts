@@ -131,9 +131,9 @@ console.log('eur : ' + this.totEUR + 'lek :' + this.totLEK);
 this.bankat.form.controls.Data.setValue(arketimiDate) ;
    let key =  this.bankat.insertBankat(this.bankat.form.controls.Bankat.value,this.bankat.form.value);
     //insert transaksionin
-    // this.arka.insertTransaksion("Arketime",key,this.bankat.form.controls.Koment.value,this.bankat.form.controls.Monedha.value,this.bankat.form.controls.Sasia.value,"Arketime "+this.bankat.form.controls["Arketime"].value,this.bankat.form.controls["Arketime"].value)
+    this.arka.insertTransaksion("Hua",key,this.bankat.form.controls.Koment.value,this.bankat.form.controls.Monedha.value,this.bankat.form.controls.Sasia.value,"Hua "+this.bankat.form.controls["Bankat"].value,this.bankat.form.controls["Bankat"].value)
    //update totali
-    // this.arka.updateTotali(Math.abs(this.bankat.form.controls.Sasia.value),this.bankat.form.controls.Monedha.value);
+    this.arka.updateTotali(Math.abs(this.bankat.form.controls.Sasia.value),this.bankat.form.controls.Monedha.value);
     
     // this.printer.printShpenzime(this.arketime.form.controls.Arketime.value,this.arketime.form.controls.Koment.value,this.arketime.form.controls.Sasia.value,this.arketime.form.controls.Monedha.value);
     // this.printer.printShpenzime(this.arketime.form.controls.Arketime.value,this.arketime.form.controls.Koment.value,this.arketime.form.controls.Sasia.value,this.arketime.form.controls.Monedha.value);

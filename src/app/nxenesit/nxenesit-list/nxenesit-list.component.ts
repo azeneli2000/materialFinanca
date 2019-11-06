@@ -46,12 +46,15 @@ export class NxenesitListComponent implements OnInit {
   mbeturTrans: number;
   mbeturLibra: number;
   mbeturUni: number;
+  detyrimiMujorShkolla : number = 0;
+  detyrimiMujorTransporti : number = 0;
   listData: MatTableDataSource<any>;
-  displayedColumns: string[] = ['index','Emri', 'Atesia', 'Mbiemri', 'Klasa', 'Indeksi', 'PagesaShkolla', 'PaguarShkolla', 'Actions'];
+  displayedColumns: string[] = ['index','Emri', 'Atesia', 'Mbiemri', 'Klasa', 'Indeksi', 'PagesaShkolla', 'PaguarShkolla','DetyrimiShkolla', 'Actions'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey: string;
 mobile: boolean =false;
+checked = false;
 
 
 
@@ -64,7 +67,11 @@ mobile: boolean =false;
     }
      else
      {
-     this.displayedColumns =  ['index','Emri', 'Atesia', 'Mbiemri', 'Klasa', 'Indeksi', 'PagesaShkolla', 'PaguarShkolla','MbeturShkolla', 'Actions'];
+       if (this.checked==false)
+     this.displayedColumns =  ['index','Emri', 'Atesia', 'Mbiemri', 'Klasa', 'Indeksi', 'PagesaShkolla', 'PaguarShkolla','MbeturShkolla','DetyrimiShkolla', 'Actions'];
+     else
+     this.displayedColumns =  ['index','Emri', 'Atesia', 'Mbiemri', 'Klasa', 'Indeksi', 'PagesaTransporti', 'PaguarTransporti','MbeturTransporti','DetyrimiTransporti', 'Actions'];
+
      this.mobile = false;
      }
     
@@ -95,29 +102,32 @@ mobile: boolean =false;
         this.mbeturTrans = this.listData.filteredData.map(t => t.PagesaTransporti).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarTransporti).reduce((acc, value) => acc + value, 0);
         this.mbeturLibra = this.listData.filteredData.map(t => t.PagesaLibrat).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarLibrat).reduce((acc, value) => acc + value, 0);
         this.mbeturUni = this.listData.filteredData.map(t => t.PagesaUniforma).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarUniforma).reduce((acc, value) => acc + value, 0);
-
-        let sum = this.listData.filteredData.map(t =>{
-         
-          return Number(t.PaguarShkolla)
-         }    
-          ).reduce((acc, value) => acc + value) ;
-        console.log(sum);
+         this.detyrimiMujorShkolla = 0;
+         this.detyrimiMujorTransporti = 0;
+        this.listData.filteredData.forEach(el=>{
+          this.detyrimiMujorShkolla =this .detyrimiMujorShkolla + this.gjejVonesaSasia(el.PagesaShkolla,el.PaguarShkolla);
+          this.detyrimiMujorTransporti =this .detyrimiMujorTransporti + this.gjejVonesaSasiaTransporti(el.PagesaTransporti,el.PaguarTransporti);
+   
+       });
+      
 
         this.listData.sort = this.sort;
         if(!this.mobile)
         this.listData.paginator = this.paginator;
         //filtron vetem kolnat e visualizuara ne tabele pervec actions dhe $key
         this.listData.filterPredicate = (data, filter) => {
-          let i : number;
+         // this.detyrimiMujorShkolla = 0;
+      
           if (this.searchKey =="shkolla"  )
           {
-           
-            
+          // this.detyrimiMujorShkolla = 0;
+         //  this.detyrimiMujorShkolla = this.detyrimiMujorShkolla + this.gjejVonesaSasia(data.PagesaShkolla,data.PaguarShkolla);
            return this.gjejVonesa(data.PagesaShkolla,data.PaguarShkolla);
 
           }
           if (this.searchKey =="transporti" )
           {
+          // this.detyrimiMujorTransporti = this.detyrimiMujorTransporti + this.gjejVonesaSasia(data.PagesaTransporti,data.PaguarTransporti);
            return this.gjejVonesaTransporti(data.PagesaTransporti,data.PaguarTransporti);
 
           }
@@ -125,22 +135,34 @@ mobile: boolean =false;
           if(this.searchKey!="transporti"&&this.searchKey!="shkolla")
           
           return this.displayedColumns.some(ele => {
-            return ele != 'MbeturShkolla' && ele != 'Actions' && ele != 'PagesaShkolla' && ele != 'PaguarShkolla' && ele != 'Indeksi' && ele != 'index' && data[ele].toString().toLowerCase().indexOf(filter) != -1;
+            return ele != 'MbeturShkolla' &&  ele != 'DetyrimiShkolla' && ele != 'Actions' && ele != 'PagesaShkolla' && ele != 'PaguarShkolla' && ele != 'MbeturTransporti' && ele != 'DetyrimiTransporti' && ele != 'PagesaTransporti' && ele != 'PaguarTransporti' && ele != 'Indeksi' && ele != 'index' && data[ele].toString().toLowerCase().indexOf(filter) != -1;
+          
           });
+         
         };
 
 
       });
   }
-
+onCheck()
+{
+  if (this.checked==false)
+  this.displayedColumns =  ['index','Emri', 'Atesia', 'Mbiemri', 'Klasa', 'Indeksi', 'PagesaShkolla', 'PaguarShkolla','MbeturShkolla','DetyrimiShkolla', 'Actions'];
+  else
+  this.displayedColumns =  ['index','Emri', 'Atesia', 'Mbiemri', 'Klasa', 'Indeksi', 'PagesaTransporti', 'PaguarTransporti','MbeturTransporti','DetyrimiTransporti', 'Actions'];
+  
+}
   onSearchClear() {
+
     this.searchKey = "";
     this.applyFilter();
   }
 
   applyFilter() {
    
-  
+    this.detyrimiMujorShkolla = 0;
+    this.detyrimiMujorTransporti = 0;
+
   
     this.listData.filter = this.searchKey.trim().toLowerCase();
   
@@ -148,7 +170,11 @@ mobile: boolean =false;
     this.mbeturTrans = this.listData.filteredData.map(t => t.PagesaTransporti).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarTransporti).reduce((acc, value) => acc + value, 0);
     this.mbeturLibra = this.listData.filteredData.map(t => t.PagesaLibrat).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarLibrat).reduce((acc, value) => acc + value, 0);
     this.mbeturUni = this.listData.filteredData.map(t => t.PagesaUniforma).reduce((acc, value) => acc + value, 0) - this.listData.filteredData.map(t => t.PaguarUniforma).reduce((acc, value) => acc + value, 0);
+    this.listData.filteredData.forEach(el=>{
+       this.detyrimiMujorShkolla =this .detyrimiMujorShkolla + this.gjejVonesaSasia(el.PagesaShkolla,el.PaguarShkolla);
+       this.detyrimiMujorTransporti =this .detyrimiMujorTransporti + this.gjejVonesaSasiaTransporti(el.PagesaTransporti,el.PaguarTransporti);
 
+    });
   }
 
 
@@ -194,12 +220,49 @@ mobile: boolean =false;
     this.router.navigate(['/nxenesit', nxenesi.$key]);
 
   }
-
+  gjejVonesaSasia(pagesa,paguar) 
+  {
+    let kesti = (pagesa)/9;
+    // console.log(kesti);
+    let nrKesteshPaguar =(paguar)/kesti;
+    var currentdate = new Date(); 
+//  console.log('keste : ' + nrKesteshPaguar);
+     let dateNow =  new Date(currentdate.getFullYear(),currentdate.getMonth(),currentdate.getDate());
+   
+    let dateFillimi =  new Date("09/20/2019");
+    
+    let muaj = dateNow.getMonth() - dateFillimi.getMonth() + (12 * (dateNow.getFullYear() - dateFillimi.getFullYear()));
+    // console.log(muaj);
+    let res =( muaj+1)*kesti - nrKesteshPaguar*kesti;
+    if (res>=0 && !(pagesa==0) )
+       return res
+    else
+       return 0;
+  }
+  gjejVonesaSasiaTransporti(pagesa,paguar) 
+  {
+    let kesti = (pagesa)/9;
+    // console.log(kesti);
+    let nrKesteshPaguar =(paguar)/kesti;
+    var currentdate = new Date(); 
+//  console.log('keste : ' + nrKesteshPaguar);
+     let dateNow =  new Date(currentdate.getFullYear(),currentdate.getMonth(),currentdate.getDate());
+   
+    let dateFillimi =  new Date("09/20/2019");
+    
+    let muaj = dateNow.getMonth() - dateFillimi.getMonth() + (12 * (dateNow.getFullYear() - dateFillimi.getFullYear()));
+    // console.log(muaj);
+    let res =( muaj+1)*kesti - nrKesteshPaguar*kesti;
+    if (res>=0 && !(pagesa==0) )
+       return res
+    else
+       return 0;
+  }
   gjejVonesa(pagesa,paguar) 
   {
-    let kesti = (pagesa- 100)/10;
+    let kesti = Math.round((pagesa)/9);
     // console.log(kesti);
-    let nrKesteshPaguar =Math.floor((paguar-100)/kesti);
+    let nrKesteshPaguar =Math.floor((paguar)/kesti);
     var currentdate = new Date(); 
 //  console.log('keste : ' + nrKesteshPaguar);
      let dateNow =  new Date(currentdate.getFullYear(),currentdate.getMonth(),currentdate.getDate());
@@ -212,7 +275,7 @@ mobile: boolean =false;
   }
   gjejVonesaTransporti(pagesa,paguar) 
   {
-    let kesti = (pagesa- 100)/10;
+    let kesti = Math.round((pagesa- 100)/9);
     // console.log(kesti);
     let nrKesteshPaguar =Math.floor((paguar-100)/kesti);
     var currentdate = new Date(); 
@@ -225,6 +288,21 @@ mobile: boolean =false;
     // console.log(muaj);
     return (nrKesteshPaguar<=muaj);
   }
+  gjejVonesaJshile(pagesa,paguar) 
+  {
+    let kesti = Math.round((pagesa)/9);
+    // console.log(kesti);
+    let nrKesteshPaguar =Math.floor((paguar)/kesti);
+    var currentdate = new Date(); 
+//  console.log('keste : ' + nrKesteshPaguar);
+     let dateNow =  new Date(currentdate.getFullYear(),currentdate.getMonth(),currentdate.getDate());
+   
+    let dateFillimi =  new Date("09/20/2019");
+    
+    let muaj = dateNow.getMonth() - dateFillimi.getMonth() + (12 * (dateNow.getFullYear() - dateFillimi.getFullYear()));
+   //  console.log(muaj);
+    return (nrKesteshPaguar==muaj);
+  }
 
   printVonesa()
   {
@@ -236,6 +314,7 @@ mobile: boolean =false;
 
      if (this.searchKey != "shkolla" && this.searchKey != "transporti")
      this.printer.printVonesa(this.listData.filteredData,"KLASA ");
+
   }
 
 }

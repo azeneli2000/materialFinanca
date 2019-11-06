@@ -690,6 +690,7 @@ printArkaThermal(llojiPagesa : string,koment,pagesa,monedha,llojiTransaksioni){
     printerData.forEach(element => {
   
     j=j+1;
+    // if(element.PagesaTransporti !=0 && element.PagesaShkolla!=0)
      printContentTbl =printContentTbl + "<tr> <td>"+j + "</td> <td style='white-space: nowrap'>" + element["Emri"] + "</td> <td>" + element["Mbiemri"] + "</td> <td>" + element["Klasa"] + "</td>"+"<td>" + element["Indeksi"] + "</td>"
     +"</tr>" ; 
   });
