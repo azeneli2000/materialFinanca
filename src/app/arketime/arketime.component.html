@@ -63,9 +63,9 @@
     <div class="tot">
       <mat-card>
     
-        <div *ngIf="totEUR>0 && totEUR != 'NaN'" style="display: inline;color : #F44336"><span style="color:#303F9F"> </span> <span class="mbeturSpan">
+        <div *ngIf="totEUR>0" style="display: inline;color : #F44336"><span style="color:#303F9F"> </span> <span class="mbeturSpan">
             {{totEUR|currency : 'EUR':'symbol':'1.0-0'}}</span></div>
-        <div *ngIf="totLEK>0 && totLEK != 'NaN'" style="display: inline;color:#303F9F"><span style="color:#303F9F"></span> <span class="mbeturSpan">
+        <div *ngIf="totLEK>0" style="display: inline;color:#303F9F"><span style="color:#303F9F"></span> <span class="mbeturSpan">
             {{totLEK|currency : 'LEK':'symbol':'1.0-0'}}</span></div>
         <!-- <div *ngIf="mbeturTrans>0" style="display: inline"> <span class="mbeturSpan" style="color:#303F9F"> Trans :
           </span> <span class="mbeturSpan">{{mbeturTrans|currency : 'LEK':'symbol':'1.0-0'}}</span></div>

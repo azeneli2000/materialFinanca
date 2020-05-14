@@ -132,14 +132,14 @@ paguajZyrtare(array){
   this.dialogService.openConfirmDialog('Jeni te sigurte qe doni te beni pagesen Zyrtare per te gjithe mesuesit e zgjedhur ?')
   .afterClosed().subscribe(res => {
     if (res) {
-      if (!(this.selection.selected.some((el)=>{console.log(el.PaguarNeto+el.PagaNetoMujore); return (el.PaguarNeto+el.PagaNetoMujore>=el.PagaNetoMujore*(el.MuajPage+1))})))
-      {
+      // if (!(this.selection.selected.some((el)=>{console.log(el.PaguarNeto+el.PagaNetoMujore); return (el.PaguarNeto+el.PagaNetoMujore>=el.PagaNetoMujore*(el.MuajPage+1))})))
+      // {
     this.listMesuesit.updatePaguarBanke(this.selection.selected);
     this.notification.success('Mesuesve te seleksionuar iu kaloi paga ! ')
     
-      }
-    else
-    this.notification.warn('Ka mesues qe nuk mund tiu hidhet paga Zyrtare ! ')
+      // }
+    // else
+    // this.notification.warn('Ka mesues qe nuk mund tiu hidhet paga Zyrtare ! ')
     }
   });
 

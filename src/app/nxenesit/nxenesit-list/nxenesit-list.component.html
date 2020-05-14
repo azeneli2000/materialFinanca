@@ -8,9 +8,8 @@
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
-  <mat-checkbox class="example-margin" (change)="onCheck()" [(ngModel)]="checked">Transporti</mat-checkbox> &nbsp;
   <div class="mbetur">
-    <mat-card  *ngIf="!checked">
+    <mat-card >
       <!-- <mat-card-title>Shkolla</mat-card-title> -->
       <mat-card-subtitle>Shkolla</mat-card-subtitle>
 
@@ -21,15 +20,6 @@
         </span> <span class="mbeturSpan">{{detyrimiMujorShkolla|currency : 'EUR':'symbol':'1.0-0'}}</span></div>
     </mat-card>
 
-      <mat-card  *ngIf="checked">
-          <mat-card-subtitle>Transporti</mat-card-subtitle>
-
-        <div  style="display: inline"><span style="color:#303F9F">Total : </span> <span class="mbeturSpan">
-          {{mbeturTrans|currency : 'LEK':'symbol':'1.0-0'}}</span></div>
-
-      <div  *ngIf="detyrimiMujorTransporti>0" style="display: inline"> <span class="mbeturSpan" style="color:#303F9F"> Mujor :
-        </span> <span class="mbeturSpan">{{detyrimiMujorTransporti|currency : 'LEK':'symbol':'1.0-0'}}</span></div>
-    </mat-card>
   </div>
 </div>
 <br>
@@ -44,63 +34,63 @@
 
     <ng-container matColumnDef="Emri">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Emri</mat-header-cell>
-      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla)&&!checked, 'make-blue': gjejVonesaJshile(row.PagesaShkolla,row.PaguarShkolla)&&!checked}">{{element.Emri}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==2, 'make-blue': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==1,'make-green': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==0}">{{element.Emri}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="Atesia">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Atesia</mat-header-cell>
-      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla)&&!checked, 'make-blue': gjejVonesaJshile(row.PagesaShkolla,row.PaguarShkolla)&&!checked}">{{element.Atesia}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==2, 'make-blue': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==1,'make-green': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==0}">{{element.Atesia}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="Mbiemri">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Mbiemri</mat-header-cell>
-      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla)&&!checked, 'make-blue': gjejVonesaJshile(row.PagesaShkolla,row.PaguarShkolla)&&!checked}">{{element.Mbiemri}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==2, 'make-blue': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==1,'make-green': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==0}">{{element.Mbiemri}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="Klasa">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Klasa</mat-header-cell>
-      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla)&&!checked, 'make-blue': gjejVonesaJshile(row.PagesaShkolla,row.PaguarShkolla)&&!checked}">{{element.Klasa}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==2, 'make-blue': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==1,'make-green': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==0}">{{element.Klasa}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="Indeksi">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Indeksi</mat-header-cell>
-      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla)&&!checked, 'make-blue': gjejVonesaJshile(row.PagesaShkolla,row.PaguarShkolla)&&!checked}">{{element.Indeksi}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==2, 'make-blue': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==1,'make-green': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==0}">{{element.Indeksi}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="PagesaShkolla">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Pagesa</mat-header-cell>
-      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla), 'make-blue': gjejVonesaJshile(row.PagesaShkolla,row.PaguarShkolla)}">{{element.PagesaShkolla|currency :element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==2, 'make-blue': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==1,'make-green': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==0}">{{element.PagesaShkolla|currency :element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="PaguarShkolla">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Paguar</mat-header-cell>
-      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla), 'make-blue': gjejVonesaJshile(row.PagesaShkolla,row.PaguarShkolla)}">{{element.PaguarShkolla|currency : element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==2, 'make-blue': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==1,'make-green': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==0}">{{element.PaguarShkolla|currency : element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="DetyrimiShkolla">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Detyrimi</mat-header-cell>
-      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla), 'make-blue': gjejVonesaJshile(row.PagesaShkolla,row.PaguarShkolla)}">{{gjejVonesaSasia(element.PagesaShkolla,element.PaguarShkolla)|currency : element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==2, 'make-blue': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==1,'make-green': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==0}">{{gjejVonesaSasia(element.PagesaShkolla,element.PaguarShkolla)|currency : element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="MbeturShkolla">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Mbetur</mat-header-cell>
-      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla), 'make-blue': gjejVonesaJshile(row.PagesaShkolla,row.PaguarShkolla)}">{{element.PagesaShkolla-element.PaguarShkolla|currency : element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==2, 'make-blue': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==1,'make-green': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==0}">{{element.PagesaShkolla-element.PaguarShkolla|currency : element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="PagesaTransporti">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Pagesa</mat-header-cell>
-      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla)&&!checked, 'make-blue': gjejVonesaJshile(row.PagesaShkolla,row.PaguarShkolla)&&!checked}">{{element.PagesaTransporti|currency :element.MonedhaTransporti:'symbol':'1.0-0'}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==2, 'make-blue': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==1,'make-green': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==0}">{{element.PagesaTransporti|currency :element.MonedhaTransporti:'symbol':'1.0-0'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="PaguarTransporti">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Paguar</mat-header-cell>
-      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla)&&!checked, 'make-blue': gjejVonesaJshile(row.PagesaShkolla,row.PaguarShkolla)&&!checked}">{{element.PaguarTransporti|currency : element.MonedhaTransporti:'symbol':'1.0-0'}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==2, 'make-blue': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==1,'make-green': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==0}">{{element.PaguarTransporti|currency : element.MonedhaTransporti:'symbol':'1.0-0'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="DetyrimiTransporti">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Detyrimi</mat-header-cell>
-      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla)&&!checked, 'make-blue': gjejVonesaJshile(row.PagesaShkolla,row.PaguarShkolla)&&!checked}">{{gjejVonesaSasiaTransporti(element.PagesaTransporti,element.PaguarTransporti)|currency : element.MonedhaTransporti:'symbol':'1.0-0'}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==2, 'make-blue': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==1,'make-green': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==0}">{{gjejVonesaSasiaTransporti(element.PagesaTransporti,element.PaguarTransporti)|currency : element.MonedhaTransporti:'symbol':'1.0-0'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="MbeturTransporti">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Mbetur</mat-header-cell>
-      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesa(row.PagesaShkolla,row.PaguarShkolla)&&!checked, 'make-blue': gjejVonesaJshile(row.PagesaShkolla,row.PaguarShkolla)&&!checked}">{{element.PagesaTransporti-element.PaguarTransporti|currency : element.MonedhaTransporti:'symbol':'1.0-0'}}</mat-cell>
+      <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==2, 'make-blue': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==1,'make-green': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==0}">{{element.PagesaTransporti-element.PaguarTransporti|currency : element.MonedhaTransporti:'symbol':'1.0-0'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="Actions">

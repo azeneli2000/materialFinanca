@@ -14,7 +14,7 @@ import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 })
 export class ArketimeComponent implements OnInit {
 
-  constructor(private arketime: AeketimeService,private datePipe : DatePipe,private printer : PrintService,private arka : ArkaService) { }
+  constructor(public arketime: AeketimeService,private datePipe : DatePipe,private printer : PrintService,private arka : ArkaService) { }
 
   myControl = new FormControl();
   options = ['Dieta','Shperblime','Interes kredie','Interes huaje','Transporti','Uniformat','Librat','Eskursion','Kancelari','Mjete mesimore','Mjete pastrimi','Karburant','Zbukurime','Lyerje','Qera','Energji','Uje','Telefona','Internet','Kamera','Mirembajtje','Sherbime noteriale','Blerje mjetesh mesimore','Komisione bankare','Tatim fitimi','Taksa Vendore','Tatime te tjera','Gjoba','Shpenzime personale','Sigurime',]

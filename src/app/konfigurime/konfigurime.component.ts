@@ -14,7 +14,7 @@ export class KonfigurimeComponent implements OnInit {
   vitiZgjedhur;
   isLoading = true;
   user : boolean = false;
-  constructor(private konfigurime: KonfigurimeService, private notification: NotificationService, private dialogService: ConfirmDialogService) { }
+  constructor(public konfigurime: KonfigurimeService, private notification: NotificationService, private dialogService: ConfirmDialogService) { }
 
   onSubmit() {
     if (this.konfigurime.form.valid) {

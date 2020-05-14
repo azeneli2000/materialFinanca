@@ -64,6 +64,7 @@ import { XchnageComponent } from './arka/xchnage/xchnage.component';
 import { ArketimeComponent } from './arketime/arketime.component';
 import { BankatComponent } from './bankat/bankat.component';
 import { PagesebankaComponent } from './pagesebanka/pagesebanka.component';
+import { NxenesitListTransportiComponent } from './nxenesit-list-transporti/nxenesit-list-transporti.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { PagesebankaComponent } from './pagesebanka/pagesebanka.component';
     ArketimeComponent,
     BankatComponent,
     PagesebankaComponent,
+    NxenesitListTransportiComponent,
     
   ],
   imports: [

@@ -25,7 +25,7 @@ export class MenuKryesoreComponent  implements OnInit{
 vz ;
     vitiZgjedhur;
     vitiFillestar;
-  constructor(private breakpointObserver: BreakpointObserver,private auth :AuthService , private router : Router ,private ag :AuthGuard,private dialog :MatDialog, private _viti : VitiService) {}
+  constructor(private breakpointObserver: BreakpointObserver,public auth :AuthService , private router : Router ,private ag :AuthGuard,private dialog :MatDialog, private _viti : VitiService) {}
     aut = this.auth.authState;
     name ;
     mobile : boolean = false;

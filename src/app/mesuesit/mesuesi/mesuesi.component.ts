@@ -33,7 +33,7 @@ export class MesuesiComponent implements OnInit {
     {value : 1, viewValue : "Kat III" } ,
     {value : 0, viewValue : "Kat IV" } 
 ];
-  constructor(private service : MesuesiService, private notification : NotificationService ,private dialogRef : MatDialogRef<MesuesiComponent>,private listLendet : LendaService, ) { }
+  constructor(public service : MesuesiService, private notification : NotificationService ,private dialogRef : MatDialogRef<MesuesiComponent>,private listLendet : LendaService, ) { }
 
   onSubmit(){
 
@@ -66,11 +66,11 @@ export class MesuesiComponent implements OnInit {
   }
 
 
-  onCheck(){
+  onCheck(a){
 
     //
   }
-  onChangePagaSig(){
+  onChangePagaSig(a){
     this.pagaSig =this.service.form.controls['PagaSig'].value;
    this.llogaritPagaSig(this.pagaBruto,this.pagaSig);
    this.service.form.controls['PagaNetoMujore'].setValue(this.pagaNetoZyrtare);

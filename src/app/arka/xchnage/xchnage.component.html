@@ -11,7 +11,7 @@
     
       <mat-form-field appearance="outline">
         <mat-label>Sasia</mat-label>
-      <input type ="number" formControlName="Sasia"  (keyup) = "llogaritXchange()" matInput [errorStateMatcher]="matcher"  >
+      <input type ="number" formControlName="Sasia"  (keyup) = "llogaritXchange()" matInput  >
       
       <mat-error *ngIf="this.form.controls['Sasia'].errors?.required">
           Sasia<strong>i detyrueshem</strong>
@@ -45,7 +45,7 @@
  1  {{this.form.get("MonedhaFillestare").value}} =
   <mat-form-field appearance="outline">
     <mat-label>Kursi</mat-label>
-  <input type ="number" formControlName="Kursi"  (keyup) = "llogaritXchange()" matInput [errorStateMatcher]="matcher">
+  <input type ="number" formControlName="Kursi"  (keyup) = "llogaritXchange()" matInput>
   
   <!-- <mat-error *ngIf="this.form.controls['Kursi'].errors?.required">
       Kursi<strong>i detyrueshem</strong>

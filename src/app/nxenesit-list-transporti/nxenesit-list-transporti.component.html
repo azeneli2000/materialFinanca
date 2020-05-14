@@ -1,0 +1,293 @@
+<div class="search-div">
+  <button mat-raised-button (click)="onCreate()" *ngIf="!mobile">
+    <mat-icon>add</mat-icon>Nxenes i Ri
+  </button>
+  <mat-form-field class="search-form-field" floatLabel="never">
+    <input
+      matInput
+      [(ngModel)]="searchKey"
+      placeholder="Kerko.."
+      autocomplete="off"
+      (keyup)="applyFilter()"
+    />
+    <button
+      mat-button
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      *ngIf="searchKey"
+      (click)="onSearchClear()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <div class="mbetur">
+    <mat-card>
+      <mat-card-subtitle>Transporti</mat-card-subtitle>
+
+      <div style="display: inline;">
+        <span style="color: #303f9f;">Total : </span>
+        <span class="mbeturSpan">
+          {{ mbeturTrans | currency: "LEK":"symbol":"1.0-0" }}</span
+        >
+      </div>
+
+      <div *ngIf="detyrimiMujorTransporti > 0" style="display: inline;">
+        <span class="mbeturSpan" style="color: #303f9f;"> Mujor : </span>
+        <span class="mbeturSpan">{{
+          detyrimiMujorTransporti | currency: "LEK":"symbol":"1.0-0"
+        }}</span>
+      </div>
+    </mat-card>
+  </div>
+</div>
+<br />
+
+<div class="mat-elevation-z8">
+  <mat-table [dataSource]="listData" matSort>
+    <ng-container matColumnDef="index">
+      <mat-header-cell *matHeaderCellDef> Nr </mat-header-cell>
+      <mat-cell *matCellDef="let i = index">{{ i + 1 }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Emri">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Emri</mat-header-cell>
+      <mat-cell
+        *matCellDef="let element; let row"
+        [ngClass]="{
+          'make-red': gjejVonesaRe(row.PagesaTransporti, row.PaguarTransporti) ==2,
+          'make-blue': gjejVonesaRe(
+            row.PagesaTransporti,
+            row.PaguarTransporti
+          )==1,
+          'make-green': gjejVonesaRe(
+            row.PagesaTransporti,
+            row.PaguarTransporti
+          )==0
+        }"
+        >{{ element.Emri }}</mat-cell
+      >
+    </ng-container>
+    <ng-container matColumnDef="Atesia">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Atesia</mat-header-cell
+      >
+      <mat-cell
+        *matCellDef="let element; let row"
+        [ngClass]="{
+          'make-red': gjejVonesaRe(row.PagesaTransporti, row.PaguarTransporti)==2,
+          'make-blue': gjejVonesaRe (       row.PagesaTransporti,
+            row.PaguarTransporti
+          )==1,
+          'make-green': gjejVonesaRe(
+            row.PagesaTransporti,
+            row.PaguarTransporti
+          )==0
+        }"
+        >{{ element.Atesia }}</mat-cell
+      >
+    </ng-container>
+    <ng-container matColumnDef="Mbiemri">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Mbiemri</mat-header-cell
+      >
+      <mat-cell
+        *matCellDef="let element; let row"
+        [ngClass]="{
+          'make-red': gjejVonesaRe(row.PagesaTransporti, row.PaguarTransporti)==2,
+          'make-blue': gjejVonesaRe(
+            row.PagesaTransporti,
+            row.PaguarTransporti
+          )==1,
+          'make-green': gjejVonesaRe(
+            row.PagesaTransporti,
+            row.PaguarTransporti
+          )==0
+        }"
+        >{{ element.Mbiemri }}</mat-cell
+      >
+    </ng-container>
+    <ng-container matColumnDef="Klasa">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Klasa</mat-header-cell>
+      <mat-cell
+        *matCellDef="let element; let row"
+        [ngClass]="{
+          'make-red': gjejVonesaRe(row.PagesaTransporti, row.PaguarTransporti)==2,
+          'make-blue': gjejVonesaRe(
+            row.PagesaTransporti,
+            row.PaguarTransporti
+          )==1,
+          'make-green': gjejVonesaRe(
+            row.PagesaTransporti,
+            row.PaguarTransporti
+          )==0
+        }"
+        >{{ element.Klasa }}</mat-cell
+      >
+    </ng-container>
+
+    <ng-container matColumnDef="Indeksi">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Indeksi</mat-header-cell
+      >
+      <mat-cell
+        *matCellDef="let element; let row"
+        [ngClass]="{
+          'make-red': gjejVonesaRe(row.PagesaTransporti, row.PaguarTransporti)==2,
+          'make-blue': gjejVonesaRe(
+            row.PagesaTransporti,
+            row.PaguarTransporti
+          )==1,
+          'make-green': gjejVonesaRe(
+            row.PagesaTransporti,
+            row.PaguarTransporti
+          )==0
+        }"
+        >{{ element.Indeksi }}</mat-cell
+      >
+    </ng-container>
+
+    <ng-container matColumnDef="PagesaTransporti">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Pagesa</mat-header-cell
+      >
+      <mat-cell
+        *matCellDef="let element; let row"
+        [ngClass]="{
+          'make-red': gjejVonesaRe(row.PagesaTransporti, row.PaguarTransporti)==2,
+          'make-blue': gjejVonesaRe(
+            row.PagesaTransporti,
+            row.PaguarTransporti
+          )==1,
+          'make-green': gjejVonesaRe(
+            row.PagesaTransporti,
+            row.PaguarTransporti
+          )==0
+        }"
+        >{{
+          element.PagesaTransporti
+            | currency: element.MonedhaTransporti:"symbol":"1.0-0"
+        }}</mat-cell
+      >
+    </ng-container>
+
+    <ng-container matColumnDef="PaguarTransporti">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Paguar</mat-header-cell
+      >
+      <mat-cell
+        *matCellDef="let element; let row"
+        [ngClass]="{
+          'make-red': gjejVonesaRe(row.PagesaTransporti, row.PaguarTransporti)==2,
+          'make-blue': gjejVonesaRe(
+            row.PagesaTransporti,
+            row.PaguarTransporti
+          )==1,
+          'make-green': gjejVonesaRe(
+            row.PagesaTransporti,
+            row.PaguarTransporti
+          )==0
+        }"
+        >{{
+          element.PaguarTransporti
+            | currency: element.MonedhaTransporti:"symbol":"1.0-0"
+        }}</mat-cell
+      >
+    </ng-container>
+
+    <ng-container matColumnDef="DetyrimiTransporti">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Detyrimi</mat-header-cell
+      >
+      <mat-cell
+        *matCellDef="let element; let row"
+        [ngClass]="{
+          'make-red': gjejVonesaRe(row.PagesaTransporti, row.PaguarTransporti)==2,
+          'make-blue': gjejVonesaRe(
+            row.PagesaTransporti,
+            row.PaguarTransporti
+          )==1,
+          'make-green': gjejVonesaRe(
+            row.PagesaTransporti,
+            row.PaguarTransporti
+          )==0
+        }"
+        >{{
+          gjejVonesaSasiaTransporti(
+            element.PagesaTransporti,
+            element.PaguarTransporti
+          ) | currency: element.MonedhaTransporti:"symbol":"1.0-0"
+        }}</mat-cell
+      >
+    </ng-container>
+
+    <ng-container matColumnDef="MbeturTransporti">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Mbetur</mat-header-cell >
+      <mat-cell
+        *matCellDef="let element; let row"
+        [ngClass]="{
+          'make-red': gjejVonesaRe(row.PagesaTransporti, row.PaguarTransporti)==2,
+          'make-blue': gjejVonesaRe(
+            row.PagesaTransporti,
+            row.PaguarTransporti
+          )==1,
+          'make-green': gjejVonesaRe(
+            row.PagesaTransporti,
+            row.PaguarTransporti
+          )==0
+        }"
+        >{{
+          element.PagesaTransporti - element.PaguarTransporti
+            | currency: element.MonedhaTransporti:"symbol":"1.0-0"
+        }}</mat-cell
+      >
+    </ng-container>
+
+    <ng-container matColumnDef="Actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button (click)="onSelect(row)" color="primary">
+          <mat-icon matTooltip="P">assignment</mat-icon>
+        </button>
+        <button mat-icon-button (click)="onEdit(row)">
+          <mat-icon matTooltip="Modifiko">launch</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="onDelete(row.$key)">
+          <mat-icon matTooltip="Fshi">delete_outline</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+    <mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      [ngClass]="{ hidden: checked && row.PagesaTransporti == 0 }"
+    ></mat-row>
+  </mat-table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 12, 14, 15, 25, 100]"
+    [pageSize]="25"
+    showFirstLastButtons
+    *ngIf="!mobile"
+  ></mat-paginator>
+
+  <mat-card
+    *ngIf="isLoading"
+    style="display: flex; justify-content: center; align-items: center;"
+  >
+    <mat-progress-spinner color="primary" mode="indeterminate">
+    </mat-progress-spinner>
+  </mat-card>
+  <div>
+    <button
+      mat-raised-button
+      color="primary"
+      matTooltip="Print Mesuesit"
+      (click)="printVonesa()"
+    >
+      <mat-icon>print</mat-icon></button
+    >&nbsp;
+  </div>
+</div>

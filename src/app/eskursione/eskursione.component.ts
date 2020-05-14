@@ -22,7 +22,7 @@ export class EskursioneComponent implements OnInit {
     Koment: ''
   };
   error;
-  constructor(private eskursione: EskursioneService, private notification: NotificationService, private dialogService: ConfirmDialogService, private shpenzimeService: ShpenzimeService, private datePipe: DatePipe,private arka : ArkaService) { }
+  constructor(public eskursione: EskursioneService, private notification: NotificationService, private dialogService: ConfirmDialogService, private shpenzimeService: ShpenzimeService, private datePipe: DatePipe,private arka : ArkaService) { }
 
   ngOnInit() {
     this.arka.getTotali();

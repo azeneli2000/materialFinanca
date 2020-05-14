@@ -8,17 +8,18 @@ import {
   MatDialog,
 } from "@angular/material";
 import { NotificationService } from "src/app/shared/notification.service";
-import { NxenesiComponent } from "../nxenesi/nxenesi.component";
+import { NxenesiComponent } from "src/app/nxenesit/nxenesi/nxenesi.component";
 import { ConfirmDialogService } from "src/app/shared/confirm-dialog.service";
 import { Router } from "@angular/router";
 import { VitiService } from "src/app/shared/viti.service";
 import { PrintService } from "src/app/shared/print.service";
+import { isNgTemplate } from "@angular/compiler";
 @Component({
-  selector: "app-nxenesit-list",
-  templateUrl: "./nxenesit-list.component.html",
-  styleUrls: ["./nxenesit-list.component.css"],
+  selector: "app-nxenesit-list-transporti",
+  templateUrl: "./nxenesit-list-transporti.component.html",
+  styleUrls: ["./nxenesit-list-transporti.component.css"],
 })
-export class NxenesitListComponent implements OnInit {
+export class NxenesitListTransportiComponent implements OnInit {
   nxenesit: any;
   nx = {
     Emri: "Stela",
@@ -83,6 +84,7 @@ export class NxenesitListComponent implements OnInit {
 
   ngOnInit() {
     //this.nxenesitService.insertNxenes(this.nx);
+
     if (window.innerWidth < 400) {
       this.mobile = true;
       this.displayedColumns = [
@@ -90,25 +92,24 @@ export class NxenesitListComponent implements OnInit {
         "Emri",
         "Mbiemri",
         "Klasa",
-        "PagesaShkolla",
-        "PaguarShkolla",
-        "MbeturShkolla",
+        "PagesaTransporti",
+        "PaguarTransporti",
+        "MbeturTransporti",
       ];
     } else {
-        this.displayedColumns = [
-          "index",
-          "Emri",
-          "Atesia",
-          "Mbiemri",
-          "Klasa",
-          "Indeksi",
-          "PagesaShkolla",
-          "PaguarShkolla",
-          "MbeturShkolla",
-          "DetyrimiShkolla",
-          "Actions",
-        ];
-    
+      this.displayedColumns = [
+        "index",
+        "Emri",
+        "Atesia",
+        "Mbiemri",
+        "Klasa",
+        "Indeksi",
+        "PagesaTransporti",
+        "PaguarTransporti",
+        "MbeturTransporti",
+        "DetyrimiTransporti",
+        "Actions",
+      ];
 
       this.mobile = false;
     }
@@ -124,39 +125,42 @@ export class NxenesitListComponent implements OnInit {
     this.nxenesitService.getNxenesit().subscribe((list) => {
       let array = list.map((item) => {
         this.isLoading = false;
+
         return {
           $key: item.key,
           ...item.payload.val(),
         };
       });
       //
-      let array1 = array.filter(
-        (item) =>
-          item.$key !== "Eskursione" &&
-          item.$key !== "Mesuesit" &&
-          item.$key !== "Shpenzime" &&
-          item.$key !== "Arketime"
-      );
+      let array1 = array
+        .filter(
+          (item) =>
+            item.$key !== "Eskursione" &&
+            item.$key !== "Mesuesit" &&
+            item.$key !== "Shpenzime" &&
+            item.$key !== "Arketime"
+        )
+        .filter((i) => i["PagesaTransporti"] > 0);
       this.listData = new MatTableDataSource(array1);
-      // console.log(array1) ;
+      // console.log(array1);
 
       if (this.listData.data.length == 0) this.isLoading = false;
-      this.mbeturShkolla =
+
+      this.mbeturTrans =
         this.listData.filteredData
-          .map((t) => t.PagesaShkolla)
+          .map((t) => t.PagesaTransporti)
           .reduce((acc, value) => acc + value, 0) -
         this.listData.filteredData
-          .map((t) => t.PaguarShkolla)
+          .map((t) => t.PaguarTransporti)
           .reduce((acc, value) => acc + value, 0);
-     
-     
-      this.detyrimiMujorShkolla = 0;
-      this.detyrimiMujorTransporti = 0;
+
       this.listData.filteredData.forEach((el) => {
-        this.detyrimiMujorShkolla =
-          this.detyrimiMujorShkolla +
-          this.gjejVonesaSasia(el.PagesaShkolla, el.PaguarShkolla);
-       
+        this.detyrimiMujorTransporti =
+          this.detyrimiMujorTransporti +
+          this.gjejVonesaSasiaTransporti(
+            el.PagesaTransporti,
+            el.PaguarTransporti
+          );
       });
 
       this.listData.sort = this.sort;
@@ -167,15 +171,15 @@ export class NxenesitListComponent implements OnInit {
 
         if (this.searchKey == "mujore") {
           // this.detyrimiMujorTransporti = this.detyrimiMujorTransporti + this.gjejVonesaSasia(data.PagesaTransporti,data.PaguarTransporti);
-          return this.gjejVonesaRe(data.PagesaShkolla, data.PaguarShkolla)==1;
+          return this.gjejVonesaRe(data.PagesaTransporti, data.PaguarTransporti)==1;
         }
         if (this.searchKey == "vonesa") {
           // this.detyrimiMujorTransporti = this.detyrimiMujorTransporti + this.gjejVonesaSasia(data.PagesaTransporti,data.PaguarTransporti);
-          return this.gjejVonesaRe(data.PagesaShkolla, data.PaguarShkolla)==2 || this.gjejVonesaRe(data.PagesaTransporti, data.PaguarTransporti)==1 ;
+          return this.gjejVonesaRe(data.PagesaTransporti, data.PaguarTransporti)==2 || this.gjejVonesaRe(data.PagesaTransporti, data.PaguarTransporti)==1 ;
         }
         if (this.searchKey == "prapambetur") {
           // this.detyrimiMujorTransporti = this.detyrimiMujorTransporti + this.gjejVonesaSasia(data.PagesaTransporti,data.PaguarTransporti);
-          return this.gjejVonesaRe(data.PagesaShkolla, data.PaguarShkolla)==2;
+          return this.gjejVonesaRe(data.PagesaTransporti, data.PaguarTransporti)==2;
         }
         if (this.searchKey == "1") {
           // this.detyrimiMujorTransporti = this.detyrimiMujorTransporti + this.gjejVonesaSasia(data.PagesaTransporti,data.PaguarTransporti);
@@ -186,7 +190,7 @@ export class NxenesitListComponent implements OnInit {
           return data.Klasa==0;
         }
 
-        if ( this.searchKey != "shkolla")
+        if (this.searchKey != "transporti")
           return this.displayedColumns.some((ele) => {
             return (
               ele != "MbeturShkolla" &&
@@ -206,36 +210,7 @@ export class NxenesitListComponent implements OnInit {
       };
     });
   }
-  // onCheck() {
-  //   if (this.checked == false)
-  //     this.displayedColumns = [
-  //       "index",
-  //       "Emri",
-  //       "Atesia",
-  //       "Mbiemri",
-  //       "Klasa",
-  //       "Indeksi",
-  //       "PagesaShkolla",
-  //       "PaguarShkolla",
-  //       "MbeturShkolla",
-  //       "DetyrimiShkolla",
-  //       "Actions",
-  //     ];
-  //   else
-  //     this.displayedColumns = [
-  //       "index",
-  //       "Emri",
-  //       "Atesia",
-  //       "Mbiemri",
-  //       "Klasa",
-  //       "Indeksi",
-  //       "PagesaTransporti",
-  //       "PaguarTransporti",
-  //       "MbeturTransporti",
-  //       "DetyrimiTransporti",
-  //       "Actions",
-  //     ];
-  // }
+  
   onSearchClear() {
     this.searchKey = "";
     this.applyFilter();
@@ -247,20 +222,21 @@ export class NxenesitListComponent implements OnInit {
 
     this.listData.filter = this.searchKey.trim().toLowerCase();
 
-    this.mbeturShkolla =
+    this.mbeturTrans =
       this.listData.filteredData
-        .map((t) => t.PagesaShkolla)
+        .map((t) => t.PagesaTransporti)
         .reduce((acc, value) => acc + value, 0) -
       this.listData.filteredData
-        .map((t) => t.PaguarShkolla)
+        .map((t) => t.PaguarTransporti)
         .reduce((acc, value) => acc + value, 0);
 
-  
     this.listData.filteredData.forEach((el) => {
-      this.detyrimiMujorShkolla =
-        this.detyrimiMujorShkolla +
-        this.gjejVonesaSasia(el.PagesaShkolla, el.PaguarShkolla);
-     
+      this.detyrimiMujorTransporti =
+        this.detyrimiMujorTransporti +
+        this.gjejVonesaSasiaTransporti(
+          el.PagesaTransporti,
+          el.PaguarTransporti
+        );
     });
   }
 
@@ -325,7 +301,30 @@ export class NxenesitListComponent implements OnInit {
     if (res >= 0 && !(pagesa == 0)) return res;
     else return 0;
   }
- 
+  gjejVonesaSasiaTransporti(pagesa, paguar) {
+    let kesti = pagesa / 9;
+    // console.log(kesti);
+    let nrKesteshPaguar = paguar / kesti;
+    var currentdate = new Date();
+    //  console.log('keste : ' + nrKesteshPaguar);
+    let dateNow = new Date(
+      currentdate.getFullYear(),
+      currentdate.getMonth(),
+      currentdate.getDate()
+    );
+
+    let dateFillimi = new Date("09/20/2019");
+
+    let muaj =
+      dateNow.getMonth() -
+      dateFillimi.getMonth() +
+      12 * (dateNow.getFullYear() - dateFillimi.getFullYear());
+    // console.log(muaj);
+    let res = (muaj + 1) * kesti - nrKesteshPaguar * kesti;
+    if (res >= 0 && !(pagesa == 0)) return res;
+    else return 0;
+  }
+  
   gjejVonesaRe(pagesa, paguar) {
     let kesti =(pagesa / 9);
     // console.log(kesti);
@@ -354,8 +353,10 @@ export class NxenesitListComponent implements OnInit {
         return 1
        if (diferenca<0)
         return 0 
+    
   }
 
+ 
 
   printVonesa() {
     if (this.searchKey == "shkolla")

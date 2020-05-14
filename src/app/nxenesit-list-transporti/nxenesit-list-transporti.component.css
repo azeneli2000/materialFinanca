@@ -1,0 +1,21 @@
+.mbetur {
+  /* float : right; */
+  display: inline-flex;
+  flex-flow: row wrap;
+  /* background: grey; */
+}
+.mbeturSpan {
+  color: #f44336;
+}
+.make-red {
+  color: red;
+}
+.make-blue {
+  color: blue;
+}
+.hidden {
+  display: none;
+}
+.make-green {
+  color: green;
+}

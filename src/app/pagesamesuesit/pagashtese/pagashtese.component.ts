@@ -12,7 +12,7 @@ import { PrintService } from 'src/app/shared/print.service';
 export class PagashteseComponent implements OnInit {
 pagesaShtese = 0;
 
-  constructor(private service : MesuesiService, private notification : NotificationService ,private dialogRef : MatDialogRef<PagashteseComponent>,private printer : PrintService) { }
+  constructor(public service : MesuesiService, private notification : NotificationService ,private dialogRef : MatDialogRef<PagashteseComponent>,private printer : PrintService) { }
 
   ngOnInit() {
     this.pagesaShtese  = this.service.form.controls['PagaShtese'].value;

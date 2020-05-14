@@ -20,7 +20,7 @@ import { PrintService } from '../shared/print.service';
 })
 export class ArkaComponent implements OnInit {
 
-  constructor(private db: AngularFireDatabase,private nxensiService : NxenesiService, private arkaSevice : ArkaService,private dialog :MatDialog, private notification : NotificationService,  private dialogService : ConfirmDialogService,private shpenzimeProva : ShpenzimeService,private arketimeProva : AeketimeService,private print : PrintService) { }
+  constructor(private db: AngularFireDatabase,private nxensiService : NxenesiService, public arkaSevice : ArkaService,private dialog :MatDialog, private notification : NotificationService,  private dialogService : ConfirmDialogService,private shpenzimeProva : ShpenzimeService,private arketimeProva : AeketimeService,private print : PrintService) { }
   isLoading = true;
   listData : MatTableDataSource<any>
   displayedColumns: string [] =['Koment','Sasia','Valuta','TeDhena','User','Data','Actions'];
@@ -185,7 +185,7 @@ this.totDolKerkimi = this.listData.filteredData.map((t)=>{
   }
 
 
-  onXchangeClick(row){      
+  onXchangeClick(){      
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;

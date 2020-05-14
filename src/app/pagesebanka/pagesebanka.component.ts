@@ -14,7 +14,7 @@ export class PagesebankaComponent implements OnInit {
 
   principali = 0;
 
-  constructor(private service : BankatService, private notification : NotificationService ,private dialogRef : MatDialogRef<PagesebankaComponent>,private printer : PrintService,private arka : ArkaService) { }
+  constructor(public service : BankatService, private notification : NotificationService ,private dialogRef : MatDialogRef<PagesebankaComponent>,private printer : PrintService,private arka : ArkaService) { }
 
   ngOnInit() {
   //   this.principali  = this.service.form.controls['principali'].value;

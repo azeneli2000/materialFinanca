@@ -70,7 +70,7 @@ Klasat : combo[]= [
   {value :  '11', viewValue : "XI" } ,
   {value :  '12', viewValue : "XII" } 
 ];
-constructor(private service : LendaService, private notification : NotificationService ,private dialogRef : MatDialogRef<LendaComponent>,private mesZ : MesuesiZgjedhurService) { }
+constructor(public service : LendaService, private notification : NotificationService ,private dialogRef : MatDialogRef<LendaComponent>,private mesZ : MesuesiZgjedhurService) { }
   idMesuesi;   
   pagaFillestareMesuesi ;
   difUpdate : number ;

@@ -61,7 +61,7 @@ cmimiKlasa : number = 0;
   removable = false;
   addOnBlur = false;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  constructor(private service: NxenesiService, private notification: NotificationService, private dialogRef: MatDialogRef<NxenesiComponent>,private konfigurime : KonfigurimeService) { }
+  constructor(public service: NxenesiService, private notification: NotificationService, private dialogRef: MatDialogRef<NxenesiComponent>,private konfigurime : KonfigurimeService) { }
 
 
 

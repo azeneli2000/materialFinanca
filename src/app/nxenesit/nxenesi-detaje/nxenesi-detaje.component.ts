@@ -22,7 +22,7 @@ export interface DialogData {
 })
 export class NxenesiDetajeComponent implements OnInit {
 
-  constructor(private cp : CurrencyPipe , private nxenesiService: NxenesiService,private eskursionetShkolla : EskursioneService, private route: ActivatedRoute, public dialog: MatDialog, private notification: NotificationService,private printer:PrintService,private arka : ArkaService ) { }
+  constructor(private cp : CurrencyPipe , public nxenesiService: NxenesiService,private eskursionetShkolla : EskursioneService, private route: ActivatedRoute, public dialog: MatDialog, private notification: NotificationService,private printer:PrintService,private arka : ArkaService ) { }
   // listData : MatTableDataSource<any>
 
   // displayedColumns: string [] =['Emri','Javetot','Klasa','NrNxenesish','Ore','Paga','Actions'];

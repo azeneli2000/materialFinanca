@@ -32,7 +32,7 @@ Lenda <strong>e detyruesheme</strong>
 <!-- javet -->
   <mat-form-field appearance="outline">
       <mat-label>Jave totale</mat-label>
-    <input type ="number"(keyup) = "onChangeJavet($event.target.value)" formControlName="Javetot" matInput [errorStateMatcher]="matcher"   >
+    <input type ="number"(keyup) = "onChangeJavet($event.target.value)" formControlName="Javetot" matInput    >
     
       <mat-error *ngIf="service.form.controls['Javetot'].errors?.required">
         Jave totale <strong>te detyruesheme</strong>
@@ -55,7 +55,7 @@ Lenda <strong>e detyruesheme</strong>
 <!-- nr nxenesish -->
   <mat-form-field appearance="outline">
       <mat-label>Nr nxenesve</mat-label>
-    <input type ="number"  (keyup) = "onChangeNxenesit($event.target.value)"  formControlName="NrNxenesish" matInput [errorStateMatcher]="matcher" >
+    <input type ="number"  (keyup) = "onChangeNxenesit($event.target.value)"  formControlName="NrNxenesish" matInput  >
     
     <mat-error *ngIf="service.form.controls['NrNxenesish'].errors?.required">
         Nr nxenesve <strong>i detyrueshem</strong>
@@ -68,7 +68,7 @@ Lenda <strong>e detyruesheme</strong>
   <!-- ore   -->
   <mat-form-field appearance="outline">
     <mat-label>Oret</mat-label>
-  <input type ="number" (keyup) = "onChangeOret($event.target.value)" formControlName="Ore" matInput [errorStateMatcher]="matcher"  >
+  <input type ="number" (keyup) = "onChangeOret($event.target.value)" formControlName="Ore" matInput   >
   
   <mat-error *ngIf="service.form.controls['Ore'].errors?.required">
      Oret <strong>jane te detyruesheme</strong>
@@ -78,7 +78,7 @@ Lenda <strong>e detyruesheme</strong>
 <!-- shtesa inst --> 
 <mat-form-field appearance="outline">
   <mat-label>Shtesa Inst</mat-label>
-<input type ="number" (keyup) = "onChangeShtesa($event.target.value)" formControlName="ShtesaInst" matInput [errorStateMatcher]="matcher"  >
+<input type ="number" (keyup) = "onChangeShtesa($event.target.value)" formControlName="ShtesaInst" matInput   >
 
 <mat-error *ngIf="service.form.controls['ShtesaInst'].errors?.required">
    Shtesa  <strong>eshte e detyruesheme</strong>

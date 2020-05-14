@@ -15,7 +15,7 @@ import { ArkaService } from '../shared/arka.service';
 })
 export class ShpenzimeComponent implements OnInit {
 
-  constructor(private shpenzime: ShpenzimeService,private datePipe : DatePipe,private printer : PrintService,private arka : ArkaService) { }
+  constructor(public shpenzime: ShpenzimeService,private datePipe : DatePipe,private printer : PrintService,private arka : ArkaService) { }
   myControl = new FormControl();
   options = ['Dieta','Shperblime','Interes kredie','Interes huaje','Transporti','Uniformat','Librat','Eskursion','Kancelari','Mjete mesimore','Mjete pastrimi','Karburant','Zbukurime','Lyerje','Qera','Energji','Uje','Telefona','Internet','Kamera','Mirembajtje','Sherbime noteriale','Blerje mjetesh mesimore','Komisione bankare','Tatim fitimi','Taksa Vendore','Tatime te tjera','Gjoba','Shpenzime personale','Sigurime',]
   filteredOptions: Observable<string[]>;

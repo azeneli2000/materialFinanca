@@ -1,23 +1,44 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="!(isHandset$ | async)">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)"
+  >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLinkActive="active" routerLink="mesuesit">Mesuesit</a>
+      <a mat-list-item routerLinkActive="active" routerLink="mesuesit"
+        >Mesuesit</a
+      >
       <a mat-list-item routerLinkActive="active" routerLink="pagesat">Pagat</a>
 
-      <a mat-list-item routerLinkActive="active" routerLink="nxenesit">Nxenesit</a>
-      <a mat-list-item routerLinkActive="active" routerLink="shpenzime">Shpenzime</a>
-      <a mat-list-item routerLinkActive="active" routerLink="arketime">Arketime</a>
+      <a mat-list-item routerLinkActive="active" routerLink="nxenesit"
+        >Nxenesit</a
+      >
+      <a mat-list-item routerLinkActive="active" routerLink="shpenzime"
+        >Shpenzime</a
+      >
+      <a mat-list-item routerLinkActive="active" routerLink="arketime"
+        >Arketime</a
+      >
 
-      <a mat-list-item routerLinkActive="active" routerLink="konfigurime" *ngIf ="!mobile">Konfigurime</a>
-      <a mat-list-item routerLinkActive="active" routerLink="eskursione">Eskursione</a>
+      <a
+        mat-list-item
+        routerLinkActive="active"
+        routerLink="konfigurime"
+        *ngIf="!mobile"
+        >Konfigurime</a
+      >
+      <a mat-list-item routerLinkActive="active" routerLink="eskursione"
+        >Eskursione</a
+      >
       <a mat-list-item routerLinkActive="active" routerLink="arka">Arka</a>
       <a mat-list-item routerLinkActive="active" routerLink="huate">Huate</a>
-
-
+      <a mat-list-item routerLinkActive="active" routerLink="nxenesittransporti"
+        >Transporti</a
+      >
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -27,28 +48,38 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+        *ngIf="isHandset$ | async"
+      >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span *ngIf ="!mobile">Shkolla Nr. 1</span>
-      <mat-select [value] = "vitiFillestar" class = "viti" (selectionChange)="onChangeViti($event)" >
-        <mat-option *ngFor="let v of vitiShkollor" [value]="v.value">{{v.value}}</mat-option>  
-
+      <span *ngIf="!mobile">Shkolla Nr. 1</span>
+      <mat-select
+        [value]="vitiFillestar"
+        class="viti"
+        (selectionChange)="onChangeViti($event)"
+      >
+        <mat-option *ngFor="let v of vitiShkollor" [value]="v.value">{{
+          v.value
+        }}</mat-option>
       </mat-select>
       <span class="user"></span>
       <span flex></span>
-      <div style="font-size: 15px">
-        <button mat-button (click) = "logout()" *ngIf = "auth.authState; else elseBlock"> {{auth.currentDisplayName}}</button> <mat-icon style="font-size: 35px">person</mat-icon>       
-       
-        <ng-template #elseBlock>
-        <button mat-button (click) = "login()"> Login</button>
+      <div style="font-size: 15px;">
+        <button
+          mat-button
+          (click)="logout()"
+          *ngIf="auth.authState; else elseBlock"
+        >
+          {{ auth.currentDisplayName }}
+        </button>
+        <mat-icon style="font-size: 35px;">person</mat-icon>
 
-       </ng-template>
+        <ng-template #elseBlock>
+          <button mat-button (click)="login()">Login</button>
+        </ng-template>
       </div>
       <!-- <button style ="float:right;" (click) = "logout()">Logout</button>  -->
     </mat-toolbar>
     <router-outlet></router-outlet>
-  
-
   </mat-sidenav-content>
 </mat-sidenav-container>

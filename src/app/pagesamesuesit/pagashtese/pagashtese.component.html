@@ -10,7 +10,7 @@
   <br>
   <mat-form-field   appearance="outline">
       <mat-label>Paga Shtese</mat-label>
-    <input type = "number" autocomplete="off" [(ngModel)] = "pagesaShtese" matInput [errorStateMatcher]="matcher" >
+    <input type = "number" autocomplete="off" [(ngModel)] = "pagesaShtese" matInput  >
    
     <mat-error *ngIf="service.form.controls['Emri'].errors?.required">
         Paga <strong>e detyruesheme</strong>

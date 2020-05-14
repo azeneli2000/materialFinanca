@@ -15,7 +15,7 @@ import { PagesebankaComponent } from '../pagesebanka/pagesebanka.component';
 })
 export class BankatComponent implements OnInit {
 
-  constructor(private bankat: BankatService,private datePipe : DatePipe,private printer : PrintService,private arka : ArkaService,private dialog :MatDialog) { }
+  constructor(public bankat: BankatService,private datePipe : DatePipe,private printer : PrintService,private arka : ArkaService,private dialog :MatDialog) { }
 
   myControl = new FormControl();
   options = ['Principali'];
