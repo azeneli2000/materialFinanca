@@ -171,7 +171,7 @@ export class NxenesitListComponent implements OnInit {
         }
         if (this.searchKey == "vonesa") {
           // this.detyrimiMujorTransporti = this.detyrimiMujorTransporti + this.gjejVonesaSasia(data.PagesaTransporti,data.PaguarTransporti);
-          return this.gjejVonesaRe(data.PagesaShkolla, data.PaguarShkolla)==2 || this.gjejVonesaRe(data.PagesaTransporti, data.PaguarTransporti)==1 ;
+          return this.gjejVonesaRe(data.PagesaShkolla, data.PaguarShkolla)==2 || this.gjejVonesaRe(data.PagesaShkolla, data.PaguarShkolla)==1 ;
         }
         if (this.searchKey == "prapambetur") {
           // this.detyrimiMujorTransporti = this.detyrimiMujorTransporti + this.gjejVonesaSasia(data.PagesaTransporti,data.PaguarTransporti);
@@ -303,6 +303,7 @@ export class NxenesitListComponent implements OnInit {
     this.router.navigate(["/nxenesit", nxenesi.$key]);
   }
   gjejVonesaSasia(pagesa, paguar) {
+    
     let kesti = pagesa / 9;
     // console.log(kesti);
     let nrKesteshPaguar = paguar / kesti;
@@ -321,12 +322,13 @@ export class NxenesitListComponent implements OnInit {
       dateFillimi.getMonth() +
       12 * (dateNow.getFullYear() - dateFillimi.getFullYear());
     // console.log(muaj);
-    let res = (muaj + 1) * kesti - nrKesteshPaguar * kesti;
+    let res = (muaj) * kesti - nrKesteshPaguar * kesti;
     if (res >= 0 && !(pagesa == 0)) return res;
     else return 0;
   }
  
   gjejVonesaRe(pagesa, paguar) {
+
     let kesti =(pagesa / 9);
     // console.log(kesti);
     let nrKesteshPaguar = Math.round(paguar / kesti);
@@ -339,13 +341,15 @@ export class NxenesitListComponent implements OnInit {
     );
 
     let dateFillimi = new Date("08/01/2019");
-
     let muaj =
       dateNow.getMonth() -
       dateFillimi.getMonth() +
       12 * (dateNow.getFullYear() - dateFillimi.getFullYear());
-      
-      let totDetyrimi = muaj*kesti;
+     let totDetyrimi = 0;
+      if (muaj<=9)
+       totDetyrimi = muaj*kesti;
+       else
+       totDetyrimi = 9*kesti
       let diferenca = (totDetyrimi - paguar);
         //  debugger;
       if (diferenca>kesti)
@@ -354,6 +358,8 @@ export class NxenesitListComponent implements OnInit {
         return 1
        if (diferenca<0)
         return 0 
+        if (diferenca==0)
+         return 4
   }
 
 

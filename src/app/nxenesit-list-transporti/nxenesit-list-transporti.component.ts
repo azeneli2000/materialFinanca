@@ -320,12 +320,13 @@ export class NxenesitListTransportiComponent implements OnInit {
       dateFillimi.getMonth() +
       12 * (dateNow.getFullYear() - dateFillimi.getFullYear());
     // console.log(muaj);
-    let res = (muaj + 1) * kesti - nrKesteshPaguar * kesti;
+    let res = (muaj) * kesti - nrKesteshPaguar * kesti;
     if (res >= 0 && !(pagesa == 0)) return res;
     else return 0;
   }
   
   gjejVonesaRe(pagesa, paguar) {
+
     let kesti =(pagesa / 9);
     // console.log(kesti);
     let nrKesteshPaguar = Math.round(paguar / kesti);
@@ -338,14 +339,20 @@ export class NxenesitListTransportiComponent implements OnInit {
     );
 
     let dateFillimi = new Date("08/01/2019");
-
     let muaj =
       dateNow.getMonth() -
       dateFillimi.getMonth() +
       12 * (dateNow.getFullYear() - dateFillimi.getFullYear());
-      
-      let totDetyrimi = muaj*kesti;
-      let diferenca = (totDetyrimi - paguar);
+      let totDetyrimi = 0;
+      if (muaj<=9)
+      {
+      totDetyrimi = muaj*kesti;
+      }
+      else
+      {
+      totDetyrimi = 9*kesti;
+      }
+        let diferenca = (totDetyrimi - paguar);
         //  debugger;
       if (diferenca>kesti)
        return 2;
@@ -353,7 +360,8 @@ export class NxenesitListTransportiComponent implements OnInit {
         return 1
        if (diferenca<0)
         return 0 
-    
+        if (diferenca==0)
+        return 4
   }
 
  
