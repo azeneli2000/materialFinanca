@@ -42,7 +42,7 @@ export class PagesamesuesitComponent implements OnInit {
     else
     {
       this.mobile = false;
-      this.displayedColumns =  ['select','Emri','Mbiemri','LlogariBankare','PagaSig','MbetjaSig','MbetjaShtese','Actions'];
+      this.displayedColumns =  ['select','Emri','Mbiemri','LlogariBankare','PagaSig','MbetjaSig','MbetjaShtese','MbetjaTotale','Actions'];
     
   }
     this.getAll();
@@ -120,6 +120,8 @@ onSelect(row){
   dialogConfig.autoFocus = true;
 //  dialogConfig.width = "60%";
   this.dialog.open(PagashteseComponent,dialogConfig);
+  console.log(this.selection.selected)
+
 }
 
 llogritMuajPagesaReale()
@@ -132,14 +134,14 @@ paguajZyrtare(array){
   this.dialogService.openConfirmDialog('Jeni te sigurte qe doni te beni pagesen Zyrtare per te gjithe mesuesit e zgjedhur ?')
   .afterClosed().subscribe(res => {
     if (res) {
-      // if (!(this.selection.selected.some((el)=>{console.log(el.PaguarNeto+el.PagaNetoMujore); return (el.PaguarNeto+el.PagaNetoMujore>=el.PagaNetoMujore*(el.MuajPage+1))})))
-      // {
+      if ((this.selection.selected.some((el)=>{return (el.PaguarNeto + el.PaguarShtese <= el.PagaTotMujore*(el.MuajPage))})))
+      {
     this.listMesuesit.updatePaguarBanke(this.selection.selected);
     this.notification.success('Mesuesve te seleksionuar iu kaloi paga ! ')
     
-      // }
-    // else
-    // this.notification.warn('Ka mesues qe nuk mund tiu hidhet paga Zyrtare ! ')
+      }
+    else
+    this.notification.warn('Ka mesues qe nuk mund tiu hidhet paga Zyrtare ! ')
     }
   });
 

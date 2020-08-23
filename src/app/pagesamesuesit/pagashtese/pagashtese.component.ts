@@ -21,7 +21,7 @@ pagesaShtese = 0;
   onSubmit(){
     console.log(this.service.form.value.MuajPage*this.service.form.value.PagaShtese);
 console.log(this.service.form.value.PaguarShtese + this.pagesaShtese);
-    if( (this.service.form.value.PaguarShtese + this.pagesaShtese)<= (this.service.form.value.MuajPage*this.service.form.value.PagaShtese) )   
+    if( (this.service.form.value.PaguarNeto + this.service.form.value.PaguarShtese + this.pagesaShtese)<= (this.service.form.value.MuajPage*this.service.form.value.PagaTotMujore) )   
     {
       this.service.updatePaguarShtese(this.service.form.value,this.pagesaShtese);
       this.printer.print22('PAGESE MESUESI',this.service.form.controls['Emri'].value,this.service.form.controls['Mbiemri'].value,this.pagesaShtese,'LEK');

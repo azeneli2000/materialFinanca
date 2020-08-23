@@ -5,7 +5,7 @@ import { XchnageComponent } from './xchnage/xchnage.component';
 import { NotificationService } from '../shared/notification.service';
 import { ConfirmDialogService } from '../shared/confirm-dialog.service';
 import { NxenesiService } from '../shared/nxenesi.service';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { resolve } from 'q';
 import { first } from 'rxjs/operators';
 import { isNgTemplate } from '@angular/compiler';
@@ -36,6 +36,7 @@ totDolKerkimi : number = 0;
 anullim : boolean = false;
 
   ngOnInit() {
+    // this.kaloRrrogaZyrtare();
     let c = JSON.parse(localStorage.getItem('user'));
 if(c.displayName == "Zenel Zeneli")
   this.anullim = true;
@@ -140,11 +141,12 @@ if(c.displayName == "Zenel Zeneli")
 this.totEurKerkimi = this.listData.filteredData.map((t)=>{
   if(t.Valuta=='EUR')
 { 
-  if(t.Lloji=="Shpenzime" || t.Lloji=="PZ"||t.Lloji=="PSHT" )
+  if(t.Lloji=="Xchange"||t.Anulluar==true)
+  return 0;
+  if(t.Lloji=="Shpenzime" || t.Lloji=="PZ"||t.Lloji=="PSHT")
    return -Math.abs(Number(t.Sasia));
 
-   if(t.Lloji=="Xchange"||t.Anulluar==true)
-   return 0;
+  
 
   return Number(t.Sasia);
 } else return 0;
@@ -153,11 +155,12 @@ this.totEurKerkimi = this.listData.filteredData.map((t)=>{
 this.totLekKerkimi = this.listData.filteredData.map((t)=>{
   if(t.Valuta=='LEK')
 { 
+  if(t.Lloji=="Xchange"||t.Anulluar==true)
+  return 0;
   if(t.Lloji=="Shpenzime" || t.Lloji=="PZ"||t.Lloji=="PSHT" )
    return -Math.abs(Number(t.Sasia));
 
-   if(t.Lloji=="Xchange"||t.Anulluar==true)
-   return 0;
+  
 
   return Number(t.Sasia);
 } else return 0;
@@ -166,11 +169,12 @@ this.totLekKerkimi = this.listData.filteredData.map((t)=>{
 this.totDolKerkimi = this.listData.filteredData.map((t)=>{
   if(t.Valuta=='DOLLARE')
 { 
+  if(t.Lloji=="Xchange"||t.Anulluar==true)
+  return 0;
   if(t.Lloji=="Shpenzime" || t.Lloji=="PZ"||t.Lloji=="PSHT" )
    return -Math.abs(Number(t.Sasia));
 
-   if(t.Lloji=="Xchange"||t.Anulluar==true)
-   return 0;
+  
 
   return Number(t.Sasia);
 } else return 0;
@@ -222,7 +226,7 @@ this.totDolKerkimi = this.listData.filteredData.map((t)=>{
       this.getNxenesiAnullim(row.DocRef).then(
        (data)=>{     
        //ul totalin e arkes sa sasia
-      this.arkaSevice.updateTotali(-Math.abs(row.Sasia),data.MonedhaShkolla);
+      this.arkaSevice.updateTotali(-(row.Sasia),data.MonedhaShkolla);
      //ul totalin e paguar se nxenesit sa sasia (nxensi gjendet ne docREf)  
       this.db.list( localStorage.getItem('VitiShkollor')).update(row.DocRef,{
       PaguarShkolla:  data.PaguarShkolla - row.Sasia,
@@ -238,7 +242,7 @@ this.totDolKerkimi = this.listData.filteredData.map((t)=>{
       this.getNxenesiAnullim(row.DocRef).then(
        (data)=>{     
        //ul totalin e arkes sa sasia
-      this.arkaSevice.updateTotali(-Math.abs(row.Sasia),data.MonedhaTransporti);
+      this.arkaSevice.updateTotali(-(row.Sasia),data.MonedhaTransporti);
      //ul totalin e paguar se nxenesit sa sasia (nxensi gjendet ne docREf)  
       this.db.list( localStorage.getItem('VitiShkollor')).update(row.DocRef,{
         PaguarTransporti:  data.PaguarTransporti - row.Sasia,
@@ -388,6 +392,66 @@ this.print.printArka(this.listData.filteredData,this.totEurKerkimi,this.totLekKe
 // this.shpenzimeProva.insertShpenzime("Libra",arketimi);
 // }
 // console.log(array1);
+//   })
+// }
+
+  kaloRrrogaZyrtare()
+  {
+    this.arkaSevice.getArka().subscribe( list => {
+      let array = list.map(item =>{
+       
+        return {
+          $key : item.key,
+          ...item.payload.val()};
+      });
+    let  array1 =array.filter((item)=>{
+      
+       return (item["Koment"] == "Paga Zyrtare" && item["Anulluar"]==false);
+    });
+    let arketimi = { 
+    Kosto:0,
+    Koment: '',
+    Shpenzime: '',
+    Monedha : '',
+    Data : ''}
+    for(let i=0;i<=array1.length-1;i++)
+{
+ 
+  arketimi.Kosto = array1[i]["Sasia"];
+  arketimi.Koment = array1[i]["TeDhena"];
+  arketimi.Monedha = array1[i]["Valuta"];
+  arketimi.Data = array1[i]["Data"];
+
+this.shpenzimeProva.insertShpenzime("Rroga",arketimi);
+}
+console.log(array1);
+  })
+}
+
+
+//   fshiZyrtare()
+//   {
+//     this.arkaSevice.getArka().subscribe( list => {
+//       let array = list.map(item =>{
+       
+//         return {
+//           $key : item.key,
+//           ...item.payload.val()};
+//       });
+//     let  array1 =array.filter((item)=>{
+      
+//        return (item["Koment"] == "Paga Zyrtare" && item["Anulluar"]==false);
+//     });
+//     let  sh: AngularFireList<any>;
+//     sh = this.db.list('2019-2020/Shpenzime/Rroga');
+//  (sh.valueChanges().subscribe((d)=>console.log(d)));
+//     for(let i=0;i<=array1.length-1;i++)
+// {
+ 
+
+// console.log(array1[i]["DocRef"].split("/")[1]);
+// sh.remove(array1[i]["DocRef"].split("/")[1]);
+// }
 //   })
 // }
 

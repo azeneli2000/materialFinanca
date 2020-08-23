@@ -79,11 +79,20 @@ TotaliEuro ; TotaliLeke ; TotaliDoll ;
     {
       case  "EUR":{
         this.TotaliEuro = Number(this.TotaliEuro) + sasia;
+        this.db.list("Arka").update("Totali",{
+          TotaliEur : this.TotaliEuro,
+         
+          });
         break;
       }
       case "LEK" :
         {
          this. TotaliLeke = Number(this.TotaliLeke) + sasia;
+         this.db.list("Arka").update("Totali",{
+          
+          TotaliLek :this.TotaliLeke,
+         
+          });
           break;
           
         }
@@ -91,16 +100,16 @@ TotaliEuro ; TotaliLeke ; TotaliDoll ;
         case "DOLLARE" :
             {
               this.TotaliDoll = Number(this.TotaliDoll) + sasia;
+              this.db.list("Arka").update("Totali",{
+              
+                TotaliDol: this.TotaliDoll,
+                });
               break;
               
             }
     }
   console.log(this.TotaliLeke);
-   this.db.list("Arka").update("Totali",{
-      TotaliEur : this.TotaliEuro,
-      TotaliLek :this.TotaliLeke,
-      TotaliDol: this.TotaliDoll,
-      });
+  
   
  
 

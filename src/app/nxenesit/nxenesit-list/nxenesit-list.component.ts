@@ -43,7 +43,7 @@ export class NxenesitListComponent implements OnInit {
     Eskursione: [{ Emri: "E1", Pagesa: 12, Monedha: "LEK" }],
   };
   //per skonton
-  vitiZgjedhur;
+  vitiZgjedhur :string ;
   isLoading = true;
 
   constructor(
@@ -83,6 +83,8 @@ export class NxenesitListComponent implements OnInit {
 
   ngOnInit() {
     //this.nxenesitService.insertNxenes(this.nx);
+    this.vitiZgjedhur = localStorage.getItem('VitiShkollor').toString();
+    console.log(localStorage.getItem('VitiShkollor'));
     if (window.innerWidth < 400) {
       this.mobile = true;
       this.displayedColumns = [
@@ -315,13 +317,14 @@ export class NxenesitListComponent implements OnInit {
       currentdate.getDate()
     );
 
-    let dateFillimi = new Date("09/20/2019");
-
+    let dateFillimi = new Date("09/20/" + this.vitiZgjedhur.substring(0,3));    
     let muaj =
       dateNow.getMonth() -
       dateFillimi.getMonth() +
       12 * (dateNow.getFullYear() - dateFillimi.getFullYear());
     // console.log(muaj);
+    if (muaj>9)
+        muaj = 9;      
     let res = (muaj) * kesti - nrKesteshPaguar * kesti;
     if (res >= 0 && !(pagesa == 0)) return res;
     else return 0;
@@ -340,7 +343,7 @@ export class NxenesitListComponent implements OnInit {
       currentdate.getDate()
     );
 
-    let dateFillimi = new Date("08/01/2019");
+    let dateFillimi = new Date("08/01/"+this.vitiZgjedhur.substring(0,4));
     let muaj =
       dateNow.getMonth() -
       dateFillimi.getMonth() +
@@ -351,7 +354,7 @@ export class NxenesitListComponent implements OnInit {
        else
        totDetyrimi = 9*kesti
       let diferenca = (totDetyrimi - paguar);
-        //  debugger;
+          // debugger;
       if (diferenca>kesti)
        return 2;
        if (diferenca<=kesti && diferenca>0)

@@ -320,6 +320,8 @@ export class NxenesitListTransportiComponent implements OnInit {
       dateFillimi.getMonth() +
       12 * (dateNow.getFullYear() - dateFillimi.getFullYear());
     // console.log(muaj);
+    if (muaj>9)
+        muaj = 9; 
     let res = (muaj) * kesti - nrKesteshPaguar * kesti;
     if (res >= 0 && !(pagesa == 0)) return res;
     else return 0;

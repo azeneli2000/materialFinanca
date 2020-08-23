@@ -93,10 +93,11 @@ export class ShpenzimeComponent implements OnInit {
           let d = new Date(b["Data"]);
           return +d - +c;
         });
+        console.log(array);
         this.listData = new MatTableDataSource(array);
 
         this.totEUR = this.listData.filteredData.map((t)=>{if(t.Monedha=='EUR') return t.Kosto; else return 0;}).reduce((acc, value) => acc + value, 0);
-        this.totLEK = this.listData.filteredData.map((t)=>{if(t.Monedha=='LEK') return t.Kosto;else return 0;}).reduce((acc, value) => acc + value, 0);
+        this.totLEK = this.listData.filteredData.map((t)=>{if(t.Monedha=='LEK') return t.Kosto; else return 0;}).reduce((acc, value) => acc + value, 0);
 console.log('eur : ' + this.totEUR + 'lek :' + this.totLEK);
         if (this.listData.data.length == 0)
         {

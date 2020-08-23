@@ -218,7 +218,7 @@ else
   
   // "<b> Paga Mujore Bruto : </b>"  + pagaSig + "LEK"+
   // "<b> Paga Mujore Bruto : </b>"  + pagaTotMujore + "LEK"
-  var printContentTabela = "<div class = 'tbl'><table style='width:60%'> <th>Emri i lendes</th><th>Klasa</th><th>Jave</th><th>Ore</th><th>Klasa paralele</th><th>Numer nxenesish</th><th>Shtese nxenes</th><th>Shtese Institucioni</th>";
+  var printContentTabela = "<div class = 'tbl'><table style='width:60%'> <th>Emri i lendes</th><th>Klasa</th><th>Jave</th><th>Ore</th>";
  let printContent1 ="";
   let par ="";
   let oreTot=0;
@@ -264,15 +264,14 @@ kujdestari =true;
  if (element["ShtesaInst"]!=0)
  {
    colspan = 7;
-  printContent1 = printContent1 + "<tr> <td style='white-space: nowrap'>" + element["Emri"] + "</td> <td>" + element["Klasa"] + "</td> <td>" + element["Javetot"] + "</td>"+"<td>" + element["Ore"] + "</td>"+
-  "<td>"+par+"</td><td>"    + element["NrNxenesish"] + "</td><td>" + (element["NrNxenesish"]-16)*2.5 + "%</td><td>+" + element["ShtesaInst"] + "%</td></tr>";
+  printContent1 = printContent1 + "<tr> <td style='white-space: nowrap'>" + element["Emri"] + "</td> <td>" + element["Klasa"] + "</td> <td>" + element["Javetot"] + "</td>"+"<td>" + element["Ore"] + "</td>";
  }
   else
   {
     colspan = 6;
-    printContentTabela = "<div class = 'tbl'><table style='width:60%'> <th>Emri i lendes</th><th>Klasa</th><th>Jave</th><th>Ore</th><th>Klasa paralele</th><th>Numer nxenesish</th><th>Shtese nxenes</th>";
-  printContent1 = printContent1 + "<tr> <td style='white-space: nowrap'>" + element["Emri"] + "</td> <td>" + element["Klasa"] + "</td> <td>" + element["Javetot"] + "</td>"+"<td>" + element["Ore"] + "</td>"+
-  "<td>"+par+"</td><td>"    + element["NrNxenesish"] + "</td><td>" + (element["NrNxenesish"]-16)*2.5 + "%</td></tr>" ; 
+    printContentTabela = "<div class = 'tbl'><table style='width:60%'> <th>Emri i lendes</th><th>Klasa</th><th>Jave</th><th>Ore</th>";
+  printContent1 = printContent1 + "<tr> <td style='white-space: nowrap'>" + element["Emri"] + "</td> <td>" + element["Klasa"] + "</td> <td>" + element["Javetot"] + "</td>"+"<td>" + element["Ore"] + "</td>";
+ 
 
   
 }
@@ -300,14 +299,10 @@ lejeZakonshme = Math.round( ((punaMesimore+puneRezerve)/22)*3);
 
   
 let printContent = 		"<h3 align='center'>SHKOLLA JOPUBLIKE “NR.1” VLORE</h3>"+
- " <h4 align='center'> SHTOJCE KONTRATE PUNE INDIVIDUALE </h4>	"	+				
-	
+	" <h4 align='center'>  NJOFTIM PARAPRAK PER Z, ZNJ "+  this.emri + " " + this.mbiemri +  "</h4>" +
 
-  "<div class = 'shkrimi'><p>Lidhet per vitin shkollor "+localStorage.getItem('VitiShkollor') +" midis administratorit te “ONA”.shpk," + 									
-	"<b>ZENEL ZENELI</b> dhe mesuesit  <b>" + this.emri + " " + this.mbiemri +
-	"</b> Eshte percaktuar ngarkesa juaj mesimore, ditet e punes, ditet e lejes, pagat mujore, " +								
-	"duke patur parasysh vjetersine, atestimin, sasine e oreve mesimore, lenden mesimore, klasen, ciklin, cilesine e punes, numrin e nxenesve ne klasa. " 	+																
-  "	Pasi  te konfirmoni per sa me poshte, do te neneshkruhen kontratat perkatese.	</p></div>" + 
+  "<div class = 'shkrimi'><p>Per vitin shkollor "+localStorage.getItem('VitiShkollor') + 									
+" ,  si punemarres me detyre mesues, jane percaktuar me poshte oret e punes javore,  ditet vjetore te punes, ditet e lejes se zakonshme (te pagueshme), ditet e festave zyrtare pushim (te pagueshme), sasia e muajve te punes vjetore dhe paga mujore (bruto dhe neto), sipas ngarkeses tuaj mesimore. Ne shtator keto te dhena saktesohen dhe ne fund te vitit shkollor behen plotesimet e duhura. Ne raste te jashtezakonshme, si pandemi, apo fatkeqesi te tjera te natyres kjo kontrate anullohet.  Pasi te konfirmoni per sa me poshte, do te neneshkruhen kontratat e punes. Per sqarime me te hollesishme drejtohuni ne zyren e finances "   +	"</p></div>" + 
 "<div class = 'conteiner'>"+
  "<div class = 'vjetersia'> <b>Vjetersia : </b> " + this.vjetersia + " Vjet" + "   </br> <b>Atestimi : </b> kateg. "  + Math.abs(this.kategoria -4 ) + "</br><b> Paga mujore bruto : </b>"  + this.pagaSig.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1 ") + " LEK" + "</br><b>   Paga mujore neto : </b>"  + this.pagaNetoMujore.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1 ") + " LEK </br>" + "<b>Paga vjetore neto : </b>"+ (Math.round( pagaVjetoreNeto/100)*100).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1 ") + " LEK" + "</div>"+
  
@@ -326,8 +321,8 @@ let style  = "<style> table, th, td {border: 1px solid black;border-collapse: co
 let sot = new Date();
  const printContent2 = "<div class = 'wraper'>"+
  "<div class = 'data'> <b>Vlore me  </b> " + sot.getDate() + "/" + (sot.getMonth()+1) + "/"+sot.getFullYear() + "</div>"+
- "<div class = 'emri'>" + this.emri + " " + this.mbiemri + "</div>"+
- "<div class = 'zeneli'> ZENEL ZENELI </div>"
+ "<div class = 'emri'>" + this.emri + " " + this.mbiemri + "</div>"
+
 let html = printContent + printContent1  + printContent2 + style;
 console.log(html);
 if (inst)
@@ -358,7 +353,7 @@ if (this.jashtem==true)
 }
 else
 {
-  ditePushimi = 14;
+  ditePushimi = 15;
   puneRezerve = 10;
 }
   let printContentshenime =  "<div class = 'shkrimi'><p>Per sqarime me te hollesishme drejtohuni ne zyren e finances.</p></div>";
@@ -413,7 +408,7 @@ kujdestari =true;
  {
    colspan = 7;
   printContent1 = printContent1 + "<tr> <td style='white-space: nowrap'>" + element["Emri"] + "</td> <td>" + element["Klasa"] + "</td> <td>" + element["Javetot"] + "</td>"+"<td>" + element["Ore"] + "</td>"+
-  "<td>"+par+"</td><td>"    + element["NrNxenesish"] + "</td><td>" + (element["NrNxenesish"]-16)*2.5 + "%</td><td>+" + element["ShtesaInst"] + "%</td></tr>";
+  "<td>"+par+"</td><td>"    + element["NrNxenesish"] + "</td><td>" + ((element["NrNxenesish"]-16)*2.5).toFixed(1) + "%</td><td>+" + element["ShtesaInst"] + "%</td></tr>";
  }
   else
   {
@@ -426,8 +421,8 @@ kujdestari =true;
 }
  
 });
-if(kujdestari&&this.jashtem==true)
-  puneRezerve = 10;
+// if(kujdestari&&this.jashtem==true)
+//   puneRezerve = 10;
 let punaMesimore  = Math.round(oreMesimore/4) ;
 if (punaMesimore>175)
     punaMesimore =175;

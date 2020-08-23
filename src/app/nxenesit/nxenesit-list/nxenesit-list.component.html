@@ -65,12 +65,12 @@
     </ng-container>
 
     <ng-container matColumnDef="DetyrimiShkolla">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Detyrimi</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Detyrimi aktual</mat-header-cell>
       <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==2, 'make-blue': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==1,'make-green': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==0}">{{gjejVonesaSasia(element.PagesaShkolla,element.PaguarShkolla)|currency : element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="MbeturShkolla">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Mbetur</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Detyrimi total</mat-header-cell>
       <mat-cell *matCellDef="let element; let row" [ngClass]="{'make-red': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==2, 'make-blue': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==1,'make-green': gjejVonesaRe(row.PagesaShkolla,row.PaguarShkolla)==0}">{{element.PagesaShkolla-element.PaguarShkolla|currency : element.MonedhaShkolla:'symbol':'1.0-0'}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="PagesaTransporti">

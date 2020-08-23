@@ -60,15 +60,18 @@
         </ng-container>
           <!-- Mbetja Sigurime  -->
           <ng-container matColumnDef="MbetjaSig">
-            <mat-header-cell *matHeaderCellDef >Mbetja Zyrtare</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{  element.PagaNetoMujore*element.MuajPage -element.PaguarNeto |currency : 'LEK' : 'symbol' : '1.0-0' }}</mat-cell>
+            <mat-header-cell *matHeaderCellDef >Marre Zyrtare</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{  element.PaguarNeto  |currency : 'LEK' : 'symbol' : '1.0-0' }}</mat-cell>
           </ng-container>
           <!-- Mbetja Shtese  -->
           <ng-container matColumnDef="MbetjaShtese">
-            <mat-header-cell *matHeaderCellDef >Mbetja Shtese</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{ element.PagaShtese*element.MuajPage -element.PaguarShtese |currency : 'LEK' : 'symbol' : '1.0-0' }}</mat-cell>
+            <mat-header-cell *matHeaderCellDef >Marre Shtese</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.PaguarShtese |currency : 'LEK' : 'symbol' : '1.0-0' }}</mat-cell>
           </ng-container>
-       
+          <ng-container matColumnDef="MbetjaTotale">
+            <mat-header-cell *matHeaderCellDef >Mbetja Totale</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.MuajPage * element.PagaTotMujore - (element.PaguarShtese + element.PaguarNeto) |currency : 'LEK' : 'symbol' : '1.0-0' }}</mat-cell>
+          </ng-container>
           <ng-container matColumnDef="Actions">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let row">

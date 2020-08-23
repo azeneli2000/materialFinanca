@@ -84,7 +84,6 @@ console.log(this.eskursioneDisponibel.eskursione[Number(value)].Emri);
       input.value = '';
     }
   }
-//!!!!!! custom key firebase :  firebase.database.ref().child('/path/with/custom/key/goes/here').set();
   
   ngOnInit() {
    //  this.printer.getPrinters().subscribe(res=>console.log(res));
@@ -143,7 +142,7 @@ console.log(this.eskursioneDisponibel.eskursione[Number(value)].Emri);
 
   shkolla(box ) {
    
-    if ((Number(this.nxenesiService.form.controls['PagesaShkolla'].value) - (Number(this.nxenesiService.form.controls['PaguarShkolla'].value) + Number(box))) >= 0 && box != "" && Number(box) != 0) {
+    // if ((Number(this.nxenesiService.form.controls['PagesaShkolla'].value) - (Number(this.nxenesiService.form.controls['PaguarShkolla'].value) + Number(box))) >= 0 && box != "" && Number(box) != 0) {
       this.nxenesiService.form.controls['PaguarShkolla'].setValue(Number(this.nxenesiService.form.controls['PaguarShkolla'].value) + Number(box));
       this.perqShkolla = Number(this.nxenesiService.form.controls['PaguarShkolla'].value) / Number(this.nxenesiService.form.controls['PagesaShkolla'].value) * 100;
       this.mbetjaShkolla = Number(this.nxenesiService.form.controls['PagesaShkolla'].value) - Number(this.nxenesiService.form.controls['PaguarShkolla'].value);
@@ -165,12 +164,12 @@ console.log(this.eskursioneDisponibel.eskursione[Number(value)].Emri);
       this.nxenesiService.form.reset();
       this.nxenesiService.initializeFormGroup();
       this.notification.success("Pagesa u krye me sukses !");
-    }
-    else {
-      this.notification.warn("Vendosni pagesen ne formatin e duhur !");
-      this.hideShkolla = false;
+    // }
+    // else {
+    //   this.notification.warn("Vendosni pagesen ne formatin e duhur !");
+    //   this.hideShkolla = false;
 
-    }
+    // }
     this.boxRef.nativeElement.value  = "";
     this.boxRef1.nativeElement.value  = "";
     this.boxRef2.nativeElement.value  = "";
@@ -181,7 +180,7 @@ console.log(this.eskursioneDisponibel.eskursione[Number(value)].Emri);
 
   transporti(box1) {
     
-    if ((Number(this.nxenesiService.form.controls['PagesaTransporti'].value) - (Number(this.nxenesiService.form.controls['PaguarTransporti'].value) + Number(box1))) >= 0 && box1 != "" && Number(box1) > 0) {
+    // if ((Number(this.nxenesiService.form.controls['PagesaTransporti'].value) - (Number(this.nxenesiService.form.controls['PaguarTransporti'].value) + Number(box1))) >= 0 && box1 != "" && Number(box1) != 0) {
       this.nxenesiService.form.controls['PaguarTransporti'].setValue(Number(this.nxenesiService.form.controls['PaguarTransporti'].value) + Number(box1));
       this.perqTransporti = Number(this.nxenesiService.form.controls['PaguarTransporti'].value) / Number(this.nxenesiService.form.controls['PagesaTransporti'].value) * 100;
       this.mbetjaTransporti = Number(this.nxenesiService.form.controls['PagesaTransporti'].value) - Number(this.nxenesiService.form.controls['PaguarTransporti'].value);
@@ -197,12 +196,12 @@ console.log(this.eskursioneDisponibel.eskursione[Number(value)].Emri);
       console.log(this.hideTransporti);
       this.hideTransporti = false;
       this.notification.success("Pagesa u krye me sukses !");
-    }
-    else {
-      this.notification.warn("Vendosni pagesen ne formatin e duhur !");
-      this.hideTransporti = false;
+    // }
+    // else {
+    //   this.notification.warn("Vendosni pagesen ne formatin e duhur !");
+    //   this.hideTransporti = false;
 
-    }
+    // }
 
     this.boxRef.nativeElement.value  = "";
     this.boxRef1.nativeElement.value  = "";
@@ -211,58 +210,7 @@ console.log(this.eskursioneDisponibel.eskursione[Number(value)].Emri);
 
   }
 
-  // uniforma(box) {
-  //   if ((Number(this.nxenesiService.form.controls['PagesaUniforma'].value) - (Number(this.nxenesiService.form.controls['PaguarUniforma'].value) + Number(box))) >= 0 && box != "" && Number(box) > 0) {
-  //     this.nxenesiService.form.controls['PaguarUniforma'].setValue(Number(this.nxenesiService.form.controls['PaguarUniforma'].value) + Number(box));
-  //     this.perqUniforma = Number(this.nxenesiService.form.controls['PaguarUniforma'].value) / Number(this.nxenesiService.form.controls['PagesaUniforma'].value) * 100;
-  //     this.mbetjaUniforma = Number(this.nxenesiService.form.controls['PagesaUniforma'].value) - Number(this.nxenesiService.form.controls['PaguarUniforma'].value);
-  //     this.nxenesiService.updateNxenes(this.nxenesiService.form.value);
-  //       //gjenerimi i transaksionit
-  //       this.arka.insertTransaksion('PU',this.nxenesiService.form.controls["$key"].value,this.nxenesiService.form.controls["Emri"].value + this.nxenesiService.form.controls["Mbiemri"].value,this.nxenesiService.form.controls["MonedhaUniforma"].value,Number(box),'Pagese per uniformen',"0")
-  //     //printimi i fatures
-  //     this.printer.print11('ARKETIM PER UNIFORMEN',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box,this.nxenesiService.form.controls['MonedhaUniforma'].value);
-
-  //     this.hideUniforma = false;
-  //     this.notification.success("Pagesa u krye me sukses !");
-  //   }
-  //   else {
-  //     this.notification.warn("Vendosni pagesen ne formatin e duhur !");
-  //     this.hideUniforma = false;
-
-  //   }
-
-  //   this.boxRef.nativeElement.value  = "";
-  //   this.boxRef1.nativeElement.value  = "";
-  //   this.boxRef2.nativeElement.value  = "";
-  //   this.boxRef3.nativeElement.value  = "";
-
-  // }
-  // librat(box) {
-    
-  //   if ((Number(this.nxenesiService.form.controls['PagesaLibrat'].value) - (Number(this.nxenesiService.form.controls['PaguarLibrat'].value) + Number(box))) >= 0 && box != "" && Number(box) > 0) {
-  //     this.nxenesiService.form.controls['PaguarLibrat'].setValue(Number(this.nxenesiService.form.controls['PaguarLibrat'].value) + Number(box));
-  //     this.perqLibrat = Number(this.nxenesiService.form.controls['PaguarLibrat'].value) / Number(this.nxenesiService.form.controls['PagesaLibrat'].value) * 100;
-  //     this.mbetjaLibrat = Number(this.nxenesiService.form.controls['PagesaLibrat'].value) - Number(this.nxenesiService.form.controls['PaguarLibrat'].value);
-  //     this.nxenesiService.updateNxenes(this.nxenesiService.form.value);
-  //      //gjenerimi i transaksionit
-  //      this.arka.insertTransaksion('PT',this.nxenesiService.form.controls["$key"].value,this.nxenesiService.form.controls["Emri"].value + this.nxenesiService.form.controls["Mbiemri"].value,this.nxenesiService.form.controls["MonedhaLibrat"].value,Number(box),'Pagese per librat',"0s")
-  //     //printimi i fatures 
-  //     this.printer.print11('ARKETIM PER LIBRAT',this.nxenesiService.form.controls['Emri'].value,this.nxenesiService.form.controls['Mbiemri'].value,this.nxenesiService.form.controls['Klasa'].value,this.nxenesiService.form.controls['Indeksi'].value,box,this.nxenesiService.form.controls['MonedhaLibrat'].value);
-
-  //     this.hideLibrat = false;
-  //     this.notification.success("Pagesa u krye me sukses !");
-  //   }
-  //   else {
-  //     this.notification.warn("Vendosni pagesen ne formatin e duhur !");
-  //     this.hideLibrat = false;
-
-  //   }
-
-  //   this.boxRef.nativeElement.value  = "";
-  //   this.boxRef1.nativeElement.value  = "";
-  //   this.boxRef2.nativeElement.value  = "";
-  //   this.boxRef3.nativeElement.value  = "";
-  // }
+  
   
 
   gjejEskursionetShkolla(){

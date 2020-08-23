@@ -239,9 +239,10 @@ this.db.list(localStorage.getItem('VitiShkollor') +'/Mesuesit').update(idMesuesi
 
     for (var i =0; i<arrayPagaZyrtare.length;i++ )
    {
+     console.log('paguar' + arrayPagaZyrtare[i].PagaNetoMujore);
     this.mesuesitList.update(arrayPagaZyrtare[i].$key, {
-      PaguarNeto:  arrayPagaZyrtare[i].PaguarNeto+  arrayPagaZyrtare[i].PagaNetoMujore});
-    this.Shpenzimi.Kosto = arrayPagaZyrtare[i].PagaNetoMujore;
+      PaguarNeto: parseInt( arrayPagaZyrtare[i].PaguarNeto)+ parseInt( arrayPagaZyrtare[i].PagaNetoMujore)});
+    this.Shpenzimi.Kosto = parseFloat( arrayPagaZyrtare[i].PagaNetoMujore);
     this.Shpenzimi.Data =  new Date().toLocaleDateString();
     this.Shpenzimi.Monedha = 'LEK';
     this.Shpenzimi.Koment = 'Zyrtare ' + arrayPagaZyrtare[i].Emri + ' ' +arrayPagaZyrtare[i].Mbiemri ;

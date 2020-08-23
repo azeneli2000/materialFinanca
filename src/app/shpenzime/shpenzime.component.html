@@ -68,6 +68,7 @@
           {{totEUR|currency : 'EUR':'symbol':'1.0-0'}}</span></div>
       <div *ngIf="totLEK>0 && totLEK != 'NaN'" style="display: inline;color:#303F9F"><span style="color:#303F9F"></span> <span class="mbeturSpan">
           {{totLEK|currency : 'LEK':'symbol':'1.0-0'}}</span></div>
+         
       <!-- <div *ngIf="mbeturTrans>0" style="display: inline"> <span class="mbeturSpan" style="color:#303F9F"> Trans :
         </span> <span class="mbeturSpan">{{mbeturTrans|currency : 'LEK':'symbol':'1.0-0'}}</span></div>
       <br>
@@ -77,6 +78,8 @@
         </span> <span class="mbeturSpan">{{mbeturLibra|currency : 'LEK':'symbol':'1.0-0'}}</span></div> -->
     </mat-card>
   </div>
+  <!-- {{totLEK}} -->
+  {{totEUR}}
 </div>
 
   <div class="mat-elevation-z8">

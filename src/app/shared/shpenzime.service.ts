@@ -52,4 +52,7 @@ export class ShpenzimeService {
       console.log(key);
       return key.toString();
   }
+  removeShpernzime (key){
+this.shpenzimetList.remove(key);
+  }
 }
