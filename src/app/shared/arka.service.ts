@@ -68,6 +68,8 @@ TotaliEuro ; TotaliLeke ; TotaliDoll ;
 
   updateTotali(sasia:number , valuta : string)
 {
+  //this.getTotali();
+  // debugger;
   // let TotaliEuro ;
   // let  TotaliLeke ;
   // let TotaliDoll ;
@@ -75,6 +77,10 @@ TotaliEuro ; TotaliLeke ; TotaliDoll ;
   //   TotaliEuro = data[1];
   //   TotaliLeke = data[2];
   //   TotaliDoll = data[0];
+  console.log(this.TotaliLeke);
+  console.log(this.TotaliEuro);
+  console.log(this.TotaliDoll);
+
     switch(valuta)
     {
       case  "EUR":{
@@ -87,7 +93,7 @@ TotaliEuro ; TotaliLeke ; TotaliDoll ;
       }
       case "LEK" :
         {
-         this. TotaliLeke = Number(this.TotaliLeke) + sasia;
+         this.TotaliLeke = Number(this.TotaliLeke) + sasia;
          this.db.list("Arka").update("Totali",{
           
           TotaliLek :this.TotaliLeke,
@@ -121,6 +127,7 @@ getTotali()
     this.TotaliEuro = data[1];
     this.TotaliLeke = data[2];
     this.TotaliDoll = data[0];
+    console.log(data[2]);
    },first());
   
 }
@@ -129,7 +136,6 @@ getTotali()
   // let TotaliEuro ;
   // let  TotaliLeke ;
   // let TotaliDoll ;
-console.log(this.TotaliEuro);
     switch(valutaFillimi)
     {
       case  "EUR":{

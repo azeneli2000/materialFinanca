@@ -52,17 +52,14 @@ pagesaUniforma;
 
 cmimiKlasa : number = 0;
   Uljet = [] ;
-    // {name: 'Lemon'},
-    // {name: 'Lime'},
-    // {name: 'Apple'},
   disabled = false;
   visible = true;
   selectable = true;
   removable = false;
   addOnBlur = false;
+meTransport =true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   constructor(public service: NxenesiService, private notification: NotificationService, private dialogRef: MatDialogRef<NxenesiComponent>,private konfigurime : KonfigurimeService) { }
-
 
 
   //chips
@@ -132,7 +129,10 @@ this.pagesaKlasa = Math.round( this.pagesaKlasa - this.pagesaKlasa*perqindja/100
   }
 
   onCheck(t) {
-   
+    if(this.meTransport)
+      this.meTransport = false;
+      else
+      this.meTransport = true
       console.log('insert');
      let klasaPagesa = 'ShkollaKlasa'+ this.klasaZgjedhur;
       let v= this.konfigurime.getKonfigurime().subscribe(

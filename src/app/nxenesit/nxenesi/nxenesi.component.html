@@ -64,14 +64,14 @@
           </mat-error>
         </mat-form-field>
         <div class="add-bottom-padding">
-          <mat-checkbox (change)="onCheck($event.checked)" formControlName="MeTransport">Me transport</mat-checkbox>
+          <mat-checkbox (change)="onCheck($event.checked)" formControlName="MeTransport" >Me transport</mat-checkbox>
         </div>
-        <div class="add-bottom-padding">
+        <!-- <div class="add-bottom-padding">
           <mat-checkbox (change)="onCheck($event.checked)" formControlName="MeUniforme">Me Uniforme</mat-checkbox>
-        </div>
+        </div> -->
       </mat-tab>
 
-      <mat-tab label="Ulje">
+      <mat-tab label="Ulje shkolla">
           <br>
           <div class="uljet">
             <mat-label>Pagesa : {{pagesaKlasa}}</mat-label>
@@ -94,7 +94,28 @@
             </mat-form-field>
       </mat-tab>
 
+      <mat-tab label="Ulje transporti" *ngIf="meTransport==true">
+        <br>
+        <div class="uljet">
+          <mat-label>Pagesa : {{pagesaKlasa}}</mat-label>
+        </div>
 
+<br><br>
+        <mat-form-field class="chip-list">
+            <mat-chip-list #chipList formControlName="Skonto" >
+              <mat-chip *ngFor="let ulje of Uljet" [selectable]="selectable"
+                       [removable]="this.service.skontoUpdate" (removed)="remove(ulje)">
+                {{ulje}}
+                <mat-icon matChipRemove *ngIf="this.service.skontoUpdate">cancel</mat-icon>
+              </mat-chip>
+              <input autocomplete="off"  placeholder="ULJET E NXENSIT..."
+                     [matChipInputFor]="chipList" [disabled] = "!this.service.skontoUpdate"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+          </mat-form-field>
+    </mat-tab>
     </mat-tab-group>
     <br>
     <div class="but">

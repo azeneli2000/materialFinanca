@@ -187,6 +187,10 @@ export class NxenesitListComponent implements OnInit {
           // this.detyrimiMujorTransporti = this.detyrimiMujorTransporti + this.gjejVonesaSasia(data.PagesaTransporti,data.PaguarTransporti);
           return data.Klasa==0;
         }
+        if (this.searchKey == "2") {
+          // this.detyrimiMujorTransporti = this.detyrimiMujorTransporti + this.gjejVonesaSasia(data.PagesaTransporti,data.PaguarTransporti);
+          return data.Klasa==2;
+        }
 
         if ( this.searchKey != "shkolla")
           return this.displayedColumns.some((ele) => {
@@ -317,7 +321,8 @@ export class NxenesitListComponent implements OnInit {
       currentdate.getDate()
     );
 
-    let dateFillimi = new Date("09/20/" + this.vitiZgjedhur.substring(0,3));    
+    let dateFillimi = new Date("08/01/" + this.vitiZgjedhur.substring(0,4)); 
+    // console.log("data "  +  this.vitiZgjedhur.substring(0,4))   
     let muaj =
       dateNow.getMonth() -
       dateFillimi.getMonth() +
@@ -354,11 +359,13 @@ export class NxenesitListComponent implements OnInit {
        else
        totDetyrimi = 9*kesti
       let diferenca = (totDetyrimi - paguar);
-          // debugger;
       if (diferenca>kesti)
        return 2;
        if (diferenca<=kesti && diferenca>0)
+       {
+        //  debugger;
         return 1
+       }
        if (diferenca<0)
         return 0 
         if (diferenca==0)

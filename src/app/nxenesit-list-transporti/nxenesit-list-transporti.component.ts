@@ -44,7 +44,7 @@ export class NxenesitListTransportiComponent implements OnInit {
     Eskursione: [{ Emri: "E1", Pagesa: 12, Monedha: "LEK" }],
   };
   //per skonton
-  vitiZgjedhur;
+  vitiZgjedhur :string;
   isLoading = true;
 
   constructor(
@@ -84,7 +84,7 @@ export class NxenesitListTransportiComponent implements OnInit {
 
   ngOnInit() {
     //this.nxenesitService.insertNxenes(this.nx);
-
+    this.vitiZgjedhur = localStorage.getItem('VitiShkollor').toString();
     if (window.innerWidth < 400) {
       this.mobile = true;
       this.displayedColumns = [
@@ -188,6 +188,10 @@ export class NxenesitListTransportiComponent implements OnInit {
         if (this.searchKey == "0") {
           // this.detyrimiMujorTransporti = this.detyrimiMujorTransporti + this.gjejVonesaSasia(data.PagesaTransporti,data.PaguarTransporti);
           return data.Klasa==0;
+        }
+        if (this.searchKey == "2") {
+          // this.detyrimiMujorTransporti = this.detyrimiMujorTransporti + this.gjejVonesaSasia(data.PagesaTransporti,data.PaguarTransporti);
+          return data.Klasa==2;
         }
 
         if (this.searchKey != "transporti")
@@ -313,7 +317,8 @@ export class NxenesitListTransportiComponent implements OnInit {
       currentdate.getDate()
     );
 
-    let dateFillimi = new Date("09/20/2019");
+    // let dateFillimi = new Date("08/01/2020");
+    let dateFillimi = new Date("08/01/" + this.vitiZgjedhur.substring(0,4)); 
 
     let muaj =
       dateNow.getMonth() -
@@ -328,7 +333,6 @@ export class NxenesitListTransportiComponent implements OnInit {
   }
   
   gjejVonesaRe(pagesa, paguar) {
-
     let kesti =(pagesa / 9);
     // console.log(kesti);
     let nrKesteshPaguar = Math.round(paguar / kesti);
@@ -340,7 +344,10 @@ export class NxenesitListTransportiComponent implements OnInit {
       currentdate.getDate()
     );
 
-    let dateFillimi = new Date("08/01/2019");
+    // let dateFillimi = new Date("08/01/2020");
+    let dateFillimi = new Date("08/01/" + this.vitiZgjedhur.substring(0,4)); 
+
+
     let muaj =
       dateNow.getMonth() -
       dateFillimi.getMonth() +
@@ -355,7 +362,6 @@ export class NxenesitListTransportiComponent implements OnInit {
       totDetyrimi = 9*kesti;
       }
         let diferenca = (totDetyrimi - paguar);
-        //  debugger;
       if (diferenca>kesti)
        return 2;
        if (diferenca<=kesti && diferenca>0)
