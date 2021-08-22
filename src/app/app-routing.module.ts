@@ -17,6 +17,7 @@ import { ArkaComponent } from "./arka/arka.component";
 import { ArketimeComponent } from "./arketime/arketime.component";
 import { BankatComponent } from "./bankat/bankat.component";
 import { NxenesitListTransportiComponent } from "./nxenesit-list-transporti/nxenesit-list-transporti.component";
+import { LibratComponent } from "./librat/librat.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/fillimi", pathMatch: "full" },
@@ -70,6 +71,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "arketime", component: ArketimeComponent },
   { path: "huate", component: BankatComponent },
+  { path: "librat", component: LibratComponent },
 ];
 
 @NgModule({

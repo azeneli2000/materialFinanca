@@ -1,0 +1,57 @@
+<mat-toolbar>
+  <!-- <span>Blerje librash</span> -->
+  <!-- <span class="fill-remaining-space"></span> -->
+  <h3 >Cmimi : {{totali}}</h3> 
+  <button style = "display: flex;float: right;margin : auto"  class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+ 
+
+</mat-toolbar>
+<button mat-raised-button color= "primary" (click)="onSubmit()" *ngIf = "!mobile">Paguaj libra</button><span style = "color:  #fc7169;;margin-left: 10px;">{{selected}}/{{totalRows}}</span>
+<button style = "display: flex;float: right;" mat-raised-button color= "warn" (click)="ktheLibra()" *ngIf = "!mobile">Kthe libra</button>
+
+<br>
+<div class="example-container mat-elevation-z8">
+
+  <mat-table #table [dataSource]="listData" matSort>
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null;selNr();calculateToatal();" [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+    <!-- emri -->
+    <ng-container matColumnDef="EmriLibri">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>EmriLibri</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.EmriLibri }}</mat-cell>
+    </ng-container>
+    <!-- mbiemri -->
+    <ng-container matColumnDef="ShtepiaBotuese">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>ShtepiaBotuese</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.ShtepiaBotuese }}</mat-cell>
+    </ng-container>
+    <!-- LlogariBankare -->
+    <ng-container matColumnDef="CmimiShitje">
+      <mat-header-cell *matHeaderCellDef >CmimiShitje</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.CmimiShitje }}</mat-cell>
+    </ng-container>
+   
+    
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row);selNr();calculateToatal();">
+    </mat-row>
+  </mat-table>
+  <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+    <mat-progress-spinner color="primary" mode="indeterminate">
+    </mat-progress-spinner>
+  </mat-card>
+</div>
+{{selection.selected|json}}
+
+

@@ -38,6 +38,7 @@ export class ArketimeComponent implements OnInit {
   searchKey: string;
   displayDate;
   mobile : boolean = false
+  insertVisible: boolean = true;
 
   private _filter(value: string): string[] {
     if(value!=''&& value!=null)
@@ -114,7 +115,10 @@ console.log('eur : ' + this.totEUR + 'lek :' + this.totLEK);
 
 
   onChanageArketime(selectedValue) {
-  
+    if (selectedValue.value == 'Libra')
+      this.insertVisible = false;
+      else
+      this.insertVisible = true;   
 
       this.getKategoria(selectedValue.value);
       this.arketime.form.controls.Monedha.setValue('LEK');

@@ -57,7 +57,6 @@ export class PagesamesuesitComponent implements OnInit {
   getAll()
   {
     this.isLoading = true;
-
     this.listMesuesit.getMesuesit().subscribe(
       list => {
         let array = list.map(item =>{

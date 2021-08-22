@@ -65,6 +65,9 @@ import { ArketimeComponent } from './arketime/arketime.component';
 import { BankatComponent } from './bankat/bankat.component';
 import { PagesebankaComponent } from './pagesebanka/pagesebanka.component';
 import { NxenesitListTransportiComponent } from './nxenesit-list-transporti/nxenesit-list-transporti.component';
+import { LibratComponent } from './librat/librat.component';
+import { LibriRiComponent } from './libri-ri/libri-ri.component';
+import { LibratNxenesiComponent } from './librat-nxenesi/librat-nxenesi.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +94,9 @@ import { NxenesitListTransportiComponent } from './nxenesit-list-transporti/nxen
     BankatComponent,
     PagesebankaComponent,
     NxenesitListTransportiComponent,
+    LibratComponent,
+    LibriRiComponent,
+    LibratNxenesiComponent,
     
   ],
   imports: [
@@ -133,6 +139,6 @@ import { NxenesitListTransportiComponent } from './nxenesit-list-transporti/nxen
   ],
   providers: [MesuesiService,AuthGuard, {provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl()},CurrencyPipe,DatePipe,ExcelService],
   bootstrap: [AppComponent],
-  entryComponents:[MesuesiComponent,ConfirmDialogComponent,LendaComponent,NxenesiComponent,PagashteseComponent,XchnageComponent,PagesebankaComponent]
+  entryComponents:[MesuesiComponent,ConfirmDialogComponent,LendaComponent,NxenesiComponent,PagashteseComponent,XchnageComponent,PagesebankaComponent,LibriRiComponent,LibratNxenesiComponent]
 })
 export class AppModule { }

@@ -1,0 +1,95 @@
+
+<mat-toolbar>
+  <span>{{service.form.controls['$key'].value?"Modifiko liber":"Liber i Ri"}}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup]="service.form" class="normal-form">
+<div class="controls-conteiner">
+  <input type="hidden" name="Skey">
+<mat-tab-group dynamicHeight>
+
+  <mat-tab label="Informacione">
+  <br>
+  <mat-form-field   appearance="outline">
+      <mat-label>Emri</mat-label>
+    <input autocomplete="off" formControlName="EmriLibri" matInput  >
+   
+    <mat-error *ngIf="service.form.controls['EmriLibri'].errors?.required">
+        Emri <strong>i detyrueshem</strong>
+      </mat-error>
+  </mat-form-field>
+
+  <br>
+  <mat-form-field appearance="outline">
+      <mat-label>Shtepia botuese</mat-label>
+<mat-select  formControlName="ShtepiaBotuese">
+  <mat-option *ngFor="let shb of ShtepiteBotuese" [value]="shb.value"  >
+    {{shb.viewValue}}
+  </mat-option>
+</mat-select>
+<mat-error *ngIf="service.form.controls['ShtepiaBotuese'].errors?.required">
+    Shtepia botuese <strong>e detyruesheme</strong>
+  </mat-error>
+</mat-form-field>
+<br>
+
+
+<br>
+<mat-form-field appearance="outline">
+    <mat-label>Klasa</mat-label>
+<mat-select  formControlName="Klasa">
+<mat-option *ngFor="let kl of Klasat" [value]="kl.value"  >
+  {{kl.viewValue}}
+</mat-option>
+</mat-select>
+<mat-error *ngIf="service.form.controls['Klasa'].errors?.required">
+ Klasa <strong>e detyruesheme</strong>
+</mat-error>
+</mat-form-field>
+
+
+<br>
+  <mat-form-field appearance="outline">
+      <mat-label>Sasia</mat-label>
+    <input type ="number" formControlName="SasiaFillestare" matInput   >
+    
+    <mat-error *ngIf="service.form.controls['SasiaFillestare'].errors?.required">
+        Sasia <strong>e detyruesheme</strong>
+      </mat-error>
+  </mat-form-field>
+  <br>
+
+  <br>
+  <mat-form-field appearance="outline">
+      <mat-label>Cmimi blerje</mat-label>
+    <input type ="number" formControlName="CmimiBlerje" matInput   >
+    
+    <mat-error *ngIf="service.form.controls['CmimiBlerje'].errors?.required">
+        Cmimi blerje <strong>e detyruesheme</strong>
+      </mat-error>
+  </mat-form-field>
+  <br>
+
+
+  <br>
+  <mat-form-field appearance="outline">
+      <mat-label>Cmimi shitje</mat-label>
+    <input type ="number" formControlName="CmimiShitje" matInput   >
+    
+    <mat-error *ngIf="service.form.controls['CmimiShitje'].errors?.required">
+        Cmimi shitje <strong>e detyruesheme</strong>
+      </mat-error>
+  </mat-form-field>
+  <br>
+
+ 
+
+</mat-tab>
+</mat-tab-group>
+<br>  
+<div class="but">
+<button mat-raised-button class = "ruaj" type = "submit" color="primary" [disabled]="service.form.invalid" (click)= "onSubmit()">Ruaj</button>
+</div>
+</div>
+</form>

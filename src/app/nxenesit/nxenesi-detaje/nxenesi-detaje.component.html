@@ -3,6 +3,7 @@
     <div class="gjeneralitete">
         <mat-card class="gjeneralitete1">
             <mat-card-title style="color: #3F51B5">Gjeneralitete</mat-card-title>
+
             <mat-form-field appearance="outline">
                 <mat-label>Emri</mat-label>
                 <input formControlName="Emri" matInput readonly>
@@ -33,6 +34,8 @@
 
     <div class="wraper">
         <div>
+            <button mat-raised-button color="primary" (click)="onClickLibrat()">Librat</button>
+
     <!-- shkolla -->
     <div class="pagesat">
         <mat-card class="gjeneralitete1">

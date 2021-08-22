@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Inject, ElementRef } from '@angular/core';
 import { NxenesiService } from 'src/app/shared/nxenesi.service';
 import { ActivatedRoute } from '@angular/router';
-import { MatTableDataSource, MatSort, MatPaginator, MatChipInputEvent } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatChipInputEvent, MatDialogConfig } from '@angular/material';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
@@ -10,6 +10,7 @@ import { CurrencyPipe } from '@angular/common';
 import { PrintService } from 'src/app/shared/print.service';
 import { ArkaService } from 'src/app/shared/arka.service';
 import { auth } from 'firebase';
+import { LibratNxenesiComponent } from 'src/app/librat-nxenesi/librat-nxenesi.component';
 
 export interface DialogData {
   monedha: 'EUR' | 'LEK' | '$';
@@ -223,6 +224,26 @@ console.log(this.eskursioneDisponibel.eskursione[Number(value)].Emri);
  
 
 }
+
+
+onClickLibrat(){
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.data = {
+    Klasa : this.nxenesi.Klasa,
+    key : this.nxenesiService.form.controls["$key"].value,
+    Emri : this.nxenesi.Emri,
+    Mbiemri:this.nxenesi.Mbiemri
+  };
+  dialogConfig.height = "100%";
+  dialogConfig.width = "50%";
+
+  this.dialog.open(LibratNxenesiComponent,dialogConfig)
+ 
+}
+
+
 }
 
 
