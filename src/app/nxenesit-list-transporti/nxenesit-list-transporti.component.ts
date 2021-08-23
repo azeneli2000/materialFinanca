@@ -138,7 +138,8 @@ export class NxenesitListTransportiComponent implements OnInit {
             item.$key !== "Eskursione" &&
             item.$key !== "Mesuesit" &&
             item.$key !== "Shpenzime" &&
-            item.$key !== "Arketime"
+            item.$key !== "Arketime" &&
+            item.$key !== "Librat"
         )
         .filter((i) => i["PagesaTransporti"] > 0);
       this.listData = new MatTableDataSource(array1);

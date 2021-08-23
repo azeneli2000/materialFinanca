@@ -137,7 +137,9 @@ export class NxenesitListComponent implements OnInit {
           item.$key !== "Eskursione" &&
           item.$key !== "Mesuesit" &&
           item.$key !== "Shpenzime" &&
-          item.$key !== "Arketime"
+          item.$key !== "Arketime" &&
+          item.$key !== "Librat"
+
       );
       this.listData = new MatTableDataSource(array1);
       // console.log(array1) ;

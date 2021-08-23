@@ -1,0 +1,26 @@
+<mat-toolbar>
+  <span>Shtepia botuese</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+
+
+
+
+  <br>
+  <form [formGroup]="service.form" class="normal-form">
+
+  <mat-form-field   appearance="outline">
+      <mat-label>Emri</mat-label>
+    <input autocomplete="off" formControlName="Emri" matInput  >
+   
+    <mat-error *ngIf="service.form.controls['Emri'].errors?.required">
+        Emri  <strong>i detyrueshem</strong>
+      </mat-error>
+  </mat-form-field>
+  <br>
+  <div class="but">
+    <button mat-raised-button class = "ruaj" type = "submit" color="primary" [disabled]="service.form.invalid" (click)= "onSubmit()">Ruaj</button>
+    </div>
+    <!-- {{this.service.form.value|json}} -->
+  </form>

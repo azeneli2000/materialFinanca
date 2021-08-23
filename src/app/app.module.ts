@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import{ReactiveFormsModule,FormsModule} from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule  } from '@angular/fire/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 // import { AngularFireDatabase } from 'angularfire2/database';
 import { environment } from '../environments/environment';
  //import { AngularFirestore } from '@angular/fire/firestore';
@@ -68,6 +68,8 @@ import { NxenesitListTransportiComponent } from './nxenesit-list-transporti/nxen
 import { LibratComponent } from './librat/librat.component';
 import { LibriRiComponent } from './libri-ri/libri-ri.component';
 import { LibratNxenesiComponent } from './librat-nxenesi/librat-nxenesi.component';
+import { ShtepiteBotueseComponent } from './shtepite-botuese/shtepite-botuese.component';
+import { PagesaShtepiteBotueseComponent } from './pagesa-shtepite-botuese/pagesa-shtepite-botuese.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +99,8 @@ import { LibratNxenesiComponent } from './librat-nxenesi/librat-nxenesi.componen
     LibratComponent,
     LibriRiComponent,
     LibratNxenesiComponent,
+    ShtepiteBotueseComponent,
+    PagesaShtepiteBotueseComponent,
     
   ],
   imports: [
