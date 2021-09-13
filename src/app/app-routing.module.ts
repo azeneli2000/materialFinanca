@@ -18,6 +18,7 @@ import { ArketimeComponent } from "./arketime/arketime.component";
 import { BankatComponent } from "./bankat/bankat.component";
 import { NxenesitListTransportiComponent } from "./nxenesit-list-transporti/nxenesit-list-transporti.component";
 import { LibratComponent } from "./librat/librat.component";
+import { ShtepiteBotueseComponent } from "./shtepite-botuese/shtepite-botuese.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/fillimi", pathMatch: "full" },
@@ -72,6 +73,8 @@ const routes: Routes = [
   { path: "arketime", component: ArketimeComponent },
   { path: "huate", component: BankatComponent },
   { path: "librat", component: LibratComponent },
+  { path: "shtepibotuese", component: ShtepiteBotueseComponent },
+
 ];
 
 @NgModule({

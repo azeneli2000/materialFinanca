@@ -14,13 +14,17 @@ import { ShtepiteBotueseService } from '../shared/shtepite-botuese.service';
   styleUrls: ['./shtepite-botuese.component.css']
 })
 export class ShtepiteBotueseComponent implements OnInit {
+  detyrimiShtepiaBotuese: number = 0;
+  lekeTembledhura: number = 0;
+  fitimi: number = 0;
+  shiturShtepiaBotuese: number;
 
   constructor(public librat : LibratService, public shtepiteBotuese: ShtepiteBotueseService,private datePipe : DatePipe,private printer : PrintService,private arka : ArkaService,private dialog :MatDialog) { }
 
 
   isLoading : boolean = false;
   listData: MatTableDataSource<any>;
-  displayedColumns: string[] = ['Data','Sasia','Paguar','Mbetur','Koment','Actions'];
+  displayedColumns: string[] = ['Emri','Klasa','Sasia','Mbetur'];
   totEUR : number = 0;
   totLEK : number = 0;
   @ViewChild(MatSort) sort: MatSort;
@@ -45,6 +49,7 @@ export class ShtepiteBotueseComponent implements OnInit {
       }
 
     }) 
+
     });
 
 
@@ -107,13 +112,33 @@ console.log('eur : ' + this.totEUR + 'lek :' + this.totLEK);
 
   onChanageShtepiteBotuese(selectedValue) {
   
-  this.selectedBotuese = selectedValue;
-   this.arrayLibratShtepiaBotuese = this.arrayLibrat.map(item=> {return item["Shtepiabotuese"]==selectedValue.Emri})
-   this.listData = new MatTableDataSource(this.arrayLibratShtepiaBotuese);
+  this.selectedBotuese = this.arrayLibratShtepiaBotuese.find(item=>{return item["Emri"]==selectedValue.value});
+  console.log(this.selectedBotuese)
+  let newArray = []
+   newArray = this.arrayLibrat.filter(item=> {return item["ShtepiaBotuese"]==selectedValue.value})
+   this.listData = new MatTableDataSource(newArray);
+   console.log(newArray)
+
    this.listData.sort = this.sort;
    this.listData.paginator = this.paginator;
 
 
+   this.detyrimiShtepiaBotuese =
+   newArray     
+     .map((t) => t.CmimiBlerje*t.SasiaShitur)
+     .reduce((acc, value) => acc + value, 0) - this.selectedBotuese["Paguar"];
+   
+   
+    this.shiturShtepiaBotuese = 
+    newArray     
+    .map((t) => t.CmimiBlerje*t.SasiaShitur)
+    .reduce((acc, value) => acc + value, 0) ;
+
+     this.lekeTembledhura  = 
+    newArray
+    .map((t) => t.CmimiShitje*t.SasiaShitur)
+    .reduce((acc, value) => acc + value, 0);
+    this.fitimi =  this.lekeTembledhura - this.shiturShtepiaBotuese
 }
 
 onSubmit(){
@@ -129,7 +154,6 @@ this.shtepiteBotuese.form.controls.Data.setValue(arketimiDate) ;
   // this.printer.printShpenzime(this.arketime.form.controls.Arketime.value,this.arketime.form.controls.Koment.value,this.arketime.form.controls.Sasia.value,this.arketime.form.controls.Monedha.value);
   // this.printer.printShpenzime(this.arketime.form.controls.Arketime.value,this.arketime.form.controls.Koment.value,this.arketime.form.controls.Sasia.value,this.arketime.form.controls.Monedha.value);
   
- 0
 }
 
 onSearchClear() {
@@ -140,8 +164,8 @@ onSearchClear() {
 
 applyFilter() {
   this.listData.filter = this.searchKey.trim().toLowerCase();
-  this.totEUR = this.listData.filteredData.map((t)=>{if(t.Monedha=='EUR') return t.Sasia-t.Paguar}).reduce((acc, value) => acc + value, 0);
-  this.totLEK = this.listData.filteredData.map((t)=>{if(t.Monedha=='LEK') return t.Sasia-t.Paguar}).reduce((acc, value) => acc + value, 0);
+  // this.totEUR = this.listData.filteredData.map((t)=>{if(t.Monedha=='EUR') return t.Sasia-t.Paguar}).reduce((acc, value) => acc + value, 0);
+  // this.totLEK = this.listData.filteredData.map((t)=>{if(t.Monedha=='LEK') return t.Sasia-t.Paguar}).reduce((acc, value) => acc + value, 0);
 }
 
 onSelect(row){  
@@ -157,6 +181,14 @@ onSelect(row){
 //   dialogConfig.autoFocus = true;
 // //  dialogConfig.width = "60%";
 //   this.dialog.open(PagesaShtepiteBotueseComponent,dialogConfig);
+}
+
+onCreate(){
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  //dialogConfig.width = "60%";
+  this.dialog.open(PagesaShtepiteBotueseComponent, dialogConfig);
 }
 
 

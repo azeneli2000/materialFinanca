@@ -143,6 +143,6 @@ import { PagesaShtepiteBotueseComponent } from './pagesa-shtepite-botuese/pagesa
   ],
   providers: [MesuesiService,AuthGuard, {provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl()},CurrencyPipe,DatePipe,ExcelService],
   bootstrap: [AppComponent],
-  entryComponents:[MesuesiComponent,ConfirmDialogComponent,LendaComponent,NxenesiComponent,PagashteseComponent,XchnageComponent,PagesebankaComponent,LibriRiComponent,LibratNxenesiComponent]
+  entryComponents:[MesuesiComponent,ConfirmDialogComponent,LendaComponent,NxenesiComponent,PagashteseComponent,XchnageComponent,PagesebankaComponent,LibriRiComponent,LibratNxenesiComponent,PagesaShtepiteBotueseComponent]
 })
 export class AppModule { }

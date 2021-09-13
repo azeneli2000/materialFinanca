@@ -18,7 +18,8 @@ export class PagesaShtepiteBotueseComponent implements OnInit {
   }
   
   onSubmit(){
-    this.service.insertShtepiBotuese(this.service.form.controls["Emri"]);
+    // console.log(this.service.form.controls["Emri"].value)
+    this.service.insertShtepiBotuese(this.service.form.controls["Emri"].value);
     this.notification.success("Shtepia botuese u ruajt !");
     this.onClose();
   
