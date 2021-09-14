@@ -144,15 +144,23 @@ console.log('eur : ' + this.totEUR + 'lek :' + this.totLEK);
 onSubmit(){
   let arketimiDate = new Date().toLocaleDateString();
   this.datePipe.transform(arketimiDate,"dd-MM-yyyy");
-this.shtepiteBotuese.form.controls.Data.setValue(arketimiDate) ;
+// this.shtepiteBotuese.form.controls.Data.setValue(arketimiDate) ;
  let key =  this.selectedBotuese["key"]
+
+
   //insert transaksionin
-  this.arka.insertTransaksion("ShtepiBotuese",key,this.selectedBotuese["Emri"],"LEK",this.shtepiteBotuese.formPaguar.Paguar,"Pagese Shtepi Botuese " + this.selectedBotuese["Emri"],'')
- //update totali
-  this.arka.updateTotali(Math.abs(this.shtepiteBotuese.formPaguar.Paguar),"LEK");
+  this.arka.insertTransaksion("ShtepiBotuese",key,this.selectedBotuese["Emri"],"LEK", this.shtepiteBotuese.form.controls.Paguar.value,"Pagese Shtepi Botuese " ,'')
+  //update totali
+   this.arka.updateTotali(Math.abs(parseInt( this.shtepiteBotuese.form.controls.Paguar.value)),"LEK");
+
+   //update shtepine botuese
+   this.shtepiteBotuese.updatePagesa(parseInt(this.shtepiteBotuese.form.controls.Paguar.value),this.selectedBotuese);
   
   // this.printer.printShpenzime(this.arketime.form.controls.Arketime.value,this.arketime.form.controls.Koment.value,this.arketime.form.controls.Sasia.value,this.arketime.form.controls.Monedha.value);
   // this.printer.printShpenzime(this.arketime.form.controls.Arketime.value,this.arketime.form.controls.Koment.value,this.arketime.form.controls.Sasia.value,this.arketime.form.controls.Monedha.value);
+  
+  
+
   
 }
 
@@ -168,20 +176,7 @@ applyFilter() {
   // this.totLEK = this.listData.filteredData.map((t)=>{if(t.Monedha=='LEK') return t.Sasia-t.Paguar}).reduce((acc, value) => acc + value, 0);
 }
 
-onSelect(row){  
-      
-// this.shtepiteBotuese.formPaguar.Paguar = row.Paguar;
-// this.shtepiteBotuese.formPaguar.$key = row.$key;
-// this.shtepiteBotuese.formPaguar.Koment = row.Koment;
-// this.shtepiteBotuese.formPaguar.Monedha = row.Monedha;
-// this.shtepiteBotuese.formPaguar.Banka = this.shtepiteBotuese.form.controls["Bankat"].value;
 
-//   const dialogConfig = new MatDialogConfig();
-//   dialogConfig.disableClose = true;
-//   dialogConfig.autoFocus = true;
-// //  dialogConfig.width = "60%";
-//   this.dialog.open(PagesaShtepiteBotueseComponent,dialogConfig);
-}
 
 onCreate(){
   const dialogConfig = new MatDialogConfig();

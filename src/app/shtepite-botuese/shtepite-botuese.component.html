@@ -4,7 +4,7 @@
 
   <mat-form-field appearance="outline">
       <mat-label>Shtepite botuese</mat-label>
-      <mat-select  (selectionChange)="onChanageShtepiteBotuese($event)">
+      <mat-select formControlName="Emri" (selectionChange)="onChanageShtepiteBotuese($event)">
         <mat-option *ngFor="let s of arrayLibratShtepiaBotuese" [value]="s.Emri">
           {{s.Emri}}
         </mat-option>
@@ -38,7 +38,7 @@
   <!-- <mat-form-field class="koment" >
     <input type="text" matInput formControlName="Koment" matInput placeholder="Koment">   
   </mat-form-field> -->
-  <!-- <button mat-raised-button class="ruaj" type="submit" color="primary" [disabled]="shtepiteBotuese.form.invalid" (click)="onSubmit()">Ruaj</button> -->
+  <button mat-raised-button class="ruaj" type="submit" color="primary" [disabled]="shtepiteBotuese.form.invalid" (click)="onSubmit()">Ruaj</button>
   </div>
   </form>
   

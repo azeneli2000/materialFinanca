@@ -9,7 +9,9 @@ import { query } from '@angular/core/src/render3';
 })
 export class ArkaService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase) {
+    this.getTotali()
+   }
   arkaList: AngularFireList<any>;
 TotaliEuro ; TotaliLeke ; TotaliDoll ;
   getArka(){

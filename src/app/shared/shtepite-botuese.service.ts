@@ -64,7 +64,7 @@ export class ShtepiteBotueseService {
     }
 
     updatePagesa(sasia,shtepiaBotuese){
-      this.db.list("Shtepibotuese").update(shtepiaBotuese.$Key,{
+      this.db.list("Shtepitebotuese").update(shtepiaBotuese.key,{
         Paguar : shtepiaBotuese.Paguar + sasia
       })
     }
